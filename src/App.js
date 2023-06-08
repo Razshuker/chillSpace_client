@@ -1,10 +1,11 @@
 import './App.css';
 import React from 'react'
+import AppRoutes from './appRoutes';
 
 function App() {
   return (
     <React.Fragment>
-      <h1 className='text-danger'>welcome to react</h1>
+      <AppRoutes/>
     </React.Fragment>
   );
 }
