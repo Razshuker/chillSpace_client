@@ -20,7 +20,7 @@ export default function UsersList() {
         <div className='container-fluid'>
             <h1 className='display-4 text-center my-5'>Users List:</h1>
             <div className="container">
-                <table>
+                <table className='table table-striped'>
                     <thead>
                         <tr>
                             <th>#</th>

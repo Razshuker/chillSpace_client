@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from 'react'
+import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
+import { Link, useNavigate } from 'react-router-dom';
+
+export default function CategoriesList() {
+    const [categories, setCategories] = useState([]);
+    const nav = useNavigate();
+
+    useEffect(() => {
+        doApi();
+    }, []);
+
+    const doApi = async () => {
+        const url = API_URL + "/categories";
+        const data = await doApiGet(url);
+        console.log(data);
+        setCategories(data);
+    }
+
+    const onDeleteCat = async (_id) => {
+        const url = API_URL + "/categories/" + _id;
+        const data = await doApiMethod(url, "DELETE");
+        if (data.deletedCount) {
+            alert("deleted");
+            doApi();
+        }
+    }
+
+    return (
+        <div className='container-fluid'>
+            <h1 className='display-4 text-center my-5'>Users List:</h1>
+            <div className="container">
+                <Link to={"add"} className='btn btn-outline-dark my-4'>Add new category</Link>
+                <table className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>CATRGORY CODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>DATE CREATED</th>
+                            <th>EDIT / DELETE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {categories.map((item, i) => {
+                            return (
+                                <tr key={item._id}>
+                                    <td>{i + 1}</td>
+                                    <td>{item._id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.category_code}</td>
+                                    <td>{item.description}</td>
+                                    <td>{item.date_created}</td>
+                                    <td><button onClick={() => {
+                                        nav("edit/" + item._id);
+                                    }} className='btn'>edit</button><button onClick={() => {
+                                        onDeleteCat(item._id);
+                                    }} className='btn btn-danger'>X</button></td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+}
