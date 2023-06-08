@@ -10,9 +10,10 @@ export default function UsersList() {
     }, []);
 
     const doApi = async () => {
-        const url = API_URL + "/usersList";
-        const resp = await axios.get(url);
-        setUsersAr(resp.data);
+        const url = API_URL + "/users/usersList";
+        const data = await doApiGet(url);
+        console.log(data);
+        setUsersAr(data);
     }
 
     return (
