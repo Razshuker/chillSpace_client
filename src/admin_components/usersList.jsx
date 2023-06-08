@@ -11,15 +11,15 @@ export default function UsersList() {
 
     const doApi = async () => {
         const url = API_URL + "/usersList";
-        const data = await doApiGet(url);
-        setUsersAr(data);
+        const resp = await axios.get(url);
+        setUsersAr(resp.data);
     }
 
     return (
         <div className='container-fluid'>
-            <h1 className='dispaly-4 text-center'>Users List:</h1>
+            <h1 className='display-2 text-center mt-5'>Users List:</h1>
             <div className="container">
-                <table>
+                <table className='table'>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -36,7 +36,22 @@ export default function UsersList() {
                         </tr>
                     </thead>
                     <tbody>
-
+                        {users_ar.map((item, i) => {
+                            return (
+                                <tr key={item._id}>
+                                    <td>{i + 1}</td>
+                                    <td>{item.full_name}</td>
+                                    <td>{item.nickname}</td>
+                                    <td>{item.img_url}</td>
+                                    <td>{item.phone}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.location}</td>
+                                    <td>{item.favorites}</td>
+                                    <td><button className='btn btn-outline-dark'>{item.role}</button></td>
+                                    <td><button className='btn btn-outline-dark'>EDIT</button><button className='btn btn-danger'>DELETE</button></td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
             </div>
