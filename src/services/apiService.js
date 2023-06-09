@@ -12,7 +12,10 @@ export const doApiMethod = async (_url, _method, _dataBody) => {
     const resp = await axios({
         url: _url,
         method: _method,
-        data: _dataBody
+        data: _dataBody,
+        headers: {
+            "x-api-key": localStorage[TOKEN_KEY]
+        }
     })
     return resp.data;
 }
