@@ -9,7 +9,6 @@ export default function Login() {
 
     const onSub = async (_data) => {
         try {
-            console.log(_data);
             const url = API_URL + "/users/login";
             const data = await doApiMethod(url, "POST", _data);
             if (data.token) {
