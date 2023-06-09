@@ -9,6 +9,7 @@ import Home from './components/home'
 import CategoriesList from './admin_components/categories/categoriesList'
 import AddCategory from './admin_components/categories/addCategory'
 import EditCategory from './admin_components/categories/editCategory'
+import Login from './admin_components/login'
 
 export default function AppRoutes() {
     return (
@@ -19,6 +20,7 @@ export default function AppRoutes() {
             </Routes>
 
             <Routes>
+                <Route path='/admin' element={<Login />}></Route>
                 <Route path='/admin/places/add' element={<AddPlace />}></Route>
                 <Route path='/admin/users' element={<UsersList />}></Route>
                 <Route path='/admin/categories' element={<CategoriesList />}></Route>
