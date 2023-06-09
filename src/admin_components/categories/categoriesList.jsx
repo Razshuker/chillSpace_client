@@ -17,12 +17,17 @@ export default function CategoriesList() {
         setCategories(data);
     }
 
-    const onDeleteCat = async (_id) => {
-        const url = API_URL + "/categories/" + _id;
-        const data = await doApiMethod(url, "DELETE");
-        if (data.deletedCount) {
-            alert("deleted");
-            doApi();
+    const onDeleteCat = async (_id, _name) => {
+        try {
+            if (window.confirm(`Are you sure you want to delete "` + _name + `"?`)) {
+                const url = API_URL + "/categories/" + _id;
+                const data = await doApiMethod(url, "DELETE");
+                if (data.deletedCount) {
+                    doApi();
+                }
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -56,7 +61,7 @@ export default function CategoriesList() {
                                     <td><button onClick={() => {
                                         nav("edit/" + item._id);
                                     }} className='btn'>edit</button><button onClick={() => {
-                                        onDeleteCat(item._id);
+                                        onDeleteCat(item._id, item.name);
                                     }} className='btn btn-danger'>X</button></td>
                                 </tr>
                             )
