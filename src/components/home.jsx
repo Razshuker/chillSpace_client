@@ -1,7 +1,15 @@
 import React from 'react'
+import "../css/home.css"
+import Strip from './home/strip'
+import Categories from './home/categories'
+import WhereToTravel from './home/whereToTravel'
 
 export default function Home() {
     return (
-        <div>Home</div>
+        <div className='container-fluid p-0'>
+            <Strip />
+            <Categories />
+            <WhereToTravel />
+        </div>
     )
 }

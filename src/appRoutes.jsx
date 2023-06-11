@@ -10,6 +10,7 @@ import CategoriesList from './admin_components/categories/categoriesList'
 import AddCategory from './admin_components/categories/addCategory'
 import EditCategory from './admin_components/categories/editCategory'
 import Login from './admin_components/login'
+import Footer from './components/footer'
 
 export default function AppRoutes() {
     return (
@@ -28,6 +29,9 @@ export default function AppRoutes() {
                 <Route path='/admin/categories/edit/:id' element={<EditCategory />}></Route>
                 <Route path='/*' element={<Page404 />}></Route>
                 <Route path='/' element={<Home />}></Route>
+            </Routes>
+            <Routes>
+                <Route path='/*' element={<Footer />}></Route>
             </Routes>
         </BrowserRouter>
     )
