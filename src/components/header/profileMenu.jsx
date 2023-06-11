@@ -1,8 +1,10 @@
 import * as React from 'react';
+import "../../css/header.css";
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 export default function ProfileMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,8 +22,8 @@ export default function ProfileMenu() {
 
     return (
         <div>
-            <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-                Open Popover
+            <Button aria-describedby={id} onClick={handleClick}>
+                <AccountCircle className='profile_btn' fontSize='large' />
             </Button>
             <Popover
                 id={id}
@@ -33,12 +35,14 @@ export default function ProfileMenu() {
                     horizontal: 'left',
                 }}
             >
-                <Typography sx={{ p: 2 }}>
-                    <ul>
-                        <li><Link>A</Link></li>
-                        <li><Link>A</Link></li>
-                        <li><Link>A</Link></li>
-                    </ul>
+                <Typography>
+                    <div className='profile p-5'>
+                        <ul className='p-0'>
+                            <li><Link>A</Link></li>
+                            <li><Link>A</Link></li>
+                            <li><Link>A</Link></li>
+                        </ul>
+                    </div>
                 </Typography>
             </Popover>
         </div>

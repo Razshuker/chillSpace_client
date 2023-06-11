@@ -1,23 +1,26 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../css/header.css'
 import ProfileMenu from './header/profileMenu'
 
 export default function Header() {
+    const nav = useNavigate();
     return (
         <header className='container-fluid'>
             <div className="row justify-content-between align-items-center px-4">
                 <div className="col logo">
-                    <img src='images/chillSpaceLogoPNG.png' alt='logo'></img>
+                    <img onClick={() => {
+                        nav("/")
+                    }} src='images/chillSpaceLogoPNG.png' alt='logo'></img>
                 </div>
-                <div className="nav row col">
-                    <nav className="col">
-                        <ul className='list-inline d-flex align-items-center'>
-                            <li className='me-3'><Link to="/admin/usersList">USERS</Link></li>
-                            <li className='me-3'><Link to="/admin/places">PLACES</Link></li>
+                <div className="nav row col align-items-center ">
+                    <nav className="col d-flex justify-content-end">
+                        <ul className='list-inline m-0 d-flex '>
+                            <li><Link to="/posts">POSTS</Link></li>
+                            <li><Link to="/places">PLACES</Link></li>
                         </ul>
                     </nav>
-                    <button className='btn btn-danger col-2 me-4'><ProfileMenu /></button>
+                    <div className='col-2'><ProfileMenu /></div>
                 </div>
             </div>
         </header >

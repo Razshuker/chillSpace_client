@@ -2,3 +2,33 @@ header {
     background-color: rgb(216, 191, 172);
     min-height: 80px;
 }
+
+header .logo img:hover {
+    cursor: pointer;
+}
+
+header nav ul li {
+    border-right: 2px solid black;
+}
+
+header nav ul li:last-of-type {
+    border-right: none;
+}
+
+header nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 0 16px;
+    font-size: 1.5em;
+    font-family: 'Manrope', sans-serif;
+    transition: 800ms;
+}
+
+header nav ul li a:hover {
+    transform: scale(0.9);
+}
+
+.profile_btn {
+    color: black;
+}
