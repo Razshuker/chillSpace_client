@@ -9,9 +9,9 @@ export default function Strip() {
                 <video className="video" autoPlay loop muted>
                     <source src={"images/strip.mp4"} type='video/mp4' />
                 </video>
-                <div className="context h-100">
+                {/* <div className="context h-100">
                     <KeyboardArrowDown className='down' fontSize='large' />
-                </div>
+                </div> */}
             </div>
             <div className="image d-lg-none d-block">
                 <img src='' alt='cover-image' />
