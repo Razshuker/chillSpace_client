@@ -1,36 +1,223 @@
-import React from 'react'
-import {useForm} from "react-hook-form"
+import React, { useEffect, useState } from 'react'
+import { useForm } from "react-hook-form"
+import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 
 export default function AddPlace() {
-    const { register, setValue ,getValues, handleSubmit, formState: { errors } } = useForm();
+    const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
+    const [tags, setTags] = useState([]);
+    const [types, setTypes] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedTags , setSelectedTags] = useState([]);
 
+    useEffect(() => {
+        doApiTags()
+        doApiTypes();
+        doApiCategory();
+    }, [])
+
+    const doApiTags = async () => {
+        try {
+            const url = API_URL + "/tags";
+            const data = await doApiGet(url);
+            setTags(data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const doApiTypes = async () => {
+        try {
+            const url = API_URL + "/types";
+            const data = await doApiGet(url);
+            setTypes(data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const doApiCategory = async () => {
+        try {
+            const url = API_URL + "/categories";
+            const data = await doApiGet(url);
+            setCategories(data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const onSubForm = (_bodyData) => {
+        const placeLocation = { latitude: (_bodyData['latitude'] || ''), longitude: (_bodyData['longitude'] || '') };
+        const openHours = {
+            Sunday: _bodyData['open_hours - Sunday'] || '',
+            Monday: _bodyData['open_hours - Monday'] || '',
+            Tuesday: _bodyData['open_hours - Tuesday'] || '',
+            Wednesday: _bodyData['open_hours - Wednesday'] || '',
+            Thursday: _bodyData['open_hours - Thursday'] || '',
+            Friday: _bodyData['open_hours - Friday'] || '',
+            Saturday: _bodyData['open_hours - Saturday'] || '',
+        };
+
+
+        const placeData = {
+            ..._bodyData,
+            open_hours: openHours,
+            location: placeLocation,
+         
+        };
+
+        delete placeData['open_hours - Sunday'];
+        delete placeData['open_hours - Monday'];
+        delete placeData['open_hours - Tuesday'];
+        delete placeData['open_hours - Wednesday'];
+        delete placeData['open_hours - Thursday'];
+        delete placeData['open_hours - Friday'];
+        delete placeData['open_hours - Saturday'];
+
+        delete placeData['latitude'];
+        delete placeData['longitude'];
+
+        console.log(placeData)
+        // doApiSub(placeData);
+
+    }
+
+    const doApiSub = async (_placeData) => {
+        try {
+            const url = API_URL + "places";
+            const data = doApiMethod(url, "POST", _placeData);
+            if (data._id) {
+                alert("new place added")
+            }
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, please try again later");
+
+        }
+
+    }
+    const onSelectTag = (_tagID) => {
+        const isSelected = selectedTags.includes(_tagID);
+
+        if (!isSelected) {
+          setSelectedTags([...selectedTags, _tagID]);
+        } else {
+            const delInd = selectedTags.findIndex((id) => id ==_tagID);
+            setSelectedTags(selectedTags.splice(delInd,1));
+        }
+        console.log(selectedTags)
+      };
     return (
         <div className='container'>
             <h1>Add new place</h1>
-            <form id="id_form" >
-                <label>name</label>
-                <input id="id_name" class="form-control" type="text" />
-                <label>img_url</label>
-                <input id="id_img_url" class="form-control" type="text" />
-                <label>type</label>
-                <input id="id_type" class="form-control" type="text" />
-                <label>categories_code</label>
-                <input id="id_categories_code" class="form-control" type="text" />
-                <label>city</label>
-                <input id="id_city" class="form-control" type="text" />
-                <label>phone</label>
-                <input id="id_phone" class="form-control" type="tel" />
-                <label>location</label>
-                <input id="id_location" class="form-control" type="text" />
-                <label>description</label>
-                <input id="id_description" class="form-control" type="text" />
-                <label>open_hours</label>
-                <input id="id_open_hours" class="form-control" type="text" />
-                <label>area</label>
-                <input id="id_area" class="form-control" type="text" />
-                <label>tags_id</label>
-                <input id="id_tags_id" class="form-control" type="text" />
-                <button>submit</button>
+            <form onSubmit={handleSubmit(onSubForm)} >
+                <label className="pt-3 pb-1">name</label>
+                <input {...register("name", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.name && <div className="text-danger">* Enter a valid name</div>}
+
+                <label className="pt-3 pb-1">image (url)</label>
+                <input {...register("img_url", { minLength: 2 })} className="form-control" type="text" />
+                {errors.img_url && <div className="text-danger">* Enter a valid url</div>}
+
+
+                <label className="pt-3 pb-1">city</label>
+                <input {...register("city", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.city && <div className="text-danger">* Enter a valid city</div>}
+
+
+                <label className="pt-3 pb-1">phone</label>
+                <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="tel" />
+                {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
+
+
+                <label className="pt-3 pb-1">latitude</label>
+                <input {...register("latitude", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.latitude && <div className="text-danger">* Enter a valid latitude</div>}
+
+                <label className="pt-3 pb-1">longitude</label>
+                <input {...register("longitude", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.longitude && <div className="text-danger">* Enter a valid longitude</div>}
+
+
+                <label className="pt-3 pb-1">description</label>
+                <input {...register("description", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.description && <div className="text-danger">* Enter a valid description</div>}
+
+
+                <label className="pt-3 pb-1">area</label>
+                <select {...register("area", { required: true })} className="form-select" type="select" >
+                    <option></option>
+                    <option>North</option>
+                    <option>South</option>
+                    <option>Center</option>
+                    <option>Jerusalem</option>
+                </select>
+
+
+                {/* <label className="pt-3 pb-1">tag name</label>
+                <select {...register("tag_name", { required: true })} className="form-select " type="select">
+                    <option></option>
+                    {tags.map(item => {
+                        return (
+                            <option key={item._id}>{item.tag_name}</option>
+                        )
+                    })}
+                </select> */}
+
+
+                <label className="pt-3 pb-1 pe-5 h5">tags</label>
+                    {tags.map(item => {
+                        return (
+                            <div className="form-check form-check-inline" key={item._id}>
+                            <input onClick= {()=>{onSelectTag(item.tag_name)} }  className="form-check-input" type="checkbox" id={item.tag_name} value={tags._id}/>
+                                <label className="form-check-label" htmlFor={item.tag_name}>{item.tag_name}</label>
+                        </div>
+                        )
+                    })}
+                <br/>
+
+                <label className="pt-3 pb-1 pe-5 h5">categories</label>
+                    {categories.map(item => {
+                        return (
+                            <div className="form-check form-check-inline" key={item._id}>
+                            <input className="form-check-input" type="checkbox" id={item.category_code} value={tags._id}/>
+                                <label className="form-check-label" htmlFor={item.category_code}>{item.name}</label>
+                        </div>
+                        )
+                    })}
+                <br/>
+       
+
+                <label className="pt-3 pb-1">type</label>
+                <select {...register("type_name", { required: true })} className="form-select " type="select">
+                    <option></option>
+                    {types.map(item => {
+                        return (
+                            <option key={item._id}>{item.type_name}</option>
+                        )
+                    })}
+                </select>
+
+
+                <label className="pt-3 pb-1">open_hours - Sunday</label>
+                <input {...register('open_hours - Sunday')} className="form-control" type="text" />
+
+                <label className="pt-3 pb-1">open_hours - Monday</label>
+                <input {...register('open_hours - Monday')} className="form-control" type="text" />
+
+                <label className="pt-3 pb-1">open_hours - Tuesday</label>
+                <input {...register('open_hours - Tuesday')} className="form-control" type="text" />
+
+                <label className="pt-3 pb-1">open_hours - Wednesday</label>
+                <input {...register('open_hours - Wednesday')} className="form-control" type="text" />
+
+                <label className="pt-3 pb-1">open_hours - Thursday</label>
+                <input {...register('open_hours - Thursday')} className="form-control" type="text" />
+
+                <label className="pt-3 pb-1">open_hours - Friday</label>
+                <input {...register('open_hours - Friday')} className="form-control" type="text" />
+
+                <label className="pt-3 pb-1">open_hours - Saturday</label>
+                <input {...register('open_hours - Saturday')} className="form-control" type="text" />
+
+                <button className='btn btn-success m-4'> Submit </button>
+
             </form>
         </div>
     )
