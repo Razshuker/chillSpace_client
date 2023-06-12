@@ -33,7 +33,7 @@ export default function CategoriesList() {
 
     return (
         <div className='container-fluid'>
-            <h1 className='display-4 text-center my-5'>Users List:</h1>
+            <h1 className='display-4 text-center my-5'>Categories List:</h1>
             <div className="container">
                 <Link to={"add"} className='btn btn-outline-dark my-4'>Add new category</Link>
                 <table className='table table-striped'>
@@ -57,7 +57,7 @@ export default function CategoriesList() {
                                     <td>{item.name}</td>
                                     <td>{item.category_code}</td>
                                     <td>{item.description}</td>
-                                    <td>{item.date_created}</td>
+                                    <td>{Date().toString(item.date_created).substring(3, 15)}</td>
                                     <td><button onClick={() => {
                                         nav("edit/" + item._id);
                                     }} className='btn'>edit</button><button onClick={() => {

@@ -16,19 +16,19 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/admin/*' element={<AdminHeader />}></Route>
-                <Route path='/*' element={<Header />}></Route>
+                <Route path='/admin/*' element={<AdminHeader />} />
+                <Route path='/*' element={<Header />} />
             </Routes>
 
             <Routes>
-                <Route path='/admin' element={<Login />}></Route>
-                <Route path='/admin/places/add' element={<AddPlace />}></Route>
-                <Route path='/admin/users' element={<UsersList />}></Route>
-                <Route path='/admin/categories' element={<CategoriesList />}></Route>
-                <Route path='/admin/categories/add' element={<AddCategory />}></Route>
-                <Route path='/admin/categories/edit/:id' element={<EditCategory />}></Route>
-                <Route path='/*' element={<Page404 />}></Route>
-                <Route path='/' element={<Home />}></Route>
+                <Route path='/admin' element={<Login />} />
+                <Route path='/admin/places/add' element={<AddPlace />} />
+                <Route path='/admin/users' element={<UsersList />} />
+                <Route path='/admin/categories' element={<CategoriesList />} />
+                <Route path='/admin/categories/add' element={<AddCategory />} />
+                <Route path='/admin/categories/edit/:id' element={<EditCategory />} />
+                <Route path='/*' element={<Page404 />} />
+                <Route path='/' element={<Home />} />
             </Routes>
             <Routes>
                 <Route path='/*' element={<Footer />}></Route>
