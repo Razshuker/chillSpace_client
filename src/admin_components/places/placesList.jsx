@@ -59,10 +59,11 @@ export default function PlacesList() {
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>area</th>
-                            <th>type</th>
-                            <th>description</th>
-                            <th>categories_code</th>
+                            <th>Area</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Categories_code</th>
+                            <th>Edit/Delete</th>
 
                         </tr>
                     </thead>
@@ -91,7 +92,12 @@ export default function PlacesList() {
                                             itemCategory + " | "
                                         )
                                     })}</td>
-
+                                    <td>
+                                        <button onClick={()=>{
+                                            nav("edit/"+item._id)
+                                        }} className='m-1 btn btn-warning'>Edit</button>
+                                        <button className='m-1 btn btn-danger'>Delete</button>
+                                    </td>
                                 </tr>
 
                             )
