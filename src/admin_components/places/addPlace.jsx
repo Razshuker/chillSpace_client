@@ -83,7 +83,7 @@ export default function AddPlace() {
 
     const doApiSub = async (_placeData) => {
         try {
-            const url = API_URL + "places";
+            const url = API_URL + "/places";
             const data = doApiMethod(url, "POST", _placeData);
             if (data._id) {
                 alert("new place added")
@@ -131,7 +131,7 @@ export default function AddPlace() {
 
 
                 <label className="pt-3 pb-1">phone</label>
-                <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="tel" />
+                <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
 
 
@@ -159,17 +159,6 @@ export default function AddPlace() {
                 </select>
 
 
-                {/* <label className="pt-3 pb-1">tag name</label>
-                <select {...register("tag_name", { required: true })} className="form-select " type="select">
-                    <option></option>
-                    {tags.map(item => {
-                        return (
-                            <option key={item._id}>{item.tag_name}</option>
-                        )
-                    })}
-                </select> */}
-
-
                 <label className="pt-3 pb-1 pe-5 h5">tags</label>
                     {tags.map(item => {
                         return (
@@ -194,7 +183,7 @@ export default function AddPlace() {
        
 
                 <label className="pt-3 pb-1">type</label>
-                <select {...register("type_name", { required: true })} className="form-select " type="select">
+                <select {...register("type", { required: true })} className="form-select " type="select">
                     <option></option>
                     {types.map(item => {
                         return (
