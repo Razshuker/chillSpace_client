@@ -77,9 +77,7 @@ export default function AddPlace() {
         delete placeData['longitude'];
 
         console.log(placeData);
-        // console.log(selectedTags);
-        // console.log(selectedCat)
-        // doApiSub(placeData);
+        doApiSub(placeData);
 
     }
 
