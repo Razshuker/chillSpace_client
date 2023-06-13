@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet } from '../../services/apiService';
+import { Navigation, useNavigate } from 'react-router-dom';
+import AddPlace from './addPlace';
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
     const [pages , setPages] = useState(0);
     const [currentPage , setCurrentPage] = useState();
+    const nav = useNavigate();
 
     useEffect(() => {
         doApiGetPlaces();
@@ -39,10 +42,12 @@ export default function PlacesList() {
     return (
         <div className='container'>
             <h2>Places List</h2>
+            <button className='btn btn-info my-3' onClick={()=>{nav("/admin/places/add")}}>Add new place</button>
+            <br/>
           {[...Array(pages)].map((item,i) => {
                   const isActive = i + 1 === currentPage;
             return(
-                <button  className={`btn btn-dark m-2 ${isActive ? 'bg-danger' : ''}`} onClick={()=> {
+                <button  className={`btn btn-dark my-3 mx-1 ${isActive ? 'bg-danger' : ''}`} onClick={()=> {
                     setCurrentPage(i+1);
                 }}>{i+1}</button>
             )
