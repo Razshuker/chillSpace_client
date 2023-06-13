@@ -73,7 +73,8 @@ export default function AddPlace() {
         delete placeData['latitude'];
         delete placeData['longitude'];
 
-        console.log(placeData)
+        console.log(placeData);
+        console.log(selectedTags);
         // doApiSub(placeData);
 
     }
@@ -92,17 +93,18 @@ export default function AddPlace() {
         }
 
     }
-    const onSelectTag = (_tagID) => {
-        const isSelected = selectedTags.includes(_tagID);
-
+    const onSelectTag = (_tagName) => {
+        const isSelected = selectedTags.includes(_tagName);
         if (!isSelected) {
-          setSelectedTags([...selectedTags, _tagID]);
+          setSelectedTags([...selectedTags, _tagName]);
         } else {
-            const delInd = selectedTags.findIndex((id) => id ==_tagID);
-            setSelectedTags(selectedTags.splice(delInd,1));
+            const delInd = selectedTags.findIndex((name) => name ==_tagName);
+            const selectedArr = selectedTags.splice(delInd,1);
+            setSelectedTags(selectedArr);
         }
         console.log(selectedTags)
       };
+
     return (
         <div className='container'>
             <h1>Add new place</h1>
@@ -165,7 +167,7 @@ export default function AddPlace() {
                     {tags.map(item => {
                         return (
                             <div className="form-check form-check-inline" key={item._id}>
-                            <input onClick= {()=>{onSelectTag(item.tag_name)} }  className="form-check-input" type="checkbox" id={item.tag_name} value={tags._id}/>
+                            <input onClick= {()=>{onSelectTag(item.tag_name)} }  className="form-check-input" type="checkbox" id={item.tag_name} value={tags.name}/>
                                 <label className="form-check-label" htmlFor={item.tag_name}>{item.tag_name}</label>
                         </div>
                         )
