@@ -79,14 +79,14 @@ export default function AddPlace() {
         delete placeData['longitude'];
 
         console.log(placeData);
-        doApiSub(placeData);
+        doApiPost(placeData);
 
     }
 
-    const doApiSub = async (_placeData) => {
+    const doApiPost = async (_placeData) => {
         try {
             const url = API_URL + "/places";
-            const data =await doApiMethod(url, "POST", _placeData);
+            const data = await doApiMethod(url, "POST", _placeData);
             if (data._id) {
                 alert("new place added")
                 nav(-1)
@@ -154,12 +154,28 @@ export default function AddPlace() {
 
                 <label className="pt-3 pb-1">area</label>
                 <select {...register("area", { required: true })} className="form-select" type="select" >
-                    <option></option>
-                    <option>North</option>
-                    <option>South</option>
-                    <option>Center</option>
-                    <option>Jerusalem</option>
+                    <option value={""}>
+                        choose one of the options:
+                    </option>
+                    <option value={"North"}>North</option>
+                    <option value={"Suoth"}>South</option>
+                    <option  value={"Center"}>Center</option>
+                    <option value={"Jerusalem"}>Jerusalem</option>
                 </select>
+
+                <label className="pt-3 pb-1">type</label>
+                <select {...register("type", { required: true })} className="form-select " type="select">
+                <option value={""}>
+                        choose one of the options:
+                    </option>
+                    <option></option>
+                    {types.map(item => {
+                        return (
+                            <option value={item.type_name} key={item._id}>{item.type_name}</option>
+                        )
+                    })}
+                </select>
+
 
 
                 <label className="pt-3 pb-1 pe-5 h5">tags</label>
@@ -185,16 +201,7 @@ export default function AddPlace() {
                 <br />
 
 
-                <label className="pt-3 pb-1">type</label>
-                <select {...register("type", { required: true })} className="form-select " type="select">
-                    <option></option>
-                    {types.map(item => {
-                        return (
-                            <option key={item._id}>{item.type_name}</option>
-                        )
-                    })}
-                </select>
-
+         
 
                 <label className="pt-3 pb-1">open_hours - Sunday</label>
                 <input {...register('open_hours - Sunday')} className="form-control" type="text" />

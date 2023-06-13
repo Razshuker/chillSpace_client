@@ -12,6 +12,7 @@ import EditCategory from './admin_components/categories/editCategory'
 import Login from './admin_components/login'
 import Footer from './components/footer'
 import PlacesList from './admin_components/places/placesList'
+import EditPlace from './admin_components/places/editPlace'
 
 export default function AppRoutes() {
     return (
@@ -25,6 +26,7 @@ export default function AppRoutes() {
                 <Route path='/admin' element={<Login />}></Route>
                 <Route path='/admin/places' element={<PlacesList />}></Route>
                 <Route path='/admin/places/add' element={<AddPlace />}></Route>
+                <Route path='/admin/places/edit/:id' element={<EditPlace />}></Route>
                 <Route path='/admin/users' element={<UsersList />}></Route>
                 <Route path='/admin/categories' element={<CategoriesList />}></Route>
                 <Route path='/admin/categories/add' element={<AddCategory />}></Route>
