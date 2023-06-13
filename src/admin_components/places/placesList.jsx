@@ -64,7 +64,7 @@ export default function PlacesList() {
                     {places.map((item, i) => {
                         return (
                             <tr key={item._id}>
-                                <td>{i + 1}</td>
+                                <td>{(currentPage-1)*6 + i+1 }</td>
                                 <td>{item.name}</td>
                                 <td>{item.area}</td>
                                 <td>{item.type}</td>
