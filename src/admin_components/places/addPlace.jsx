@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddPlace() {
     const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
     const [tags, setTags] = useState([]);
     const [types, setTypes] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedTags , setSelectedTags] = useState([]);
-    const [selectedCat , setSelectedCat] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedCat, setSelectedCat] = useState([]);
+    const nav = useNavigate();
 
     useEffect(() => {
         doApiTags()
@@ -84,9 +86,10 @@ export default function AddPlace() {
     const doApiSub = async (_placeData) => {
         try {
             const url = API_URL + "/places";
-            const data = doApiMethod(url, "POST", _placeData);
+            const data =await doApiMethod(url, "POST", _placeData);
             if (data._id) {
                 alert("new place added")
+                nav(-1)
             }
         } catch (error) {
             console.log(error);
@@ -98,19 +101,19 @@ export default function AddPlace() {
     const onSelectTag = (_tagName) => {
         const isSelected = selectedTags.includes(_tagName);
         if (!isSelected) {
-          setSelectedTags([...selectedTags, _tagName]);
+            setSelectedTags([...selectedTags, _tagName]);
         } else {
-          setSelectedTags(selectedTags.filter((name) => name !== _tagName));
+            setSelectedTags(selectedTags.filter((name) => name !== _tagName));
         }
-      };
+    };
     const onSelectCat = (_catCode) => {
         const isSelected = selectedCat.includes(_catCode);
         if (!isSelected) {
-          setSelectedCat([...selectedCat, _catCode]);
+            setSelectedCat([...selectedCat, _catCode]);
         } else {
-          setSelectedCat(selectedCat.filter((code) => code !== _catCode));
+            setSelectedCat(selectedCat.filter((code) => code !== _catCode));
         }
-      };
+    };
 
     return (
         <div className='container'>
@@ -160,27 +163,27 @@ export default function AddPlace() {
 
 
                 <label className="pt-3 pb-1 pe-5 h5">tags</label>
-                    {tags.map(item => {
-                        return (
-                            <div className="form-check form-check-inline" key={item._id}>
-                            <input onClick= {()=>{onSelectTag(item.tag_name)} }  className="form-check-input" type="checkbox" id={item.tag_name} value={item.tag_name}/>
-                                <label className="form-check-label" htmlFor={item.tag_name}>{item.tag_name}</label>
+                {tags.map(item => {
+                    return (
+                        <div className="form-check form-check-inline" key={item._id}>
+                            <input onClick={() => { onSelectTag(item.tag_name) }} className="form-check-input" type="checkbox" id={item.tag_name} value={item.tag_name} />
+                            <label className="form-check-label" htmlFor={item.tag_name}>{item.tag_name}</label>
                         </div>
-                        )
-                    })}
-                <br/>
+                    )
+                })}
+                <br />
 
                 <label className="pt-3 pb-1 pe-5 h5">categories</label>
-                    {categories.map(item => {
-                        return (
-                            <div className="form-check form-check-inline" key={item._id}>
-                            <input  onClick= {()=>{onSelectCat(item.category_code)} }  className="form-check-input" type="checkbox" id={item.category_code} value={item._id}/>
-                                <label className="form-check-label" htmlFor={item.category_code}>{item.name}</label>
+                {categories.map(item => {
+                    return (
+                        <div className="form-check form-check-inline" key={item._id}>
+                            <input onClick={() => { onSelectCat(item.category_code) }} className="form-check-input" type="checkbox" id={item.category_code} value={item._id} />
+                            <label className="form-check-label" htmlFor={item.category_code}>{item.name}</label>
                         </div>
-                        )
-                    })}
-                <br/>
-       
+                    )
+                })}
+                <br />
+
 
                 <label className="pt-3 pb-1">type</label>
                 <select {...register("type", { required: true })} className="form-select " type="select">
