@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Login from '../login';
+import { TOKEN_KEY } from '../../services/apiService';
+
 
 export default function ProfileMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,12 +39,17 @@ export default function ProfileMenu() {
                 }}
             >
                 <Typography>
-                    <div className='profile p-5'>
-                        <ul className='p-0'>
-                            <li><Link>A</Link></li>
-                            <li><Link>A</Link></li>
-                            <li><Link>A</Link></li>
-                        </ul>
+                    <div className='profile'>
+                        {console.log(localStorage[TOKEN_KEY])}
+                        {!localStorage[TOKEN_KEY] ?
+                            <Login />
+                            :
+                            <ul className='p-0'>
+                                <li><Link>A</Link></li>
+                                <li><Link>A</Link></li>
+                                <li><Link>A</Link></li>
+                            </ul>
+                        }
                     </div>
                 </Typography>
             </Popover>

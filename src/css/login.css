@@ -1,0 +1,41 @@
+header {
+    position: unset;
+}
+
+.loginClient {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 52px;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.loginClient input {
+    padding: 12px 24px;
+    border-radius: 24px;
+}
+
+.loginClient input:last-of-type {
+    margin-top: 36px;
+}
+
+.loginClient h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 9em;
+    font-weight: 200;
+}
+
+.loginClient .login_btn {
+    display: flex;
+    margin: 42px auto 0 auto;
+    padding: 12px 46px;
+    font-size: 1.25em;
+    background-color: rgb(117, 100, 89);
+    border-radius: 32px;
+    color: white;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+}
