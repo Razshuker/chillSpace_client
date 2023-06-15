@@ -20,7 +20,7 @@ header {
 }
 
 .loginClient input:last-of-type {
-    margin-top: 36px;
+    margin-top: 24px;
 }
 
 .loginClient h1 {
@@ -40,4 +40,11 @@ header {
     color: white;
     border: none;
     font-family: 'Raleway', sans-serif;
+}
+
+.loginClient form a {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+    color: black;
 }

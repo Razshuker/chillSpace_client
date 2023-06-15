@@ -30,9 +30,29 @@ header nav ul li a:hover {
 }
 
 .profile {
-    height: 50vh;
+    height: 55vh;
+    overflow-y: hidden;
 }
 
 .profile_btn {
     color: black;
+}
+
+.profile .loginClient {
+    min-height: 55vh;
+    padding: 8px;
+    width: 400px;
+    background-attachment: unset;
+    background-size: cover;
+    background-position: center;
+}
+
+.profile .loginClient h1 {
+    font-size: 3em;
+    margin-top: 24px;
+}
+
+.profile .loginClient form {
+    width: 100%;
+    padding: 24px;
 }
