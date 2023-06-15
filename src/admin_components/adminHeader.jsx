@@ -14,6 +14,7 @@ export default function AdminHeader() {
                             <li className='me-3'><Link className='text-dark' to="/admin/users">USERS</Link></li>
                             <li className='me-3'><Link className='text-dark' to="/admin/places">PLACES</Link></li>
                             <li className='me-3'><Link className='text-dark' to="/admin/categories">CATEGORIES</Link></li>
+                            <li className='me-3'><Link className='text-dark' to="/admin/reportedPosts">REPORTED POSTS</Link></li>
                         </ul>
                     </nav>
                     {localStorage[TOKEN_KEY] &&

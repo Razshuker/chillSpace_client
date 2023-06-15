@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddPlace() {
     const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
     const [tags, setTags] = useState([]);
     const [types, setTypes] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedTags , setSelectedTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedCat, setSelectedCat] = useState([]);
+    const nav = useNavigate();
 
     useEffect(() => {
         doApiTags()
@@ -20,6 +23,7 @@ export default function AddPlace() {
             const url = API_URL + "/tags";
             const data = await doApiGet(url);
             setTags(data);
+            // console.log(data);
         } catch (error) {
             console.log(error)
         }
@@ -38,6 +42,7 @@ export default function AddPlace() {
             const url = API_URL + "/categories";
             const data = await doApiGet(url);
             setCategories(data);
+            console.log(data)
         } catch (error) {
             console.log(error)
         }
@@ -54,12 +59,12 @@ export default function AddPlace() {
             Saturday: _bodyData['open_hours - Saturday'] || '',
         };
 
-
         const placeData = {
             ..._bodyData,
             open_hours: openHours,
             location: placeLocation,
-         
+            tags_name: selectedTags,
+            categories_code: selectedCat
         };
 
         delete placeData['open_hours - Sunday'];
@@ -73,17 +78,18 @@ export default function AddPlace() {
         delete placeData['latitude'];
         delete placeData['longitude'];
 
-        console.log(placeData)
-        // doApiSub(placeData);
+        console.log(placeData);
+        doApiPost(placeData);
 
     }
 
-    const doApiSub = async (_placeData) => {
+    const doApiPost = async (_placeData) => {
         try {
-            const url = API_URL + "places";
-            const data = doApiMethod(url, "POST", _placeData);
+            const url = API_URL + "/places";
+            const data = await doApiMethod(url, "POST", _placeData);
             if (data._id) {
                 alert("new place added")
+                nav(-1)
             }
         } catch (error) {
             console.log(error);
@@ -92,17 +98,23 @@ export default function AddPlace() {
         }
 
     }
-    const onSelectTag = (_tagID) => {
-        const isSelected = selectedTags.includes(_tagID);
-
+    const onSelectTag = (_tagName) => {
+        const isSelected = selectedTags.includes(_tagName);
         if (!isSelected) {
-          setSelectedTags([...selectedTags, _tagID]);
+            setSelectedTags([...selectedTags, _tagName]);
         } else {
-            const delInd = selectedTags.findIndex((id) => id ==_tagID);
-            setSelectedTags(selectedTags.splice(delInd,1));
+            setSelectedTags(selectedTags.filter((name) => name !== _tagName));
         }
-        console.log(selectedTags)
-      };
+    };
+    const onSelectCat = (_catCode) => {
+        const isSelected = selectedCat.includes(_catCode);
+        if (!isSelected) {
+            setSelectedCat([...selectedCat, _catCode]);
+        } else {
+            setSelectedCat(selectedCat.filter((code) => code !== _catCode));
+        }
+    };
+
     return (
         <div className='container'>
             <h1>Add new place</h1>
@@ -122,7 +134,7 @@ export default function AddPlace() {
 
 
                 <label className="pt-3 pb-1">phone</label>
-                <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="tel" />
+                <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
 
 
@@ -142,58 +154,54 @@ export default function AddPlace() {
 
                 <label className="pt-3 pb-1">area</label>
                 <select {...register("area", { required: true })} className="form-select" type="select" >
-                    <option></option>
-                    <option>North</option>
-                    <option>South</option>
-                    <option>Center</option>
-                    <option>Jerusalem</option>
+                    <option value={""}>
+                        choose one of the options:
+                    </option>
+                    <option value={"North"}>North</option>
+                    <option value={"Suoth"}>South</option>
+                    <option  value={"Center"}>Center</option>
+                    <option value={"Jerusalem"}>Jerusalem</option>
                 </select>
 
-
-                {/* <label className="pt-3 pb-1">tag name</label>
-                <select {...register("tag_name", { required: true })} className="form-select " type="select">
-                    <option></option>
-                    {tags.map(item => {
-                        return (
-                            <option key={item._id}>{item.tag_name}</option>
-                        )
-                    })}
-                </select> */}
-
-
-                <label className="pt-3 pb-1 pe-5 h5">tags</label>
-                    {tags.map(item => {
-                        return (
-                            <div className="form-check form-check-inline" key={item._id}>
-                            <input onClick= {()=>{onSelectTag(item.tag_name)} }  className="form-check-input" type="checkbox" id={item.tag_name} value={tags._id}/>
-                                <label className="form-check-label" htmlFor={item.tag_name}>{item.tag_name}</label>
-                        </div>
-                        )
-                    })}
-                <br/>
-
-                <label className="pt-3 pb-1 pe-5 h5">categories</label>
-                    {categories.map(item => {
-                        return (
-                            <div className="form-check form-check-inline" key={item._id}>
-                            <input className="form-check-input" type="checkbox" id={item.category_code} value={tags._id}/>
-                                <label className="form-check-label" htmlFor={item.category_code}>{item.name}</label>
-                        </div>
-                        )
-                    })}
-                <br/>
-       
-
                 <label className="pt-3 pb-1">type</label>
-                <select {...register("type_name", { required: true })} className="form-select " type="select">
+                <select {...register("type", { required: true })} className="form-select " type="select">
+                <option value={""}>
+                        choose one of the options:
+                    </option>
                     <option></option>
                     {types.map(item => {
                         return (
-                            <option key={item._id}>{item.type_name}</option>
+                            <option value={item.type_name} key={item._id}>{item.type_name}</option>
                         )
                     })}
                 </select>
 
+
+
+                <label className="pt-3 pb-1 pe-5 h5">tags</label>
+                {tags.map(item => {
+                    return (
+                        <div className="form-check form-check-inline" key={item._id}>
+                            <input onClick={() => { onSelectTag(item.tag_name) }} className="form-check-input" type="checkbox" id={item.tag_name} value={item.tag_name} />
+                            <label className="form-check-label" htmlFor={item.tag_name}>{item.tag_name}</label>
+                        </div>
+                    )
+                })}
+                <br />
+
+                <label className="pt-3 pb-1 pe-5 h5">categories</label>
+                {categories.map(item => {
+                    return (
+                        <div className="form-check form-check-inline" key={item._id}>
+                            <input onClick={() => { onSelectCat(item.category_code) }} className="form-check-input" type="checkbox" id={item.category_code} value={item._id} />
+                            <label className="form-check-label" htmlFor={item.category_code}>{item.name}</label>
+                        </div>
+                    )
+                })}
+                <br />
+
+
+         
 
                 <label className="pt-3 pb-1">open_hours - Sunday</label>
                 <input {...register('open_hours - Sunday')} className="form-control" type="text" />
