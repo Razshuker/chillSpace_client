@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { API_URL, doApiGet } from '../../services/apiService';
+import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { PaginationButtons } from '../../components/PaginationButtons';
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
@@ -36,6 +37,20 @@ export default function PlacesList() {
 
         }
     }
+    const deletePlace = async(_delId) => {
+        try {
+            if(window.confirm("Are you sure you want to delete this place?")){
+                const url = API_URL + "/places/" + _delId;
+                const data = await doApiMethod(url,"DELETE");
+                if(data.deletedCount){
+                    doApiGetPlaces();
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            alert("There is a problem, please try again later");
+        }
+    }
 
 
     return (
@@ -43,14 +58,11 @@ export default function PlacesList() {
             <h2>Places List</h2>
             <button className='btn btn-info my-3' onClick={() => { nav("/admin/places/add") }}>Add new place</button>
             <br />
-            {[...Array(pages)].map((item, i) => {
-                const isActive = i + 1 === currentPage;
-                return (
-                    <button key={i} className={`btn btn-dark my-3 mx-1 ${isActive ? 'bg-danger' : ''}`} onClick={() => {
-                        setCurrentPage(i + 1);
-                    }}>{i + 1}</button>
-                )
-            })}
+            <PaginationButtons
+                currentPage={currentPage}
+                pages={pages}
+                setCurrentPage={setCurrentPage}
+            />
            {places.length === 0 ? (
                 <p>Loading...</p>
             ) : ( 
@@ -96,7 +108,7 @@ export default function PlacesList() {
                                         <button onClick={()=>{
                                             nav("edit/"+item._id)
                                         }} className='m-1 btn btn-warning'>Edit</button>
-                                        <button className='m-1 btn btn-danger'>Delete</button>
+                                        <button onClick={()=>{deletePlace(item._id)}} className='m-1 btn btn-danger'>Delete</button>
                                     </td>
                                 </tr>
 
