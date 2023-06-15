@@ -11,7 +11,7 @@ export default function Header() {
                 <div className="col logo">
                     <img onClick={() => {
                         nav("/")
-                    }} src='images/chillSpaceLogoPNG.png' alt='logo'></img>
+                    }} src='images/chillSpaceLogoPNG.png' alt='logo' />
                 </div>
                 <div className="nav row col align-items-center ">
                     <nav className="col d-flex justify-content-end">
