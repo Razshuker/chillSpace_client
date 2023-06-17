@@ -1,0 +1,19 @@
+.postItem{
+    background-color:rgb(161, 145, 141);
+    border-radius: 24px;
+}
+.profile-pic{
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    
+}
+.postPic{
+    min-height: 100px;
+}
+
+.profile-pic-comment{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}

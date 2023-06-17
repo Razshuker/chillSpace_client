@@ -16,6 +16,7 @@ import EditPlace from './admin_components/places/editPlace'
 import ReportedPosts from './admin_components/posts/reportedPosts'
 import Signup from './components/signup'
 import Login from './components/login';
+import PostsList from './components/postsList'
 
 export default function AppRoutes() {
     return (
@@ -26,6 +27,11 @@ export default function AppRoutes() {
             </Routes>
 
             <Routes>
+            <Route path='/' element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/sign-up' element={<Signup />} />
+                <Route path='/posts' element={<PostsList />} />
+
                 <Route path='/admin' element={<LoginAdmin />} />
                 <Route path='/admin/places' element={<PlacesList />} />
                 <Route path='/admin/places/add' element={<AddPlace />} />
@@ -35,10 +41,9 @@ export default function AppRoutes() {
                 <Route path='/admin/categories' element={<CategoriesList />} />
                 <Route path='/admin/categories/add' element={<AddCategory />} />
                 <Route path='/admin/categories/edit/:id' element={<EditCategory />} />
+
                 <Route path='/*' element={<Page404 />} />
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/sign-up' element={<Signup />} />
+            
             </Routes>
             <Routes>
                 <Route path='/*' element={<Footer />} />

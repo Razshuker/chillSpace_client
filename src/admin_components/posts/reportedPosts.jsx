@@ -2,6 +2,7 @@ import React from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import PostItem from '../../components/posts/postItem';
 
 export default function ReportedPosts() {
     const [reportedPosts, setReportedPosts] = useState([]);
@@ -62,14 +63,16 @@ export default function ReportedPosts() {
 
     return (
         <div className='container'>
-            <h2>Reported Posts</h2>
+            <h2 className='p-4'>Reported Posts</h2>
             {reportedPosts.map(item => {
                 return (
-                    <div className='border border-dark p-2 mb-4' key={item._id}>
-                        <div>title : {item.title}</div>
+                    <div className='border border-dark p-5 mb-4' key={item._id} >
+                        {/* <div>title : {item.title}</div>
                         <div>description : {item.description}</div>
                         <div>likes : {item.likes}</div>
-                        <div>date created : {(item.date_created).substring(0, 10)}</div>
+                        */}
+                        <div>date created : {(item.date_created).substring(0, 10)}</div> 
+                        <PostItem key={item._id} item={item}/>
                         <button onClick={() => { deletePost(item._id) }} className='btn btn-danger mx-1 mt-2'>Delete post</button>
                         <button onClick={() => { confirmPost(item._id) }} className='btn btn-success mx-1 mt-2'>Confirm post</button>
                     </div>
