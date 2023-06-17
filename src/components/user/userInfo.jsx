@@ -21,6 +21,7 @@ export default function UserInfo() {
             backgroundImage: `url("/images/loginBG.jpg")`
         }} className='userInfo container text-center pt-5' >
             <h3>Welcome {user.full_name}!</h3>
+            <p className='text-center'>{user.nickname}</p>
             <div className="d-flex align-items-center justify-content-center list">
                 <ul className='p-0 list-inline'>
                     <li><Link to="#">FAVORITES</Link></li>

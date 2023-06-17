@@ -61,19 +61,16 @@ header nav ul li a:hover {
 .profile .userInfo {
     height: 100%;
     font-family: 'Manrope', sans-serif;
-
+    color: rgb(117, 100, 89);
 }
 
 .profile .userInfo h3 {
-    color: rgb(117, 100, 89);
     font-size: 2.5em;
     font-weight: 600;
     text-shadow: 7px 7px 9px rgba(255, 255, 255, 0.651);
 }
 
-.profile .userInfo .list {
-    height: 70%;
-}
+
 
 .profile .userInfo .list ul li {
     padding: 12px 0;
