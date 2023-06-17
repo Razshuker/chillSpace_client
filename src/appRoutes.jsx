@@ -17,6 +17,8 @@ import ReportedPosts from './admin_components/posts/reportedPosts'
 import Signup from './components/signup'
 import Login from './components/login';
 import UpdateUserInfo from './components/user/updateUserInfo'
+import PostsList from './components/postsList'
+
 
 export default function AppRoutes() {
     return (
@@ -27,20 +29,24 @@ export default function AppRoutes() {
             </Routes>
 
             <Routes>
-                <Route path='/admin' element={<LoginAdmin />} />
-                <Route path='/admin/places' element={<PlacesList />} />
-                <Route path='/admin/places/add' element={<AddPlace />} />
-                <Route path='/admin/places/edit/:id' element={<EditPlace />} />
-                <Route path='/admin/reportedPosts' element={<ReportedPosts />} />
-                <Route path='/admin/users' element={<UsersList />} />
-                <Route path='/admin/categories' element={<CategoriesList />} />
-                <Route path='/admin/categories/add' element={<AddCategory />} />
-                <Route path='/admin/categories/edit/:id' element={<EditCategory />} />
-                <Route path='/*' element={<Page404 />} />
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/sign-up' element={<Signup />} />
-                <Route path='user/updateAccount' element={<UpdateUserInfo />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/sign-up' element={<Signup />} />
+            <Route path='/posts' element={<PostsList />} />
+            <Route path='user/updateAccount' element={<UpdateUserInfo />} />
+
+            <Route path='/admin' element={<LoginAdmin />} />
+            <Route path='/admin/places' element={<PlacesList />} />
+            <Route path='/admin/places/add' element={<AddPlace />} />
+            <Route path='/admin/places/edit/:id' element={<EditPlace />} />
+            <Route path='/admin/reportedPosts' element={<ReportedPosts />} />
+            <Route path='/admin/users' element={<UsersList />} />
+            <Route path='/admin/categories' element={<CategoriesList />} />
+            <Route path='/admin/categories/add' element={<AddCategory />} />
+            <Route path='/admin/categories/edit/:id' element={<EditCategory />} />
+
+            <Route path='/*' element={<Page404 />} />
+
             </Routes>
             <Routes>
                 <Route path='/*' element={<Footer />} />
