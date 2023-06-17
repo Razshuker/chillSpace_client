@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Login from '../login';
 import { TOKEN_KEY } from '../../services/apiService';
+import UserInfo from '../user/userInfo';
 
 
 export default function ProfileMenu() {
@@ -44,11 +45,7 @@ export default function ProfileMenu() {
                         {!localStorage[TOKEN_KEY] ?
                             <Login />
                             :
-                            <ul className='p-0'>
-                                <li><Link>A</Link></li>
-                                <li><Link>A</Link></li>
-                                <li><Link>A</Link></li>
-                            </ul>
+                            <UserInfo />
                         }
                     </div>
                 </Typography>

@@ -1,0 +1,39 @@
+header {
+    position: unset;
+}
+
+.updateAccount {
+    min-height: 90vh;
+    flex-wrap: wrap;
+}
+
+.updateAccount h1 {
+    color: rgb(117, 100, 89);
+    font-family: 'Raleway', sans-serif;
+    font-size: 5em;
+    text-align: center;
+    text-shadow: 7px 7px 9px rgba(83, 74, 74, 0.651);
+}
+
+
+
+.updateAccount form input {
+    margin-bottom: 18px;
+    padding: 18px 32px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.537);
+    border-radius: 24px;
+    font-size: 1.5em;
+}
+
+.updateAccount form .update_btn {
+    width: 40%;
+    padding: 18px 48px;
+    border-radius: 24px;
+    border: none;
+    margin: 12px auto;
+    background-color: rgb(117, 100, 89);
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5em;
+}

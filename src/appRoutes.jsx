@@ -16,6 +16,7 @@ import EditPlace from './admin_components/places/editPlace'
 import ReportedPosts from './admin_components/posts/reportedPosts'
 import Signup from './components/signup'
 import Login from './components/login';
+import UpdateUserInfo from './components/user/updateUserInfo'
 
 export default function AppRoutes() {
     return (
@@ -39,6 +40,7 @@ export default function AppRoutes() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/sign-up' element={<Signup />} />
+                <Route path='user/updateAccount' element={<UpdateUserInfo />} />
             </Routes>
             <Routes>
                 <Route path='/*' element={<Footer />} />
