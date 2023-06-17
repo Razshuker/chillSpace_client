@@ -31,6 +31,7 @@ header nav ul li a:hover {
 
 .profile {
     height: 55vh;
+    width: 400px;
     overflow-y: hidden;
 }
 
@@ -55,4 +56,40 @@ header nav ul li a:hover {
 .profile .loginClient form {
     width: 100%;
     padding: 24px;
+}
+
+.profile .userInfo {
+    height: 100%;
+    font-family: 'Manrope', sans-serif;
+    color: rgb(117, 100, 89);
+}
+
+.profile .userInfo h3 {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-shadow: 7px 7px 9px rgba(255, 255, 255, 0.651);
+}
+
+
+
+.profile .userInfo .list ul li {
+    padding: 12px 0;
+    border-bottom: 2px solid rgb(117, 100, 89);
+    ;
+}
+
+.profile .userInfo .list ul li:last-of-type {
+    border-bottom: none;
+}
+
+.profile .userInfo .list ul li a {
+    color: rgb(117, 100, 89);
+    display: block;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: 800ms;
+}
+
+.profile .userInfo .list ul li a:hover {
+    transform: scale(0.9);
 }

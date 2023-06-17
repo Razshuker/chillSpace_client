@@ -2,22 +2,22 @@ header {
     position: unset;
 }
 
-.sign-up {
+.updateAccount {
     min-height: 90vh;
     flex-wrap: wrap;
 }
 
-.sign-up h1 {
+.updateAccount h1 {
     color: rgb(117, 100, 89);
     font-family: 'Raleway', sans-serif;
-    font-size: 7em;
+    font-size: 5em;
     text-align: center;
     text-shadow: 7px 7px 9px rgba(83, 74, 74, 0.651);
 }
 
 
 
-.sign-up form input {
+.updateAccount form input {
     margin-bottom: 18px;
     padding: 18px 32px;
     text-align: center;
@@ -26,7 +26,7 @@ header {
     font-size: 1.5em;
 }
 
-.sign-up form .sign-up_btn {
+.updateAccount form .update_btn {
     width: 40%;
     padding: 18px 48px;
     border-radius: 24px;
