@@ -76,7 +76,7 @@ export default function EditPlace() {
 
 
     const onSubForm = (_bodyData) => {
-        const placeLocation = { latitude: (_bodyData['latitude'] || ''), longitude: (_bodyData['longitude'] || '') };
+        const placeLocation = { lat: (_bodyData['lat'] || ''), lon: (_bodyData['lon'] || '') };
         // const openHours = {
         //     Sunday: _bodyData['open_hours - Sunday'] || '',
         //     Monday: _bodyData['open_hours - Monday'] || '',
@@ -135,35 +135,26 @@ export default function EditPlace() {
                     <label className="pt-3 pb-1">name</label>
                     <input defaultValue={placeDetails.name} {...register("name", { required: true, minLength: 2 })} className="form-control" type="text" />
                     {errors.name && <div className="text-danger">* Enter a valid name</div>}
-
                     <label className="pt-3 pb-1">image (url)</label>
                     <input defaultValue={placeDetails.img_url} {...register("img_url", { minLength: 2 })} className="form-control" type="text" />
                     {errors.img_url && <div className="text-danger">* Enter a valid url</div>}
-
                     <label className="pt-3 pb-1">city</label>
                     <input defaultValue={placeDetails.city} {...register("city", { required: true, minLength: 2 })} className="form-control" type="text" />
                     {errors.city && <div className="text-danger">* Enter a valid city</div>}
-
                     <label className="pt-3 pb-1">phone</label>
                     <input defaultValue={placeDetails.phone} {...register("phone", { required: true, minLength: 2 })} className="form-control" type="text" />
                     {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
-
                     <label className="pt-3 pb-1">latitude</label>
                     <input defaultValue={placeDetails.location.lat} {...register("lat", { required: true, minLength: 2 })} className="form-control" type="text" />
                     {errors.lat && <div className="text-danger">* Enter a valid latitude</div>}
-
                     <label className="pt-3 pb-1">longitude</label>
                     <input defaultValue={placeDetails.location.lon} {...register("lon", { required: true, minLength: 2 })} className="form-control" type="text" />
                     {errors.lon && <div className="text-danger">* Enter a valid longitude</div>}
-
-
                     <label className="pt-3 pb-1">description</label>
                     <textarea rows={"5"} defaultValue={placeDetails.description} {...register("description", { required: true, minLength: 2 })} className="form-control" type="text" />
                     {errors.description && <div className="text-danger">* Enter a valid description</div>}
-
-
                     <label className="pt-3 pb-1">area</label>
-                    <select defaultValue={placeDetails.area} {...register("area", { required: true })} className="form-select" type="select" >
+                    <select {...register("area", { required: true })} className="form-select" type="select">
                         <option value={placeDetails.area}>{placeDetails.area}</option>
                         {fitAreas.map((item, i) => {
                             return (
@@ -171,7 +162,6 @@ export default function EditPlace() {
                             )
                         })}
                     </select>
-
                     <label className="pt-3 pb-1">type</label>
                     <select {...register("type", { required: true })} className="form-select" type="select">
                         <option value={placeDetails.type}>{placeDetails.type}</option>
@@ -181,8 +171,6 @@ export default function EditPlace() {
                             )
                         })}
                     </select>
-
-
                     <label className="pt-3 pb-1 pe-5 h5">tags</label>
                     {tags.map(item => {
                         return (

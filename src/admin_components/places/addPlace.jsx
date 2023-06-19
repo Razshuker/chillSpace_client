@@ -162,7 +162,6 @@ export default function AddPlace() {
                     <option value={"center"}>Center</option>
                     <option value={"jerusalem"}>Jerusalem</option>
                 </select>
-
                 <label className="pt-3 pb-1">type</label>
                 <select {...register("type", { required: true })} className="form-select " type="select">
                     <option value={""}>
