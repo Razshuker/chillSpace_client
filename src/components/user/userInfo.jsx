@@ -27,6 +27,7 @@ export default function UserInfo() {
                     <li><Link to="#">FAVORITES</Link></li>
                     <li><Link to="#">MY POSTS</Link></li>
                     <li><Link to="/user/updateAccount">UPDATE ACCOUNT DETAILS</Link></li>
+                    <li><Link to="#">CHANGE USER PASSWORD</Link></li>
                 </ul>
             </div>
             <button onClick={() => {
