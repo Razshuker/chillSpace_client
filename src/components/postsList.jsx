@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PostItem from './posts/postItem'
 import { API_URL, doApiGet } from '../services/apiService';
+import {IoSearchOutline} from "react-icons/io5"
+import { Link } from 'react-router-dom';
 
 export default function PostsList() {
     const [postsAr,setPostsAr] = useState([]);
+    const inputRf = useRef();
 
     useEffect(()=>{
         doApi();
@@ -18,6 +21,11 @@ export default function PostsList() {
 
     <div className='container-fluid p-md-5'>
         <div className='container'>
+            <Link to={"add"}>Add new post</Link>
+            <div className='d-flex justify-content-end py-4'>
+            <input ref={inputRf} placeholder='Search by name or description...' className='searchInput input-group'/>
+            <button className='searchBtn'><IoSearchOutline className='h5 m-1'/></button>
+            </div>
         {postsAr.map(item=> {
             return(
                 <PostItem key={item._id} item={item}/>
