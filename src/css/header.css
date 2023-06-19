@@ -25,6 +25,16 @@ header nav ul li a {
     transition: 800ms;
 }
 
+header .adminNav ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 0 16px;
+    font-size: 1em;
+    font-family: 'Manrope', sans-serif;
+    transition: 800ms;
+}
+
 header nav ul li a:hover {
     transform: scale(0.9);
 }
