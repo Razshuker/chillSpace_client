@@ -2,18 +2,45 @@
     background-color:rgb(161, 145, 141);
     border-radius: 24px;
 }
-.profile-pic{
+.postItem .postInfo{
+    border-right: 4px solid rgb(252, 246, 234) ;
+}
+.postItem .profile-pic{
     border-radius: 50%;
     height: 60px;
     width: 60px;
     
 }
-.postPic{
+.postItem .postPic{
     min-height: 100px;
 }
 
-.profile-pic-comment{
+.postItem .profile-pic-comment{
     border-radius: 50%;
     height: 40px;
     width: 40px;
 }
+
+/* posts list */
+.searchInput{
+    background-color: rgb(189, 209, 159); 
+    border-radius: 14px;
+     padding: 8px;
+     max-width: 50%;
+     border: 1px solid darkgray;
+
+}
+.searchBtn{
+    width: 40px;
+    height: 40px;
+    background-color: rgb(61, 78, 57);
+    color: white;
+    border-radius: 50%;
+
+}
+@media(max-width:768px){
+    .postItem .postInfo{
+        border-right: none ;
+    }
+}
+

@@ -18,6 +18,7 @@ import Signup from './components/signup'
 import Login from './components/login';
 import UpdateUserInfo from './components/user/updateUserInfo'
 import PostsList from './components/postsList'
+import AddPost from './components/posts/addPost'
 
 
 export default function AppRoutes() {
@@ -33,6 +34,7 @@ export default function AppRoutes() {
             <Route path='/login' element={<Login />} />
             <Route path='/sign-up' element={<Signup />} />
             <Route path='/posts' element={<PostsList />} />
+            <Route path='/posts/add' element={<AddPost />} />
             <Route path='user/updateAccount' element={<UpdateUserInfo />} />
 
             <Route path='/admin' element={<LoginAdmin />} />
