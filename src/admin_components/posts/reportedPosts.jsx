@@ -17,13 +17,10 @@ export default function ReportedPosts() {
             const url = API_URL + "/posts/reported";
             const data = await doApiGet(url);
             setReportedPosts(data);
-
-
         } catch (error) {
             console.log(error);
             alert("There is a problem, please try again later");
         }
-
     }
 
     const deletePost = async (_idDel) => {
@@ -39,13 +36,12 @@ export default function ReportedPosts() {
             console.log(error);
             alert("There is a problem, please try again later");
         }
-
     }
+
     const confirmPost = async (_idConfirm) => {
         try {
             if (window.confirm("confirm post?")) {
-
-                const url = API_URL + "/posts/confirmPost/" + _idConfirm;
+                const url = API_URL + "/posts/reportPost/" + _idConfirm + "/true";
                 const data = await doApiMethod(url, "PATCH");
                 if (data.modifiedCount) {
                     doApiReported();
@@ -56,7 +52,6 @@ export default function ReportedPosts() {
             console.log(error);
             alert("There is a problem, please try again later");
         }
-
     }
 
 
@@ -71,8 +66,8 @@ export default function ReportedPosts() {
                         <div>description : {item.description}</div>
                         <div>likes : {item.likes}</div>
                         */}
-                        <div>date created : {(item.date_created).substring(0, 10)}</div> 
-                        <PostItem key={item._id} item={item}/>
+                        <div>date created : {(item.date_created).substring(0, 10)}</div>
+                        <PostItem key={item._id} item={item} />
                         <button onClick={() => { deletePost(item._id) }} className='btn btn-danger mx-1 mt-2'>Delete post</button>
                         <button onClick={() => { confirmPost(item._id) }} className='btn btn-success mx-1 mt-2'>Confirm post</button>
                     </div>
