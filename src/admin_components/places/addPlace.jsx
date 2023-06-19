@@ -48,7 +48,7 @@ export default function AddPlace() {
         }
     }
     const onSubForm = (_bodyData) => {
-        const placeLocation = { latitude: (_bodyData['latitude'] || ''), longitude: (_bodyData['longitude'] || '') };
+        const placeLocation = { lat: (_bodyData['lat'] || ''), lon: (_bodyData['lon'] || '') };
         const openHours = {
             Sunday: _bodyData['open_hours - Sunday'] || '',
             Monday: _bodyData['open_hours - Monday'] || '',
@@ -75,8 +75,8 @@ export default function AddPlace() {
         delete placeData['open_hours - Friday'];
         delete placeData['open_hours - Saturday'];
 
-        delete placeData['latitude'];
-        delete placeData['longitude'];
+        delete placeData['lat'];
+        delete placeData['lon'];
 
         console.log(placeData);
         doApiPost(placeData);
@@ -139,12 +139,12 @@ export default function AddPlace() {
 
 
                 <label className="pt-3 pb-1">latitude</label>
-                <input {...register("latitude", { required: true, minLength: 2 })} className="form-control" type="text" />
-                {errors.latitude && <div className="text-danger">* Enter a valid latitude</div>}
+                <input {...register("lat", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.lat && <div className="text-danger">* Enter a valid latitude</div>}
 
                 <label className="pt-3 pb-1">longitude</label>
-                <input {...register("longitude", { required: true, minLength: 2 })} className="form-control" type="text" />
-                {errors.longitude && <div className="text-danger">* Enter a valid longitude</div>}
+                <input {...register("lon", { required: true, minLength: 2 })} className="form-control" type="text" />
+                {errors.lon && <div className="text-danger">* Enter a valid longitude</div>}
 
 
                 <label className="pt-3 pb-1">description</label>
@@ -157,15 +157,15 @@ export default function AddPlace() {
                     <option value={""}>
                         choose one of the options:
                     </option>
-                    <option value={"North"}>North</option>
-                    <option value={"Suoth"}>South</option>
-                    <option  value={"Center"}>Center</option>
-                    <option value={"Jerusalem"}>Jerusalem</option>
+                    <option value={"north"}>North</option>
+                    <option value={"suoth"}>South</option>
+                    <option value={"center"}>Center</option>
+                    <option value={"jerusalem"}>Jerusalem</option>
                 </select>
 
                 <label className="pt-3 pb-1">type</label>
                 <select {...register("type", { required: true })} className="form-select " type="select">
-                <option value={""}>
+                    <option value={""}>
                         choose one of the options:
                     </option>
                     <option></option>
@@ -201,7 +201,7 @@ export default function AddPlace() {
                 <br />
 
 
-         
+
 
                 <label className="pt-3 pb-1">open_hours - Sunday</label>
                 <input {...register('open_hours - Sunday')} className="form-control" type="text" />
