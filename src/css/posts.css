@@ -24,6 +24,13 @@
     color: white;
 }
 
+.postItem .btnLike{
+    background-color: inherit;
+    border: none;
+    padding: 0;
+
+}
+
 .postItem .comment {
     margin-top: 12px;
 }
