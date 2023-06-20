@@ -41,7 +41,6 @@ export default function ProfileMenu() {
             >
                 <Typography>
                     <div className='profile'>
-                        {console.log(localStorage[TOKEN_KEY])}
                         {!localStorage[TOKEN_KEY] ?
                             <Login />
                             :
