@@ -9,7 +9,6 @@ import Loading from '../../components/loading';
 export default function EditPlace() {
     const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
     const [tags, setTags] = useState([]);
-    const [types, setTypes] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedCat, setSelectedCat] = useState([]);
