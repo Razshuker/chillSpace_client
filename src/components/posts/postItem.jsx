@@ -3,14 +3,14 @@ import "../../css/posts.css"
 import { Link } from 'react-router-dom'
 import { AiFillLike, AiOutlinePushpin } from "react-icons/ai";
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { API_URL, doApiMethod } from '../../services/apiService';
+import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 
 // not finished
 
 export default function PostItem(props) {
     const item = props.item;
     const [likes,setLikes] = useState(item.likes.length);
-  
+
     const getTimePassed = (date) => {
         const now = new Date().getTime();
         const pastDate = new Date(date).getTime();
@@ -41,7 +41,18 @@ export default function PostItem(props) {
         try {
             const url = API_URL + "/posts/addLike/" + _idPost;
             await doApiMethod(url,"PATCH");
-            setLikes(likes+1);
+            getLikes();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+// might not be necesery , right now i could'nt find another way to render the likes to the client
+    const getLikes = async()=>{
+        try {
+            const url = API_URL + "/posts/single/"+item._id;
+            const data = await doApiGet(url);
+            console.log((data.likes).length);
+            setLikes((data.likes).length)
         } catch (error) {
             console.log(error);
         }
