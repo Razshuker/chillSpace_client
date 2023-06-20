@@ -29,7 +29,7 @@ export default function UserInfo() {
             <p className='text-center'>{user.nickname}</p>
             <div className="d-flex align-items-center justify-content-center list">
                 <ul className='p-0 list-inline'>
-                    <li><Link to="#">FAVORITES</Link></li>
+                    <li><Link to="/user/favorites">FAVORITES</Link></li>
                     <li><Link to="#">MY POSTS</Link></li>
                     <li><Link to="/user/updateAccount">UPDATE ACCOUNT DETAILS</Link></li>
                 </ul>
