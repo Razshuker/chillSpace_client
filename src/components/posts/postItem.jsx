@@ -2,6 +2,8 @@ import React from 'react'
 import "../../css/posts.css"
 import { Link } from 'react-router-dom'
 import { AiFillLike, AiOutlinePushpin } from "react-icons/ai";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+
 
 
 export default function PostItem(props) {
@@ -41,24 +43,23 @@ export default function PostItem(props) {
                 <div className='row align-items-center justify-content-between'>
                     <div className='col-6'>
                         <div className='row p-2'>
-                            <div className='col-auto profile-pic bg-light'>
-                                profile pic
+                            <div className='col-4 profile-pic p-0'>
+                                <AccountCircle className='profile_icon' fontSize='large' />
                             </div>
-
-                            <div className='col-3'>nickNme</div>
-                            <h5 className='p-1'>{item.title}</h5>
+                            <div className='col-6'>
+                                <h3>Nickname</h3>
+                                <h5 className=''>{item.title}</h5>
+                            </div>
                         </div>
                     </div>
-
-                    <div className='col-auto mx-3'>
+                    <div className='col-3'>
                         <div className=' col-auto '>{getTimePassed(item.date_created)}</div>
                         <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>
                     </div>
-
                 </div>
 
                 <div className='row'>
-                    <div className='bg-dark m-1 col-md-5 postPic'>picture</div>
+                    <div className='m-1 col-md-5 postPic'>picture</div>
                     <div className='col-md-6'>{item.description}</div>
                 </div>
                 <div className='float-end'>
@@ -69,25 +70,25 @@ export default function PostItem(props) {
 
             <div className='col-md-5 text-center'>
                 <h5 className='text-center'>comments</h5>
-                <div className='row border m-1'>
-                    <div className='col-2  profile-pic-comment bg-light'>
-                        pic
+                <div className='comment row border'>
+                    <div className='col-2  profile-pic-comment'>
+                        <AccountCircle fontSize='large' />
                     </div>
                     <div className='col-9 d-flex align-items-center'>
                         your comment
                     </div>
                 </div>
-                <div className='row border m-1'>
-                    <div className='col-2  profile-pic-comment bg-light'>
-                        pic
+                <div className='comment row border'>
+                    <div className='col-2  profile-pic-comment'>
+                        <AccountCircle fontSize='large' />
                     </div>
                     <div className='col-9 d-flex align-items-center'>
                         your comment
                     </div>
                 </div>
-                <div className='row border m-1'>
-                    <div className='col-2  profile-pic-comment bg-light'>
-                        pic
+                <div className='comment row border'>
+                    <div className='col-2  profile-pic-comment'>
+                        <AccountCircle fontSize='large' />
                     </div>
                     <div className='col-9 d-flex align-items-center'>
                         your comment

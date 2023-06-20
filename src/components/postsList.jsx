@@ -24,13 +24,15 @@ export default function PostsList() {
     }
 
     return (
-        <div className='container-fluid p-md-5'>
-            <div className='container'>
+        <div className='container-fluid'>
+            <div className="px-5">
                 <Link to={"add"}>Add new post</Link>
                 <div className='d-flex justify-content-end py-4'>
                     <input ref={inputRf} placeholder='Search by name or description...' className='searchInput input-group' />
-                    <button className='searchBtn'><IoSearchOutline className='h5 m-1' /></button>
+                    <button className='searchBtn'><IoSearchOutline className='search_icon' /></button>
                 </div>
+            </div>
+            <div className='container'>
                 {postsAr.map(item => {
                     return (
                         <PostItem key={item._id} item={item} />
