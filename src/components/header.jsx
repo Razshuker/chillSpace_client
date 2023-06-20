@@ -5,6 +5,7 @@ import ProfileMenu from './header/profileMenu'
 
 export default function Header() {
     const nav = useNavigate();
+
     return (
         <header className='container-fluid'>
             <div className="row justify-content-between align-items-center px-4">

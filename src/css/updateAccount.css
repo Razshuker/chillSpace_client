@@ -5,9 +5,13 @@ header {
 .updateAccount {
     min-height: 90vh;
     flex-wrap: wrap;
+    background-position: center;
+    background-size: cover;
+
 }
 
-.updateAccount h1 {
+.updateAccount h2 {
+    padding: 48px 0;
     color: rgb(117, 100, 89);
     font-family: 'Raleway', sans-serif;
     font-size: 5em;
@@ -32,6 +36,20 @@ header {
     border-radius: 24px;
     border: none;
     margin: 12px auto;
+    background-color: rgb(117, 100, 89);
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5em;
+}
+
+.password_btn {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    padding: 22px 38px;
+    border-radius: 24px;
+    border: none;
+    margin: 24px auto;
     background-color: rgb(117, 100, 89);
     color: white;
     font-family: 'Raleway', sans-serif;

@@ -15,7 +15,6 @@ export default function LoginAdmin() {
                 localStorage.setItem(TOKEN_KEY, data.token);
                 nav("users");
             }
-
         } catch (error) {
             console.log(error);
         }
@@ -25,7 +24,6 @@ export default function LoginAdmin() {
         <div className='container-fluid'>
             <div className="container">
                 <h1 className='display-1 text-center'>ADMIN LOGIN</h1>
-
                 <form onSubmit={handleSubmit(onSub)} className='col-md-4 mx-auto' >
                     <input placeholder='Email' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className="form-control mt-4" type="email" />
                     {errors.email && <div className="text-danger">* Enter valid email</div>}

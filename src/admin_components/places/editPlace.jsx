@@ -15,16 +15,19 @@ export default function EditPlace() {
     const [selectedCat, setSelectedCat] = useState([]);
     const AREAS = ["south", "north", "center", "jerusalem"];
     const [fitAreas, setAreas] = useState([]);
+    const [types, setTypes] = useState([]);
+    const params = useParams();
     const [placeDetails, setPlaceDetails] = useState({});
     const nav = useNavigate();
-    const params = useParams();
+
 
     useEffect(() => {
         doApiGetPlace();
     }, [])
 
-    const doApiGetPlace = async () => {
-        const url = API_URL + "/places/single/" + params["id"];
+    const doApiGetPlace = async (res, req) => {
+        try {
+            const url = API_URL + "/places/single/" + params["id"];
         const data = await doApiGet(url);
         console.log(data);
         setPlaceDetails(data);
@@ -33,6 +36,12 @@ export default function EditPlace() {
         doApiTypes(data.type);
         doApiTags();
         doApiCategory();
+          
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
+
     }
 
     const doApiTypes = async (_type) => {

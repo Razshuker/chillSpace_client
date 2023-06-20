@@ -12,16 +12,21 @@ export default function Signup() {
 
 
     const onSub = async (_data) => {
-        _data.full_name = _data.first_name + " " + _data.last_name;
-        delete _data.first_name;
-        delete _data.last_name;
-        delete _data.confirm_password;
-        console.log(_data);
-        const url = API_URL + '/users';
-        const user = await doApiMethod(url, "POST", _data);
-        if (user._id) {
-            alert("user add");
-            nav("/login");
+        try {
+            _data.full_name = _data.first_name + " " + _data.last_name;
+            delete _data.first_name;
+            delete _data.last_name;
+            delete _data.confirm_password;
+            console.log(_data);
+            const url = API_URL + '/users';
+            const user = await doApiMethod(url, "POST", _data);
+            if (user._id) {
+                alert("user add");
+                nav("/login");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
         }
     }
 
