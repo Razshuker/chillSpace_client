@@ -23,7 +23,6 @@ export default function AddPlace() {
             const url = API_URL + "/tags";
             const data = await doApiGet(url);
             setTags(data);
-            // console.log(data);
         } catch (error) {
             console.log(error)
         }
@@ -42,7 +41,6 @@ export default function AddPlace() {
             const url = API_URL + "/categories";
             const data = await doApiGet(url);
             setCategories(data);
-            console.log(data)
         } catch (error) {
             console.log(error)
         }
@@ -58,7 +56,6 @@ export default function AddPlace() {
             Friday: _bodyData['open_hours - Friday'] || '',
             Saturday: _bodyData['open_hours - Saturday'] || '',
         };
-
         const placeData = {
             ..._bodyData,
             open_hours: openHours,
@@ -66,7 +63,6 @@ export default function AddPlace() {
             tags_name: selectedTags,
             categories_code: selectedCat
         };
-
         delete placeData['open_hours - Sunday'];
         delete placeData['open_hours - Monday'];
         delete placeData['open_hours - Tuesday'];
@@ -78,9 +74,7 @@ export default function AddPlace() {
         delete placeData['lat'];
         delete placeData['lon'];
 
-        console.log(placeData);
         doApiPost(placeData);
-
     }
 
     const doApiPost = async (_placeData) => {
@@ -94,7 +88,6 @@ export default function AddPlace() {
         } catch (error) {
             console.log(error);
             alert("there is a problem, please try again later");
-
         }
 
     }
@@ -114,7 +107,6 @@ export default function AddPlace() {
             setSelectedCat(selectedCat.filter((code) => code !== _catCode));
         }
     };
-
     return (
         <div className='container'>
             <h1>Add new place</h1>
@@ -122,36 +114,24 @@ export default function AddPlace() {
                 <label className="pt-3 pb-1">name</label>
                 <input {...register("name", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.name && <div className="text-danger">* Enter a valid name</div>}
-
                 <label className="pt-3 pb-1">image (url)</label>
                 <input {...register("img_url", { minLength: 2 })} className="form-control" type="text" />
                 {errors.img_url && <div className="text-danger">* Enter a valid url</div>}
-
-
                 <label className="pt-3 pb-1">city</label>
                 <input {...register("city", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.city && <div className="text-danger">* Enter a valid city</div>}
-
-
                 <label className="pt-3 pb-1">phone</label>
                 <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
-
-
                 <label className="pt-3 pb-1">latitude</label>
                 <input {...register("lat", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.lat && <div className="text-danger">* Enter a valid latitude</div>}
-
                 <label className="pt-3 pb-1">longitude</label>
                 <input {...register("lon", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.lon && <div className="text-danger">* Enter a valid longitude</div>}
-
-
                 <label className="pt-3 pb-1">description</label>
-                <input {...register("description", { required: true, minLength: 2 })} className="form-control" type="text" />
+                <textarea rows={"5"} {...register("description", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.description && <div className="text-danger">* Enter a valid description</div>}
-
-
                 <label className="pt-3 pb-1">area</label>
                 <select {...register("area", { required: true })} className="form-select" type="select" >
                     <option value={""}>
@@ -174,9 +154,6 @@ export default function AddPlace() {
                         )
                     })}
                 </select>
-
-
-
                 <label className="pt-3 pb-1 pe-5 h5">tags</label>
                 {tags.map(item => {
                     return (
@@ -187,44 +164,31 @@ export default function AddPlace() {
                     )
                 })}
                 <br />
-
                 <label className="pt-3 pb-1 pe-5 h5">categories</label>
                 {categories.map(item => {
                     return (
                         <div className="form-check form-check-inline" key={item._id}>
-                            <input onClick={() => { onSelectCat(item.category_code) }} className="form-check-input" type="checkbox" id={item.category_code} value={item._id} />
+                            <input onClick={() => { onSelectCat(item.category_code) }} className="form-check-input" type="checkbox" id={item.category_code} value={item.category_code} />
                             <label className="form-check-label" htmlFor={item.category_code}>{item.name}</label>
                         </div>
                     )
                 })}
                 <br />
-
-
-
-
                 <label className="pt-3 pb-1">open_hours - Sunday</label>
                 <input {...register('open_hours - Sunday')} className="form-control" type="text" />
-
                 <label className="pt-3 pb-1">open_hours - Monday</label>
                 <input {...register('open_hours - Monday')} className="form-control" type="text" />
-
                 <label className="pt-3 pb-1">open_hours - Tuesday</label>
                 <input {...register('open_hours - Tuesday')} className="form-control" type="text" />
-
                 <label className="pt-3 pb-1">open_hours - Wednesday</label>
                 <input {...register('open_hours - Wednesday')} className="form-control" type="text" />
-
                 <label className="pt-3 pb-1">open_hours - Thursday</label>
                 <input {...register('open_hours - Thursday')} className="form-control" type="text" />
-
                 <label className="pt-3 pb-1">open_hours - Friday</label>
                 <input {...register('open_hours - Friday')} className="form-control" type="text" />
-
                 <label className="pt-3 pb-1">open_hours - Saturday</label>
                 <input {...register('open_hours - Saturday')} className="form-control" type="text" />
-
                 <button className='btn btn-success m-4'> Submit </button>
-
             </form>
         </div>
     )
