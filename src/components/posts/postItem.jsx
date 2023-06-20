@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../css/posts.css"
 import { Link } from 'react-router-dom'
 import { AiFillLike, AiOutlinePushpin } from "react-icons/ai";
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import { API_URL, doApiMethod } from '../../services/apiService';
 
-
+// not finished
 
 export default function PostItem(props) {
     const item = props.item;
-
+    const [likes,setLikes] = useState(item.likes.length);
+  
     const getTimePassed = (date) => {
         const now = new Date().getTime();
         const pastDate = new Date(date).getTime();
@@ -35,9 +37,17 @@ export default function PostItem(props) {
         }
         return `${seconds}s ago`;
     }
+    const addLike = async (_idPost) => {
+        try {
+            const url = API_URL + "/posts/addLike/" + _idPost;
+            await doApiMethod(url,"PATCH");
+            setLikes(likes+1);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
-
         <div className='postItem border p-4  mt-4 row '>
             <div className='postInfo col-md-7 '>
                 <div className='row align-items-center justify-content-between'>
@@ -63,8 +73,8 @@ export default function PostItem(props) {
                     <div className='col-md-6'>{item.description}</div>
                 </div>
                 <div className='float-end'>
-                    <AiFillLike className=' h3' />
-                    <span className='p-1'>{item.likes}</span>
+                    <button onClick={() => {addLike(item._id)}} className='btnLike'><AiFillLike className=' h3' /></button>
+                    <span className='p-1'>{likes}</span>
                 </div>
             </div>
 
