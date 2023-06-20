@@ -23,7 +23,6 @@ export default function EditPlace() {
         doApiGetPlace();
     }, [])
 
-
     const doApiGetPlace = async () => {
         const url = API_URL + "/places/single/" + params["id"];
         const data = await doApiGet(url);
@@ -196,28 +195,20 @@ export default function EditPlace() {
                             <br />
                             <label className="pt-3 pb-1">open_hours - Sunday</label>
                             <input defaultValue={placeDetails.open_hours['Sunday']} className="form-control" type="text" />
-
                             <label className="pt-3 pb-1">open_hours - Monday</label>
                             <input defaultValue={placeDetails.open_hours['Monday']} {...register('open_hours - Monday')} className="form-control" type="text" />
-
                             <label className="pt-3 pb-1">open_hours - Tuesday</label>
                             <input defaultValue={placeDetails.open_hours['Tuesday']} {...register('open_hours - Tuesday')} className="form-control" type="text" />
-
                             <label className="pt-3 pb-1">open_hours - Wednesday</label>
                             <input defaultValue={placeDetails.open_hours['Wednesday']} {...register('open_hours - Wednesday')} className="form-control" type="text" />
-
                             <label className="pt-3 pb-1">open_hours - Thursday</label>
                             <input defaultValue={placeDetails.open_hours['Thursday']} {...register('open_hours - Thursday')} className="form-control" type="text" />
-
                             <label className="pt-3 pb-1">open_hours - Friday</label>
                             <input defaultValue={placeDetails.open_hours['Friday']} {...register('open_hours - Friday')} className="form-control" type="text" />
-
                             <label className="pt-3 pb-1">open_hours - Saturday</label>
                             <input defaultValue={placeDetails.open_hours['Saturday']} {...register('open_hours - Saturday')} className="form-control" type="text" />
-
                             <button className='btn btn-success m-4 d-block'> Update </button>
                         </form>
-
                     </>
                 ) : <Loading />}
         </div>

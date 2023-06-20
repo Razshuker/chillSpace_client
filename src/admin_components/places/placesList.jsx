@@ -15,8 +15,6 @@ export default function PlacesList() {
         doApiCount();
     }, [currentPage])
 
-
-
     const doApiGetPlaces = async () => {
         try {
             const url = API_URL + "/places?page=" + currentPage;
@@ -53,7 +51,6 @@ export default function PlacesList() {
         }
     }
 
-
     return (
         <div className='container'>
             <h2>Places List</h2>
@@ -64,59 +61,59 @@ export default function PlacesList() {
                 pages={pages}
                 setCurrentPage={setCurrentPage}
             />
-           {places.length === 0 ? (
-                <Loading/>
+           {places.length != 0 ? (
+             <table className='table table-hover table-striped table-primary'>
+             <thead>
+                 <tr>
+                     <th>#</th>
+                     <th>Name</th>
+                     <th>Area</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                     <th>Categories_code</th>
+                     <th>Edit/Delete</th>
+
+                 </tr>
+             </thead>
+
+             <tbody>
+                 {places.map((item, i) => {
+                     return (
+                         <tr key={item._id}>
+                             <td>{(currentPage - 1) * 6 + i + 1}</td>
+                             <td>{item.name}</td>
+                             <td>{item.area}</td>
+                             <td>{item.type}</td>
+                             <td style={{ position: 'relative' }}>
+                                 <div
+                                     style={{
+                                         height: '100px',
+                                         overflowY: 'auto',
+                                         width: '200px'
+                                     }}
+                                 >
+                                     {item.description}
+                                 </div>
+                             </td>
+                             <td>{(item.categories_code).map((itemCategory) => {
+                                 return (
+                                     itemCategory + " | "
+                                 )
+                             })}</td>
+                             <td>
+                                 <button onClick={()=>{
+                                     nav("edit/"+item._id)
+                                 }} className='m-1 btn btn-warning'>Edit</button>
+                                 <button onClick={()=>{deletePlace(item._id)}} className='m-1 btn btn-danger'>Delete</button>
+                             </td>
+                         </tr>
+
+                     )
+                 })}
+             </tbody>
+         </table>
             ) : ( 
-                <table className='table table-hover table-striped table-primary'>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Area</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Categories_code</th>
-                            <th>Edit/Delete</th>
-
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {places.map((item, i) => {
-                            return (
-                                <tr key={item._id}>
-                                    <td>{(currentPage - 1) * 6 + i + 1}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.area}</td>
-                                    <td>{item.type}</td>
-                                    <td style={{ position: 'relative' }}>
-                                        <div
-                                            style={{
-                                                height: '100px',
-                                                overflowY: 'auto',
-                                                width: '200px'
-                                            }}
-                                        >
-                                            {item.description}
-                                        </div>
-                                    </td>
-                                    <td>{(item.categories_code).map((itemCategory) => {
-                                        return (
-                                            itemCategory + " | "
-                                        )
-                                    })}</td>
-                                    <td>
-                                        <button onClick={()=>{
-                                            nav("edit/"+item._id)
-                                        }} className='m-1 btn btn-warning'>Edit</button>
-                                        <button onClick={()=>{deletePlace(item._id)}} className='m-1 btn btn-danger'>Delete</button>
-                                    </td>
-                                </tr>
-
-                            )
-                        })}
-                    </tbody>
-                </table>
+                <Loading/>
              )} 
         </div>
 
