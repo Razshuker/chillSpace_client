@@ -3,7 +3,7 @@ import '../../css/updateAccount.css'
 import { useForm } from "react-hook-form"
 import { CgProfile } from "react-icons/cg";
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
-import { useNavigate } from 'react-router-dom';
+import ChangePassword from './changePassword';
 
 export default function UpdateUserInfo() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,30 +14,38 @@ export default function UpdateUserInfo() {
     }, []);
 
     const doApi = async () => {
-        const url = API_URL + "/users/userInfo";
-        const data = await doApiGet(url);
-        const index = data.full_name.indexOf(' ');
-        data.first_name = data.full_name.substring(0, index);
-        data.last_name = data.full_name.substring(index + 1, Infinity);
-        setUser(data);
-
+        try {
+            const url = API_URL + "/users/userInfo";
+            const data = await doApiGet(url);
+            const index = data.full_name.indexOf(' ');
+            data.first_name = data.full_name.substring(0, index);
+            data.last_name = data.full_name.substring(index + 1, Infinity);
+            setUser(data);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
     const onSub = async (_data) => {
-        console.log(_data);
-        _data.full_name = _data.first_name + " " + _data.last_name;
-        delete _data.first_name;
-        delete _data.last_name;
-        const url = API_URL + "/users/updateUser";
-        const data = await doApiMethod(url, "PUT", _data);
-        if (data.modifiedCount) {
-            alert("user updated");
+        try {
+            _data.full_name = _data.first_name + " " + _data.last_name;
+            delete _data.first_name;
+            delete _data.last_name;
+            const url = API_URL + "/users/updateUser";
+            const data = await doApiMethod(url, "PUT", _data);
+            if (data.modifiedCount) {
+                alert("user updated");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
         }
     }
 
     return (
-        <div style={{ backgroundImage: 'url("images/sign-upBG.jpg")' }} className='updateAccount container_fluid d-flex align-items-center'>
-            <h1 className='col-12'>UPDATE ACCOUNT DETAILS</h1>
+        <div style={{ backgroundImage: `url("/images/sign-upBG.jpg")` }} className='updateAccount container_fluid d-flex align-items-center'>
+            <h2 className='col-12'>UPDATE ACCOUNT DETAILS</h2>
             <div className="container">
                 {user.full_name &&
                     <div className="row">
@@ -72,6 +80,7 @@ export default function UpdateUserInfo() {
                         </form>
                     </div>
                 }
+                <ChangePassword />
             </div>
         </div>
 

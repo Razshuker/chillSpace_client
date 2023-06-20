@@ -16,38 +16,35 @@ export default function EditPlace() {
     const AREAS = ["south", "north", "center", "jerusalem"];
     const [fitAreas, setAreas] = useState([]);
     const [types, setTypes] = useState([]);
-
-
-
     const params = useParams();
     const [placeDetails, setPlaceDetails] = useState({});
-
-
-
 
     useEffect(() => {
         doApiGetPlace();
         doApiTags();
     }, [])
 
-
     const doApiGetPlace = async (res, req) => {
-        const url = API_URL + "/places/single/" + params["id"];
-        const data = await doApiGet(url);
-        console.log(data);
-        setPlaceDetails(data);
-        const filterArea = AREAS.filter(item => { return item != data.area });
-        setAreas(filterArea);
-        doApiTypes(data.type);
-
-        // setValue('name', data.name);
-        // setValue('img_url', data.img_url);
-        // setValue('city', data.city);
-        // setValue('phone', data.phone);
-        // setValue('latitude', data.latitude);
-        // setValue('longitude', data.longitude);
-        // setValue('description', data.description);
-        // setValue('area', data.area);
+        try {
+            const url = API_URL + "/places/single/" + params["id"];
+            const data = await doApiGet(url);
+            console.log(data);
+            setPlaceDetails(data);
+            const filterArea = AREAS.filter(item => { return item != data.area });
+            setAreas(filterArea);
+            doApiTypes(data.type);
+            // setValue('name', data.name);
+            // setValue('img_url', data.img_url);
+            // setValue('city', data.city);
+            // setValue('phone', data.phone);
+            // setValue('latitude', data.latitude);
+            // setValue('longitude', data.longitude);
+            // setValue('description', data.description);
+            // setValue('area', data.area);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
 

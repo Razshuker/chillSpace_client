@@ -48,39 +48,39 @@ export default function AddPlace() {
         }
     }
     const onSubForm = (_bodyData) => {
-        const placeLocation = { lat: (_bodyData['lat'] || ''), lon: (_bodyData['lon'] || '') };
-        const openHours = {
-            Sunday: _bodyData['open_hours - Sunday'] || '',
-            Monday: _bodyData['open_hours - Monday'] || '',
-            Tuesday: _bodyData['open_hours - Tuesday'] || '',
-            Wednesday: _bodyData['open_hours - Wednesday'] || '',
-            Thursday: _bodyData['open_hours - Thursday'] || '',
-            Friday: _bodyData['open_hours - Friday'] || '',
-            Saturday: _bodyData['open_hours - Saturday'] || '',
-        };
-
-        const placeData = {
-            ..._bodyData,
-            open_hours: openHours,
-            location: placeLocation,
-            tags_name: selectedTags,
-            categories_code: selectedCat
-        };
-
-        delete placeData['open_hours - Sunday'];
-        delete placeData['open_hours - Monday'];
-        delete placeData['open_hours - Tuesday'];
-        delete placeData['open_hours - Wednesday'];
-        delete placeData['open_hours - Thursday'];
-        delete placeData['open_hours - Friday'];
-        delete placeData['open_hours - Saturday'];
-
-        delete placeData['lat'];
-        delete placeData['lon'];
-
-        console.log(placeData);
-        doApiPost(placeData);
-
+        try {
+            const placeLocation = { lat: (_bodyData['lat'] || ''), lon: (_bodyData['lon'] || '') };
+            const openHours = {
+                Sunday: _bodyData['open_hours - Sunday'] || '',
+                Monday: _bodyData['open_hours - Monday'] || '',
+                Tuesday: _bodyData['open_hours - Tuesday'] || '',
+                Wednesday: _bodyData['open_hours - Wednesday'] || '',
+                Thursday: _bodyData['open_hours - Thursday'] || '',
+                Friday: _bodyData['open_hours - Friday'] || '',
+                Saturday: _bodyData['open_hours - Saturday'] || '',
+            };
+            const placeData = {
+                ..._bodyData,
+                open_hours: openHours,
+                location: placeLocation,
+                tags_name: selectedTags,
+                categories_code: selectedCat
+            };
+            delete placeData['open_hours - Sunday'];
+            delete placeData['open_hours - Monday'];
+            delete placeData['open_hours - Tuesday'];
+            delete placeData['open_hours - Wednesday'];
+            delete placeData['open_hours - Thursday'];
+            delete placeData['open_hours - Friday'];
+            delete placeData['open_hours - Saturday'];
+            delete placeData['lat'];
+            delete placeData['lon'];
+            console.log(placeData);
+            doApiPost(placeData);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
     const doApiPost = async (_placeData) => {
@@ -105,7 +105,8 @@ export default function AddPlace() {
         } else {
             setSelectedTags(selectedTags.filter((name) => name !== _tagName));
         }
-    };
+    }
+
     const onSelectCat = (_catCode) => {
         const isSelected = selectedCat.includes(_catCode);
         if (!isSelected) {
@@ -113,7 +114,7 @@ export default function AddPlace() {
         } else {
             setSelectedCat(selectedCat.filter((code) => code !== _catCode));
         }
-    };
+    }
 
     return (
         <div className='container'>

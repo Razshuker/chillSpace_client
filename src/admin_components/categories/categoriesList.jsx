@@ -11,10 +11,15 @@ export default function CategoriesList() {
     }, []);
 
     const doApi = async () => {
-        const url = API_URL + "/categories";
-        const data = await doApiGet(url);
-        console.log(data);
-        setCategories(data);
+        try {
+            const url = API_URL + "/categories";
+            const data = await doApiGet(url);
+            console.log(data);
+            setCategories(data);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
     const onDeleteCat = async (_id, _name) => {

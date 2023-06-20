@@ -14,9 +14,14 @@ export default function EditCategory() {
     }, []);
 
     const doApi = async () => {
-        const url = API_URL + "/categories/single/" + params["id"];
-        const data = await doApiGet(url);
-        setCategory(data);
+        try {
+            const url = API_URL + "/categories/single/" + params["id"];
+            const data = await doApiGet(url);
+            setCategory(data);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
     const onSub = async (_bodyData) => {
