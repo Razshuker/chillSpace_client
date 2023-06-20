@@ -9,11 +9,16 @@ export default function Login() {
     const nav = useNavigate();
 
     const onSub = async (_data) => {
-        const url = API_URL + '/users/login';
-        const data = await doApiMethod(url, "POST", _data);
-        if (data.token) {
-            localStorage.setItem(TOKEN_KEY, data.token);
-            nav("/");
+        try {
+            const url = API_URL + '/users/login';
+            const data = await doApiMethod(url, "POST", _data);
+            if (data.token) {
+                localStorage.setItem(TOKEN_KEY, data.token);
+                nav("/");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
         }
     }
 

@@ -11,9 +11,14 @@ export default function UserInfo() {
     }, []);
 
     const doApi = async () => {
-        const url = API_URL + "/users/userInfo";
-        const data = await doApiGet(url);
-        setUser(data);
+        try {
+            const url = API_URL + "/users/userInfo";
+            const data = await doApiGet(url);
+            setUser(data);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
     return (

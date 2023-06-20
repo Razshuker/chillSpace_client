@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../services/apiService';
-import axios from 'axios';
 
 export default function UsersList() {
     const [users_ar, setUsersAr] = useState([]);
@@ -10,10 +9,15 @@ export default function UsersList() {
     }, []);
 
     const doApi = async () => {
-        const url = API_URL + "/users/usersList";
-        const data = await doApiGet(url);
-        console.log(data);
-        setUsersAr(data);
+        try {
+            const url = API_URL + "/users/usersList";
+            const data = await doApiGet(url);
+            console.log(data);
+            setUsersAr(data);
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later")
+        }
     }
 
     const changeRole = async (_id, _role) => {
