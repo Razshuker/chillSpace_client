@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import { PaginationButtons } from '../../components/PaginationButtons';
+import Loading from '../../components/loading';
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
@@ -64,7 +65,7 @@ export default function PlacesList() {
                 setCurrentPage={setCurrentPage}
             />
            {places.length === 0 ? (
-                <p>Loading...</p>
+                <Loading/>
             ) : ( 
                 <table className='table table-hover table-striped table-primary'>
                     <thead>
