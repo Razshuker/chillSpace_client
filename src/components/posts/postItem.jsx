@@ -37,9 +37,9 @@ export default function PostItem(props) {
         }
         return `${seconds}s ago`;
     }
-    const addLike = async (_idPost) => {
+    const changeLike = async (_idPost) => {
         try {
-            const url = API_URL + "/posts/addLike/" + _idPost;
+            const url = API_URL + "/posts/changeLike/" + _idPost;
             await doApiMethod(url,"PATCH");
             getLikes();
         } catch (error) {
@@ -84,7 +84,7 @@ export default function PostItem(props) {
                     <div className='col-md-6'>{item.description}</div>
                 </div>
                 <div className='float-end'>
-                    <button onClick={() => {addLike(item._id)}} className='btnLike'><AiFillLike className=' h3' /></button>
+                    <button onClick={() => {changeLike(item._id)}} className='btnLike'><AiFillLike className=' h3' /></button>
                     <span className='p-1'>{likes}</span>
                 </div>
             </div>
