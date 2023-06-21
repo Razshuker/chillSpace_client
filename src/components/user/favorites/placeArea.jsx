@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { API_URL, doApiGet } from '../../../services/apiService'
+import { API_URL, doApiGet, doApiMethod } from '../../../services/apiService'
 import FPlaceItem from './fPlaceItem';
 
 export default function PlaceArea() {
@@ -32,14 +32,27 @@ export default function PlaceArea() {
         }
     }
 
+    const onDeleteFromFavorite = async (post_id) => {
+        try {
+            const url = API_URL + "/users/editFavorite";
+            const data = await doApiMethod(url, "PATCH", { post_id });
+            if (data.modifiedCount) {
+                getFavorites();
+            }
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later");
+        }
+    }
+
     return (
         <div className='conatiner-fluid'>
             <div className="container">
                 <h3>My favorites</h3>
-                <div className="row">
+                <div className="row g-3">
                     {favorites.map(item => {
                         return (
-                            <FPlaceItem key={item._id} item={item} />
+                            <FPlaceItem key={item._id} item={item} onDeleteFromFavorite={onDeleteFromFavorite} />
                         )
                     })}
                 </div>
