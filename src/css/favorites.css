@@ -1,3 +1,22 @@
 .favorites {
     min-height: 100vh;
 }
+
+h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 4.5em;
+    text-align: center;
+    padding: 24px 0;
+}
+
+.place_item {
+    min-height: 200px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 12px;
+}
+
+.place_item .love_btn {
+    border: none;
+    background-color: transparent;
+}
