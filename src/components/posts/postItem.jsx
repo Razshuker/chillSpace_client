@@ -4,12 +4,24 @@ import { Link } from 'react-router-dom'
 import { AiFillLike, AiOutlinePushpin } from "react-icons/ai";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
+import CommentItem from './commentItem';
 
 // not finished
 
 export default function PostItem(props) {
     const item = props.item;
     const [likes,setLikes] = useState(item.likes.length);
+    const [userInfo,setUserInfo] = useState({});
+
+    useEffect(()=>{
+        doApiUserInfo();
+    },[])
+
+    const doApiUserInfo = async() => {
+        const url = API_URL + "/users/userInfo/" + item.user_id;
+        const data = await doApiGet(url);
+        setUserInfo(data)
+    }
 
     const getTimePassed = (date) => {
         const now = new Date().getTime();
@@ -51,7 +63,6 @@ export default function PostItem(props) {
         try {
             const url = API_URL + "/posts/single/"+item._id;
             const data = await doApiGet(url);
-            console.log((data.likes).length);
             setLikes((data.likes).length)
         } catch (error) {
             console.log(error);
@@ -59,23 +70,24 @@ export default function PostItem(props) {
     }
 
     return (
-        <div className='postItem border p-4  mt-4 row '>
+        <div className='postItem border p-3  mt-4 row '>
             <div className='postInfo col-md-7 '>
-                <div className='row align-items-center justify-content-between'>
-                    <div className='col-6'>
-                        <div className='row p-2'>
-                            <div className='col-4 profile-pic p-0'>
+                <div className='row align-items-center justify-content-between pb-4'>
+                    <div className='col-9'>
+                        <div className='row'>
+                            <div className='col-2 profile-pic p-0'>
                                 <AccountCircle className='profile_icon' fontSize='large' />
                             </div>
-                            <div className='col-6'>
-                                <h3>Nickname</h3>
-                                <h5 className=''>{item.title}</h5>
+                            <div className='col-9 ms-3'>
+                                <h5>{userInfo.nickname}</h5>
+                                <h4 className='col-auto'>{item.title}</h4>
                             </div>
                         </div>
                     </div>
                     <div className='col-3'>
                         <div className=' col-auto '>{getTimePassed(item.date_created)}</div>
-                        <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>
+                        {/* {item.location && <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>} */}
+                       <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>
                     </div>
                 </div>
 
@@ -91,35 +103,12 @@ export default function PostItem(props) {
 
             <div className='col-md-5 text-center'>
                 <h5 className='text-center'>comments</h5>
-                <div className='comment row border'>
-                    <div className='col-2  profile-pic-comment'>
-                        <AccountCircle fontSize='large' />
-                    </div>
-                    <div className='col-9 d-flex align-items-center'>
-                        your comment
-                    </div>
-                </div>
-                <div className='comment row border'>
-                    <div className='col-2  profile-pic-comment'>
-                        <AccountCircle fontSize='large' />
-                    </div>
-                    <div className='col-9 d-flex align-items-center'>
-                        your comment
-                    </div>
-                </div>
-                <div className='comment row border'>
-                    <div className='col-2  profile-pic-comment'>
-                        <AccountCircle fontSize='large' />
-                    </div>
-                    <div className='col-9 d-flex align-items-center'>
-                        your comment
-                    </div>
-                </div>
-
+               <CommentItem/>
+               <CommentItem/>
                 <div className='p-2'>
                     <Link to={"#"}>more comments</Link>
                     <br />
-                    <button className='btn btn-light mt-4'>Write your comment...</button>
+                    <textarea className='mt-4 postInputs input-group m-auto text-center' placeholder='Write your comment...'/>
                 </div>
             </div>
 
