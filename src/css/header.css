@@ -8,7 +8,7 @@ header .logo img:hover {
 }
 
 header nav ul li {
-    border-right: 2px solid black;
+    border-right: 2px solid #50423A;
 }
 
 header nav ul li:last-of-type {
@@ -18,7 +18,7 @@ header nav ul li:last-of-type {
 header nav ul li a {
     display: block;
     text-decoration: none;
-    color: black;
+    color: #50423A;
     padding: 0 16px;
     font-size: 1.5em;
     font-family: 'Manrope', sans-serif;
@@ -28,7 +28,7 @@ header nav ul li a {
 header .adminNav ul li a {
     display: block;
     text-decoration: none;
-    color: black;
+    color: #50423A;
     padding: 0 16px;
     font-size: 1em;
     font-family: 'Manrope', sans-serif;
@@ -46,7 +46,8 @@ header nav ul li a:hover {
 }
 
 .profile_btn {
-    color: black;
+    color: #50423A;
+    font-size: 4em;
 }
 
 .profile .loginClient {

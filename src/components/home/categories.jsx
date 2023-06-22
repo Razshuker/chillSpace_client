@@ -17,14 +17,14 @@ export default function Categories() {
         setCategories(data);
     }
     return (
-        <div className="container-fluid my-5">
+        <div className="categories container-fluid my-5">
             <div className="container">
-                <h2 className='display-3 text-center'>CATEGORIES</h2>
+                <h2 className='text-center'>CATEGORIES</h2>
                 <div className="row align-items-center">
                     {/* <HiArrowLeft className='col-1' /> */}
                     {Categories.map(item => {
                         return (
-                            <CategoryItem key={item} />
+                            <CategoryItem key={item} item={item} />
                         )
                     })}
                     {/* <HiArrowRight className='col-1' /> */}
