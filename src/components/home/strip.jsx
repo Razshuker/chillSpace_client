@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../css/home.css'
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 
 export default function Strip() {
     return (
