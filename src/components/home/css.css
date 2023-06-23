@@ -1,0 +1,40 @@
+.story-slider {
+    max-width: 600px;
+    margin: 24px auto;
+    min-height: 200px;
+}
+
+.story-slider .story {
+    height: auto;
+    width: auto;
+    flex-shrink: 0;
+
+}
+
+.story-slider .story img {
+    height: 80px;
+    width: auto;
+    object-fit: cover;
+
+}
+
+.story-slider .stories {
+    display: flex;
+    gap: 8px;
+    direction: rtl;
+}
+
+.story-slider .content {
+    overflow-x: scroll;
+    direction: rtl;
+}
+
+.collection-name {
+    text-align: center;
+}
+
+/* @media (min-width: 768px) {
+    .story-slider {
+        display: none;
+    }
+} */
