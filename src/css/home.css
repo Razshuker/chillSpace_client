@@ -40,6 +40,8 @@ header {
     color: #50423A;
 }
 
+
+
 .categories .category_box {
     min-height: 200px;
     border-radius: 24px;
@@ -64,6 +66,7 @@ header {
     max-width: 700px;
     background-color: rgb(216, 191, 172);
     font-family: 'Raleway', sans-serif;
+    color: #50423A;
 }
 
 .whereToTravel h2 {

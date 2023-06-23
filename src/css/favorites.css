@@ -20,3 +20,7 @@ h3 {
     border: none;
     background-color: transparent;
 }
+
+.map {
+    min-height: 100vh;
+}

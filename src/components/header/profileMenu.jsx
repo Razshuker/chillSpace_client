@@ -42,9 +42,9 @@ export default function ProfileMenu() {
                 <Typography>
                     <div className='profile'>
                         {!localStorage[TOKEN_KEY] ?
-                            <Login />
+                            <Login handleClose={handleClose} />
                             :
-                            <UserInfo />
+                            <UserInfo handleClose={handleClose} />
                         }
                     </div>
                 </Typography>
