@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiMethod } from '../services/apiService';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ handleClose }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate();
 
@@ -15,6 +15,7 @@ export default function Login() {
             if (data.token) {
                 localStorage.setItem(TOKEN_KEY, data.token);
                 nav("/");
+                handleClose();
             }
         } catch (error) {
             console.log(error);
@@ -31,7 +32,7 @@ export default function Login() {
                 <input placeholder='Password' {...register("password", { required: true, minLength: 2 })} className="form-control" type="password" />
                 {errors.password && <div className="text-danger">* Enter valid password</div>}
                 <button className='login_btn'>LOGIN</button>
-                <Link to={"/sign-up"} className='text-center col-12'>don't have an account?</Link>
+                <Link onClick={handleClose} to={"/sign-up"} className='text-center col-12'>don't have an account?</Link>
             </form>
         </div>
     )
