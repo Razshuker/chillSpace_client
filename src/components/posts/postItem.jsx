@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { AiFillLike, AiOutlinePushpin } from "react-icons/ai";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
-import CommentItem from './commentItem';
+import CommentsList from './commentsList';
 
 // not finished
 
@@ -103,8 +103,7 @@ export default function PostItem(props) {
 
             <div className='col-md-5 text-center'>
                 <h5 className='text-center'>comments</h5>
-               <CommentItem/>
-               <CommentItem/>
+               <CommentsList postId={item._id}/>
                 <div className='p-2'>
                     <Link to={"#"}>more comments</Link>
                     <br />
