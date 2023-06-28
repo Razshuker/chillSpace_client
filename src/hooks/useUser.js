@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_URL, doApiGet } from "../services/apiService";
+import { API_URL, TOKEN_KEY, doApiGet } from "../services/apiService";
 
 
 export const useUser = () => {
@@ -11,10 +11,12 @@ export const useUser = () => {
 
     const getUserInfo = async () => {
         try {
-            const url = API_URL + "/users/userInfo";
-            const data = await doApiGet(url);
-            if (data._id) {
-                setUserInfo(data);
+            if (localStorage[TOKEN_KEY]) {
+                const url = API_URL + "/users/userInfo";
+                const data = await doApiGet(url);
+                if (data._id) {
+                    setUserInfo(data);
+                }
             }
         }
         catch (err) {
