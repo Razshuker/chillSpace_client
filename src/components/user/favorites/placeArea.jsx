@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../../../services/apiService'
 import FPlaceItem from './fPlaceItem';
+import { MyContext } from '../../../context/myContext';
 
 export default function PlaceArea() {
     const [favorites, setFavorites] = useState([]);
+    const { userInfo } = useContext(MyContext)
 
     useEffect(() => {
         getFavorites();
+        console.log(userInfo);
     }, []);
 
     const getFavorites = async () => {
