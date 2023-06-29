@@ -1,11 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './css.css'
 
 export default function TestCategory() {
+    const content = document.querySelector(".content");
+
+    const [isBackActive, setBackActive] = useState(false);
+    const [isNextActive, setNextActive] = useState(false);
+
+
+    const scrollFun = () => {
+        if (content.scrollLeft <= 24) {
+            setBackActive(true)
+        } else {
+            setBackActive(false)
+        }
+    }
+
+    const next = () => {
+        content.scrollLeft += 300;
+    }
+    const back = () => {
+        content.scrollLeft -= 300;
+    }
+
     return (
 
         <div class="story-slider">
-            <div class="content">
+            <div onScroll={scrollFun} class="content">
+                <div className={`back-icon ${isBackActive ? 'active' : ''}`}>
+                    <button onClick={back}>back</button>
+                </div>
                 <div class="stories">
                     <div class="story">
                         <a href="https://peteat.co.il/collections/%D7%90%D7%95%D7%9B%D7%9C-%D7%9C%D7%9B%D7%9C%D7%91%D7%99%D7%9D">
@@ -68,8 +92,9 @@ export default function TestCategory() {
                         </a>
                     </div>
                 </div>
-                <button onClick={() => {
-                }}>next</button>
+                <div className={`next-icon ${isNextActive ? 'active' : ''}`}>
+                    <button onClick={next}>next</button>
+                </div>
             </div>
 
         </div>)
