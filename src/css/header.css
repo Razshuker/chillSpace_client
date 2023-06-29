@@ -39,6 +39,12 @@ header nav ul li a:hover {
     transform: scale(0.9);
 }
 
+.profile-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
 .profile {
     height: 55vh;
     width: 400px;
