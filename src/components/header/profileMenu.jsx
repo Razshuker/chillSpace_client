@@ -39,7 +39,7 @@ export default function ProfileMenu() {
                     horizontal: 'left',
                 }}
             >
-                <Typography>
+                <div>
                     <div className='profile'>
                         {!localStorage[TOKEN_KEY] ?
                             <Login handleClose={handleClose} />
@@ -47,7 +47,7 @@ export default function ProfileMenu() {
                             <UserInfo handleClose={handleClose} />
                         }
                     </div>
-                </Typography>
+                </div>
             </Popover>
         </div>
     );
