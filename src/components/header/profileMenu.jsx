@@ -8,10 +8,13 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Login from '../login';
 import { TOKEN_KEY } from '../../services/apiService';
 import UserInfo from '../user/userInfo';
+import { useContext } from 'react';
+import { MyContext } from '../../context/myContext';
 
 
 export default function ProfileMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const { userInfo } = useContext(MyContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -27,7 +30,7 @@ export default function ProfileMenu() {
     return (
         <div>
             <Button aria-describedby={id} onClick={handleClick}>
-                <AccountCircle className='profile_btn' fontSize='large' />
+                {userInfo.img_url ? <img src={userInfo.img_url} className='profile-img' /> : <AccountCircle className='profile_btn' fontSize='large' />}
             </Button>
             <Popover
                 id={id}

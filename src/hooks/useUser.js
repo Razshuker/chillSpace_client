@@ -5,10 +5,6 @@ import { API_URL, TOKEN_KEY, doApiGet } from "../services/apiService";
 export const useUser = () => {
     const [userInfo, setUserInfo] = useState({});
 
-    useEffect(() => {
-        getUserInfo();
-    }, []);
-
     const getUserInfo = async () => {
         try {
             if (localStorage[TOKEN_KEY]) {
@@ -23,5 +19,5 @@ export const useUser = () => {
             console.log(err);
         }
     }
-    return { userInfo }
+    return { getUserInfo, userInfo, setUserInfo }
 }
