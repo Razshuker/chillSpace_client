@@ -51,9 +51,9 @@ export default function Categories() {
                 <h2 className='text-center'>CATEGORIES</h2>
                 <div className="row align-items-center justify-content-center">
                     <HiArrowLeft onClick={minus1Category} className='col-1' />
-                    {showCat.map(item => {
+                    {showCat.map((item, i) => {
                         return (
-                            <CategoryItem key={item._id} item={item} />
+                            <CategoryItem key={i} item={item} />
                         )
                     })}
                     <HiArrowRight onClick={plus1Category} className='col-1' />
