@@ -21,6 +21,7 @@ import PostsList from './components/postsList'
 import AddPost from './components/posts/addPost'
 import Favorites from './components/user/favorites'
 import TestCategory from './components/home/testCategory'
+import Categories2 from './components/home/categories2'
 
 
 export default function AppRoutes() {
@@ -39,7 +40,7 @@ export default function AppRoutes() {
                 <Route path='/posts/add' element={<AddPost />} />
                 <Route path='user/updateAccount' element={<UpdateUserInfo />} />
                 <Route path='user/favorites' element={<Favorites />} />
-                <Route path='test/cat' element={<TestCategory />} />
+                <Route path='test/cat' element={<Categories2 />} />
 
                 <Route path='/admin' element={<LoginAdmin />} />
                 <Route path='/admin/places' element={<PlacesList />} />
