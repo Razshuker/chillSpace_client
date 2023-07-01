@@ -3,10 +3,12 @@ import '../css/login.css'
 import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiMethod } from '../services/apiService';
 import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../hooks/useUser';
 
 export default function Login({ handleClose }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate();
+    const { getUserInfo } = useUser();
 
     const onSub = async (_data) => {
         try {
@@ -14,6 +16,7 @@ export default function Login({ handleClose }) {
             const data = await doApiMethod(url, "POST", _data);
             if (data.token) {
                 localStorage.setItem(TOKEN_KEY, data.token);
+                getUserInfo();
                 nav("/");
                 handleClose();
             }

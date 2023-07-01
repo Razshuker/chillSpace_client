@@ -1,32 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { API_URL, TOKEN_KEY, doApiGet } from '../../services/apiService'
 import { Link, useNavigate } from 'react-router-dom';
+import { MyContext } from '../../context/myContext';
 
 export default function UserInfo({ handleClose }) {
     const nav = useNavigate();
     const [user, setUser] = useState({});
+    const { userInfo, setUserInfo } = useContext(MyContext)
 
-    useEffect(() => {
-        doApi();
-    }, []);
-
-    const doApi = async () => {
-        try {
-            const url = API_URL + "/users/userInfo";
-            const data = await doApiGet(url);
-            setUser(data);
-        } catch (error) {
-            console.log(error);
-            alert("there is a problem, try again later")
-        }
-    }
 
     return (
         <div style={{
             backgroundImage: `url("/images/loginBG.jpg")`
         }} className='userInfo container text-center pt-5' >
-            <h3>Welcome {user.full_name}!</h3>
-            <p className='text-center'>{user.nickname}</p>
+            <h3>Welcome {userInfo.full_name}!</h3>
+            <p className='text-center'>{userInfo.nickname}</p>
             <div className="d-flex align-items-center justify-content-center list">
                 <ul onClick={handleClose} className='p-0 list-inline'>
                     <li><Link to="/user/favorites">FAVORITES</Link></li>
@@ -36,6 +24,7 @@ export default function UserInfo({ handleClose }) {
             </div>
             <button onClick={() => {
                 localStorage.removeItem(TOKEN_KEY);
+                setUserInfo({});
                 handleClose();
                 alert("you logged out");
                 nav("/");
