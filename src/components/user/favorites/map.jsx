@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { API_URL, doApiGet } from '../../../services/apiService';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { MyContext } from '../../../context/myContext';
 
 export default function Map() {
     const [favorites, setFavorites] = useState([]);
+    const { userInfo } = useContext(MyContext);
 
     const mapRef = useRef(null);
 
