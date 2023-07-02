@@ -43,7 +43,7 @@ export default function Map() {
 
     return (
         <div className="map d-flex align-items-center">
-            <div id="map" style={{ width: '100%', height: '750px' }} />
+            <div id="map" style={{ width: '100%', height: '750px', borderRadius: "24px" }} />
         </div>
     )
 }
