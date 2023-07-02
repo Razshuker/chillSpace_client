@@ -1,62 +1,71 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import CategoryItem from './categoryItem';
 import { API_URL, doApiGet } from '../../services/apiService'
+import '../../css/home.css'
 
 
 export default function Categories() {
+    const contentRef = useRef(null);
     const [categories, setCategories] = useState([]);
-    const [startIndex, setStartIndex] = useState(0);
-    const [showCat, setShowCat] = useState([4]);
+    const [isBackActive, setBackActive] = useState(true);
+    const [isNextActive, setNextActive] = useState(true);
+
 
     useEffect(() => {
         getCategories();
-    }, [showCat])
+    }, [])
 
     const getCategories = async () => {
         const url = API_URL + "/categories?perPage=0";
         const data = await doApiGet(url);
         setCategories(data);
-        setShowCat(data.splice(startIndex, 4));
     }
 
-    const plus1Category = () => {
-        console.log(startIndex + 1);
-        if (startIndex + 1 <= categories.length) {
-            const filterAr = categories.splice(startIndex + 1, 4);
-            console.log(filterAr);
-            setStartIndex(startIndex + 1);
+    const scrollFun = () => {
+        if (contentRef.current && contentRef.current.scrollLeft >= 24) {
+            console.log(contentRef.current.scrollLeft);
+            setBackActive(true);
         } else {
-            const filterAr = categories.splice(0, 4);
-            console.log(filterAr);
-            setStartIndex(0);
+            console.log(contentRef.current.scrollLeft);
+            setBackActive(false);
         }
-    }
 
-    const minus1Category = () => {
-        console.log(startIndex - 1);
-        if (startIndex - 1 >= 0) {
-            const filterAr = categories.splice(startIndex - 1, 4);
-            console.log(filterAr);
-            setStartIndex(startIndex - 1);
+        let scrollMaxValue = contentRef.current.scrollWidth - contentRef.current.clientWidth - 24;
+        if (contentRef.current.scrollLeft >= scrollMaxValue) {
+            setNextActive(false);
         } else {
-            const filterAr = categories.splice(categories.length - 4, 4);
-            console.log(filterAr);
-            setStartIndex(categories.length - 4);
+            setNextActive(true);
         }
-    }
+    };
+
+    const onNext = () => {
+        if (contentRef.current) {
+            contentRef.current.scrollLeft += 300;
+        }
+    };
+
+    const onBack = () => {
+        if (contentRef.current) {
+            contentRef.current.scrollLeft -= 300;
+        }
+    };
+
+
     return (
         <div className="categories container-fluid my-5">
             <div className="container">
                 <h2 className='text-center'>CATEGORIES</h2>
-                <div className="row align-items-center justify-content-center">
-                    <HiArrowLeft onClick={minus1Category} className='col-1' />
-                    {showCat.map((item, i) => {
-                        return (
-                            <CategoryItem key={i} item={item} />
-                        )
-                    })}
-                    <HiArrowRight onClick={plus1Category} className='col-1' />
+                <div onScroll={scrollFun} ref={contentRef} className="content">
+                    <HiArrowLeft onClick={onBack} className={`d-none d-md-block back-icon ${isBackActive ? 'active' : ''}`} />
+                    <div className="categories_row">
+                        {categories.map((item, i) => {
+                            return (
+                                <CategoryItem key={item._id} item={item} />
+                            )
+                        })}
+                    </div>
+                    <HiArrowRight onClick={onNext} className={`d-none d-md-block next-icon ${isNextActive ? 'active' : ''}`} />
                 </div>
             </div>
         </div>
