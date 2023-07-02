@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { API_URL, doApiGet } from '../../../services/apiService';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MyContext } from '../../../context/myContext';
@@ -7,7 +6,6 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility';
 
 export default function Map() {
-    // const [favorites, setFavorites] = useState([]);
     const { getFavorites, favorites } = useContext(MyContext);
 
     const mapRef = useRef(null);
@@ -42,29 +40,6 @@ export default function Map() {
             });
         }
     };
-
-    // const getFavorites = async () => {
-    //     try {
-    //         const url = API_URL + "/users/favorites";
-    //         const data = await doApiGet(url);
-    //         getPlaces(data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    // const getPlaces = async (_favorites) => {
-    //     try {
-    //         const url = API_URL + "/places?perPage=0";
-    //         const data = await doApiGet(url);
-    //         const filterData = data.filter(item => {
-    //             return _favorites.includes(item._id);
-    //         })
-    //         setFavorites(filterData);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
 
     return (
         <div className="map d-flex align-items-center">
