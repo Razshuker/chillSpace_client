@@ -7,12 +7,10 @@ export default function CategoryItem({ item }) {
     const nav = useNavigate();
     const img_url = item.img_url || "/images/categoryDefault.jpg";
     return (
-        <div className='col-2'>
-            <div style={{ backgroundImage: `url(${img_url})` }} onClick={() => {
-                nav("?category=" + item.name);
-            }} className='border category_box p-3'>
-                <h4>{item.name}</h4>
-            </div>
+        <div style={{ backgroundImage: `url(${img_url})` }} className="cat_box">
+            <a href={`?category=${item.name}`}>
+                <div className="category-name">{item.name}</div>
+            </a>
         </div>
     )
 }
