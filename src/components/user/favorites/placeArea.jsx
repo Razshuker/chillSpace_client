@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { API_URL, doApiMethod } from '../../../services/apiService'
 import FPlaceItem from './fPlaceItem';
 import { MyContext } from '../../../context/myContext';

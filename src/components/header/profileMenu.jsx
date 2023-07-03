@@ -1,9 +1,7 @@
 import * as React from 'react';
-import "../../css/header.css";
+import "../../App.css";
 import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Login from '../login';
 import { TOKEN_KEY } from '../../services/apiService';
@@ -30,7 +28,7 @@ export default function ProfileMenu() {
     return (
         <div>
             <Button aria-describedby={id} onClick={handleClick}>
-                {userInfo.img_url ? <img src={userInfo.img_url} className='profile-img' /> : <AccountCircle className='profile_btn' fontSize='large' />}
+                {userInfo.img_url ? <img src={userInfo.img_url} alt='profile' className='profile-img' /> : <AccountCircle className='profile_btn' fontSize='large' />}
             </Button>
             <Popover
                 id={id}
