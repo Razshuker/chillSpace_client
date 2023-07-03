@@ -1,6 +1,7 @@
 import React from 'react'
+import '../../css/updateAccount.css'
 import { useForm } from "react-hook-form"
-import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService';
+import { API_URL, TOKEN_KEY, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
 
 export default function ChangePassword() {

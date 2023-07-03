@@ -57,6 +57,14 @@ header nav ul li a:hover {
     font-size: 4em;
 }
 
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    color: transparent !important;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: transparent !important;
+}
+
 .profile .loginClient {
     min-height: 55vh;
     padding: 8px;
@@ -87,8 +95,6 @@ header nav ul li a:hover {
     font-weight: 600;
     text-shadow: 7px 7px 9px rgba(255, 255, 255, 0.651);
 }
-
-
 
 .profile .userInfo .list ul li {
     padding: 12px 0;

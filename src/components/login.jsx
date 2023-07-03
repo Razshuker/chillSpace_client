@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../css/login.css'
 import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiMethod } from '../services/apiService';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from '../hooks/useUser';
+import { MyContext } from '../context/myContext';
 
 export default function Login({ handleClose }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate();
-    const { getUserInfo } = useUser();
+    const { getUserInfo } = useContext(MyContext);
 
     const onSub = async (_data) => {
         try {
