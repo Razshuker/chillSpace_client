@@ -1,41 +1,19 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useRef, useContext } from 'react'
 import '../../css/updateAccount.css'
 import { useForm } from "react-hook-form"
 import { CgProfile } from "react-icons/cg";
-import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
+import { API_URL, doApiMethod } from '../../services/apiService';
 import ChangePassword from './changePassword';
 import { MyContext } from '../../context/myContext';
 
 export default function UpdateUserInfo() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [index, setIndex] = useState();
     const fileRef = useRef();
-    const { userInfo, setUserInfo, uploadImage } = useContext(MyContext);
+    const { userInfo, uploadImage } = useContext(MyContext);
 
-
-    useEffect(() => {
-        // doApi();
-    }, []);
-
-    // const doApi = async () => {
-    //     try {
-    //         const url = API_URL + "/users/userInfo";
-    //         const data = await doApiGet(url);
-    //         const index = data.full_name.indexOf(' ');
-    //         data.first_name = data.full_name.substring(0, index);
-    //         data.last_name = data.full_name.substring(index + 1, Infinity);
-    //         setUser(data);
-    //     } catch (error) {
-    //         console.log(error);
-    //         alert("there is a problem, try again later")
-    //     }
-    // }
 
     const onSub = async (_data) => {
         try {
-            // _data.full_name = _data.first_name + " " + _data.last_name;
-            // delete _data.first_name;
-            // delete _data.last_name;
             _data.img_url = await uploadImage(fileRef);
             const url = API_URL + "/users/updateUser";
             const data = await doApiMethod(url, "PUT", _data);
