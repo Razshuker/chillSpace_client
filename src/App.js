@@ -5,11 +5,13 @@ import { MyContext } from './context/myContext';
 import { useUser } from './hooks/useUser';
 import { TOKEN_KEY } from './services/apiService';
 import { useFavorite } from './hooks/useFavorite';
+import { useCloudinary } from './hooks/useCloudinary';
 
 function App() {
 
   const { getUserInfo, userInfo, setUserInfo } = useUser();
   const { getFavorites, favorites, setFavorites } = useFavorite();
+  const { uploadImage } = useCloudinary();
 
   useEffect(() => {
     if (localStorage[TOKEN_KEY]) {
@@ -27,7 +29,8 @@ function App() {
   return (
     <MyContext.Provider value={{
       getUserInfo, userInfo, setUserInfo,
-      getFavorites, favorites, setFavorites
+      getFavorites, favorites, setFavorites,
+      uploadImage
     }}>
       <AppRoutes />
     </MyContext.Provider>
