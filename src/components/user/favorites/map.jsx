@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import '../../../css/favorites.css'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MyContext } from '../../../context/myContext';
@@ -14,7 +15,6 @@ export default function Map() {
         getFavorites();
         addMap();
         makeMarkers();
-
     }, [favorites.length]);
 
     const addMap = () => {
@@ -42,7 +42,7 @@ export default function Map() {
     };
 
     return (
-        <div className="map d-flex align-items-center">
+        <div className="map d-flex align-items-center my-3">
             <div id="map" style={{ width: '100%', height: '750px', borderRadius: "24px" }} />
         </div>
     )

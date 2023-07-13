@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../css/home.css'
 import { useForm } from "react-hook-form"
 
 export default function WhereToTravel() {
@@ -20,6 +21,7 @@ export default function WhereToTravel() {
                         <option value="chill" >Chill it's me</option>
                         <option value="stayAtHome" >TV, air conditioner and sleep</option>
                     </select>
+                    {errors.DescribeYourself && <div className="text-danger">* choose the best option for you</div>}
                     <label>Choose the best option for you</label>
                     <select {...register("bestOption", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
@@ -27,6 +29,7 @@ export default function WhereToTravel() {
                         <option value="openPlace" >An open place with a crazy view</option>
                         <option value="dont_care" >I don't care</option>
                     </select>
+                    {errors.bestOption && <div className="text-danger">* choose the best option for you</div>}
                     <label>What kind of entertainment do you want?</label>
                     <select {...register("kind", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
@@ -34,6 +37,7 @@ export default function WhereToTravel() {
                         <option value="calm" >Calm place</option>
                         <option value="food" >Just bring me food</option>
                     </select>
+                    {errors.kind && <div className="text-danger">* choose the best option for you</div>}
                     <label>who's coming?</label>
                     <select {...register("members", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
@@ -42,6 +46,7 @@ export default function WhereToTravel() {
                         <option value="couple" >My soulmate</option>
                         <option value="family" >My family</option>
                     </select>
+                    {errors.members && <div className="text-danger">* choose the best option for you</div>}
                     <button className='find_btn'>Find me a place</button>
                 </form>
             </div>

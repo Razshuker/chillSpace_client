@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import '../css/header.css'
+import '../App.css'
 import ProfileMenu from './header/profileMenu'
 
 export default function Header() {
