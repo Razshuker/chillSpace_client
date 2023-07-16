@@ -41,7 +41,7 @@ export default function CategoriesList() {
             <h1 className='display-4 text-center my-5'>Categories List:</h1>
             <div className="container">
                 <Link to={"add"} className='btn btn-outline-dark my-4'>Add new category</Link>
-                <table className='table table-striped'>
+                <table className='table table-hover table-striped'>
                     <thead>
                         <tr>
                             <th>#</th>

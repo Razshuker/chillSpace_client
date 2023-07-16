@@ -1,33 +1,18 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import '../css/signup.css'
 import { useForm } from "react-hook-form"
 import { CgProfile } from "react-icons/cg";
 import { API_URL, doApiMethod } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import { imageToString } from '../services/cloudService';
+import { MyContext } from '../context/myContext';
 
 
 export default function Signup() {
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();
-    const [img_info, setImgInfo] = useState({});
     const nav = useNavigate();
     const fileRef = useRef();
-
-    const uploadImage = async () => {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const myFile = fileRef.current.files[0];
-                const imageData = await imageToString(myFile);
-                const url = API_URL + "/upload/uploadCloud";
-                const data = await doApiMethod(url, "POST", { image: imageData });
-                const dataUrl = data.url
-                resolve(dataUrl);
-            } catch (error) {
-                console.log(error);
-            }
-        })
-    }
-
+    const { uploadImage } = useContext(MyContext);
 
     const onSub = async (_data) => {
         try {
@@ -35,8 +20,7 @@ export default function Signup() {
             delete _data.first_name;
             delete _data.last_name;
             delete _data.confirm_password;
-            _data.img_url = await uploadImage();
-            console.log(_data);
+            _data.img_url = await uploadImage(fileRef);
             const url = API_URL + '/users';
             const user = await doApiMethod(url, "POST", _data);
             if (user._id) {

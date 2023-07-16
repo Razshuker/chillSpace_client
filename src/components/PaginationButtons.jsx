@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const PaginationButtons = ({ currentPage, pages, setCurrentPage }) => {
-   
+
 
     return (
         <div>
@@ -12,7 +12,7 @@ export const PaginationButtons = ({ currentPage, pages, setCurrentPage }) => {
                 return (
                     <button
                         key={i}
-                        className={`btn btn-dark my-3 mx-1 ${isActive ? 'bg-danger' : ''}`}
+                        className={`btn btn-outline-dark my-3 mx-1 ${isActive ? 'bg-dark text-light' : ''}`}
                         onClick={() => {
                             setCurrentPage(pageNumber);
                         }}
