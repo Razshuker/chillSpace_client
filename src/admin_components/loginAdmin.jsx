@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { API_URL, TOKEN_KEY, doApiMethod } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import '../css/login.css'
 
 export default function LoginAdmin() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -22,8 +23,8 @@ export default function LoginAdmin() {
 
     return (
         <div className='container-fluid'>
-            <div className="container">
-                <h1 className='display-1 text-center'>ADMIN LOGIN</h1>
+            <div className="container loginAdmin">
+                <h1 className='display-1 text-center mb-5'>ADMIN LOGIN</h1>
                 <form onSubmit={handleSubmit(onSub)} className='col-md-4 mx-auto' >
                     <input placeholder='Email' {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className="form-control mt-4" type="email" />
                     {errors.email && <div className="text-danger">* Enter valid email</div>}

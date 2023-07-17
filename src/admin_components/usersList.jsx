@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../services/apiService';
+import '../css/tablesAdmin.css'
 
 export default function UsersList() {
     const [users_ar, setUsersAr] = useState([]);
@@ -52,7 +53,7 @@ export default function UsersList() {
             {users_ar.length > 0 &&
                 <div>
                     <h1 className='display-4 text-center my-5'>Users List:</h1>
-                    <div className="container">
+                    <div className="container table-container">
                         <table className='table table-hover table-striped'>
                             <thead>
                                 <tr>
