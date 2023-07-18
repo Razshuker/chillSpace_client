@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import PostItem from './posts/postItem'
 import { API_URL, doApiGet } from '../services/apiService';
-import { IoSearchOutline, IoArrowForwardSharp , IoSwapVerticalSharp} from "react-icons/io5"
+import { IoSearchOutline, IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import PostsLoading from './posts/postsLoading';
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -35,27 +36,36 @@ export default function PostsList() {
         }
     }
     return (
-        <div className='container-fluid'>
+        <div className='container-fluid pb-5'>
             <div className="px-5">
                 <Link to={"add"}>Add new post</Link>
                 <div className='row justify-content-between  align-items-center'>
-                    <div  className='col-2 border'>
-                    <button className='postInputs'>new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0'/></button>
+                    <div className='col-md-2'>
+                        <button className='postInputs'>new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                     </div>
-                    <div className='d-flex justify-content-end py-4 border col-6'>
+                    <div className='d-flex justify-content-end py-4 col-md-6'>
                         <input onKeyDown={(e) => { onInputEnter(e) }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
                         <button onClick={onSearchClick} className='searchBtn'><IoSearchOutline className='search_icon' /></button>
                     </div>
                 </div>
             </div>
             <div className='container'>
-                {postsAr.map(item => {
-                    return (
-                        <PostItem key={item._id} item={item} />
-                    )
-                })}
+                {postsAr.length == 0 ?
+                <>
+                   <PostsLoading/>
+                   <PostsLoading/>
+                </>
+                    :
+                    postsAr.map(item => {
+                        return (
+                            <PostItem key={item._id} item={item} />
+                        )
+                    })
+
+                }
             </div>
         </div>
+
 
     )
 }

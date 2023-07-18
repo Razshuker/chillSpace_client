@@ -19,7 +19,7 @@ export default function CommentItem(props) {
 
 
     return (
-        <div className='comment row border' key={comment._id}>
+        <div className='comment row' key={comment._id}>
             <div className='col-1  profile-pic-comment d-flex'>
                 <AccountCircle fontSize='large' />
             </div>
