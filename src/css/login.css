@@ -2,11 +2,19 @@ header {
     position: unset;
 }
 
+.loginAdmin {
+    min-height: 80vh;
+    padding-top: 25vh;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+
+}
+
 .loginClient {
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
-    /* align-items: center; */
     padding-top: 52px;
     justify-content: center;
     background-attachment: fixed;

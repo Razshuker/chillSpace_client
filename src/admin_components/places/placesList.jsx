@@ -3,6 +3,7 @@ import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import { PaginationButtons } from '../../components/PaginationButtons';
 import Loading from '../../components/loading';
+import '../../css/tablesAdmin.css'
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
@@ -55,61 +56,60 @@ export default function PlacesList() {
         <div className='container'>
             <h2 className='display-2 text-center mt-4'>Places List</h2>
             <button className='btn btn-outline-dark' onClick={() => { nav("/admin/places/add") }}>Add new place</button>
+            <div className="table-container">
+                {places.length != 0 ? (
+                    <table className='table table-hover table-striped'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Area</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Categories_code</th>
+                                <th>Edit/Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {places.map((item, i) => {
+                                return (
+                                    <tr key={item._id}>
+                                        <td>{(currentPage - 1) * 6 + i + 1}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.area}</td>
+                                        <td>{item.type}</td>
+                                        <td style={{ position: 'relative' }}>
+                                            <div
+                                                style={{
+                                                    height: '100px',
+                                                    overflowY: 'auto',
+                                                    width: '200px'
+                                                }}
+                                            >
+                                                {item.description}
+                                            </div>
+                                        </td>
+                                        <td>{(item.categories_code).map((itemCategory) => {
+                                            return (
+                                                itemCategory + " | "
+                                            )
+                                        })}</td>
+                                        <td>
+                                            <button onClick={() => {
+                                                nav("edit/" + item._id)
+                                            }} className='m-1 btn btn-outline-dark'>Edit</button>
+                                            <button onClick={() => { deletePlace(item._id) }} className='m-1 btn btn-danger'>Delete</button>
+                                        </td>
+                                    </tr>
 
-            {places.length != 0 ? (
-                <table className='table table-hover table-striped'>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Area</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Categories_code</th>
-                            <th>Edit/Delete</th>
-
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {places.map((item, i) => {
-                            return (
-                                <tr key={item._id}>
-                                    <td>{(currentPage - 1) * 6 + i + 1}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.area}</td>
-                                    <td>{item.type}</td>
-                                    <td style={{ position: 'relative' }}>
-                                        <div
-                                            style={{
-                                                height: '100px',
-                                                overflowY: 'auto',
-                                                width: '200px'
-                                            }}
-                                        >
-                                            {item.description}
-                                        </div>
-                                    </td>
-                                    <td>{(item.categories_code).map((itemCategory) => {
-                                        return (
-                                            itemCategory + " | "
-                                        )
-                                    })}</td>
-                                    <td>
-                                        <button onClick={() => {
-                                            nav("edit/" + item._id)
-                                        }} className='m-1 btn btn-outline-dark'>Edit</button>
-                                        <button onClick={() => { deletePlace(item._id) }} className='m-1 btn btn-danger'>Delete</button>
-                                    </td>
-                                </tr>
-
-                            )
-                        })}
-                    </tbody>
-                </table>
-            ) : (
-                <Loading />
-            )}
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                ) : (
+                    <Loading />
+                )}
+            </div>
             <div className="d-flex justify-content-center my-3">
                 <PaginationButtons
                     currentPage={currentPage}
@@ -118,6 +118,5 @@ export default function PlacesList() {
                 />
             </div>
         </div>
-
     )
 }
