@@ -56,9 +56,14 @@ export default function PostItem(props) {
     }
     const changeLike = async (_idPost) => {
         try {
-            const url = API_URL + "/posts/changeLike/" + _idPost;
-            await doApiMethod(url, "PATCH");
-            getLikes();
+            if(userInfo._id){
+                const url = API_URL + "/posts/changeLike/" + _idPost;
+                await doApiMethod(url, "PATCH");
+                getLikes();
+            }
+            else{
+                alert("Log in to like posts")
+            }
         } catch (error) {
             console.log(error);
         }
@@ -76,16 +81,20 @@ export default function PostItem(props) {
 
         const addComment = async (_comment) => {
             try {
-                if(userInfo._id && commentRef.current.value!=""){
-                    const user_id = userInfo._id;
-                    const text = commentRef.current.value;
-                    const post_id = item._id;
-                     const commentData = {user_id,text,post_id};
-                     const url =  API_URL + "/comments";
-                     const data = await doApiMethod(url,"POST",commentData);
-                     if(data._id){
-                        commentRef.current.value="";
-                     }
+                if(userInfo._id){
+                if( commentRef.current.value!=""){
+                        const user_id = userInfo._id;
+                        const text = commentRef.current.value;
+                        const post_id = item._id;
+                         const commentData = {user_id,text,post_id};
+                         const url =  API_URL + "/comments";
+                         const data = await doApiMethod(url,"POST",commentData);
+                         if(data._id){
+                            commentRef.current.value="";
+                         }
+                        }
+                    }else{
+                        alert("Login to comment")
                 }
             } catch (error) {
                 
@@ -127,9 +136,7 @@ export default function PostItem(props) {
 
             <div className='col-md-5 text-center'>
                 <h5 className='text-center'>comments</h5>
-                <div>
                 <CommentsList postId={item._id} />
-                </div>
                 <div className='p-2'>
                     <button  className='btn btn-link '>more comments</button>
                     <br />

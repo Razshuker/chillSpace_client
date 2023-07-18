@@ -14,18 +14,18 @@ export default function CommentsList(props) {
     const doApiComments = async (_idPost) => {
         const url = API_URL + "/comments/" + _idPost;
         const data = await doApiGet(url);
-         setComments(data);
+        setComments(data);
     }
-   
-    return (
-        <>
 
-          {comments.map((item,i) => {
-                  return (
-                      <CommentItem comment={item} key={item._id} />
-                  )
-          })
-        }
-        </>
+    return (
+        <div  className='ps-3'
+        style={{ overflowY: 'auto', overflowX: 'hidden' , height:"150px" }}>
+            {comments.map((item, i) => {
+                return (
+                    <CommentItem comment={item} key={item._id} />
+                )
+            })
+            }
+        </div>
     )
 }

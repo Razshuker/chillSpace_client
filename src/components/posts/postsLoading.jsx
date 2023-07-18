@@ -14,48 +14,48 @@ export default function PostsLoading() {
                         <AccountCircle className='profile_icon' fontSize='large' />
                     </div>
                     <div className='col-9 ms-3'>
-                        <h5><p class="placeholder-glow">
-                            <span class="placeholder col-12"></span>
+                        <h5><p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
                         </p></h5>
-                        <h4 className='col-auto'><p class="placeholder-glow">
-                            <span class="placeholder col-12"></span>
+                        <h4 className='col-auto'><p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
                         </p></h4>
                     </div>
                 </div>
             </div>
             <div className='col-3'>
-                <div className=' col-auto '><p class="placeholder-glow">
-                    <span class="placeholder col-12"></span>
+                <div className=' col-auto '><p className="placeholder-glow">
+                    <span className="placeholder col-12"></span>
                 </p></div>
                 <div className='col-auto p-1'> 
                 <AiOutlinePushpin className='h5' />
-                <p class="placeholder-glow">
-                    <span class="placeholder col-12"></span>
+                <p className="placeholder-glow">
+                    <span className="placeholder col-12"></span>
                 </p></div>
             </div>
         </div>
 
         <div className='row'>
-            <div className='col-md-6'><p class="placeholder-glow">
-                <span class="placeholder col-12"></span>
+            <div className='col-md-6'><p className="placeholder-glow">
+                <span className="placeholder col-12"></span>
             </p></div>
         </div>
         <div className='float-end'>
             <button className='btnIcon'><AiFillLike className=' h3' /></button>
-            <span className='p-1'><p class="placeholder-glow">
-                <span class="placeholder col-12"></span>
+            <span className='p-1'><p className="placeholder-glow">
+                <span className="placeholder col-12"></span>
             </p></span>
         </div>
     </div>
 
     <div className='col-md-5 text-center'>
-        <h5 className='text-center'><p class="placeholder-glow">
-            <span class="placeholder col-12"></span>
+        <h5 className='text-center'><p className="placeholder-glow">
+            <span className="placeholder col-12"></span>
         </p></h5>
 
         <div className='p-2'>
-            <button className='btn btn-link '><p class="placeholder-glow">
-                <span class="placeholder col-12"></span>
+            <button className='btn btn-link '><p className="placeholder-glow">
+                <span className="placeholder col-12"></span>
             </p></button>
             <br />
             <div className='row col-auto pt-4 align-items-center'>
