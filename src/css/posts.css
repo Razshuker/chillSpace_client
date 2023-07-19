@@ -12,19 +12,17 @@
     color: rgb(78, 67, 59);
 }
 
-/* .postItem .profile-pic {
+.postItem .profile-pic {
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
-} */
+    height: 80px;
+    width: 80px;
+}
 
 .postItem .postPic {
     min-height: 150px;
-    background-color: rgb(78, 67, 59);
-    color: white;
 }
 
-.btnIcon{
+.btnIcon {
     background-color: inherit;
     border: none;
     padding: 0;
@@ -39,7 +37,6 @@
     /* max-width: 55%; */
     border: none;
     color: white;
-
 }
 
 .searchBtn {
@@ -61,9 +58,9 @@
 }
 
 .profile-pic-comment {
-    /* border-radius: 50%;
+    border-radius: 50%;
     height: 40px;
-    width: 40px; */
+    width: 40px;
     padding: 0;
 }
 
