@@ -20,6 +20,7 @@ import UpdateUserInfo from './components/user/updateUserInfo'
 import PostsList from './components/postsList'
 import AddPost from './components/posts/addPost'
 import Favorites from './components/user/favorites'
+import Places from './components/places'
 
 
 export default function AppRoutes() {
@@ -36,6 +37,7 @@ export default function AppRoutes() {
                 <Route path='/sign-up' element={<Signup />} />
                 <Route path='/posts' element={<PostsList />} />
                 <Route path='/posts/add' element={<AddPost />} />
+                <Route path='/places' element={<Places />} />
                 <Route path='user/updateAccount' element={<UpdateUserInfo />} />
                 <Route path='user/favorites' element={<Favorites />} />
 
