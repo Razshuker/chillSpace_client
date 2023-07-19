@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "../../css/posts.css"
-import { Link } from 'react-router-dom'
-import { AiFillLike, AiOutlinePushpin,AiFillMessage } from "react-icons/ai";
+import { AiFillHeart, AiOutlinePushpin, AiOutlineComment, AiOutlineHeart } from "react-icons/ai";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import CommentsList from './commentsList';
@@ -12,7 +11,8 @@ import { MyContext } from '../../context/myContext';
 
 export default function PostItem(props) {
     const item = props.item;
-    const [likes, setLikes] = useState(item.likes.length);
+    const [likes, setLikes] = useState(item.likes);
+    const [isLiked, setIsLiked] = useState(true);
     const [userPostInfo, setUserPostInfo] = useState({});
     const commentRef = useRef();
     const { userInfo } = useContext(MyContext);
@@ -20,6 +20,9 @@ export default function PostItem(props) {
 
     useEffect(() => {
         doApiUserInfo();
+        if (likes.includes(userInfo._id)) {
+            setIsLiked(false)
+        }
     }, [])
 
     const doApiUserInfo = async () => {
@@ -56,12 +59,13 @@ export default function PostItem(props) {
     }
     const changeLike = async (_idPost) => {
         try {
-            if(userInfo._id){
+            if (userInfo._id) {
                 const url = API_URL + "/posts/changeLike/" + _idPost;
-                await doApiMethod(url, "PATCH");
+                const data = await doApiMethod(url, "PATCH");
                 getLikes();
+                setIsLiked(!data.isAdded)
             }
-            else{
+            else {
                 alert("Log in to like posts")
             }
         } catch (error) {
@@ -73,33 +77,33 @@ export default function PostItem(props) {
         try {
             const url = API_URL + "/posts/single/" + item._id;
             const data = await doApiGet(url);
-            setLikes((data.likes).length)
+            setLikes(data.likes);
         } catch (error) {
             console.log(error);
         }
     }
 
-        const addComment = async (_comment) => {
-            try {
-                if(userInfo._id){
-                if( commentRef.current.value!=""){
-                        const user_id = userInfo._id;
-                        const text = commentRef.current.value;
-                        const post_id = item._id;
-                         const commentData = {user_id,text,post_id};
-                         const url =  API_URL + "/comments";
-                         const data = await doApiMethod(url,"POST",commentData);
-                         if(data._id){
-                            commentRef.current.value="";
-                         }
-                        }
-                    }else{
-                        alert("Login to comment")
+    const addComment = async (_comment) => {
+        try {
+            if (userInfo._id) {
+                if (commentRef.current.value != "") {
+                    const user_id = userInfo._id;
+                    const text = commentRef.current.value;
+                    const post_id = item._id;
+                    const commentData = { user_id, text, post_id };
+                    const url = API_URL + "/comments";
+                    const data = await doApiMethod(url, "POST", commentData);
+                    if (data._id) {
+                        commentRef.current.value = "";
+                    }
                 }
-            } catch (error) {
-                
+            } else {
+                alert("Login to comment")
             }
+        } catch (error) {
+
         }
+    }
 
 
     return (
@@ -108,8 +112,8 @@ export default function PostItem(props) {
                 <div className='row align-items-center justify-content-between pb-4'>
                     <div className='col-9'>
                         <div className='row'>
-                            <div className='col-2 profile-pic p-0'>
-                                <AccountCircle className='profile_icon' fontSize='large' />
+                            <div className='col-2 p-0 d-flex align-items-center'>
+                                {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
                             </div>
                             <div className='col-9 ms-3'>
                                 <h5>{userPostInfo.nickname}</h5>
@@ -125,12 +129,14 @@ export default function PostItem(props) {
                 </div>
 
                 <div className='row'>
-                    <div className='m-1 col-md-5 postPic'>picture</div>
+                    {item.img_url && <img src={item.img_url} alt="place pic" className='m-1 col-md-5 postPic' />}
                     <div className='col-md-6'>{item.description}</div>
                 </div>
                 <div className='float-end'>
-                    <button onClick={() => { changeLike(item._id) }} className='btnIcon'><AiFillLike className=' h3' /></button>
-                    <span className='p-1'>{likes}</span>
+                    <button onClick={() => { changeLike(item._id) }} className='btnIcon'>
+                        {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2' />}
+                    </button>
+                    <span className='p-1'>{likes.length}</span>
                 </div>
             </div>
 
@@ -138,23 +144,20 @@ export default function PostItem(props) {
                 <h5 className='text-center'>comments</h5>
                 <CommentsList postId={item._id} />
                 <div className='p-2'>
-                    <button  className='btn btn-link '>more comments</button>
-                    <br />
                     <div className='row col-auto pt-4 align-items-center'>
                         <div className='col-10 '>
-                        <textarea onKeyDown={(e)=>{
-                            if(e.key == "Enter"){
-                                addComment()
-                            }
-                        }} ref={commentRef} className=' postInputs input-group m-auto text-center' placeholder='Write your comment...' />
+                            <textarea rows={1} onKeyDown={(e) => {
+                                if (e.key == "Enter") {
+                                    addComment()
+                                }
+                            }} ref={commentRef} className=' postInputs input-group m-auto text-center' placeholder='Write your comment...' />
                         </div>
                         <button className=' col-2 btnIcon'>
-                        <AiFillMessage onClick={addComment} className='display-4' />
+                            <AiOutlineComment onClick={addComment} className='display-6' />
                         </button>
                     </div>
                 </div>
             </div>
-
         </div>
 
 
