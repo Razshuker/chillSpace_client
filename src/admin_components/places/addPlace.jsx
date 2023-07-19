@@ -129,7 +129,7 @@ export default function AddPlace() {
                 <input {...register("city", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.city && <div className="text-danger">* Enter a valid city</div>}
                 <label className="pt-3 pb-1">phone</label>
-                <input {...register("phone", { required: true, minLength: 2 })} className="form-control" type="text" />
+                <input {...register("phone", { minLength: 2 })} className="form-control" type="text" />
                 {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
                 <label className="pt-3 pb-1">latitude</label>
                 <input {...register("lat", { required: true, minLength: 2 })} className="form-control" type="text" />
