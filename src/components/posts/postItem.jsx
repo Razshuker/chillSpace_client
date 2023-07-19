@@ -6,8 +6,7 @@ import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import CommentsList from './commentsList';
 import { useContext } from 'react';
 import { MyContext } from '../../context/myContext';
-
-// not finished
+import TimeDiff from './timeDiff';
 
 export default function PostItem(props) {
     const item = props.item;
@@ -31,32 +30,6 @@ export default function PostItem(props) {
         setUserPostInfo(data)
     }
 
-    const getTimePassed = (date) => {
-        const now = new Date().getTime();
-        const pastDate = new Date(date).getTime();
-        const timeDiff = now - pastDate;
-
-
-        const seconds = Math.floor(timeDiff / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(months / 12);
-
-        if (years >= 1) {
-            return `${years}y ago`;
-        } else if (months >= 1) {
-            return `${months}m ago`;
-        } else if (days >= 1) {
-            return `${days}d ago`;
-        } else if (hours >= 1) {
-            return `${hours}h ago`;
-        } else if (minutes >= 1) {
-            return `${minutes}m ago`;
-        }
-        return `${seconds}s ago`;
-    }
     const changeLike = async (_idPost) => {
         try {
             if (userInfo._id) {
@@ -72,7 +45,7 @@ export default function PostItem(props) {
             console.log(error);
         }
     }
-    // might not be necesery , right now i could'nt find another way to render the likes to the client
+
     const getLikes = async () => {
         try {
             const url = API_URL + "/posts/single/" + item._id;
@@ -122,7 +95,7 @@ export default function PostItem(props) {
                         </div>
                     </div>
                     <div className='col-3'>
-                        <div className=' col-auto '>{getTimePassed(item.date_created)}</div>
+                       <TimeDiff data={(item.date_created)} className='col-auto'/>
                         {/* {item.location && <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>} */}
                         <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>
                     </div>

@@ -7,18 +7,21 @@ import PostsLoading from './posts/postsLoading';
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
+    const [reverse,setReverse] = useState(false);
     const [query] = useSearchParams();
     const inputRf = useRef();
     const nav = useNavigate();
-
     useEffect(() => {
         const searchQ = query.get("s") || "";
         doApi(searchQ);
-    }, [query])
+    }, [query,reverse])
 
     const doApi = async (_search) => {
         try {
-            const url = API_URL + "/posts?s=" + _search;
+            let url = API_URL + "/posts?s=" + _search;
+            if(reverse){
+                url+= `&reverse=yes`;
+            }
             const data = await doApiGet(url);
             setPostsAr(data);
         } catch (error) {
@@ -35,7 +38,9 @@ export default function PostsList() {
             nav("?s=" + inputRf.current.value);
         }
     }
-
+    const onSortClick = () => {
+       setReverse(!reverse);
+    }
 
     return (
         <div className='container-fluid pb-5'>
@@ -43,7 +48,11 @@ export default function PostsList() {
                 <Link to={"add"}>Add new post</Link>
                 <div className='row justify-content-between  align-items-center'>
                     <div className='col-md-2'>
-                        <button className='postInputs'>new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
+                        {reverse == false ?
+                            <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
+                            :
+                            <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
+                    }
                     </div>
                     <div className='d-flex justify-content-end py-4 col-md-6'>
                         <input onKeyDown={(e) => { onInputEnter(e) }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
