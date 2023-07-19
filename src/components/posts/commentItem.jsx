@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import '../../css/posts.css'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet } from '../../services/apiService';
 
@@ -20,12 +21,12 @@ export default function CommentItem(props) {
 
     return (
         <div className='comment row' key={comment._id}>
-            <div className='col-1  profile-pic-comment d-flex'>
-                <AccountCircle fontSize='large' />
+            <div className='col-1 d-flex'>
+                {userInfo.img_url ? <img src={userInfo.img_url} className='profile-pic-comment' /> : <AccountCircle fontSize='large' />}
             </div>
-            <div className='col-10 text-start'>
-                <div className='small'>{userInfo.nickname}</div>
-                <div className='col-auto'>{comment.text}</div>
+            <div className='col-10 text-start ms-2'>
+                <p className='small m-0'><strong>{userInfo.nickname}</strong></p>
+                <p className='col-auto mt-1 mb-0'>{comment.text}</p>
             </div>
         </div>)
 }

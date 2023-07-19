@@ -41,6 +41,7 @@ export default function PostsList() {
     const onSortClick = () => {
        setReverse(!reverse);
     }
+
     return (
         <div className='container-fluid pb-5'>
             <div className="px-5">
@@ -61,10 +62,10 @@ export default function PostsList() {
             </div>
             <div className='container'>
                 {postsAr.length == 0 ?
-                <>
-                   <PostsLoading/>
-                   <PostsLoading/>
-                </>
+                    <>
+                        <PostsLoading />
+                        <PostsLoading />
+                    </>
                     :
                     postsAr.map(item => {
                         return (

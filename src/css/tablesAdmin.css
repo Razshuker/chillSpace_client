@@ -1,0 +1,14 @@
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* table {
+    width: 100%;
+    table-layout: fixed;
+} */
+
+
+td {
+    border-right: 1px solid silver;
+}
