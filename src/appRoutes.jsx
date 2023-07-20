@@ -10,10 +10,10 @@ import CategoriesList from './admin_components/categories/categoriesList'
 import AddCategory from './admin_components/categories/addCategory'
 import EditCategory from './admin_components/categories/editCategory'
 import LoginAdmin from './admin_components/loginAdmin'
+import ReportedAll from './admin_components/posts/reportedAll'
 import Footer from './components/footer'
 import PlacesList from './admin_components/places/placesList'
 import EditPlace from './admin_components/places/editPlace'
-import ReportedPosts from './admin_components/posts/reportedPosts'
 import Signup from './components/signup'
 import Login from './components/login';
 import UpdateUserInfo from './components/user/updateUserInfo'
@@ -46,7 +46,7 @@ export default function AppRoutes() {
                 <Route path='/admin/places' element={<PlacesList />} />
                 <Route path='/admin/places/add' element={<AddPlace />} />
                 <Route path='/admin/places/edit/:id' element={<EditPlace />} />
-                <Route path='/admin/reportedPosts' element={<ReportedPosts />} />
+                <Route path='/admin/reportedPosts' element={<ReportedAll />} />
                 <Route path='/admin/users' element={<UsersList />} />
                 <Route path='/admin/categories' element={<CategoriesList />} />
                 <Route path='/admin/categories/add' element={<AddCategory />} />
