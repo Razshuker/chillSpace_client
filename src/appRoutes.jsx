@@ -21,6 +21,7 @@ import PostsList from './components/postsList'
 import AddPost from './components/posts/addPost'
 import Favorites from './components/user/favorites'
 import Places from './components/places'
+import CheckAdminAuth from './admin_components/checkAdminAuth'
 
 
 export default function AppRoutes() {
@@ -56,6 +57,9 @@ export default function AppRoutes() {
             </Routes>
             <Routes>
                 <Route path='/*' element={<Footer />} />
+            </Routes>
+            <Routes>
+                <Route path='/admin/:dir/*' element={<CheckAdminAuth/>}/>
             </Routes>
         </BrowserRouter>
     )
