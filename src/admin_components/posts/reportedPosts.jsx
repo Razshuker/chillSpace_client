@@ -9,10 +9,10 @@ export default function ReportedPosts() {
 
 
     useEffect(() => {
-        doApiReported();
-    }, [])
+        doApiReportedPosts();
+    }, [reportedPosts])
 
-    const doApiReported = async () => {
+    const doApiReportedPosts = async () => {
         try {
             const url = API_URL + "/posts/reported";
             const data = await doApiGet(url);
@@ -23,20 +23,6 @@ export default function ReportedPosts() {
         }
     }
 
-    const deletePost = async (_idDel) => {
-        try {
-            if (window.confirm("are you sure you want to delete this post")) {
-                const url = API_URL + "/posts/" + _idDel;
-                const data = await doApiMethod(url, "DELETE");
-                if (data.deletedCount) {
-                    doApiReported();
-                }
-            }
-        } catch (error) {
-            console.log(error);
-            alert("There is a problem, please try again later");
-        }
-    }
 
     const confirmPost = async (_idConfirm) => {
         try {
@@ -44,7 +30,6 @@ export default function ReportedPosts() {
                 const url = API_URL + "/posts/reportPost/" + _idConfirm + "/true";
                 const data = await doApiMethod(url, "PATCH");
                 if (data.modifiedCount) {
-                    doApiReported();
                     alert("post confirmed")
                 }
             }
@@ -53,7 +38,17 @@ export default function ReportedPosts() {
             alert("There is a problem, please try again later");
         }
     }
-
+    const deletePost = async (_idDel) => {
+        try {
+            if (window.confirm("are you sure you want to delete this post?")) {
+                const url = API_URL + "/posts/" + _idDel;
+                await doApiMethod(url, "DELETE");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("There is a problem, please try again later");
+        }
+    }
 
 
     return (
@@ -62,10 +57,6 @@ export default function ReportedPosts() {
             {reportedPosts.map(item => {
                 return (
                     <div className='border border-dark p-5 mb-4' key={item._id} >
-                        {/* <div>title : {item.title}</div>
-                        <div>description : {item.description}</div>
-                        <div>likes : {item.likes}</div>
-                        */}
                         <div>date created : {(item.date_created).substring(0, 10)}</div>
                         <PostItem key={item._id} item={item} />
                         <button onClick={() => { deletePost(item._id) }} className='btn btn-danger mx-1 mt-2'>Delete post</button>
