@@ -10,11 +10,15 @@ export default function Places() {
         <div className='mb-3'>
             {isShowSort ?
                 <div className='container-fluid row'>
-                    <SortPlaces setShowSort={setShowSort} isShowSort={isShowSort} className='col-6' />
-                    <PlacesList className="col-6" />
+                    <div className='col-lg-4 col-12 m-0 p-0'>
+                    <SortPlaces setShowSort={setShowSort} isShowSort={isShowSort}  />
+                    </div>
+                    <div className="col-lg-8 col-12 m-0 p-0">
+                    <PlacesList  />
+                    </div>
                 </div> :
                 <div className='container-fluid'>
-                    <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} />
+                    <SearchForm setShowSort={setShowSort} isShowSort={isShowSort}  />
                     <PlacesList />
                 </div>
             }
