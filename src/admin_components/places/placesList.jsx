@@ -34,9 +34,9 @@ export default function PlacesList() {
             setPages(Math.ceil(count / 6))
             console.log(pages);
         } catch (error) {
-
         }
     }
+
     const deletePlace = async (_delId) => {
         try {
             if (window.confirm("Are you sure you want to delete this place?")) {

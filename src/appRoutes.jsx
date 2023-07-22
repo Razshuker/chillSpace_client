@@ -22,6 +22,9 @@ import AddPost from './components/posts/addPost'
 import Favorites from './components/user/favorites'
 import Places from './components/places'
 import CheckAdminAuth from './admin_components/checkAdminAuth'
+import TypesTagsList from './admin_components/types_tags/typesTagsList'
+import Add from './admin_components/types_tags/add'
+import Edit from './admin_components/types_tags/edit'
 
 
 export default function AppRoutes() {
@@ -51,6 +54,10 @@ export default function AppRoutes() {
                 <Route path='/admin/categories' element={<CategoriesList />} />
                 <Route path='/admin/categories/add' element={<AddCategory />} />
                 <Route path='/admin/categories/edit/:id' element={<EditCategory />} />
+                <Route path='/admin/types&tags' element={<TypesTagsList />} />
+                <Route path='/admin/types&tags/add' element={<Add />} />
+                <Route path='/admin/types&tags/:editElement/:id' element={<Edit />} />
+
 
                 <Route path='/*' element={<Page404 />} />
 
@@ -59,7 +66,7 @@ export default function AppRoutes() {
                 <Route path='/*' element={<Footer />} />
             </Routes>
             <Routes>
-                <Route path='/admin/:dir/*' element={<CheckAdminAuth/>}/>
+                <Route path='/admin/:dir/*' element={<CheckAdminAuth />} />
             </Routes>
         </BrowserRouter>
     )
