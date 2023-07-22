@@ -50,69 +50,71 @@ export default function UsersList() {
 
     return (
         <div className='container-fluid'>
-            {users_ar.length > 0 &&
-                <div>
-                    <h1 className='display-4 text-center my-5'>Users List:</h1>
-                    <div className="container table-container">
-                        <table className='table table-hover table-striped'>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>ID</th>
-                                    <th>FULL NAME</th>
-                                    <th>NICKNAME</th>
-                                    <th>IMAGE URL</th>
-                                    <th>PHONE</th>
-                                    <th>EMAIL</th>
-                                    <th>LOCATION</th>
-                                    <th>FAVORITES</th>
-                                    <th>ROLE</th>
-                                    <th>DELETE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users_ar.map((item, i) => {
-                                    return (
-                                        <tr key={item._id}>
-                                            <td>{i + 1}</td>
-                                            <td title={item._id}>{item._id.substring(0, 5)}</td>
-                                            <td>{item.full_name}</td>
-                                            <td>{item.nickname}</td>
-                                            <td title={item.img_url}>{item.img_url && item.img_url.substring(0, 15)}</td>
-                                            <td>{item.phone}</td>
-                                            <td>{item.email}</td>
-                                            <td>{item.location}</td>
-                                            <td style={{ position: 'relative' }}>
-                                                <div
-                                                    style={{
-                                                        height: '100px',
-                                                        overflowY: 'auto',
-                                                        width: '200px'
-                                                    }}
-                                                >
-                                                    {item.favorites.map(fav => {
-                                                        return (
-                                                            <div key={fav}>
-                                                                <p title={fav}>*{fav && fav.substring(0, 5)}</p>
-                                                            </div>
-                                                        )
-                                                    })}
-                                                </div>
-                                            </td>
-                                            <td><button onClick={() => {
-                                                changeRole(item._id, item.role);
-                                            }} className='btn'>{item.role}</button></td>
-                                            <td><button onClick={() => {
-                                                deleteUser(item._id, item.full_name);
-                                            }} className='btn btn-danger btn-close'></button></td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
+            <div className="container">
+                {users_ar.length > 0 &&
+                    <div>
+                        <h1 className='display-4 text-center my-5'>Users List:</h1>
+                        <div className="table-container">
+                            <table className='table table-hover table-striped'>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>ID</th>
+                                        <th>FULL NAME</th>
+                                        <th>NICKNAME</th>
+                                        <th>IMAGE URL</th>
+                                        <th>PHONE</th>
+                                        <th>EMAIL</th>
+                                        <th>LOCATION</th>
+                                        <th>FAVORITES</th>
+                                        <th>ROLE</th>
+                                        <th>DELETE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {users_ar.map((item, i) => {
+                                        return (
+                                            <tr key={item._id}>
+                                                <td>{i + 1}</td>
+                                                <td title={item._id}>{item._id.substring(0, 5)}</td>
+                                                <td>{item.full_name}</td>
+                                                <td>{item.nickname}</td>
+                                                <td title={item.img_url}>{item.img_url && item.img_url.substring(0, 15)}</td>
+                                                <td>{item.phone}</td>
+                                                <td>{item.email}</td>
+                                                <td>{item.location}</td>
+                                                <td style={{ position: 'relative' }}>
+                                                    <div
+                                                        style={{
+                                                            height: '100px',
+                                                            overflowY: 'auto',
+                                                            width: '200px'
+                                                        }}
+                                                    >
+                                                        {item.favorites.map(fav => {
+                                                            return (
+                                                                <div key={fav}>
+                                                                    <p title={fav}>*{fav && fav.substring(0, 5)}</p>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </td>
+                                                <td><button onClick={() => {
+                                                    changeRole(item._id, item.role);
+                                                }} className='btn'>{item.role}</button></td>
+                                                <td><button onClick={() => {
+                                                    deleteUser(item._id, item.full_name);
+                                                }} className='btn btn-danger btn-close'></button></td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     )
 }

@@ -16,6 +16,7 @@ export default function AdminHeader() {
                                 <li><Link className='text-dark' to="/admin/users">USERS</Link></li>
                                 <li><Link className='text-dark' to="/admin/places">PLACES</Link></li>
                                 <li><Link className='text-dark' to="/admin/categories">CATEGORIES</Link></li>
+                                <li><Link className='text-dark' to="/admin/types&tags">TAGS & TYPES</Link></li>
                                 <li><Link className='text-dark' to="/admin/reportedPosts">REPORTED POSTS</Link></li>
                             </ul>
                         </nav>
