@@ -25,6 +25,7 @@ import CheckAdminAuth from './admin_components/checkAdminAuth'
 import TypesTagsList from './admin_components/types_tags/typesTagsList'
 import Add from './admin_components/types_tags/add'
 import Edit from './admin_components/types_tags/edit'
+import SinglePlace from './admin_components/singlePlace'
 
 
 export default function AppRoutes() {
@@ -42,6 +43,7 @@ export default function AppRoutes() {
                 <Route path='/posts' element={<PostsList />} />
                 <Route path='/posts/add' element={<AddPost />} />
                 <Route path='/places' element={<Places />} />
+                <Route path='/places/:id' element={<SinglePlace />} />
                 <Route path='user/updateAccount' element={<UpdateUserInfo />} />
                 <Route path='user/favorites' element={<Favorites />} />
 

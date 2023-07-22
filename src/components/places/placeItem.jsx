@@ -18,7 +18,9 @@ export default function PlaceItem({ item }) {
 
     return (
         <div className="mt-3">
-            <div className='place_info p-3'>
+            <div onClick={() => {
+                nav(item._id);
+            }} className='place_info p-3'>
                 <div className="row">
                     <div className="col-md-4">
                         <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image' />

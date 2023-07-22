@@ -58,3 +58,24 @@
     min-height: 100vh;
     z-index: 999999;
 }
+
+.singlePlace {
+    min-height: 100vh;
+    font-family: 'Manrope', sans-serif;
+}
+
+.singlePlace h2 {
+    font-size: 3.5em;
+}
+
+.singlePlace h3 {
+    font-size: 1.5em;
+}
+
+.singlePlace .placePic {
+    height: 40vh;
+}
+
+.singlePlace p {
+    font-size: 1.25em;
+}
