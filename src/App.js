@@ -10,7 +10,7 @@ import { useCloudinary } from './hooks/useCloudinary';
 function App() {
 
   const { getUserInfo, userInfo, setUserInfo } = useUser();
-  const { getFavorites, favorites, setFavorites } = useFavorite();
+  const { getFavorites, favorites, setFavorites, onDeleteOrAddToFavorite } = useFavorite();
   const { uploadImage } = useCloudinary();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App() {
   return (
     <MyContext.Provider value={{
       getUserInfo, userInfo, setUserInfo,
-      getFavorites, favorites, setFavorites,
+      getFavorites, favorites, setFavorites, onDeleteOrAddToFavorite,
       uploadImage
     }}>
       <AppRoutes />
