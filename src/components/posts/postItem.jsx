@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import "../../css/posts.css"
-import { AiFillHeart, AiOutlinePushpin, AiOutlineComment, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlinePushpin, AiOutlineComment, AiOutlineHeart, AiOutlineExclamationCircle } from "react-icons/ai";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import CommentsList from './commentsList';
@@ -78,6 +78,19 @@ export default function PostItem(props) {
         }
     }
 
+    const  onReportPost = async(_idPost) => {
+        if(window.confirm("Are you sure you want to report this post?")){
+                if(!item.report){
+                    try {
+                      const url = API_URL + "/posts/reportPost/"+_idPost+"/false";
+                      await doApiMethod(url,"PATCH");
+
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+        }
+    }
 
     return (
         <div className='postItem border p-3  mt-4 row '>
@@ -95,6 +108,9 @@ export default function PostItem(props) {
                         </div>
                     </div>
                     <div className='col-3'>
+                    <div  className='justify-content-end d-flex h4 '>
+                       <button onClick={()=> onReportPost(item._id)} className='btnIcon'> <AiOutlineExclamationCircle/> </button>
+                        </div>
                        <TimeDiff data={(item.date_created)} className='col-auto'/>
                         {/* {item.location && <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>} */}
                         <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>
