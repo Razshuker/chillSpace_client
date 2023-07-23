@@ -9,9 +9,9 @@ export default function UserInfo({ handleClose }) {
     const nav = useNavigate();
     const { userInfo, setUserInfo } = useContext(MyContext)
 
-    if (!Object.keys(userInfo).length) {
-        return <Loading />
-    }
+    // if (!Object.keys(userInfo).length) {
+    //     return <Loading />
+    // }
 
     return (
         <div style={{
