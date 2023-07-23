@@ -28,7 +28,7 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                             if (e.key == "Enter") {
                                 nav("?s=" + inputRef.current.value)
                             }
-                        }} ref={inputRef} placeholder='search for category / place...' type="text" className='input_search me-2 col-10' />
+                        }} ref={inputRef} placeholder='search for place...' type="text" className='input_search me-2 col-10' />
                         <button onClick={() => {
                             nav("?s=" + inputRef.current.value)
                         }} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { BsFillSuitHeartFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext'
 
@@ -18,16 +18,20 @@ export default function PlaceItem({ item }) {
 
     return (
         <div className="mt-3">
-            <div onClick={() => {
-                nav(item._id);
-            }} className='place_info p-3'>
+            <div className='place_info p-3'>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div onClick={() => {
+                        nav(item._id);
+                    }} className="col-md-4">
                         <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image' />
                     </div>
                     <div className="info col-md-6">
-                        <h4 className='display-6'>{item.name}</h4>
-                        <p className='lead'>{item.description}</p>
+                        <div onClick={() => {
+                            nav(item._id);
+                        }}>
+                            <h4 className='display-6'>{item.name}</h4>
+                            <p className='lead'>{item.description}</p>
+                        </div>
                         <div className="row align-items-end">
                             {item.tags_name.map(tag => {
                                 return (

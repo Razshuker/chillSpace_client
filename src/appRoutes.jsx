@@ -25,7 +25,7 @@ import CheckAdminAuth from './admin_components/checkAdminAuth'
 import TypesTagsList from './admin_components/types_tags/typesTagsList'
 import Add from './admin_components/types_tags/add'
 import Edit from './admin_components/types_tags/edit'
-import SinglePlace from './admin_components/singlePlace'
+import SinglePlace from './components/places/singlePlace'
 
 
 export default function AppRoutes() {

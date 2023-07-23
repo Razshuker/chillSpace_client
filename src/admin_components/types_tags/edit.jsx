@@ -28,10 +28,10 @@ export default function Edit() {
 
     const onSub = async (_reqBody) => {
         try {
-            const url = API_URL + `/${_reqBody.select}s/` + item._id;
-            const data = await doApiMethod(url, "PUT", { [_reqBody.select + "_name"]: _reqBody.name });
+            const url = API_URL + `/${params["editElement"]}s/` + item._id;
+            const data = await doApiMethod(url, "PUT", { [params["editElement"] + "_name"]: _reqBody.name });
             if (data.modifiedCount) {
-                alert(_reqBody.select + " edit");
+                alert(params["editElement"] + " edit");
                 nav("/admin/types&tags")
             }
         } catch (error) {
@@ -46,12 +46,11 @@ export default function Edit() {
                 <div className="container d-flex justify-content-center">
                     <form onSubmit={handleSubmit(onSub)} className="col-md-6" >
                         <label>select tag/type</label>
-                        <select disabled defaultValue={params["editElement"]} {...register("select", { required: true, minLength: 2 })} className="form-select" type="select" >
+                        <select disabled defaultValue={params["editElement"]} {...register("select", { required: false, minLength: 2 })} className="form-select" type="select" >
                             <option value="" >choose type/tag</option>
                             <option value="type" >type</option>
                             <option value="tag" >tag</option>
                         </select>
-                        {errors.select && <div className="text-danger">* You must choose one</div>}
                         <label>name</label>
                         <input defaultValue={item[itemName]} {...register("name", { required: true, minLength: 2 })} className="form-control" type="text" />
                         {errors.name && <div className="text-danger">* Enter valid name</div>}
