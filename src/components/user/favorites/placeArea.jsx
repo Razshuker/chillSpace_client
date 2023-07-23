@@ -8,24 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PlaceArea() {
     const nav = useNavigate();
-    const { favorites, getFavorites } = useContext(MyContext)
+    const { favorites, getFavorites, onDeleteOrAddToFavorite } = useContext(MyContext)
 
     useEffect(() => {
         getFavorites();
     }, []);
 
-    const onDeleteFromFavorite = async (post_id) => {
-        try {
-            const url = API_URL + "/users/editFavorite";
-            const data = await doApiMethod(url, "PATCH", { post_id });
-            if (data.modifiedCount) {
-                getFavorites();
-            }
-        } catch (error) {
-            console.log(error);
-            alert("there is a problem, try again later");
-        }
-    }
+
 
     return (
 
@@ -41,7 +30,7 @@ export default function PlaceArea() {
                     </div>}
                     {favorites.map(item => {
                         return (
-                            <FPlaceItem key={item._id} item={item} onDeleteFromFavorite={onDeleteFromFavorite} />
+                            <FPlaceItem key={item._id} item={item} onDeleteOrAddToFavorite={onDeleteOrAddToFavorite} />
                         )
                     })}
                 </div>

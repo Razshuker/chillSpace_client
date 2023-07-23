@@ -13,7 +13,7 @@ export default function FPlaceItem(props) {
         <div className='col-6 col-lg-4'>
             <div style={{ backgroundImage: `url(${img_url})` }} className="place_item p-3 d-flex align-items-end justify-content-between">
                 <button onClick={() => {
-                    props.onDeleteFromFavorite(place._id);
+                    props.onDeleteOrAddToFavorite(place._id);
                 }} className='love_btn'>
                     <BsFillSuitHeartFill className='text-danger h2 m-0' />
                 </button>

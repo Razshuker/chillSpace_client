@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { API_URL, doApiGet } from "../services/apiService";
+import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 
 
 export const useFavorite = () => {
@@ -28,5 +28,20 @@ export const useFavorite = () => {
             console.log(error);
         }
     }
-    return { getFavorites, favorites, setFavorites }
+
+
+    const onDeleteOrAddToFavorite = async (place_id) => {
+        try {
+            const url = API_URL + "/users/editFavorite";
+            const data = await doApiMethod(url, "PATCH", { place_id });
+            if (data.modifiedCount) {
+                getFavorites();
+            }
+        } catch (error) {
+            console.log(error);
+            alert("there is a problem, try again later");
+        }
+    }
+
+    return { getFavorites, favorites, setFavorites, onDeleteOrAddToFavorite }
 }
