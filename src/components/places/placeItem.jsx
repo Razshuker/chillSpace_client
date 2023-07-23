@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { BsFillSuitHeartFill } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext'
 
