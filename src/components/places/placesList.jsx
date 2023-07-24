@@ -4,6 +4,7 @@ import PlaceItem from './placeItem'
 import { API_URL, doApiGet } from '../../services/apiService'
 import { useScroll } from '../../hooks/useScroll';
 import { useSearchParams } from 'react-router-dom';
+import UpButton from '../upButton';
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
@@ -40,6 +41,7 @@ export default function PlacesList() {
                     )
                 })
             }
+            <UpButton />
         </div>
     )
 }
