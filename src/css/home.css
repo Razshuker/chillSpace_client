@@ -39,6 +39,7 @@ header {
 
 .strip .sunIcon {
     font-size: 3em;
+    text-shadow: #e0e0e0 1px 1px 0, 5px 2px 10px #FFF9F9;
 }
 
 .strip .text-overlay h2,
@@ -46,6 +47,8 @@ header {
     margin: 0;
     font-family: 'Dancing Script', cursive;
     font-size: 5em;
+    text-shadow: #e0e0e0 1px 1px 0, 5px 2px 10px #FFF9F9;
+
 }
 
 
