@@ -64,9 +64,39 @@
     padding: 0;
 }
 
+/* new post */
+.newPost {
+    min-height: 100vh;
+
+}
+
+.newPostH2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 4em;
+    text-align: center;
+    margin: 48px 0;
+}
+
+.newPost .commentsArea {
+    min-height: 300px;
+}
+
+.addBtn {
+    display: flex;
+    justify-content: center;
+    margin: 48px auto;
+    border: none;
+    color: white;
+    background-color: #50423A;
+    padding: 12px 24px;
+    border-radius: 24px;
+}
+
+
 
 @media(max-width:768px) {
     .postItem .postInfo {
         border-right: none;
+        border-bottom: 4px solid rgb(78, 67, 59);
     }
 }

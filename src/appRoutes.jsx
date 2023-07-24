@@ -18,7 +18,6 @@ import Signup from './components/signup'
 import Login from './components/login';
 import UpdateUserInfo from './components/user/updateUserInfo'
 import PostsList from './components/postsList'
-import AddPost from './components/posts/addPost'
 import Favorites from './components/user/favorites'
 import Places from './components/places'
 import CheckAdminAuth from './admin_components/checkAdminAuth'
@@ -26,6 +25,7 @@ import TypesTagsList from './admin_components/types_tags/typesTagsList'
 import Add from './admin_components/types_tags/add'
 import Edit from './admin_components/types_tags/edit'
 import SinglePlace from './components/places/singlePlace'
+import AddPost from './components/posts/addPost'
 
 
 export default function AppRoutes() {

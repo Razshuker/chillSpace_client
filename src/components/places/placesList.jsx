@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import '../../css/places.css'
 import PlaceItem from './placeItem'
 import { API_URL, doApiGet } from '../../services/apiService'
 import { useScroll } from '../../hooks/useScroll';
 import { useSearchParams } from 'react-router-dom';
+import UpButton from '../upButton';
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
@@ -13,7 +15,6 @@ export default function PlacesList() {
     useEffect(() => {
         if (isEnd) {
             getPlaces();
-            console.log(query.get("s"));
         }
     }, [isEnd, query]);
 
@@ -31,12 +32,16 @@ export default function PlacesList() {
     }
 
     return (
-        <div className="container">
-            {places.map(item => {
-                return (
-                    <PlaceItem key={item._id} item={item} />
-                )
-            })}
+        <div className="placeList container">
+            {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
+
+                places.map(item => {
+                    return (
+                        <PlaceItem key={item._id} item={item} />
+                    )
+                })
+            }
+            <UpButton />
         </div>
     )
 }
