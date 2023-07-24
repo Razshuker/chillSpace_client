@@ -25,7 +25,6 @@ export default function Signup() {
             } else {
                 _data.img_url = "";
             }
-            // _data.img_url = await uploadImage(fileRef);
             const url = API_URL + '/users';
             const user = await doApiMethod(url, "POST", _data);
             if (user._id) {
