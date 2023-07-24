@@ -20,7 +20,12 @@ export default function Signup() {
             delete _data.first_name;
             delete _data.last_name;
             delete _data.confirm_password;
-            _data.img_url = await uploadImage(fileRef);
+            if (fileRef.current.files.length > 0) {
+                _data.img_url = await uploadImage(fileRef);
+            } else {
+                _data.img_url = "";
+            }
+            // _data.img_url = await uploadImage(fileRef);
             const url = API_URL + '/users';
             const user = await doApiMethod(url, "POST", _data);
             if (user._id) {
