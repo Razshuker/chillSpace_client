@@ -7,20 +7,21 @@ import PostsLoading from './posts/postsLoading';
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
-    const [reverse,setReverse] = useState(false);
+    const [reverse, setReverse] = useState(false);
     const [query] = useSearchParams();
     const inputRf = useRef();
     const nav = useNavigate();
+
     useEffect(() => {
         const searchQ = query.get("s") || "";
-        doApi(searchQ);
-    }, [query,reverse])
+        getPosts(searchQ);
+    }, [query, reverse])
 
-    const doApi = async (_search) => {
+    const getPosts = async (_search) => {
         try {
             let url = API_URL + "/posts?s=" + _search;
-            if(reverse){
-                url+= `&reverse=yes`;
+            if (reverse) {
+                url += `&reverse=yes`;
             }
             const data = await doApiGet(url);
             setPostsAr(data);
@@ -29,17 +30,9 @@ export default function PostsList() {
             alert("there is a problem, try again later")
         }
     }
-    const onSearchClick = () => {
-        nav("?s=" + inputRf.current.value);
 
-    }
-    const onInputEnter = (e) => {
-        if (e.key == "Enter") {
-            nav("?s=" + inputRf.current.value);
-        }
-    }
     const onSortClick = () => {
-       setReverse(!reverse);
+        setReverse(!reverse);
     }
 
     return (
@@ -52,11 +45,17 @@ export default function PostsList() {
                             <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             :
                             <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
-                    }
+                        }
                     </div>
                     <div className='d-flex justify-content-end py-4 col-md-6'>
-                        <input onKeyDown={(e) => { onInputEnter(e) }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
-                        <button onClick={onSearchClick} className='searchBtn'><IoSearchOutline className='search_icon' /></button>
+                        <input onKeyDown={(e) => {
+                            if (e.key == "Enter") {
+                                nav("?s=" + inputRf.current.value);
+                            }
+                        }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
+                        <button onClick={() => {
+                            nav("?s=" + inputRf.current.value);
+                        }} className='searchBtn'><IoSearchOutline className='search_icon' /></button>
                     </div>
                 </div>
             </div>

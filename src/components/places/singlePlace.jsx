@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet } from '../../services/apiService';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../css/places.css';
+import PlaceMap from './placeMap';
+import SamePlaceItem from './samePlaceItem';
 
 export default function SinglePlace() {
     const [place, setPlace] = useState({});
+    const [samePlaces, setSamePlaces] = useState([1, 2, 3, 4])
     const params = useParams();
     const nav = useNavigate();
 
@@ -48,7 +51,14 @@ export default function SinglePlace() {
                     <p><strong>Friday: </strong>{place.open_hours.Friday}</p>
                     <p><strong>Saturday: </strong>{place.open_hours.Saturday}</p>
                     <hr />
+                    <PlaceMap place={place} />
+                    <hr />
                     <h3>Same places:</h3>
+                    {samePlaces.map((item, i) => {
+                        // return (
+                        //     // <SamePlaceItem key={i} />
+                        // )
+                    })}
                 </React.Fragment>}
             </div>
         </div>

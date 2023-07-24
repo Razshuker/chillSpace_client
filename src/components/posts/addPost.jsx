@@ -19,6 +19,8 @@ export default function AddPostRaz(props) {
 
 
     useEffect(() => {
+        console.log(fileRef);
+
         getPlacesNames();
     }, [])
 
@@ -34,8 +36,11 @@ export default function AddPostRaz(props) {
 
     const onSub = async (_data) => {
         try {
-            _data.img_url = await uploadImage(fileRef);
-            _data.user_id = userInfo._id;
+            if (fileRef.current.files.length > 0) {
+                _data.img_url = await uploadImage(fileRef);
+            } else {
+                _data.img_url = "";
+            } _data.user_id = userInfo._id;
             console.log(_data);
             const url = API_URL + "/posts";
             const data = await doApiMethod(url, "POST", _data);
