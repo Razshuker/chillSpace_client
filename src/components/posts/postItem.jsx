@@ -7,14 +7,17 @@ import CommentsList from './commentsList';
 import { useContext } from 'react';
 import { MyContext } from '../../context/myContext';
 import TimeDiff from './timeDiff';
+import { useNavigate } from 'react-router-dom';
 
 export default function PostItem(props) {
     const item = props.item;
     const [likes, setLikes] = useState(item.likes);
     const [isLiked, setIsLiked] = useState(true);
     const [userPostInfo, setUserPostInfo] = useState({});
+    const [placeInfo, setPlaceInfo] = useState({});
     const commentRef = useRef();
     const { userInfo } = useContext(MyContext);
+    const nav = useNavigate();
 
 
     useEffect(() => {
@@ -22,12 +25,25 @@ export default function PostItem(props) {
         if (likes.includes(userInfo._id)) {
             setIsLiked(false)
         }
+        getPlaceInfo();
     }, [])
 
     const doApiUserInfo = async () => {
         const url = API_URL + "/users/userInfo/" + item.user_id;
         const data = await doApiGet(url);
         setUserPostInfo(data)
+    }
+
+    const getPlaceInfo = async () => {
+        if (item.place_url) {
+            try {
+                const url = API_URL + `/places/single/${item.place_url}`;
+                const data = await doApiGet(url);
+                setPlaceInfo(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 
     const changeLike = async (_idPost) => {
@@ -78,17 +94,17 @@ export default function PostItem(props) {
         }
     }
 
-    const  onReportPost = async(_idPost) => {
-        if(window.confirm("Are you sure you want to report this post?")){
-                if(!item.report){
-                    try {
-                      const url = API_URL + "/posts/reportPost/"+_idPost+"/false";
-                      await doApiMethod(url,"PATCH");
+    const onReportPost = async (_idPost) => {
+        if (window.confirm("Are you sure you want to report this post?")) {
+            if (!item.report) {
+                try {
+                    const url = API_URL + "/posts/reportPost/" + _idPost + "/false";
+                    await doApiMethod(url, "PATCH");
 
-                    } catch (error) {
-                        console.log(error);
-                    }
+                } catch (error) {
+                    console.log(error);
                 }
+            }
         }
     }
 
@@ -108,12 +124,13 @@ export default function PostItem(props) {
                         </div>
                     </div>
                     <div className='col-3'>
-                    <div  className='justify-content-end d-flex h4 '>
-                       <button onClick={()=> onReportPost(item._id)} className='btnIcon'> <AiOutlineExclamationCircle/> </button>
+                        <div className='justify-content-end d-flex h4 '>
+                            <button onClick={() => onReportPost(item._id)} className='btnIcon'> <AiOutlineExclamationCircle /> </button>
                         </div>
-                       <TimeDiff data={(item.date_created)} className='col-auto'/>
-                        {/* {item.location && <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>} */}
-                        <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>
+                        <TimeDiff data={(item.date_created)} className='col-auto' />
+                        {item.place_url && <button onClick={() => {
+                            nav(`/places/${placeInfo._id}`);
+                        }} className='col-auto locationBtn'> <AiOutlinePushpin className='h5' /><br />{placeInfo.name}</button>}
                     </div>
                 </div>
 
