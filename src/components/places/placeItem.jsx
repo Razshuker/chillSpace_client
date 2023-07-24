@@ -18,39 +18,36 @@ export default function PlaceItem({ item }) {
 
     return (
         <div className="mt-3">
-            {userInfo.favorites &&
-                <div className='place_info p-3'>
-                    <div className="row">
+            <div className='place_info p-3'>
+                <div className="row">
+                    <div onClick={() => {
+                        nav(item._id);
+                    }} className="col-md-4">
+                        <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image' />
+                    </div>
+                    <div className="info col-md-6">
                         <div onClick={() => {
                             nav(item._id);
-                        }} className="col-md-4">
-                            <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image' />
+                        }}>
+                            <h4 className='display-6'>{item.name}</h4>
+                            <p className='lead'>{item.description}</p>
                         </div>
-                        <div className="info col-md-6">
-                            <div onClick={() => {
-                                nav(item._id);
-                            }}>
-                                <h4 className='display-6'>{item.name}</h4>
-                                <p className='lead'>{item.description}</p>
-                            </div>
-                            <div className="row align-items-end">
-                                {item.tags_name.map(tag => {
-                                    return (
-                                        <button key={tag} onClick={() => nav("?tags=" + tag)} className='tags col'>{tag}</button>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                        <div onClick={() => {
-                            setIsLiked((isLiked) => !isLiked);
-                            onDeleteOrAddToFavorite(item._id);
-                        }} className="buttons d-flex align-items-end justify-content-end col-1">
-                            {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2 ' />}
-
-                            {/* <BsFillSuitHeartFill className='text-danger h2 m-0 mb-2' /> */}
+                        <div className="row align-items-end">
+                            {item.tags_name.map(tag => {
+                                return (
+                                    <button key={tag} onClick={() => nav("?tags=" + tag)} className='tags col'>{tag}</button>
+                                )
+                            })}
                         </div>
                     </div>
-                </div>}
+                    <div onClick={() => {
+                        setIsLiked((isLiked) => !isLiked);
+                        onDeleteOrAddToFavorite(item._id);
+                    }} className="buttons d-flex align-items-end justify-content-end col-1">
+                        {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2 ' />}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

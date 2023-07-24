@@ -13,7 +13,6 @@ export default function PlacesList() {
     useEffect(() => {
         if (isEnd) {
             getPlaces();
-            console.log(query.get("s"));
         }
     }, [isEnd, query]);
 
