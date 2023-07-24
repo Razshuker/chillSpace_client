@@ -18,7 +18,6 @@ import Signup from './components/signup'
 import Login from './components/login';
 import UpdateUserInfo from './components/user/updateUserInfo'
 import PostsList from './components/postsList'
-import AddPost from './components/posts/addPost'
 import Favorites from './components/user/favorites'
 import Places from './components/places'
 import CheckAdminAuth from './admin_components/checkAdminAuth'
@@ -26,7 +25,7 @@ import TypesTagsList from './admin_components/types_tags/typesTagsList'
 import Add from './admin_components/types_tags/add'
 import Edit from './admin_components/types_tags/edit'
 import SinglePlace from './components/places/singlePlace'
-import AddPostRaz from './components/posts/addPostRaz'
+import AddPost from './components/posts/addPost'
 
 
 export default function AppRoutes() {
@@ -42,7 +41,7 @@ export default function AppRoutes() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/sign-up' element={<Signup />} />
                 <Route path='/posts' element={<PostsList />} />
-                <Route path='/posts/add' element={<AddPostRaz />} />
+                <Route path='/posts/add' element={<AddPost />} />
                 <Route path='/places' element={<Places />} />
                 <Route path='/places/:id' element={<SinglePlace />} />
                 <Route path='user/updateAccount' element={<UpdateUserInfo />} />
