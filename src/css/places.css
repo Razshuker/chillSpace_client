@@ -23,6 +23,19 @@
     cursor: pointer;
 }
 
+.placeList {
+    min-height: 100vh;
+}
+
+.placeList .noPlaces {
+    min-height: 50vh;
+    font-family: 'Manrope', sans-serif;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .place_info {
     background-color: rgb(121, 99, 88);
     min-height: 250px;
