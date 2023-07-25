@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
+import '../css/posts.css'
 import PostItem from './posts/postItem'
-import { API_URL, doApiGet } from '../services/apiService';
+import { API_URL, TOKEN_KEY, doApiGet } from '../services/apiService';
 import { IoSearchOutline, IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
+import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
 
@@ -38,7 +40,12 @@ export default function PostsList() {
     return (
         <div className='container-fluid pb-5'>
             <div className="px-5">
-                <Link to={"add"}>Add new post</Link>
+                {localStorage[TOKEN_KEY] && <Link to={"add"} className='addBtn-posts'>
+                    <div className="d-flex align-items-center justify-content-center">
+                        <BsPostcardHeart className='iconAdd' />
+                        <p className='m-0 ps-2'>Add new post</p>
+                    </div>
+                </Link>}
                 <div className='row justify-content-between  align-items-center'>
                     <div className='col-md-2'>
                         {reverse == false ?
