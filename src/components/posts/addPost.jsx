@@ -126,7 +126,7 @@ export default function AddPostRaz(props) {
                         </div >
                     </div >
                 </div>}
-            <Link to={"/posts"} className='d-flex justify-content-center mt-5'>Back to Posts</Link>
+            <Link to={"/posts"} className='d-flex justify-content-center mt-5 text-dark'>Back to Posts</Link>
         </div>
     )
 }
