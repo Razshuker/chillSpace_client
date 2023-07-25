@@ -5,6 +5,7 @@ header {
 
 .strip {
     min-height: 75vh;
+    position: relative;
 }
 
 .strip .video {
