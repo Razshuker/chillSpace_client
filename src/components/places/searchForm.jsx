@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { FaSistrix } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { BiSlider, BiX } from "react-icons/bi";
+import '../../css/places.css'
 
 
 
@@ -20,6 +21,11 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
         }
     }
 
+    const onCleanSearch = () => {
+        setPage(1);
+        nav("/places");
+    }
+
     return (
         <div className='container-fluid'>
             <div className="container mt-5">
@@ -36,6 +42,7 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
                     <div className='d-flex align-items-center col-9'>
                         <input onKeyDown={onEnterSearch} ref={inputRef} placeholder='search for place...' type="text" className='input_search me-2 col-10' />
                         <button onClick={onSearch} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>
+                        <button onClick={onCleanSearch} className='cleanBtn'>clean search</button>
                     </div>
                 </div>
             </div>

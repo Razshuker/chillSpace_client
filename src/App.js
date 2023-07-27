@@ -6,6 +6,8 @@ import { useUser } from './hooks/useUser';
 import { TOKEN_KEY } from './services/apiService';
 import { useFavorite } from './hooks/useFavorite';
 import { useCloudinary } from './hooks/useCloudinary';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -33,6 +35,7 @@ function App() {
       uploadImage
     }}>
       <AppRoutes />
+      <ToastContainer />
     </MyContext.Provider>
   );
 }
