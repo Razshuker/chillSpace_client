@@ -6,20 +6,23 @@ import SearchForm from './places/searchForm';
 
 export default function Places() {
     const [isShowSort, setShowSort] = useState(false);
+    const [page, setPage] = useState(1);
+
+
     return (
         <div className='mb-3'>
             {isShowSort ?
                 <div className='container-fluid row'>
                     <div className='col-lg-4 col-12 m-0 p-0'>
-                    <SortPlaces setShowSort={setShowSort} isShowSort={isShowSort}  />
+                        <SortPlaces setShowSort={setShowSort} isShowSort={isShowSort} />
                     </div>
                     <div className="col-lg-8 col-12 m-0 p-0">
-                    <PlacesList  />
+                        <PlacesList page={page} setPage={setPage} />
                     </div>
                 </div> :
                 <div className='container-fluid'>
-                    <SearchForm setShowSort={setShowSort} isShowSort={isShowSort}  />
-                    <PlacesList />
+                    <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} setPage={setPage} />
+                    <PlacesList page={page} setPage={setPage} />
                 </div>
             }
 

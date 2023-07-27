@@ -6,9 +6,9 @@ import { useScroll } from '../../hooks/useScroll';
 import { useSearchParams } from 'react-router-dom';
 import UpButton from '../upButton';
 
-export default function PlacesList() {
+export default function PlacesList({ page, setPage }) {
     const [places, setPlaces] = useState([]);
-    const [page, setPage] = useState(1);
+    // const [page, setPage] = useState(1);
     const { isEnd, setScrollEndFalse } = useScroll();
     const [query] = useSearchParams();
 
@@ -16,7 +16,13 @@ export default function PlacesList() {
         if (isEnd) {
             getPlaces();
         }
-    }, [isEnd, query]);
+    }, [isEnd]);
+
+    useEffect(() => {
+        // setPage(1);
+        console.log(query.get("s"));
+        getPlaces();
+    }, [query]);
 
 
     const getPlaces = async () => {
@@ -24,7 +30,8 @@ export default function PlacesList() {
             const url = query.get("s") ? API_URL + `/places?page=${page}&s=` + query.get("s") : API_URL + `/places?page=${page}`;
             const data = await doApiGet(url);
             setPage((page) => page + 1)
-            setPlaces((places) => [...places, ...data]);
+            setPlaces((places) => (page === 1 ? data : [...places, ...data]));
+            // setPlaces((places) => [...places, ...data]);
             setScrollEndFalse();
         } catch (error) {
             console.log(error);

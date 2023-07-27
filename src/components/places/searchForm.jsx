@@ -5,7 +5,7 @@ import { BiSlider, BiX } from "react-icons/bi";
 
 
 
-export default function SearchForm({ setShowSort, isShowSort }) {
+export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const inputRef = useRef();
     const nav = useNavigate();
 
@@ -26,11 +26,13 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                     <div className='d-flex align-items-center col-9'>
                         <input onKeyDown={(e) => {
                             if (e.key == "Enter") {
-                                nav("?s=" + inputRef.current.value)
+                                nav("?s=" + inputRef.current.value);
+                                setPage(1);
                             }
                         }} ref={inputRef} placeholder='search for place...' type="text" className='input_search me-2 col-10' />
                         <button onClick={() => {
-                            nav("?s=" + inputRef.current.value)
+                            nav("?s=" + inputRef.current.value);
+                            setPage(1);
                         }} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>
                     </div>
                 </div>
