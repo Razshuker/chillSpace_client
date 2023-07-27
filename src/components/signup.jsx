@@ -6,6 +6,7 @@ import { API_URL, doApiMethod } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
 import { imageToString } from '../services/cloudService';
 import { MyContext } from '../context/myContext';
+import { toast } from 'react-toastify';
 
 
 export default function Signup() {
@@ -28,12 +29,12 @@ export default function Signup() {
             const url = API_URL + '/users';
             const user = await doApiMethod(url, "POST", _data);
             if (user._id) {
-                alert("user add");
+                toast.success("user add");
                 nav("/login");
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

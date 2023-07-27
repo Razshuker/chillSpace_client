@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { API_URL, doApiMethod } from '../../services/apiService';
 import ChangePassword from './changePassword';
 import { MyContext } from '../../context/myContext';
+import { toast } from 'react-toastify';
 
 export default function UpdateUserInfo() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -18,11 +19,11 @@ export default function UpdateUserInfo() {
             const url = API_URL + "/users/updateUser";
             const data = await doApiMethod(url, "PUT", _data);
             if (data.modifiedCount) {
-                alert("user updated");
+                toast.success("user updated");
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

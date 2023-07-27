@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function AddPlace() {
     const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
@@ -76,22 +77,22 @@ export default function AddPlace() {
             doApiPost(placeData);
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
-    
+
 
     const doApiPost = async (_placeData) => {
         try {
             const url = API_URL + "/places";
             const data = await doApiMethod(url, "POST", _placeData);
             if (data._id) {
-                alert("new place added")
+                toast.success("new place added")
                 nav(-1)
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, please try again later");
+            toast.error("there is a problem, please try again later");
         }
 
     }
@@ -128,7 +129,7 @@ export default function AddPlace() {
                 <input {...register("city", { required: true, minLength: 2 })} className="form-control" type="text" />
                 {errors.city && <div className="text-danger">* Enter a valid city</div>}
                 <label className="pt-3 pb-1">phone</label>
-                <input {...register("phone", {required: false, minLength: 2 })} className="form-control" type="text" />
+                <input {...register("phone", { required: false, minLength: 2 })} className="form-control" type="text" />
                 {errors.phone && <div className="text-danger">* Enter a valid phone</div>}
                 <label className="pt-3 pb-1">latitude</label>
                 <input {...register("lat", { required: true, minLength: 2 })} className="form-control" type="text" />

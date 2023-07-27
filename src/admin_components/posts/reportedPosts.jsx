@@ -3,6 +3,7 @@ import { API_URL, doApiGet, doApiMethod } from '../../services/apiService'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import PostItem from '../../components/posts/postItem';
+import { toast } from 'react-toastify';
 
 export default function ReportedPosts() {
     const [reportedPosts, setReportedPosts] = useState([]);
@@ -19,7 +20,7 @@ export default function ReportedPosts() {
             setReportedPosts(data);
         } catch (error) {
             console.log(error);
-            alert("There is a problem, please try again later");
+            toast.error("There is a problem, please try again later");
         }
     }
 
@@ -30,12 +31,12 @@ export default function ReportedPosts() {
                 const url = API_URL + "/posts/reportPost/" + _idConfirm + "/true";
                 const data = await doApiMethod(url, "PATCH");
                 if (data.modifiedCount) {
-                    alert("post confirmed")
+                    toast.success("post confirmed")
                 }
             }
         } catch (error) {
             console.log(error);
-            alert("There is a problem, please try again later");
+            toast.error("There is a problem, please try again later");
         }
     }
     const deletePost = async (_idDel) => {
@@ -46,7 +47,7 @@ export default function ReportedPosts() {
             }
         } catch (error) {
             console.log(error);
-            alert("There is a problem, please try again later");
+            toast.error("There is a problem, please try again later");
         }
     }
 

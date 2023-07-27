@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PaginationButtons } from '../../components/PaginationButtons';
 import Loading from '../../components/loading';
 import '../../css/tablesAdmin.css'
+import { toast } from 'react-toastify';
 
 export default function PlacesList() {
     const [places, setPlaces] = useState([]);
@@ -48,7 +49,7 @@ export default function PlacesList() {
             }
         } catch (error) {
             console.log(error);
-            alert("There is a problem, please try again later");
+            toast.error("There is a problem, please try again later");
         }
     }
 

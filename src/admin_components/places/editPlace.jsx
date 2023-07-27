@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Loading from '../../components/loading';
+import { toast } from 'react-toastify';
 
 export default function EditPlace() {
     const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
@@ -27,18 +28,17 @@ export default function EditPlace() {
     const doApiGetPlace = async (res, req) => {
         try {
             const url = API_URL + "/places/single/" + params["id"];
-        const data = await doApiGet(url);
-        console.log(data);
-        setPlaceDetails(data);
-        const filterArea = AREAS.filter(item => { return item != data.area });
-        setAreas(filterArea);
-        doApiTypes(data.type);
-        doApiTags();
-        doApiCategory();
-          
+            const data = await doApiGet(url);
+            console.log(data);
+            setPlaceDetails(data);
+            const filterArea = AREAS.filter(item => { return item != data.area });
+            setAreas(filterArea);
+            doApiTypes(data.type);
+            doApiTags();
+            doApiCategory();
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
 
     }
@@ -126,12 +126,12 @@ export default function EditPlace() {
             const url = API_URL + "/places/" + params["id"];
             const data = await doApiMethod(url, "PUT", _placeData);
             if (data.modifiedCount) {
-                alert("place Updated")
+                toast.success("place Updated")
                 nav(-1)
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, please try again later");
+            toast.error("there is a problem, please try again later");
         }
     }
     return (

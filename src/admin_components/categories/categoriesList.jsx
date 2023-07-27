@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../css/tablesAdmin.css'
+import { toast } from 'react-toastify';
 
 export default function CategoriesList() {
     const [categories, setCategories] = useState([]);
@@ -19,7 +20,7 @@ export default function CategoriesList() {
             setCategories(data);
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

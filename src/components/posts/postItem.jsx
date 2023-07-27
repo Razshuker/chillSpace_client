@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { MyContext } from '../../context/myContext';
 import TimeDiff from './timeDiff';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function PostItem(props) {
     const item = props.item;
@@ -55,7 +56,7 @@ export default function PostItem(props) {
                 setIsLiked(!data.isAdded)
             }
             else {
-                alert("Log in to like posts")
+                toast.warning("Log in to like posts")
             }
         } catch (error) {
             console.log(error);
@@ -87,7 +88,7 @@ export default function PostItem(props) {
                     }
                 }
             } else {
-                alert("Login to comment")
+                toast.warning("Login to comment")
             }
         } catch (error) {
 

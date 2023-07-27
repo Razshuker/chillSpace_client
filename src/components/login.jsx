@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiMethod } from '../services/apiService';
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../context/myContext';
+import { toast } from 'react-toastify';
 
 export default function Login({ handleClose }) {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -16,13 +17,14 @@ export default function Login({ handleClose }) {
             const data = await doApiMethod(url, "POST", _data);
             if (data.token) {
                 localStorage.setItem(TOKEN_KEY, data.token);
+                toast.success("you logged in")
                 getUserInfo();
                 nav("/");
                 handleClose();
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

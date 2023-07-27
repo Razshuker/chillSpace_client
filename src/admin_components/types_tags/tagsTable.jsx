@@ -3,6 +3,7 @@ import '../../css/tablesAdmin.css'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { PaginationButtons } from '../../components/PaginationButtons';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 export default function TagsTable() {
@@ -32,7 +33,7 @@ export default function TagsTable() {
                 const url = API_URL + "/tags/" + _id;
                 const data = await doApiMethod(url, "DELETE");
                 if (data.deletedCount) {
-                    alert("deleted");
+                    toast.success("deleted");
                     getTags();
                 }
             } catch (error) {
