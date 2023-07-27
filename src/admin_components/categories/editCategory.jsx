@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function EditCategory() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -20,7 +21,7 @@ export default function EditCategory() {
             setCategory(data);
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 
@@ -29,7 +30,7 @@ export default function EditCategory() {
             const url = API_URL + "/categories/" + params["id"];
             const data = await doApiMethod(url, "PUT", _bodyData);
             if (data.modifiedCount) {
-                alert("category update");
+                toast.success("category update");
                 nav("/admin/categories");
             }
         } catch (error) {

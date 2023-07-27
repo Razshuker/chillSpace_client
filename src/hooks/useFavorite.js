@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
+import { toast } from "react-toastify";
 
 
 export const useFavorite = () => {
@@ -39,7 +40,7 @@ export const useFavorite = () => {
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later");
+            toast.error("there is a problem, try again later");
         }
     }
 

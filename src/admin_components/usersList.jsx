@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../services/apiService';
 import '../css/tablesAdmin.css'
+import { toast } from 'react-toastify';
 
 export default function UsersList() {
     const [users_ar, setUsersAr] = useState([]);
@@ -17,7 +18,7 @@ export default function UsersList() {
             setUsersAr(data);
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

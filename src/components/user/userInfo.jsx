@@ -4,6 +4,7 @@ import { TOKEN_KEY } from '../../services/apiService'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext';
 import Loading from '../loading';
+import { toast } from 'react-toastify';
 
 export default function UserInfo({ handleClose }) {
     const nav = useNavigate();
@@ -30,7 +31,7 @@ export default function UserInfo({ handleClose }) {
                 localStorage.removeItem(TOKEN_KEY);
                 setUserInfo({});
                 handleClose();
-                alert("you logged out");
+                toast.success("you logged out");
                 nav("/");
             }} className='btn'>Logout</button>
         </div>

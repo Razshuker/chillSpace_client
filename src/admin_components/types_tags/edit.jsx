@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Edit() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -31,7 +32,7 @@ export default function Edit() {
             const url = API_URL + `/${params["editElement"]}s/` + item._id;
             const data = await doApiMethod(url, "PUT", { [params["editElement"] + "_name"]: _reqBody.name });
             if (data.modifiedCount) {
-                alert(params["editElement"] + " edit");
+                toast.success(params["editElement"] + " edit");
                 nav("/admin/types&tags")
             }
         } catch (error) {

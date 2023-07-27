@@ -3,6 +3,7 @@ import '../../css/tablesAdmin.css'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { PaginationButtons } from '../../components/PaginationButtons';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 export default function TypesTable() {
@@ -33,7 +34,7 @@ export default function TypesTable() {
                 const url = API_URL + "/types/" + _id;
                 const data = await doApiMethod(url, "DELETE");
                 if (data.deletedCount) {
-                    alert("deleted");
+                    toast.success("deleted");
                     getTypes();
                 }
             } catch (error) {

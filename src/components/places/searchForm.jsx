@@ -2,13 +2,29 @@ import React, { useRef } from 'react'
 import { FaSistrix } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { BiSlider, BiX } from "react-icons/bi";
+import '../../css/places.css'
 
 
 
-export default function SearchForm({ setShowSort, isShowSort }) {
+export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const inputRef = useRef();
     const nav = useNavigate();
 
+    const onSearch = () => {
+        nav("?s=" + inputRef.current.value);
+        setPage(1);
+    }
+
+    const onEnterSearch = (e) => {
+        if (e.key == "Enter") {
+            onSearch();
+        }
+    }
+
+    const onCleanSearch = () => {
+        setPage(1);
+        nav("/places");
+    }
 
     return (
         <div className='container-fluid'>
@@ -24,14 +40,9 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                         }} className='h2 col-2 sort_icon' />
                     }
                     <div className='d-flex align-items-center col-9'>
-                        <input onKeyDown={(e) => {
-                            if (e.key == "Enter") {
-                                nav("?s=" + inputRef.current.value)
-                            }
-                        }} ref={inputRef} placeholder='search for place...' type="text" className='input_search me-2 col-10' />
-                        <button onClick={() => {
-                            nav("?s=" + inputRef.current.value)
-                        }} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>
+                        <input onKeyDown={onEnterSearch} ref={inputRef} placeholder='search for place...' type="text" className='input_search me-2 col-10' />
+                        <button onClick={onSearch} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>
+                        <button onClick={onCleanSearch} className='cleanBtn'>clean search</button>
                     </div>
                 </div>
             </div>

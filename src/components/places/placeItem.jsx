@@ -3,16 +3,24 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext'
+import { toast } from 'react-toastify';
 
 
 export default function PlaceItem({ item }) {
     const nav = useNavigate();
+    const [loggedUser, setLoggesUser] = useState(false);
     const { userInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
     const [isLiked, setIsLiked] = useState(true);
 
     useEffect(() => {
+        if (userInfo.full_name) {
+            setLoggesUser(true);
+        }
+    }, []);
+
+    useEffect(() => {
         if (userInfo.favorites && userInfo.favorites.includes(item._id)) {
-            setIsLiked(false)
+            setIsLiked(false);
         }
     }, [userInfo.favorites]);
 
@@ -41,8 +49,12 @@ export default function PlaceItem({ item }) {
                         </div>
                     </div>
                     <div onClick={() => {
-                        setIsLiked((isLiked) => !isLiked);
-                        onDeleteOrAddToFavorite(item._id);
+                        if (loggedUser) {
+                            setIsLiked((isLiked) => !isLiked);
+                            onDeleteOrAddToFavorite(item._id);
+                        } else {
+                            toast.warning("you must login to add this place to you favorite");
+                        }
                     }} className="buttons d-flex align-items-end justify-content-end col-1">
                         {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2 ' />}
                     </div>

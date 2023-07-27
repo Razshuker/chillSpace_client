@@ -3,6 +3,7 @@ import '../../css/updateAccount.css'
 import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function ChangePassword() {
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();
@@ -15,13 +16,13 @@ export default function ChangePassword() {
             const url = API_URL + "/users/changePassword";
             const data = await doApiMethod(url, "PATCH", _reqData);
             if (data.modifiedCount) {
-                alert("password changed");
+                toast.success("password changed");
                 localStorage.removeItem(TOKEN_KEY);
                 nav("/login");
             }
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

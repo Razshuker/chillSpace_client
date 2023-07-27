@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from "react-hook-form"
 import { API_URL, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Add() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,7 +13,7 @@ export default function Add() {
             const url = API_URL + `/${_reqBody.select}s`;
             const data = await doApiMethod(url, "POST", { [_reqBody.select + "_name"]: _reqBody.name });
             if (data._id) {
-                alert(_reqBody.select + " added");
+                toast.success(_reqBody.select + " added");
                 nav("/admin/types&tags")
             }
         } catch (error) {

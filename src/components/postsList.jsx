@@ -6,6 +6,7 @@ import { IoSearchOutline, IoArrowForwardSharp, IoSwapVerticalSharp } from "react
 import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
+import { toast } from 'react-toastify';
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -29,7 +30,7 @@ export default function PostsList() {
             setPostsAr(data);
         } catch (error) {
             console.log(error);
-            alert("there is a problem, try again later")
+            toast.error("there is a problem, try again later")
         }
     }
 

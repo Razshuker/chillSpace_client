@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { API_URL, doApiMethod } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function AddCategory() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,7 +13,7 @@ export default function AddCategory() {
             const url = API_URL + "/categories";
             const data = await doApiMethod(url, "POST", _bodyData);
             if (data._id) {
-                alert("category added");
+                toast.success("category added");
                 nav("/admin/categories");
             }
         } catch (error) {
