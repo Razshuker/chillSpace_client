@@ -63,7 +63,7 @@ export default function PlaceItem({ item }) {
                             toast.warning("you must login to add this place to you favorite");
                         }
                     }} className="buttons d-flex justify-content-end col-1 w-100 pe-4">
-                        {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2 ' />}
+                        {!isLiked ? <AiFillHeart className=' h1 text-danger' /> : <AiOutlineHeart className='h1 ' />}
                     </div>
                     <div className="row align-items-end col-11 ms-3">
                         {item.tags_name.map(tag => {
