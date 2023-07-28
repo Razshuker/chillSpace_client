@@ -7,11 +7,12 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../../css/places.css'
 import { Style } from '@mui/icons-material';
 
-export default function SortPlaces({ setShowSort, isShowSort }) {
+export default function SortPlaces({ setShowSort, isShowSort , setPage }) {
     const [types, setTypes] = useState([]);
     const [arArea, setArArea] = useState([]);
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
+
     const nav = useNavigate();
     const [query] = useSearchParams();
 
@@ -38,6 +39,7 @@ export default function SortPlaces({ setShowSort, isShowSort }) {
         } catch (error) {
             console.log(error);
         }
+
     }
     const doApiTags = async () => {
         try {
@@ -66,7 +68,7 @@ export default function SortPlaces({ setShowSort, isShowSort }) {
 
     return (
         <div className='sortMenu border h-auto sort_places p-2'>
-            <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} />
+            <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} setPage={setPage}/>
             <div className='mt-5'>
                 <h4 className='display-6 text-center p-2'>Area</h4>
                 <div className='row pb-4 px-3'>
@@ -107,6 +109,7 @@ export default function SortPlaces({ setShowSort, isShowSort }) {
                             <input type="checkbox" />
                             <label className='ms-1' htmlFor={item.categories_code}>{item.name}</label>
                         </div>
+
                     )
                 })}
                 </div>

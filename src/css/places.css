@@ -20,7 +20,7 @@
 }
 
 .cleanBtn {
-    padding: 8px;
+    padding: 8px 12px;
     margin-left: 8px;
     background-color: #B7B7A4;
     border-radius: 234px;
@@ -34,6 +34,7 @@
 
 .placeList {
     min-height: 100vh;
+    max-width: 1000px;
 }
 
 .placeList .noPlaces {

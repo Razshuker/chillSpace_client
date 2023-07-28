@@ -5,6 +5,7 @@ import { API_URL, doApiGet } from '../../services/apiService'
 import { useScroll } from '../../hooks/useScroll';
 import { useSearchParams } from 'react-router-dom';
 import UpButton from '../upButton';
+import Loading from '../loading';
 
 export default function PlacesList({ page, setPage }) {
     const [places, setPlaces] = useState([]);
@@ -13,12 +14,12 @@ export default function PlacesList({ page, setPage }) {
 
     useEffect(() => {
         if (isEnd) {
+            setPage((page) => page + 1)
             getPlaces();
         }
     }, [isEnd]);
 
     useEffect(() => {
-        console.log(query.get("s"));
         getPlaces();
     }, [query]);
 
@@ -30,7 +31,7 @@ export default function PlacesList({ page, setPage }) {
             //     url+=`&area=` + query.get("area");
             // }
             const data = await doApiGet(url);
-            setPage((page) => page + 1)
+            // setPage((page) => page + 1)
             setPlaces((places) => (page == 1 ? data : [...places, ...data]));
             setScrollEndFalse();
         } catch (error) {
