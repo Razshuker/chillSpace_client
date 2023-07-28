@@ -13,6 +13,7 @@ export default function PlacesList({ page, setPage }) {
 
     useEffect(() => {
         if (isEnd) {
+            setPage((page) => page + 1)
             getPlaces();
         }
     }, [isEnd]);
@@ -30,7 +31,7 @@ export default function PlacesList({ page, setPage }) {
             //     url+=`&area=` + query.get("area");
             // }
             const data = await doApiGet(url);
-            setPage((page) => page + 1)
+            // setPage((page) => page + 1)
             setPlaces((places) => (page == 1 ? data : [...places, ...data]));
             setScrollEndFalse();
         } catch (error) {
