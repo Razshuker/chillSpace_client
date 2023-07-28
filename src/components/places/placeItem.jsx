@@ -28,12 +28,12 @@ export default function PlaceItem({ item }) {
         <div className="mt-3">
             <div className='place_info p-3'>
                 <div className="row">
-                    <div onClick={() => {
+                    {/* <div onClick={() => {
                         nav(item._id);
                     }} className="col-md-4">
                         <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image' />
                     </div>
-                    <div className="info col-md-6">
+                    <div className="info col-md-7">
                         <div onClick={() => {
                             nav(item._id);
                         }}>
@@ -47,7 +47,14 @@ export default function PlaceItem({ item }) {
                                 )
                             })}
                         </div>
+                    </div> */}
+                    <div className='p-3'>
+                        <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image float-start' />
+                        <h4 className='display-6'>{item.name}</h4>
+                        <p className='lead'>{item.description}</p>
                     </div>
+                </div>
+                <div className="row flex-wrap">
                     <div onClick={() => {
                         if (loggedUser) {
                             setIsLiked((isLiked) => !isLiked);
@@ -55,8 +62,15 @@ export default function PlaceItem({ item }) {
                         } else {
                             toast.warning("you must login to add this place to you favorite");
                         }
-                    }} className="buttons d-flex align-items-end justify-content-end col-1">
-                        {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2 ' />}
+                    }} className="buttons d-flex justify-content-end col-1 w-100 pe-4">
+                        {!isLiked ? <AiFillHeart className=' h1 text-danger' /> : <AiOutlineHeart className='h1 ' />}
+                    </div>
+                    <div className="row align-items-end col-11 ms-3">
+                        {item.tags_name.map(tag => {
+                            return (
+                                <button key={tag} onClick={() => nav("?tags=" + tag)} className='tags col'>{tag}</button>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
