@@ -5,6 +5,7 @@ import { API_URL, doApiGet } from '../../services/apiService'
 import { useScroll } from '../../hooks/useScroll';
 import { useSearchParams } from 'react-router-dom';
 import UpButton from '../upButton';
+import Loading from '../loading';
 
 export default function PlacesList({ page, setPage }) {
     const [places, setPlaces] = useState([]);
@@ -41,6 +42,7 @@ export default function PlacesList({ page, setPage }) {
 
     return (
         <div className="placeList container">
+            <Loading />
             {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
 
                 places.map(item => {

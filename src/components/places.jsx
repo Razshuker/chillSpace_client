@@ -7,6 +7,7 @@ import SearchForm from './places/searchForm';
 export default function Places() {
     const [isShowSort, setShowSort] = useState(false);
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     return (
         <div className='mb-3'>
