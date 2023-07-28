@@ -20,7 +20,6 @@ export default function PlacesList({ page, setPage }) {
     }, [isEnd]);
 
     useEffect(() => {
-        console.log(query.get("s"));
         getPlaces();
     }, [query]);
 
@@ -42,7 +41,6 @@ export default function PlacesList({ page, setPage }) {
 
     return (
         <div className="placeList container">
-            <Loading />
             {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
 
                 places.map(item => {
