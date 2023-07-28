@@ -55,8 +55,8 @@ export default function PlaceItem({ item }) {
                         } else {
                             toast.warning("you must login to add this place to you favorite");
                         }
-                    }} className="buttons d-flex align-items-end justify-content-end col-1">
-                        {!isLiked ? <AiFillHeart className=' h2 text-danger' /> : <AiOutlineHeart className='h2 ' />}
+                    }} className="buttons d-flex align-items-end justify-content-end col-1 ">
+                        {!isLiked ? <AiFillHeart  role="button"  className=' h2 text-danger p-0' /> : <AiOutlineHeart  role="button"  className='h2 p-0' />}
                     </div>
                 </div>
             </div>

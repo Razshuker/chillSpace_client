@@ -68,6 +68,7 @@
     color: white;
 }
 
+.sort_places .tags,
 .place_info .tags,
 .singlePlace .tags {
     border: none;
