@@ -26,10 +26,10 @@ export default function PlacesList({ page, setPage }) {
 
     const getPlaces = async () => {
         try {
-            const url = query.get("s") ? API_URL + `/places?page=${page}&s=` + query.get("s") : API_URL + `/places?page=${page}`;
-            // if(query.get("area")){
-            //     url+=`&area=` + query.get("area");
-            // }
+            let url = query.get("s") ? API_URL + `/places?page=${page}&s=` + query.get("s") : API_URL + `/places?page=${page}`;
+            if(query.get("area")){
+                url+=`&area=` + query.get("area");
+            }
             const data = await doApiGet(url);
             // setPage((page) => page + 1)
             setPlaces((places) => (page == 1 ? data : [...places, ...data]));
