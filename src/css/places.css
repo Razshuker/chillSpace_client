@@ -69,6 +69,20 @@
     color: white;
 }
 
+.saveIcon {
+    color: #9f9f6f;
+}
+
+.saveIcon-single {
+    font-size: 3em;
+    color: #9f9f6f;
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    z-index: 99;
+}
+
+
 .sort_places .tags,
 .place_info .tags,
 .singlePlace .tags {
@@ -95,8 +109,18 @@
     font-size: 3.5em;
 }
 
-.singlePlace h3 {
+h3 {
     font-size: 1.5em;
+}
+
+.tpye-h3 {
+    font-size: 1.75em;
+    cursor: pointer;
+    transition: 800ms;
+}
+
+.tpye-h3:hover {
+    transform: scale(0.9);
 }
 
 .singlePlace .placePic {
