@@ -3,11 +3,16 @@ import { FaSistrix } from "react-icons/fa";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiSlider, BiX } from "react-icons/bi";
 import '../../css/places.css'
+import { useEffect } from 'react';
 
 export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const inputRef = useRef();
     const nav = useNavigate();
     const [query] = useSearchParams();
+
+    useEffect(()=> {
+        onCleanSearch();
+    },[])
 
     const onSearch = () => {
         const searchParams = new URLSearchParams(query);
