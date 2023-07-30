@@ -129,7 +129,7 @@ footer {
   }
   
   *::-webkit-scrollbar {
-      width: 12px;
+      max-width: 12px;
   }
   
   *::-webkit-scrollbar-track {

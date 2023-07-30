@@ -1,17 +1,18 @@
 import React, { useRef } from 'react'
 import { FaSistrix } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiSlider, BiX } from "react-icons/bi";
 import '../../css/places.css'
-
-
 
 export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const inputRef = useRef();
     const nav = useNavigate();
+    const [query] = useSearchParams();
 
     const onSearch = () => {
-        nav("?s=" + inputRef.current.value);
+        const searchParams = new URLSearchParams(query);
+        searchParams.set("s", inputRef.current.value);
+        nav("?" + searchParams.toString());
         setPage(1);
     }
 
