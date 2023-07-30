@@ -7,12 +7,14 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../../css/places.css'
 import { Style } from '@mui/icons-material';
 
-export default function SortPlaces({ setShowSort, isShowSort , setPage }) {
+export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
     const [types, setTypes] = useState([]);
     const [arArea, setArArea] = useState([]);
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
-    const [selectedTags,setSelectedTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedTypes, setSelectedTypes] = useState([]);
+    const [selectedCats, setSelectedCats] = useState([]);
     const nav = useNavigate();
     const [query] = useSearchParams();
 
@@ -51,89 +53,118 @@ export default function SortPlaces({ setShowSort, isShowSort , setPage }) {
         }
     }
 
-    const onSelectedArea = (_area) => {
-        const updatedAreaArr = [...arArea];
-        const isIn = updatedAreaArr.includes(_area);
-        if (isIn) {
-            const index = updatedAreaArr.indexOf(_area);
-            updatedAreaArr.splice(index, 1);
-        } else {
-            updatedAreaArr.push(_area);
+    const onSelected = (_selected, _queryName) => {
+        setPage(1)
+        let updatedArr = [];
+        switch (_queryName) {
+            case 'area':
+                updatedArr = [...arArea];
+                break;
+            case 'tags':
+                updatedArr = [...selectedTags];
+                break;
+            case 'types':
+                updatedArr = [...selectedTypes];
+                break;
+            case 'cats':
+                updatedArr = [...selectedCats];
+                break;
         }
-        setArArea(updatedAreaArr);
+        const isIn = updatedArr.includes(_selected);
+        if (isIn) {
+            const index = updatedArr.indexOf(_selected);
+            updatedArr.splice(index, 1);
+        } else {
+            updatedArr.push(_selected);
+        }
+        switch (_queryName) {
+            case 'area':
+                setArArea(updatedArr);
+                break;
+            case 'tags':
+                setSelectedTags(updatedArr);
+                break;
+            case 'types':
+                setSelectedTypes(updatedArr)
+                break;
+            case 'cats':
+                setSelectedCats(updatedArr)
+                break;
+        }
         const searchParams = new URLSearchParams(query);
-        searchParams.set("area", updatedAreaArr.join(","));
+        searchParams.set(_queryName, updatedArr.join(","));
         nav("?" + searchParams.toString());
+  
     };
 
-    const onSelectedTags = (_tag) => {
-        const updatedTagsArr = [...selectedTags];
-        const isIn = updatedTagsArr.includes(_tag);
-        if (isIn) {
-            const index = updatedTagsArr.indexOf(_tag);
-            updatedTagsArr.splice(index, 1);
-        } else {
-            updatedTagsArr.push(_tag);
-        }
-        setSelectedTags(updatedTagsArr);
-        const searchParams = new URLSearchParams(query);
-        searchParams.set("tags", updatedTagsArr.join(","));
-        nav("?" + searchParams.toString());
-    };
+    const isQueryExists = (_qKey, _qValue) => {
+        let isIn = false;
+            if(query.get(_qKey)){
+                const arrValues = query.get(_qKey).split(',');
+                 isIn = arrValues.includes(_qValue);
+            }
+            // console.log(isIn);
+    }
+    
 
     return (
         <div className='sortMenu border h-auto sort_places p-2'>
-            <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} setPage={setPage}/>
+            <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} setPage={setPage} />
             <div className='mt-5'>
                 <h4 className='display-6 text-center p-2'>Area</h4>
                 <div className='row pb-4 px-3'>
-                <div className=' pt-3 col-6'>
-                    <input onClick={() => { onSelectedArea("north") }} type="checkbox" name="scales" />
-                    <label className='ms-1' htmlFor="north">North</label>
-                </div>
-                <div className=' pt-3 col-6'>
-                    <input onClick={() => { onSelectedArea("south") }} type="checkbox" />
-                    <label className='ms-1' htmlFor="south">South</label>
-                </div>
-                <div className=' pt-3 col-6'>
-                    <input onClick={() => { onSelectedArea("center") }} type="checkbox" />
-                    <label className='ms-1' htmlFor="center">Center</label>
-                </div>
-                <div className=' pt-3 col-6'>
-                    <input onClick={() => { onSelectedArea("jerusalem") }} type="checkbox" />
-                    <label className='ms-1' htmlFor="jerusalem">Jerusalem</label>
-                </div>
+                    <div className=' pt-3 col-6'>
+                        <input onClick={() => {
+                            onSelected("north", "area")
+                             isQueryExists("area","north")
+                        }} type="checkbox" name="scales"
+                        />
+                        <label className='ms-1' htmlFor="north">North</label>
+                    </div>
+                    <div className=' pt-3 col-6'>
+                        <input onClick={() => { onSelected("south", "area") }} type="checkbox" />
+                        <label className='ms-1' htmlFor="south">South</label>
+                    </div>
+                    <div className=' pt-3 col-6'>
+                        <input onClick={() => { onSelected("center", "area") }} type="checkbox" />
+                        <label className='ms-1' htmlFor="center">Center</label>
+                    </div>
+                    <div className=' pt-3 col-6'>
+                        <input onClick={() => { onSelected("jerusalem", "area") }} type="checkbox" />
+                        <label className='ms-1' htmlFor="jerusalem">Jerusalem</label>
+                    </div>
                 </div>
 
                 <h4 className='display-6 text-center p-2'>What to do</h4>
                 <div className='row px-3 pb-4'>
-                {types.map(item => {
-                    return (
-                        <div className=' pt-3 col-6' key={item._id}>
-                            <input type="checkbox" />
-                            <label className='ms-1' htmlFor={item.type_name}>{item.type_name}</label>
-                        </div>
-                    )
-                })}
+                    {types.map(item => {
+                        return (
+                            <div className=' pt-3 col-6' key={item._id}>
+                                <input onClick={() => { onSelected(item.type_name, "types") }} type="checkbox" />
+                                <label className='ms-1' htmlFor={item.type_name}>{item.type_name}</label>
+                            </div>
+                        )
+                    })}
                 </div>
                 <h4 className='display-6 text-center p-2'>Categoris</h4>
                 <div className='row px-3 pb-4'>
-                {categories.map(item => {
-                    return (
-                        <div className='pt-3 col-6' key={item._id}>
-                            <input type="checkbox" />
-                            <label className='ms-1' htmlFor={item.categories_code}>{item.name}</label>
-                        </div>
+                    {categories.map(item => {
+                        return (
+                            <div className='pt-3 col-6' key={item._id}>
+                                <input onClick={() => { onSelected(item.category_code, "cats") }} type="checkbox" />
+                                <label className='ms-1' htmlFor={item.category_code}>{item.name}</label>
+                            </div>
 
-                    )
-                })}
+                        )
+                    })}
                 </div>
                 <h4 className='display-6 text-center p-2'>Tags</h4>
                 <div className='row'>
                     {tags.map(item => {
                         return (
                             <div className='col-auto' key={item._id}>
-                                <button onClick={ () => {onSelectedTags(item.tag_name)}}  className='tags'>{item.tag_name}</button>
+                                <button
+                                    onClick={() => { onSelected(item.tag_name, "tags") }} className='tags'>{item.tag_name}</button>
                             </div>
                         )
                     })}
