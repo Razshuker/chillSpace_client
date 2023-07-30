@@ -8,6 +8,7 @@ import { useFavorite } from './hooks/useFavorite';
 import { useCloudinary } from './hooks/useCloudinary';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Scroll from './components/scroll';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
       getFavorites, favorites, setFavorites, onDeleteOrAddToFavorite,
       uploadImage
     }}>
+      <Scroll/>
       <AppRoutes />
       <ToastContainer />
     </MyContext.Provider>
