@@ -1,4 +1,5 @@
 /* global css */
+
 header {
     background-color: rgb(216, 191, 172);
     min-height: 10vh;
@@ -123,29 +124,25 @@ footer {
     font-family: 'Manrope', sans-serif;
 }
 
-*{
+* {
     scrollbar-width: auto;
     scrollbar-color: #444654 #343541;
-  }
-  
-  *::-webkit-scrollbar {
-      max-width: 12px;
-  }
-  
-  *::-webkit-scrollbar-track {
-      background: #a58b95;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-      background-color: #826f7f;
-      border-radius: 12px;
-       border: 3px solid #ffffff; 
-  }
-  
-  *::-webkit-scrollbar-thumb:hover {
-      background-color: #404253;
-  
-  }
+}
+
+*::-webkit-scrollbar {
+    max-width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(117, 100, 89);
+    border-radius: 12px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(117, 100, 89);
+
+}
+
 /*   
   #progress-bar {
       width: 100%;
