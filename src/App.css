@@ -2,11 +2,15 @@
 
 header {
     background-color: rgb(216, 191, 172);
-    min-height: 10vh;
+    min-height: 8vh;
 }
 
 header .logo img:hover {
     cursor: pointer;
+}
+
+.burger {
+    font-size: 2em;
 }
 
 header nav ul li {
@@ -160,3 +164,14 @@ footer {
       background-color: #826f7f;
       transition: width 0.3s;
   } */
+
+@media(max-width:768px) {
+    header .logo {
+        padding: 0;
+    }
+
+    header .logo img {
+        width: 200px;
+    }
+
+}

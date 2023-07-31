@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '../App.css'
 import ProfileMenu from './header/profileMenu'
+import { CiMenuBurger } from "react-icons/ci";
+
 
 export default function Header() {
     const nav = useNavigate();
@@ -14,7 +16,7 @@ export default function Header() {
                         nav("/")
                     }} src='images/chillSpaceLogoPNG.png' alt='logo' />
                 </div>
-                <div className="nav row col align-items-center ">
+                <div className="nav row col align-items-center d-none d-lg-flex">
                     <nav className="col d-flex justify-content-end">
                         <ul className='list-inline m-0 d-flex '>
                             <li><Link to="/posts">POSTS</Link></li>
@@ -22,6 +24,9 @@ export default function Header() {
                         </ul>
                     </nav>
                     <div className='col-2'><ProfileMenu /></div>
+                </div>
+                <div className="col d-flex justify-content-end align-items-center d-lg-none">
+                    <CiMenuBurger className='burger' />
                 </div>
             </div>
         </header >
