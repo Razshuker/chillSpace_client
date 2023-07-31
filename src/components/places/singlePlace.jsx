@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { API_URL, doApiGet } from '../../services/apiService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import '../../css/places.css';
 import PlaceMap from './placeMap';
 import SamePlaceItem from './samePlaceItem';
@@ -41,6 +42,9 @@ export default function SinglePlace() {
     return (
         <div className='singlePlace container-fluid'>
             <div className="container">
+                <AiOutlineArrowLeft className='backArrow' onClick={() => {
+                    nav(-1);
+                }} />
                 {place.name && <React.Fragment>
                     <h2 className='text-center my-4'>{place.name}</h2>
                     <h3 onClick={() => {
@@ -68,12 +72,14 @@ export default function SinglePlace() {
                     <hr />
                     <PlaceMap place={place} />
                     <hr />
-                    <h3>Same places:</h3>
-                    {samePlaces.map((item, i) => {
-                        // return (
-                        //     // <SamePlaceItem key={i} />
-                        // )
-                    })}
+                    <h3 className='mt-3'>Same places:</h3>
+                    <div className="row mb-5 g-2">
+                        {samePlaces.map((item, i) => {
+                            return (
+                                <SamePlaceItem key={i} />
+                            )
+                        })}
+                    </div>
                 </React.Fragment>}
                 <div onClick={() => {
                     if (loggedUser) {

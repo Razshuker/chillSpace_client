@@ -23,7 +23,7 @@ export default function UserInfo({ handleClose }) {
             <div className="d-flex align-items-center justify-content-center list pt-2">
                 <ul onClick={handleClose} className='p-0 list-inline'>
                     <li><Link to="/user/favorites">FAVORITES</Link></li>
-                    <li><Link to="#">MY POSTS</Link></li>
+                    <li><Link to="/user/posts">MY POSTS</Link></li>
                     <li><Link to="/user/updateAccount">UPDATE ACCOUNT DETAILS</Link></li>
                 </ul>
             </div>

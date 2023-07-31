@@ -35,7 +35,9 @@ export default function PlaceItem({ item }) {
             <div className='place_info p-3'>
                 <div className="row">
                     <div className='p-3'>
-                        <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image float-start' />
+                        <img onClick={() => {
+                            nav(item._id);
+                        }} src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image float-start' />
                         <h4 role='button' onClick={() => {
                             nav(item._id);
                         }} className='display-6'>{item.name}</h4>
@@ -45,12 +47,12 @@ export default function PlaceItem({ item }) {
                             :
                             <div>
                                 <p className='lead'>{(item.description).substring(0, 200)}
-                                    {isShowMore ?(
+                                    {isShowMore ? (
                                         <span>{(item.description).substring(200)}</span>
                                     ) : "..."}
                                 </p>
                                 <div className='inline'>
-                                    <button className='btn btn-light py-1' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50 small' /></span> : <span>Read More <AiOutlineDown className='opacity-50 small' /></span>}</button>
+                                    <button className='py-1 readMoreBtn' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50 small' /></span> : <span>Read More <AiOutlineDown className='opacity-50 small' /></span>}</button>
                                 </div>
                             </div>
                         }

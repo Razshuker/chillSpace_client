@@ -26,6 +26,8 @@ import Add from './admin_components/types_tags/add'
 import Edit from './admin_components/types_tags/edit'
 import SinglePlace from './components/places/singlePlace'
 import AddPost from './components/posts/addPost'
+import EditPost from './components/posts/editPost'
+import UserPostsList from './components/user/userPostsList'
 
 
 export default function AppRoutes() {
@@ -44,8 +46,10 @@ export default function AppRoutes() {
                 <Route path='/posts/add' element={<AddPost />} />
                 <Route path='/places' element={<Places />} />
                 <Route path='/places/:id' element={<SinglePlace />} />
-                <Route path='user/updateAccount' element={<UpdateUserInfo />} />
-                <Route path='user/favorites' element={<Favorites />} />
+                <Route path='/user/updateAccount' element={<UpdateUserInfo />} />
+                <Route path='/user/favorites' element={<Favorites />} />
+                <Route path='/user/posts' element={<UserPostsList />} />
+                <Route path='/user/posts/edit/:id' element={<EditPost />} />
 
                 <Route path='/admin' element={<LoginAdmin />} />
                 <Route path='/admin/places' element={<PlacesList />} />
