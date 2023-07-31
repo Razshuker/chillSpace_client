@@ -1,17 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { API_URL, doApiGet } from '../../services/apiService';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
 import '../../css/places.css';
 import PlaceMap from './placeMap';
 import SamePlaceItem from './samePlaceItem';
+import { MyContext } from '../../context/myContext';
+import { toast } from 'react-toastify';
+
 
 export default function SinglePlace() {
+    const [isLiked, setIsLiked] = useState(true);
     const [place, setPlace] = useState({});
     const [samePlaces, setSamePlaces] = useState([1, 2, 3, 4])
     const params = useParams();
+    const [loggedUser, setLoggesUser] = useState(false);
     const nav = useNavigate();
+    const { userInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
 
     useEffect(() => {
+        if (userInfo.full_name) {
+            setLoggesUser(true);
+            if (userInfo.favorites.includes(params["id"])) {
+                setIsLiked(false);
+            }
+        }
         getPlace();
     }, [])
 
@@ -30,7 +43,9 @@ export default function SinglePlace() {
             <div className="container">
                 {place.name && <React.Fragment>
                     <h2 className='text-center my-4'>{place.name}</h2>
-                    <h3 className='text-center pb-4 m-0 pt-0'>{place.type}</h3>
+                    <h3 onClick={() => {
+                        nav("/places?type=" + place.type);
+                    }} className='text-center pb-4 m-0 pt-0 tpye-h3'>{place.type}</h3>
                     <img src={place.img_url || "images/defualtImg.jpg"} alt="placePic" className='placePic float-start pe-5' />
                     <p><strong>Area:</strong> {place.area}</p>
                     <p><strong>City:</strong> {place.city}</p>
@@ -60,6 +75,17 @@ export default function SinglePlace() {
                         // )
                     })}
                 </React.Fragment>}
+                <div onClick={() => {
+                    if (loggedUser) {
+                        setIsLiked((isLiked) => !isLiked);
+                        onDeleteOrAddToFavorite(params["id"]);
+                    } else {
+                        toast.warning("you must login to add this place to you favorite");
+                    }
+
+                }} className="buttons d-flex justify-content-end col-1 w-100 pe-4">
+                    {!isLiked ? <BsFillBookmarkFill className='saveIcon-single' /> : <BsBookmark className='saveIcon-single' />}
+                </div>
             </div>
         </div>
     )
