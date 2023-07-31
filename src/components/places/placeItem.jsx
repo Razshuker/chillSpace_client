@@ -57,7 +57,7 @@ export default function PlaceItem({ item }) {
                         <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image float-start' />
                         <h4 className='display-6'>{item.name}</h4>
                         {(item.description.length < 200) ?
-                        <p>{item.description}</p>
+                        <p className='lead'>{item.description}</p>
                         :
                         <div>
                             <p className='lead'>{(item.description).substring(0, 200)}
