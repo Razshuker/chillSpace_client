@@ -33,6 +33,12 @@ export default function PlacesList({ page, setPage }) {
             if(query.get("tags")){
                 url+=`&tags=` + query.get("tags")
             }
+            if(query.get("types")){
+                url+=`&types=` + query.get("types")
+            }
+            if(query.get("cats")){
+                url+=`&cats=` + query.get("cats")
+            }
             const data = await doApiGet(url);
             // setPage((page) => page + 1)
             setPlaces((places) => (page == 1 ? data : [...places, ...data]));
