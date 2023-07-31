@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { API_URL, doApiGet } from '../../services/apiService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import '../../css/places.css';
 import PlaceMap from './placeMap';
 import SamePlaceItem from './samePlaceItem';
@@ -41,6 +42,9 @@ export default function SinglePlace() {
     return (
         <div className='singlePlace container-fluid'>
             <div className="container">
+                <AiOutlineArrowLeft className='backArrow' onClick={() => {
+                    nav(-1);
+                }} />
                 {place.name && <React.Fragment>
                     <h2 className='text-center my-4'>{place.name}</h2>
                     <h3 onClick={() => {
