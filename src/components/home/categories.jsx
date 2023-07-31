@@ -24,10 +24,8 @@ export default function Categories() {
 
     const scrollFun = () => {
         if (contentRef.current && contentRef.current.scrollLeft >= 24) {
-            console.log(contentRef.current.scrollLeft);
             setBackActive(true);
         } else {
-            console.log(contentRef.current.scrollLeft);
             setBackActive(false);
         }
 

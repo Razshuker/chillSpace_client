@@ -6,7 +6,6 @@ export const useScroll = () => {
     useEffect(() => {
         window.addEventListener("scroll", scrollWindow);
         return () => {
-            // console.log("long page will unmount hook");
             window.removeEventListener("scroll", scrollWindow);
         }
     }, [])
