@@ -45,7 +45,7 @@ export default function PlaceItem({ item }) {
                             :
                             <div>
                                 <p className='lead'>{(item.description).substring(0, 200)}
-                                    {isShowMore ? (
+                                    {isShowMore ?(
                                         <span>{(item.description).substring(200)}</span>
                                     ) : "..."}
                                 </p>
