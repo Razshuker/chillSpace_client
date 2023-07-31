@@ -72,12 +72,14 @@ export default function SinglePlace() {
                     <hr />
                     <PlaceMap place={place} />
                     <hr />
-                    <h3>Same places:</h3>
-                    {samePlaces.map((item, i) => {
-                        // return (
-                        //     // <SamePlaceItem key={i} />
-                        // )
-                    })}
+                    <h3 className='mt-3'>Same places:</h3>
+                    <div className="row mb-5 g-2">
+                        {samePlaces.map((item, i) => {
+                            return (
+                                <SamePlaceItem key={i} />
+                            )
+                        })}
+                    </div>
                 </React.Fragment>}
                 <div onClick={() => {
                     if (loggedUser) {

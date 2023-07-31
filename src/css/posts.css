@@ -79,6 +79,11 @@
     font-size: 2em;
 }
 
+.nameTitle {
+    font-family: 'Manrope', sans-serif;
+    font-size: 3em;
+}
+
 /* posts comments */
 .comment {
     margin-top: 12px;
