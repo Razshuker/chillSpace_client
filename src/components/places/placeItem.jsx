@@ -66,7 +66,7 @@ export default function PlaceItem({ item }) {
                             ): "..."}
                         </p>
                         <div className='inline'>
-                        <button className='btn btn-light py-1' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50'/></span> :<span>Read More <AiOutlineDown className='opacity-50 small'/></span>}</button>
+                        <button className='btn btn-light py-1' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50 small'/></span> :<span>Read More <AiOutlineDown className='opacity-50 small'/></span>}</button>
                         </div>
                         </div>
                     }     
