@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineDown,AiOutlineUp } from "react-icons/ai";
 import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext'
@@ -9,8 +9,9 @@ import { toast } from 'react-toastify';
 export default function PlaceItem({ item }) {
     const nav = useNavigate();
     const [loggedUser, setLoggesUser] = useState(false);
-    const { userInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
     const [isLiked, setIsLiked] = useState(true);
+    const [isShowMore, setIsShowMore] = useState(false);
+    const { userInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
 
     useEffect(() => {
         if (userInfo.full_name) {
@@ -23,6 +24,10 @@ export default function PlaceItem({ item }) {
             setIsLiked(false);
         }
     }, [userInfo.favorites]);
+
+    const onReadMoreLess = () => {
+        setIsShowMore(!isShowMore);
+    }
 
     return (
         <div className="mt-3">
@@ -51,7 +56,20 @@ export default function PlaceItem({ item }) {
                     <div className='p-3'>
                         <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image float-start' />
                         <h4 className='display-6'>{item.name}</h4>
-                        <p className='lead'>{item.description}</p>
+                        {(item.description.length < 200) ?
+                        <p>{item.description}</p>
+                        :
+                        <div>
+                            <p className='lead'>{(item.description).substring(0, 200)}
+                            {isShowMore ? (
+                                <span>{(item.description).substring(200)}</span>
+                            ): "..."}
+                        </p>
+                        <div className='inline'>
+                        <button className='btn btn-light py-1' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50 small'/></span> :<span>Read More <AiOutlineDown className='opacity-50 small'/></span>}</button>
+                        </div>
+                        </div>
+                    }     
                     </div>
                 </div>
                 <div className="row flex-wrap">
