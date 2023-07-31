@@ -37,12 +37,15 @@ h3 {
 .place_item .love_btn {
     border: none;
     background-color: transparent;
+    color: #B7B7A4;
+
 }
 
 .place_item .place_name {
     font-family: 'Raleway', sans-serif;
-    text-shadow: #e0e0e0 1px 1px 0, 5px 2px 10px #FFF9F9;
-
+    text-shadow: black 1px 1px 0, 5px 2px 10px black;
+    font-weight: 600;
+    color: white;
 }
 
 .map {
