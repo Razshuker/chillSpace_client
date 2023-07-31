@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
+import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext'
@@ -39,19 +40,19 @@ export default function PlaceItem({ item }) {
                         <img src={item.img_url || "images/defualtImg.jpg"} alt="placePic" className='image float-start' />
                         <h4 className='display-6'>{item.name}</h4>
                         {(item.description.length < 200) ?
-                        <p>{item.description}</p>
-                        :
-                        <div>
-                            <p className='lead'>{(item.description).substring(0, 200)}
-                            {isShowMore ? (
-                                <span>{(item.description).substring(200)}</span>
-                            ): "..."}
-                        </p>
-                        <div className='inline'>
-                        <button className='btn btn-light py-1' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50 small'/></span> :<span>Read More <AiOutlineDown className='opacity-50 small'/></span>}</button>
-                        </div>
-                        </div>
-                    }     
+                            <p>{item.description}</p>
+                            :
+                            <div>
+                                <p className='lead'>{(item.description).substring(0, 200)}
+                                    {isShowMore ? (
+                                        <span>{(item.description).substring(200)}</span>
+                                    ) : "..."}
+                                </p>
+                                <div className='inline'>
+                                    <button className='btn btn-light py-1' onClick={onReadMoreLess}>{isShowMore ? <span>Read Less <AiOutlineUp className='opacity-50 small' /></span> : <span>Read More <AiOutlineDown className='opacity-50 small' /></span>}</button>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div className="row flex-wrap">
