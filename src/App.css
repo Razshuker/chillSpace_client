@@ -1,4 +1,7 @@
 /* global css */
+.container {
+    max-width: 1300px;
+}
 
 header {
     background-color: rgb(216, 191, 172);
@@ -13,13 +16,13 @@ header .logo img:hover {
     font-size: 2em;
 }
 
-header nav ul li {
+/* header nav ul li {
     border-right: 2px solid #50423A;
-}
+} */
 
-header nav ul li:last-of-type {
+/* header nav ul li:last-of-type {
     border-right: none;
-}
+} */
 
 header nav ul li a {
     display: block;
@@ -165,7 +168,7 @@ footer {
       transition: width 0.3s;
   } */
 
-@media(max-width:768px) {
+@media(max-width:992px) {
     header .logo {
         padding: 0;
     }
@@ -173,5 +176,40 @@ footer {
     header .logo img {
         width: 200px;
     }
+    
+    header .burgerShow{
+        height: 300px;
+        /* width: 300px; */
+    }
+    header nav{
+        position: absolute;
+        top: 11vh;
+        right: 0;
+        z-index: 999;
+        background: rgba(253, 252, 252, 0.838);
+        border-radius: 0 0 24px 24px;
+        text-align: center;
+        max-width: 200px;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        transition: 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    
+    }
+    header nav ul a{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        /* border: 1px solid #000000; */
+    
+    }
+   
+
 
 }
