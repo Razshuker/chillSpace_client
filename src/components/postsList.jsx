@@ -19,10 +19,23 @@ export default function PostsList() {
         const searchQ = query.get("s") || "";
         getPosts(searchQ);
     }, [query, reverse])
+// for finding posts by the places id
+    const getPlaceId = async (_name) => {
+        try {
+            const url = API_URL + "/places/placeId/" + _name;
+            const data = await doApiGet(url);
+            // console.log(data);
+            return data;
+        } catch (error) {
+            
+        }
+    }
 
     const getPosts = async (_search) => {
         try {
+            // const id = await getPlaceId(_search)
             let url = API_URL + "/posts?s=" + _search;
+            // let url = API_URL + "/posts?s=" + id;
             if (reverse) {
                 url += `&reverse=yes`;
             }
