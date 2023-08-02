@@ -16,13 +16,17 @@ header .logo img:hover {
     font-size: 2em;
 }
 
-/* header nav ul li {
-    border-right: 2px solid #50423A;
-} */
+header nav.nav.d-lg-flex.justify-content-end {
+    width: 50%;
+}
 
-/* header nav ul li:last-of-type {
+header nav ul li {
+    border-right: 2px solid #50423A;
+}
+
+header nav ul li:last-of-type {
     border-right: none;
-} */
+}
 
 header nav ul li a {
     display: block;
@@ -176,12 +180,13 @@ footer {
     header .logo img {
         width: 200px;
     }
-    
-    header .burgerShow{
+
+    header .burgerShow {
         height: 300px;
         /* width: 300px; */
     }
-    header nav{
+
+    header nav {
         position: absolute;
         top: 11vh;
         right: 0;
@@ -197,19 +202,15 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-
-    
     }
-    header nav ul a{
+
+    header nav ul a {
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
         min-height: 50px;
-        /* border: 1px solid #000000; */
-    
+        border: 1px solid #000000;
     }
-   
-
 
 }
