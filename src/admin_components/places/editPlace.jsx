@@ -56,7 +56,7 @@ export default function EditPlace() {
 
     const doApiTags = async () => {
         try {
-            const url = API_URL + "/tags";
+            const url = API_URL + "/tags?perPage=0";
             const data = await doApiGet(url);
             setTags(data);
         } catch (error) {
@@ -65,7 +65,7 @@ export default function EditPlace() {
     }
     const doApiCategory = async () => {
         try {
-            const url = API_URL + "/categories";
+            const url = API_URL + "/categories?perPage=0";
             const data = await doApiGet(url);
             setCategories(data);
         } catch (error) {

@@ -43,7 +43,7 @@ export default function Signup() {
             <h1 className='col-12'>SIGN UP</h1>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 text-center">
                         <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />
                         <input ref={fileRef} type='file' className='input_upload' />
                     </div>

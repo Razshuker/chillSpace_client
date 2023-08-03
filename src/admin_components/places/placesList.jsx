@@ -68,6 +68,7 @@ export default function PlacesList() {
                                 <th>Type</th>
                                 <th>Description</th>
                                 <th>Categories_code</th>
+                                <th>Tags</th>
                                 <th>Edit/Delete</th>
                             </tr>
                         </thead>
@@ -90,9 +91,14 @@ export default function PlacesList() {
                                                 {item.description}
                                             </div>
                                         </td>
-                                        <td>{(item.categories_code).map((itemCategory) => {
+                                        <td>{(item.categories_code).map((itemCategory, i) => {
                                             return (
-                                                itemCategory + " | "
+                                                i == 0 ? itemCategory : " | " + itemCategory
+                                            )
+                                        })}</td>
+                                        <td>{(item.tags_name).map((tag, i) => {
+                                            return (
+                                                i == 0 ? tag : " | " + tag
                                             )
                                         })}</td>
                                         <td>
@@ -102,7 +108,6 @@ export default function PlacesList() {
                                             <button onClick={() => { deletePlace(item._id) }} className='m-1 btn btn-danger'>Delete</button>
                                         </td>
                                     </tr>
-
                                 )
                             })}
                         </tbody>
