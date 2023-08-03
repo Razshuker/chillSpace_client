@@ -21,7 +21,7 @@ export default function AddPlace() {
 
     const doApiTags = async () => {
         try {
-            const url = API_URL + "/tags";
+            const url = API_URL + "/tags?perPage=0";
             const data = await doApiGet(url);
             setTags(data);
         } catch (error) {
@@ -30,7 +30,7 @@ export default function AddPlace() {
     }
     const doApiTypes = async () => {
         try {
-            const url = API_URL + "/types";
+            const url = API_URL + "/types?perPage=0";
             const data = await doApiGet(url);
             setTypes(data);
         } catch (error) {
@@ -39,7 +39,7 @@ export default function AddPlace() {
     }
     const doApiCategory = async () => {
         try {
-            const url = API_URL + "/categories";
+            const url = API_URL + "/categories?perPage=0";
             const data = await doApiGet(url);
             setCategories(data);
         } catch (error) {
@@ -155,7 +155,6 @@ export default function AddPlace() {
                     <option value={""}>
                         choose one of the options:
                     </option>
-                    <option></option>
                     {types.map(item => {
                         return (
                             <option value={item.type_name} key={item._id}>{item.type_name}</option>
