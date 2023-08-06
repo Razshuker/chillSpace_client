@@ -53,22 +53,23 @@ export default function PostsList() {
 
     return (
         <div className='container-fluid pb-5'>
-            <div className="px-5">
+            <div className='container'>
+            <div className="px-3">
                 {localStorage[TOKEN_KEY] && <Link to={"add"} className='addBtn-posts'>
                     <div className="d-flex align-items-center justify-content-center">
                         <BsPostcardHeart className='iconAdd' />
                         <p className='m-0 ps-2'>Add new post</p>
                     </div>
                 </Link>}
-                <div className='row justify-content-between  align-items-center'>
-                    <div className='col-md-2'>
+                <div className='row justify-content-between align-items-center'>
+                    <div className='col-auto pt-4  d-flex align-items-center'>
                         {reverse == false ?
                             <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             :
                             <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                         }
                     </div>
-                    <div className='d-flex justify-content-end py-4 col-md-6'>
+                    <div className='d-flex justify-content-end pt-4 col-md-6 '>
                         <input onKeyDown={(e) => {
                             if (e.key == "Enter") {
                                 nav("?s=" + inputRf.current.value);
@@ -80,7 +81,7 @@ export default function PostsList() {
                     </div>
                 </div>
             </div>
-            <div className='container'>
+            <div className=''>
                 {postsAr.length == 0 ?
                     <>
                         <PostsLoading />
@@ -94,6 +95,7 @@ export default function PostsList() {
                     })
 
                 }
+            </div>
             </div>
         </div>
 
