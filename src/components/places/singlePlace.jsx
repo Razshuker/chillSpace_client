@@ -17,7 +17,7 @@ export default function SinglePlace() {
     const params = useParams();
     const [loggedUser, setLoggesUser] = useState(false);
     const nav = useNavigate();
-    const { userInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
+    const { userInfo, onDeleteOrAddToFavorite, getUserInfo } = useContext(MyContext);
 
     useEffect(() => {
         if (userInfo.full_name) {
@@ -85,6 +85,7 @@ export default function SinglePlace() {
                     if (loggedUser) {
                         setIsLiked((isLiked) => !isLiked);
                         onDeleteOrAddToFavorite(params["id"]);
+                        getUserInfo();
                     } else {
                         toast.warning("you must login to add this place to you favorite");
                     }
