@@ -28,7 +28,7 @@ export default function ProfileMenu() {
     return (
         <div>
             <Button aria-describedby={id} onClick={handleClick}>
-                {userInfo.img_url ? <img src={userInfo.img_url} alt='profile' className='profile-img' /> : <AccountCircle className='profile_btn' fontSize='large' />}
+                {localStorage[TOKEN_KEY] && userInfo.img_url ? <img src={userInfo.img_url} alt='profile' className='profile-img' /> : <AccountCircle className='profile_btn' fontSize='large' />}
             </Button>
             <Popover
                 id={id}

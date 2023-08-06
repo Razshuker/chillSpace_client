@@ -42,15 +42,15 @@ export default function Header() {
                     <div className='row'>
                         <div className={isBurgerOpen ? "col-0" : "row col-auto align-items-center justify-content-end p-0"}>
                             <nav className={isBurgerOpen ? "burgerShow d-lg-flex nav " : "nav d-lg-flex justify-content-end"}>
-                                <TfiClose onClick={onToggleBurger} className={isBurgerOpen ? "d- none d-lg-flex closeIcon" : "d-none"} />
+                                <TfiClose onClick={onToggleBurger} className={isBurgerOpen ? "d-lg-flex closeIcon" : "d-none"} />
                                 <ul className='list-inline m-0 d-lg-flex '>
                                     {isBurgerOpen ?
-                                        <li className='d-lg-none profile-li'>
+                                        <div className='d-lg-none profile-li'>
                                             {localStorage[TOKEN_KEY] && userInfo.img_url ? <img onClick={onToggleProfile} src={userInfo.img_url} alt='profile' className='profile-img my-5' /> :
                                                 <AccountCircle onClick={onToggleProfile} className='profile_btn my-5' fontSize='large' />
                                             }
                                             {localStorage[TOKEN_KEY] &&
-                                                <div className={isProfileOpen ? 'responsive-profile d-flex' : 'burger-profile'}>
+                                                <div className={isProfileOpen ? 'responsive-profile d-flex align-items-center' : 'burger-profile'}>
                                                     <hr />
                                                     <ul className={isProfileOpen ? 'd-block p-0 m-0 list-inline' : 'd-none'}>
                                                         <li><Link to="/user/favorites">FAVORITES</Link></li>
@@ -60,24 +60,26 @@ export default function Header() {
                                                     <hr />
                                                 </div>
                                             }
-                                        </li> : <></>
+                                        </div> : <></>
                                     }
                                     <li className='about-us-li'><Link to="/about-us">ABOUT US</Link></li>
                                     <li><Link to="/places">PLACES</Link></li>
                                     <li><Link to="/posts">POSTS</Link></li>
                                 </ul>
-                                {!localStorage[TOKEN_KEY] ?
-                                    <div className=' d-flex justify-content-end mb-3 flex-column'>
-                                        <Link onClick={onToggleBurger} to='/login' className='btn btn-outline-dark d-block d-lg-none'>Login</Link>
-                                        <Link onClick={onToggleBurger} to='/sign-up' className='d-block d-lg-none text-dark'>Don't have an account?</Link>
-                                    </div> : <div className=' d-flex align-items-end mb-3'>
-                                        <button onClick={() => {
-                                            localStorage.removeItem(TOKEN_KEY);
-                                            toast.success("you logged out");
-                                            nav("/");
-                                            onToggleBurger();
-                                        }} className='btn btn-outline-dark'>Logout</button>
-                                    </div>}
+                                <div className="d-flex d-lg-none">
+                                    {!localStorage[TOKEN_KEY] ?
+                                        <div className=' d-flex justify-content-end mb-3 flex-column'>
+                                            <Link onClick={onToggleBurger} to='/login' className='btn btn-outline-dark d-block d-lg-none'>Login</Link>
+                                            <Link onClick={onToggleBurger} to='/sign-up' className='d-block d-lg-none text-dark'>Don't have an account?</Link>
+                                        </div> : <div className=' d-flex align-items-end mb-3'>
+                                            <button onClick={() => {
+                                                localStorage.removeItem(TOKEN_KEY);
+                                                toast.success("you logged out");
+                                                nav("/");
+                                                onToggleBurger();
+                                            }} className='btn btn-outline-dark'>Logout</button>
+                                        </div>}
+                                </div>
                             </nav>
                         </div>
                         <div className='col-2 d-none d-lg-block'><ProfileMenu /></div>

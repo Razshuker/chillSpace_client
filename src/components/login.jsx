@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../context/myContext';
 import { toast } from 'react-toastify';
 
-export default function Login({ handleClose }) {
+export default function Login(props) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate();
     const { getUserInfo } = useContext(MyContext);
@@ -20,7 +20,9 @@ export default function Login({ handleClose }) {
                 toast.success("you logged in")
                 getUserInfo();
                 nav("/");
-                handleClose();
+                if (props.handleClose) {
+                    props.handleClose();
+                }
             }
         } catch (error) {
             console.log(error);
@@ -37,7 +39,7 @@ export default function Login({ handleClose }) {
                 <input placeholder='Password' {...register("password", { required: true, minLength: 2 })} className="form-control" type="password" />
                 {errors.password && <div className="text-danger">* Enter valid password</div>}
                 <button className='login_btn'>LOGIN</button>
-                <Link onClick={handleClose} to={"/sign-up"} className='text-center col-12'>don't have an account?</Link>
+                <Link onClick={props.handleClose} to={"/sign-up"} className='text-center col-12'>don't have an account?</Link>
             </form>
         </div>
     )
