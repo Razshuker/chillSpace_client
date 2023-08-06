@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 export default function Header() {
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
-    const { userInfo } = useContext(MyContext);
+    const { userInfo, setUserInfo } = useContext(MyContext);
 
     const nav = useNavigate();
 
@@ -75,6 +75,7 @@ export default function Header() {
                                             <button onClick={() => {
                                                 localStorage.removeItem(TOKEN_KEY);
                                                 toast.success("you logged out");
+                                                setUserInfo({});
                                                 nav("/");
                                                 onToggleBurger();
                                             }} className='btn btn-outline-dark'>Logout</button>

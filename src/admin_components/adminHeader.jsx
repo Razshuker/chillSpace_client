@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../App.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { API_URL, TOKEN_KEY, doApiGet } from '../services/apiService'
+import { MyContext } from '../context/myContext';
 
 export default function AdminHeader() {
     const nav = useNavigate();
     const [showNav, setShowNav] = useState(false);
+    const { setUserInfo } = useContext(MyContext);
 
     useEffect(() => {
         if (localStorage[TOKEN_KEY]) {
@@ -42,6 +44,7 @@ export default function AdminHeader() {
                         </nav>
                         <button onClick={() => {
                             localStorage.removeItem(TOKEN_KEY);
+                            setUserInfo({});
                             setShowNav(false);
                             nav("/admin");
                         }} className='btn btn-danger col-2 me-4'>logout</button>
