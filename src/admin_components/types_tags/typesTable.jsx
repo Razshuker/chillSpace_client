@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../css/tablesAdmin.css'
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
-import { PaginationButtons } from '../../components/PaginationButtons';
+import { PaginationButtons } from '../../components/paginationButtons';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
