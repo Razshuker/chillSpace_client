@@ -110,7 +110,7 @@ export default function PostItem(props) {
     }
 
     return (
-        <div className='postItem p-3 mt-4 row '>
+        <div className='postItem p-4 mt-4 row '>
             <div className='postInfo col-md-8'>
                 <div className='row align-items-center justify-content-between pb-4'>
                         <div className='row pb-1 col-auto me-auto'>
