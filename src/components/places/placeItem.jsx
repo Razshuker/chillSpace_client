@@ -5,18 +5,19 @@ import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext'
 import { toast } from 'react-toastify';
+import { TOKEN_KEY } from '../../services/apiService';
 
 
 export default function PlaceItem({ item }) {
     const nav = useNavigate();
-    const [loggedUser, setLoggesUser] = useState(false);
+    const [loggedUser, setLoggedUser] = useState(false);
     const [isLiked, setIsLiked] = useState(true);
     const [isShowMore, setIsShowMore] = useState(false);
-    const { userInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
+    const { userInfo, onDeleteOrAddToFavorite, getUserInfo } = useContext(MyContext);
 
     useEffect(() => {
-        if (userInfo.full_name) {
-            setLoggesUser(true);
+        if (userInfo.full_name && localStorage[TOKEN_KEY]) {
+            setLoggedUser(true);
         }
     }, []);
 
@@ -63,6 +64,7 @@ export default function PlaceItem({ item }) {
                         if (loggedUser) {
                             setIsLiked((isLiked) => !isLiked);
                             onDeleteOrAddToFavorite(item._id);
+                            getUserInfo();
                         } else {
                             toast.warning("you must login to add this place to you favorite");
                         }

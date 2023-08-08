@@ -9,6 +9,7 @@ import { useCloudinary } from './hooks/useCloudinary';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Scroll from './components/scroll';
+import OpenAi from './components/openAi';
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
       getFavorites, favorites, setFavorites, onDeleteOrAddToFavorite,
       uploadImage
     }}>
-      <Scroll/>
+      {/* <OpenAi /> */}
+      <Scroll />
       <AppRoutes />
       <ToastContainer />
     </MyContext.Provider>

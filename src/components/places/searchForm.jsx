@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { FaSistrix } from "react-icons/fa";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiSliderAlt, BiX } from "react-icons/bi";
-import { BsFillTrash3Fill } from "react-icons/bs"
+import { AiOutlineDelete } from "react-icons/ai"
 import '../../css/places.css'
 import { useEffect } from 'react';
 
@@ -51,7 +51,7 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
                             <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />
                         }
                         <div>
-                            <button onClick={onCleanSearch} className='cleanBtn col-auto '><BsFillTrash3Fill /></button>
+                            <button onClick={onCleanSearch} className='cleanBtn col-auto '><AiOutlineDelete /></button>
                         </div>
 
                     </div>

@@ -14,7 +14,7 @@ export const useScroll = () => {
         const windowHeight = window.innerHeight;
         const scrollTop = document.documentElement.scrollTop;
         const docHeight = document.documentElement.offsetHeight
-        if (Math.ceil(windowHeight + scrollTop) >= docHeight) {
+        if (Math.ceil(windowHeight + scrollTop) + 150 >= docHeight) {
             setIsEnd(true)
         }
     }
