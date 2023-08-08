@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { API_URL, doApiGet } from "../../services/apiService";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchPosts() {
   const [options, setOptions] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isInputFocused, setInputFocused] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
     doApiPlaces();
@@ -14,7 +16,6 @@ export default function SearchPosts() {
     const url = API_URL + "/places?perPage=0";
     const data = await doApiGet(url);
     setOptions(data);
-    console.log(data);
   };
 
   const handleInputChange = (event) => {
@@ -31,8 +32,10 @@ export default function SearchPosts() {
   };
 
   const handleOptionSelect = (option) => {
-    setSearchQuery(option.name);
-    setInputFocused(false); // Hide the options dropdown after selecting
+      console.log("s");
+    setSearchQuery(option);
+    nav("s=?" + option)
+    setInputFocused(false); 
   };
 
   // Filter the options based on the user's input
@@ -66,8 +69,13 @@ export default function SearchPosts() {
             {filteredOptions.map((option, index) => (
               <option
                 key={index}
-                onClick={() => handleOptionSelect(option)}
-              >
+                onClick={() =>{ 
+                    console.log("s");
+                    setSearchQuery(option);
+                    nav("s=?" + option)
+                    setInputFocused(false); 
+                }}
+                >
                 {option.name}
               </option>
             ))}
