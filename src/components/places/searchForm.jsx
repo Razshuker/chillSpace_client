@@ -12,7 +12,7 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const [query] = useSearchParams();
 
     useEffect(() => {
-        onCleanSearch();
+        // onCleanSearch();
     }, [])
 
     const onSearch = () => {
