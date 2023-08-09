@@ -36,7 +36,7 @@ function App() {
       getFavorites, favorites, setFavorites, onDeleteOrAddToFavorite,
       uploadImage
     }}>
-      <OpenAi />
+      {/* <OpenAi /> */}
       <Scroll />
       <AppRoutes />
       <ToastContainer />

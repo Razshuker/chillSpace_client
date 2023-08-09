@@ -7,6 +7,7 @@ export default function WhereToTravel() {
 
     const onSub = async (_data) => {
         console.log(_data);
+        const url = `?kind=${_data.kind}&members=${_data.members}`
     }
 
     return (
@@ -17,25 +18,25 @@ export default function WhereToTravel() {
                     <label>Describe yourself in the most appropriate option</label>
                     <select {...register("DescribeYourself", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
-                        <option value="travel" >Traveling is all that is on my mind</option>
-                        <option value="chill" >Chill it's me</option>
-                        <option value="stayAtHome" >TV, air conditioner and sleep</option>
+                        <option value="Nature,Hiking,Dirty" >Traveling is all that is on my mind</option>
+                        <option value="Calm,Cafe,Mood,Chill" >Chill it's me</option>
+                        <option value="Relax,Air-Conditioner,Indoor" >TV, air conditioner and sleep</option>
                     </select>
                     {errors.DescribeYourself && <div className="text-danger">* choose the best option for you</div>}
                     <label>Choose the best option for you</label>
                     <select {...register("bestOption", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
-                        <option value="airConditioner" >Must have air conditioner</option>
-                        <option value="openPlace" >An open place with a crazy view</option>
-                        <option value="dont_care" >I don't care</option>
+                        <option value="Indoor,Air-Conditioner,Clean,Smart" >Must have air conditioner</option>
+                        <option value="Nature,Outdoor,Open space,Green space,Megical" >An open place with a crazy view</option>
+                        <option value="null" >I don't care</option>
                     </select>
                     {errors.bestOption && <div className="text-danger">* choose the best option for you</div>}
                     <label>What kind of entertainment do you want?</label>
                     <select {...register("kind", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
-                        <option value="extreme" >Extreme</option>
-                        <option value="calm" >Calm place</option>
-                        <option value="food" >Just bring me food</option>
+                        <option value="Extreme" >Extreme</option>
+                        <option value="Calm" >Calm place</option>
+                        <option value="Food" >Just bring me food</option>
                     </select>
                     {errors.kind && <div className="text-danger">* choose the best option for you</div>}
                     <label>who's coming?</label>
