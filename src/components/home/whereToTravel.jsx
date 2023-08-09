@@ -1,13 +1,21 @@
 import React from 'react'
 import '../../css/home.css'
 import { useForm } from "react-hook-form"
+import { API_URL, doApiGet } from '../../services/apiService'
 
 export default function WhereToTravel() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSub = async (_data) => {
-        console.log(_data);
-        const url = `?kind=${_data.kind}&members=${_data.members}`
+        try {
+            console.log(_data);
+            const url = API_URL + `/places/whereToTravel?kind=${_data.kind}&members=${_data.members}&tags_ar=${_data.DescribeYourself},${_data.bestOption}`;
+            console.log(url);
+            const data = await doApiGet(url);
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -42,10 +50,10 @@ export default function WhereToTravel() {
                     <label>who's coming?</label>
                     <select {...register("members", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
-                        <option value="just_me" >Just me</option>
-                        <option value="friends" >Group of friends</option>
-                        <option value="couple" >My soulmate</option>
-                        <option value="family" >My family</option>
+                        <option value="Just me" >Just me</option>
+                        <option value="With friends" >Group of friends</option>
+                        <option value="Couple experience" >My soulmate</option>
+                        <option value="Family experience" >My family</option>
                     </select>
                     {errors.members && <div className="text-danger">* choose the best option for you</div>}
                     <button className='find_btn'>Find me a place</button>
