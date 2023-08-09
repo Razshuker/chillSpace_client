@@ -7,7 +7,7 @@ import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
 import { toast } from 'react-toastify';
-import SearchPosts from './posts/searchPosts';
+import SearchByLocation from './posts/searchByLocation';
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -26,19 +26,20 @@ export default function PostsList() {
         try {
             const url = API_URL + "/places/placeId/" + _name;
             const data = await doApiGet(url);
-            // console.log(data);
+            console.log(data);
             return data;
         } catch (error) {
-
         }
     }
 
     const getPosts = async (_search) => {
         try {
             setIsLoading(true);
-            // const id = await getPlaceId(_search)
             let url = API_URL + "/posts?s=" + _search;
-            // let url = API_URL + "/posts?s=" + id;
+            if (query.get("place")) {
+                const id = await getPlaceId(query.get("place"));
+                url = API_URL + "/posts?place=" + id;
+            }
             if (reverse) {
                 url += `&reverse=yes`;
             }
@@ -51,6 +52,28 @@ export default function PostsList() {
             setIsLoading(false)
         }
     }
+
+    // const getPosts = async (_search) => {
+    //     try {
+    //         setIsLoading(true);
+    //         // const id = await getPlaceId(_search)
+    //         let url = API_URL + "/posts?s=" + _search;
+    //         // let url = API_URL + "/posts?s=" + id;
+    //         if (reverse) {
+    //             url += `&reverse=yes`;
+    //         }
+    //         // if(query.get("place")){
+    //         //     url+="&place=" + query.get("place");
+    //         // }
+    //         const data = await doApiGet(url);
+    //         setPostsAr(data);
+    //         setIsLoading(false);
+    //     } catch (error) {
+    //         console.log(error);
+    //         toast.error("there is a problem, try again later")
+    //         setIsLoading(false)
+    //     }
+    // }
 
     const onSortClick = () => {
         setReverse(!reverse);
@@ -84,7 +107,7 @@ export default function PostsList() {
                                 nav("?s=" + inputRf.current.value);
                             }} className='searchBtn'><IoSearchOutline className='search_icon' /></button>
                         </div>
-                        <SearchPosts />
+                        <SearchByLocation />
                     </div>
                 </div>
                 <div className=''>
@@ -95,7 +118,7 @@ export default function PostsList() {
                         </>
                     ) : (
                         postsAr.length === 0 ? (
-                            <h2 className='row justify-content-center align-items-center display-5' style={{height:300}}>No results found.</h2>
+                            <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
                         ) : (
                             postsAr.map(item => (
                                 <PostItem key={item._id} item={item} />
