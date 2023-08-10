@@ -14,8 +14,7 @@ export default function PostsList() {
     const [reverse, setReverse] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [query] = useSearchParams();
-    const inputRf = useRef();
-    const nav = useNavigate();
+ 
 
     useEffect(() => {
         const searchQ = query.get("s") || "";
