@@ -50,7 +50,7 @@ export default function SearchByLocation() {
 
     return (
         <div>
-            <input placeholder='search for a place...' onChange={onChangePlace} type="text" value={placeSelected}/>
+            <input className='postInputs' placeholder='search for a place...' onChange={onChangePlace} type="text" value={placeSelected}/>
               {
                             placesMatch && placesMatch.map(place => {
                                 return (

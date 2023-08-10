@@ -97,16 +97,7 @@ export default function PostsList() {
                                 <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                        <div className='d-flex justify-content-end pt-4 col-md-6 '>
-                            <input onKeyDown={(e) => {
-                                if (e.key == "Enter") {
-                                    nav("?s=" + inputRf.current.value);
-                                }
-                            }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
-                            <button onClick={() => {
-                                nav("?s=" + inputRf.current.value);
-                            }} className='searchBtn'><IoSearchOutline className='search_icon' /></button>
-                        </div>
+                   
                         <SearchByLocation />
                     </div>
                 </div>
