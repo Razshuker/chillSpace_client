@@ -38,7 +38,7 @@ export default function CommentItem(props) {
             <div className='col-1 d-flex p-0'>
                 {userInfo.img_url ? <img src={userInfo.img_url} className='profile-pic-comment' /> : <AccountCircle fontSize='large' />}
             </div>
-            <div className='col-9 text-start ps-4'>
+            <div className='col-9 text-start ps-4 '>
                 <p className='small m-0'><strong>{userInfo.nickname}</strong></p>
                 <p className='col-auto mt-1 mb-0'>{comment.text}</p>
             </div>

@@ -9,6 +9,7 @@ import Loading from '../loading';
 
 export default function PlacesList({ page, setPage }) {
     const [places, setPlaces] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const { isEnd, setScrollEndFalse } = useScroll();
     const [query] = useSearchParams();
 
@@ -26,6 +27,7 @@ export default function PlacesList({ page, setPage }) {
 
     const getPlaces = async () => {
         try {
+            setIsLoading(true);
             let url = query.get("s") ? API_URL + `/places?page=${page}&s=` + query.get("s") : API_URL + `/places?page=${page}`;
             if(query.get("area")){
                 url+=`&area=` + query.get("area");
@@ -43,13 +45,17 @@ export default function PlacesList({ page, setPage }) {
             // setPage((page) => page + 1)
             setPlaces((places) => (page == 1 ? data : [...places, ...data]));
             setScrollEndFalse();
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     }
 
     return (
         <div className="placeList container">
+            {isLoading ? <Loading/> : 
+            <>
             {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
 
                 places.map(item => {
@@ -59,6 +65,8 @@ export default function PlacesList({ page, setPage }) {
                 })
             }
             <UpButton />
+            </>
+            }
         </div>
     )
 }
