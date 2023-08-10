@@ -39,6 +39,9 @@ export default function PostsList() {
                 const id = await getPlaceId(query.get("place"));
                 url = API_URL + "/posts?place=" + id;
             }
+            // if(query.get("user")){
+            //     url= API_URL +"/posts?user=" + query.get("user")
+            // }
             if (reverse) {
                 url += `&reverse=yes`;
             }
