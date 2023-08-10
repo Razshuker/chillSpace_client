@@ -8,6 +8,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
 import { toast } from 'react-toastify';
 import SearchByLocation from './posts/searchByLocation';
+import SearchPosts from './posts/searchPosts';
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -39,9 +40,9 @@ export default function PostsList() {
                 const id = await getPlaceId(query.get("place"));
                 url = API_URL + "/posts?place=" + id;
             }
-            // if(query.get("user")){
-            //     url= API_URL +"/posts?user=" + query.get("user")
-            // }
+            if(query.get("user")){
+                url= API_URL +"/posts?user=" + query.get("user")
+            }
             if (reverse) {
                 url += `&reverse=yes`;
             }
@@ -99,8 +100,8 @@ export default function PostsList() {
                                 <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                   
                         <SearchByLocation />
+                            <SearchPosts/>
                     </div>
                 </div>
                 <div className=''>
