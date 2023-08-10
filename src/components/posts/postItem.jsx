@@ -128,7 +128,7 @@ export default function PostItem(props) {
                     <div className='pt-2 p-0 pe-2 col-12 col-md-auto'>
                         {item.place_url && <button onClick={() => {
                             nav(`/places/${placeInfo._id}`);
-                        }} className='col-auto locationBtn'> <AiOutlinePushpin className='h4 p-0' />{placeInfo.name}</button>}
+                        }} className='col-auto locationBtn d-flex align-items-center p-2'> <AiOutlinePushpin className='h5 m-0' />{placeInfo.name}</button>}
                     </div>
 
                 </div>
@@ -154,12 +154,12 @@ export default function PostItem(props) {
                 </div>
             </div>
 
-            <div className='postCommets col-md-4 text-center'>
+            <div className='postCommets col-md-4 text-center d-flex ps-3' style={{flexDirection: "column"}}>
                 <h5 className='text-center pb-2'>comments</h5>
-                <CommentsList postId={item._id} />
-                <div className='p-2'>
-                    <div className='row col-auto pt-4 align-items-center'>
-                        <div className='col-10 '>
+                <div className=''> <CommentsList postId={item._id} /></div>
+                <div className='row align-items-end' style={{flex:"1 1 0%"}}>
+                    <div className='row col-12 align-items-center mt-auto' >
+                        <div className='col-10 ' >
                             <textarea rows={1} onKeyDown={(e) => {
                                 if (e.key == "Enter") {
                                     addComment()

@@ -67,9 +67,9 @@ export default function SearchByLocation() {
                     })
                 }
             </div>
-            <div>
+            {/* <div>
                 <input className='postInputs' placeholder='search for a users...'/>
-            </div>
+            </div> */}
 
 
         </div>

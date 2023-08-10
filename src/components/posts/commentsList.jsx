@@ -18,11 +18,10 @@ export default function CommentsList(props) {
     }
 
     return (
-        <div  className='ps-3'
-        style={{ overflowY: 'auto', overflowX: 'hidden' , height:"150px" }}>
+        <div className='py-3' style={{ overflowY: 'auto', overflowX: 'hidden' , maxHeight:"280px" }}>
             {comments.map((item, i) => {
                 return (
-                    <CommentItem comment={item} key={item._id} />
+                    <CommentItem className="col-auto" comment={item} key={item._id} />
                 )
             })
             }
