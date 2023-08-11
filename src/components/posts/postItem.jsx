@@ -110,18 +110,18 @@ export default function PostItem(props) {
     }
 
     return (
-        <div className='postItem p-4 mt-4 row '>
-            <div className='postInfo col-md-8'>
+        <div className='postItem p-4 mt-4 row border border-dark'>
+            <div className='postInfo col-md-8 row m-0'>
                 <div className='row align-items-center justify-content-between pb-4'>
-                        <div className='row pb-1 col-auto me-auto'>
-                            <div className='col-auto p-0 d-flex align-items-center'>
-                                {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
-                            </div>
-                            <div className='col-auto ps-2'>
-                                <h5 className='small m-0'>{userPostInfo.nickname}</h5>
-                                <h4 className='col-auto m-0'>{item.title}</h4>
-                            </div>
+                    <div className='row pb-1 col-auto me-auto'>
+                        <div className='col-auto p-0 d-flex align-items-center'>
+                            {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
                         </div>
+                        <div className='col-auto ps-2'>
+                            <h5 className='small m-0'>{userPostInfo.nickname}</h5>
+                            <h4 className='col-auto m-0'>{item.title}</h4>
+                        </div>
+                    </div>
                     <div className='col-auto'>
                         <TimeDiff data={(item.date_created)} className='col-auto' />
                     </div>
@@ -136,29 +136,32 @@ export default function PostItem(props) {
                     {item.img_url && <img src={item.img_url} alt="place pic" className='m-1 col-md-5 postPic' />}
                     <div className='col-md-6 description'>{item.description}</div>
                 </div>
-
-                <div className='float-end d-flex justify-content-between  align-items-center py-2 mt-md-5'>
-                    <div className='d-flex pe-2 '>
-                        <div className=''>
-                            <button onClick={() => { changeLike(item._id) }} className='btnIcon'>
-                                <span>
-                                    {!isLiked ? <AiFillHeart className=' h2 m-0 text-danger' /> : <AiOutlineHeart className='h2 m-0 ' />}
-                                </span>
-                            </button>
+                <div className='row align-items-end m-0 p-0'>
+                <div className='mt-auto m-0'>
+                    <div className='float-end d-flex justify-content-between  align-items-center py-2' >
+                        <div className='d-flex pe-2 ' >
+                            <div className=''>
+                                <button onClick={() => { changeLike(item._id) }} className='btnIcon'>
+                                    <span>
+                                        {!isLiked ? <AiFillHeart className=' h2 m-0 text-danger' /> : <AiOutlineHeart className='h2 m-0 ' />}
+                                    </span>
+                                </button>
+                            </div>
+                            <span className='px-1 d-flex align-items-center'>{likes.length}</span>
                         </div>
-                        <span className='px-1 d-flex align-items-center'>{likes.length}</span>
+                        <div className='  p-0 m-0 '>
+                            <button onClick={() => onReportPost(item._id)} className='btnIcon'> <AiOutlineExclamationCircle className='h2 m-0' /> </button>
+                        </div>
                     </div>
-                    <div className='  p-0 m-0 '>
-                        <button onClick={() => onReportPost(item._id)} className='btnIcon'> <AiOutlineExclamationCircle className='h2 m-0' /> </button>
-                    </div>
+                </div>
                 </div>
             </div>
 
-            <div className='postCommets col-md-4 text-center d-flex ps-3' style={{flexDirection: "column"}}>
+            <div className='postCommets col-md-4 text-center d-flex ps-3' style={{ flexDirection: "column" }}>
                 <h5 className='text-center pb-2'>comments</h5>
-                <div className=''> <CommentsList postId={item._id} /></div>
-                <div className='row align-items-end' style={{flex:"1 1 0%"}}>
-                    <div className='row col-12 align-items-center mt-auto' >
+                <div className='pb-3'> <CommentsList postId={item._id} /></div>
+                <div className='row align-items-end' style={{ flex: "1 1 0%" }}>
+                    <div className='row col-12 align-items-center mt-auto ms-0' >
                         <div className='col-10 ' >
                             <textarea rows={1} onKeyDown={(e) => {
                                 if (e.key == "Enter") {

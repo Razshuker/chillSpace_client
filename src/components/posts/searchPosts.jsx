@@ -20,16 +20,13 @@ export default function SearchPosts() {
 
   const doApiUsers = async () => {
     try {
-        const url = API_URL + "/users/usersList?perPage=0";
+        const url = API_URL + "/users/nickNames";
         const data = await doApiGet(url);
         setUsersAr(data);
-        console.log(data);
     } catch (error) {
         console.log(error);
     }
 };
-
-
 
   const formatResult = (item) => {
     return (
