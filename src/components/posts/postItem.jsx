@@ -110,7 +110,7 @@ export default function PostItem(props) {
     }
 
     return (
-        <div className='postItem p-4 mt-4 row border border-dark'>
+        <div className='postItem p-4 mt-4 row border border-dark border-opacity-10'>
             <div className='postInfo col-md-8 row m-0'>
                 <div className='row align-items-center justify-content-between pb-4'>
                     <div className='row pb-1 col-auto me-auto'>
