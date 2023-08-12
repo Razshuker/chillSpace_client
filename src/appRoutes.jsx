@@ -28,6 +28,7 @@ import SinglePlace from './components/places/singlePlace'
 import AddPost from './components/posts/addPost'
 import EditPost from './components/posts/editPost'
 import UserPostsList from './components/user/userPostsList'
+import AboutUs from './components/aboutUs'
 
 
 export default function AppRoutes() {
@@ -40,6 +41,7 @@ export default function AppRoutes() {
 
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/about-us' element={<AboutUs />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/sign-up' element={<Signup />} />
                 <Route path='/posts' element={<PostsList />} />
