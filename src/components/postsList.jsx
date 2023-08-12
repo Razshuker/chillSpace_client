@@ -16,10 +16,9 @@ export default function PostsList() {
     const [isLoading, setIsLoading] = useState(false);
     const [query] = useSearchParams();
  
-
     useEffect(() => {
-        const searchQ = query.get("s") || "";
-        getPosts(searchQ);
+        // const searchQ = query.get("s") || "";
+        getPosts();
     }, [query, reverse])
     // for finding posts by the places id
     const getPlaceId = async (_name) => {
@@ -32,19 +31,24 @@ export default function PostsList() {
         }
     }
 
-    const getPosts = async (_search) => {
+    const getPosts = async () => {
         try {
-            setIsLoading(true);
-            let url = API_URL + "/posts?s=" + _search;
-            if (query.get("place")) {
-                const id = await getPlaceId(query.get("place"));
-                url = API_URL + "/posts?place=" + id;
+            setIsLoading(true);  
+            let url = API_URL + "/posts";
+            if(query.get("s")){
+                url += "?s=" + query.get("s")
             }
-            if(query.get("user")){
-                url= API_URL +"/posts?user=" + query.get("user")
+            else if (query.get("place")) {
+                const id = await getPlaceId(query.get("place"));
+                url += "?place=" + id;
+            }
+            else if(query.get("user")){
+                url += "?user=" + query.get("user")
             }
             if (reverse) {
-                url += `&reverse=yes`;
+                const mark = window.location.href.includes("?");
+                mark ? url += `&` : url += `?`;
+                url += "reverse=yes"
             }
             const data = await doApiGet(url);
             setPostsAr(data);
