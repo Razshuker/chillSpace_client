@@ -25,8 +25,8 @@ export default function Login(props) {
                 }
             }
         } catch (error) {
-            console.log(error);
-            toast.error("there is a problem, try again later")
+            console.log(error.response.data.err);
+            toast.error(error.response.data.err)
         }
     }
 
