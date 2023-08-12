@@ -19,7 +19,7 @@ export default function Login(props) {
                 localStorage.setItem(TOKEN_KEY, data.token);
                 toast.success("you logged in")
                 getUserInfo();
-                nav("/");
+                nav(-1);
                 if (props.handleClose) {
                     props.handleClose();
                 }
