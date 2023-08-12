@@ -14,8 +14,7 @@ export default function SearchPosts() {
   }, []);
 
   const handleOnSelect = (item) => {
-    // the item selected
-    nav(`?user=${item._id}`);
+    nav(`?user=${item.id}`);
   };
 
   const doApiUsers = async () => {
