@@ -19,14 +19,14 @@ export default function Login(props) {
                 localStorage.setItem(TOKEN_KEY, data.token);
                 toast.success("you logged in")
                 getUserInfo();
-                nav("/");
+                nav(-1);
                 if (props.handleClose) {
                     props.handleClose();
                 }
             }
         } catch (error) {
-            console.log(error);
-            toast.error("there is a problem, try again later")
+            console.log(error.response.data.err);
+            toast.error(error.response.data.err)
         }
     }
 
