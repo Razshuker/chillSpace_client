@@ -45,6 +45,7 @@ export default function SearchUserPosts() {
         onSelect={handleOnSelect}
         fuseOptions={{ keys: ["nickname"] ,maxPatternLength: 3, distance: 1}}
         resultStringKeyName="nickname"
+        onClear={()=>nav("/posts")}
       />
     </div>
   );

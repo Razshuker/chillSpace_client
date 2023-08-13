@@ -43,6 +43,7 @@ export default function SearchPlacePosts() {
           onSelect={handleOnSelect}
           fuseOptions={{ keys: ["name"] ,maxPatternLength: 3, distance: 1}}
           resultStringKeyName="name"
+          onClear={()=>nav("/posts")}          
         />
       </div>
     );

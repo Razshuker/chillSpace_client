@@ -9,6 +9,7 @@ import PostsLoading from './posts/postsLoading';
 import { toast } from 'react-toastify';
 import SearchUserPosts from './posts/searchUserPosts';
 import SearchPlacePosts from './posts/searchPlacePosts';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 
 export default function PostsList() {
@@ -50,7 +51,7 @@ export default function PostsList() {
                 url += "?user=" + query.get("user")
             }
             if (reverse) {
-                const mark = window.location.href.includes("?");
+                const mark = url.includes("?");
                 mark ? url += `&` : url += `?`;
                 url += "reverse=yes"
             }
@@ -64,30 +65,12 @@ export default function PostsList() {
         }
     }
 
-    // const getPosts = async (_search) => {
-    //     try {
-    //         setIsLoading(true);
-    //         // const id = await getPlaceId(_search)
-    //         let url = API_URL + "/posts?s=" + _search;
-    //         // let url = API_URL + "/posts?s=" + id;
-    //         if (reverse) {
-    //             url += `&reverse=yes`;
-    //         }
-    //         // if(query.get("place")){
-    //         //     url+="&place=" + query.get("place");
-    //         // }
-    //         const data = await doApiGet(url);
-    //         setPostsAr(data);
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         console.log(error);
-    //         toast.error("there is a problem, try again later")
-    //         setIsLoading(false)
-    //     }
-    // }
-
     const onSortClick = () => {
         setReverse(!reverse);
+    }
+
+    const handleOnSearch = (item) => {
+        nav("?s=" + item)
     }
 
     return (
@@ -100,32 +83,46 @@ export default function PostsList() {
                             <p className='m-0 ps-2'>Add new post</p>
                         </div>
                     </Link>}
-                    <div className='row justify-content-between align-items-center'>
-                        <div className='col-auto pt-4  d-flex align-items-center'>
+                    <div className='row justify-content-between p-0 align-items-center pt-4  '>
+                        <div className='col-auto  d-flex align-items-center'>
                             {reverse == false ?
                                 <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                                 :
                                 <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                        <div className='row border'>
-                            <div className=' col-md-3 col-4'>
+                        <div className='row px-0 py-2 justify-content-between align-items-center m-0 col-lg-8 '>
+                            <div className=' p-0 col-3'>
                                 <select
-                                    className="form-select"
+                                    className="form-select py-2"
                                     aria-label="Default select example"
                                     onChange={(e) => setSelected(e.target.value)}
                                     value={select}
                                 >
-                                    <option value="">Search by..</option>
+                                    <option disabled>Search by..</option>
                                     <option value="place">Place</option>
                                     <option value="user">User</option>
                                     <option value="title">Title</option>
                                 </select>
                             </div>
-                            {select == "place" && <SearchPlacePosts />}
-                            {select == "user" && <SearchUserPosts />}
-                            {select == "title" && <div className='d-flex justify-content-end pt-4 col-md-6 '>
-                                <input onKeyDown={(e) => {
+                            {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
+                            {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
+                            {select == "title" && <div className='col-9'>
+
+                                <ReactSearchAutocomplete
+                                    autoFocus
+                                    placeholder="Search by Title.."
+                                    resultStringKeyName="name"
+                                    onSearch={handleOnSearch}
+                                    onClear={()=>nav("/posts")}
+                                                        // onClick={handleInputClick} // Add this line
+
+                                />
+                            </div>}
+
+
+                            {select == "titleeqw" && <div className='d-flex justify-content-end col-9 '>
+                                {/* <input onKeyDown={(e) => {
                                     if (e.key == "Enter") {
                                         nav("?s=" + inputRf.current.value);
                                     }
@@ -133,7 +130,10 @@ export default function PostsList() {
                                 {/* <button onClick={() => {
                                 nav("?s=" + inputRf.current.value);
                             }} className='searchBtn'><IoSearchOutline className='search_icon' /></button> */}
-                            </div>}
+
+                            </div>
+                            
+                            }
                         </div>
                     </div>
                 </div>
