@@ -29,17 +29,17 @@ export default function PlacesList({ page, setPage }) {
         try {
             setIsLoading(true);
             let url = query.get("s") ? API_URL + `/places?page=${page}&s=` + query.get("s") : API_URL + `/places?page=${page}`;
-            if(query.get("area")){
-                url+=`&area=` + query.get("area");
+            if (query.get("area")) {
+                url += `&area=` + query.get("area");
             }
-            if(query.get("tags")){
-                url+=`&tags=` + query.get("tags")
+            if (query.get("tags")) {
+                url += `&tags=` + query.get("tags")
             }
-            if(query.get("types")){
-                url+=`&types=` + query.get("types")
+            if (query.get("types")) {
+                url += `&types=` + query.get("types")
             }
-            if(query.get("cats")){
-                url+=`&cats=` + query.get("cats")
+            if (query.get("cats")) {
+                url += `&cats=` + query.get("cats")
             }
             const data = await doApiGet(url);
             // setPage((page) => page + 1)
@@ -54,18 +54,18 @@ export default function PlacesList({ page, setPage }) {
 
     return (
         <div className="placeList container">
-            {isLoading ? <Loading/> : 
-            <>
-            {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
+            {isLoading ? <Loading /> :
+                <>
+                    {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
 
-                places.map(item => {
-                    return (
-                        <PlaceItem key={item._id} item={item} />
-                    )
-                })
-            }
-            <UpButton />
-            </>
+                        places.map(item => {
+                            return (
+                                <PlaceItem key={item._id} item={item} />
+                            )
+                        })
+                    }
+                    <UpButton />
+                </>
             }
         </div>
     )
