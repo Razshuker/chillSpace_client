@@ -3,7 +3,6 @@ import { API_URL, doApiGet } from '../../services/apiService';
 import { useNavigate } from 'react-router';
 import { useRef } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
-import SearchPosts from './searchPosts';
 
 export default function SearchByLocation() {
     const [placesAr, setPlacesAr] = useState([]);

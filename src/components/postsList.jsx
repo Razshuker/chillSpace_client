@@ -7,15 +7,19 @@ import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
 import { toast } from 'react-toastify';
-import SearchByLocation from './posts/searchByLocation';
-import SearchPosts from './posts/searchPosts';
+import SearchUserPosts from './posts/searchUserPosts';
+import SearchPlacePosts from './posts/searchPlacePosts';
+
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
     const [reverse, setReverse] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [select, setSelected] = useState("place");
     const [query] = useSearchParams();
- 
+    const nav = useNavigate();
+    const inputRf = useRef();
+
     useEffect(() => {
         // const searchQ = query.get("s") || "";
         getPosts();
@@ -33,16 +37,16 @@ export default function PostsList() {
 
     const getPosts = async () => {
         try {
-            setIsLoading(true);  
+            setIsLoading(true);
             let url = API_URL + "/posts";
-            if(query.get("s")){
+            if (query.get("s")) {
                 url += "?s=" + query.get("s")
             }
             else if (query.get("place")) {
                 const id = await getPlaceId(query.get("place"));
                 url += "?place=" + id;
             }
-            else if(query.get("user")){
+            else if (query.get("user")) {
                 url += "?user=" + query.get("user")
             }
             if (reverse) {
@@ -104,8 +108,33 @@ export default function PostsList() {
                                 <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                        <SearchByLocation />
-                            <SearchPosts/>
+                        <div className='row border'>
+                            <div className=' col-md-3 col-4'>
+                                <select
+                                    className="form-select"
+                                    aria-label="Default select example"
+                                    onChange={(e) => setSelected(e.target.value)}
+                                    value={select}
+                                >
+                                    <option value="">Search by..</option>
+                                    <option value="place">Place</option>
+                                    <option value="user">User</option>
+                                    <option value="title">Title</option>
+                                </select>
+                            </div>
+                            {select == "place" && <SearchPlacePosts />}
+                            {select == "user" && <SearchUserPosts />}
+                            {select == "title" && <div className='d-flex justify-content-end pt-4 col-md-6 '>
+                                <input onKeyDown={(e) => {
+                                    if (e.key == "Enter") {
+                                        nav("?s=" + inputRf.current.value);
+                                    }
+                                }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
+                                {/* <button onClick={() => {
+                                nav("?s=" + inputRf.current.value);
+                            }} className='searchBtn'><IoSearchOutline className='search_icon' /></button> */}
+                            </div>}
+                        </div>
                     </div>
                 </div>
                 <div className=''>
