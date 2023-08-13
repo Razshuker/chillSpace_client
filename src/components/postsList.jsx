@@ -7,15 +7,20 @@ import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
 import { toast } from 'react-toastify';
-import SearchByLocation from './posts/searchByLocation';
-import SearchPosts from './posts/searchPosts';
+import SearchUserPosts from './posts/searchUserPosts';
+import SearchPlacePosts from './posts/searchPlacePosts';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
     const [reverse, setReverse] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [select, setSelected] = useState("place");
     const [query] = useSearchParams();
- 
+    const nav = useNavigate();
+    const inputRf = useRef();
+
     useEffect(() => {
         // const searchQ = query.get("s") || "";
         getPosts();
@@ -33,20 +38,20 @@ export default function PostsList() {
 
     const getPosts = async () => {
         try {
-            setIsLoading(true);  
+            setIsLoading(true);
             let url = API_URL + "/posts";
-            if(query.get("s")){
+            if (query.get("s")) {
                 url += "?s=" + query.get("s")
             }
             else if (query.get("place")) {
                 const id = await getPlaceId(query.get("place"));
                 url += "?place=" + id;
             }
-            else if(query.get("user")){
+            else if (query.get("user")) {
                 url += "?user=" + query.get("user")
             }
             if (reverse) {
-                const mark = window.location.href.includes("?");
+                const mark = url.includes("?");
                 mark ? url += `&` : url += `?`;
                 url += "reverse=yes"
             }
@@ -60,30 +65,12 @@ export default function PostsList() {
         }
     }
 
-    // const getPosts = async (_search) => {
-    //     try {
-    //         setIsLoading(true);
-    //         // const id = await getPlaceId(_search)
-    //         let url = API_URL + "/posts?s=" + _search;
-    //         // let url = API_URL + "/posts?s=" + id;
-    //         if (reverse) {
-    //             url += `&reverse=yes`;
-    //         }
-    //         // if(query.get("place")){
-    //         //     url+="&place=" + query.get("place");
-    //         // }
-    //         const data = await doApiGet(url);
-    //         setPostsAr(data);
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         console.log(error);
-    //         toast.error("there is a problem, try again later")
-    //         setIsLoading(false)
-    //     }
-    // }
-
     const onSortClick = () => {
         setReverse(!reverse);
+    }
+
+    const handleOnSearch = (item) => {
+        nav("?s=" + item)
     }
 
     return (
@@ -96,16 +83,58 @@ export default function PostsList() {
                             <p className='m-0 ps-2'>Add new post</p>
                         </div>
                     </Link>}
-                    <div className='row justify-content-between align-items-center'>
-                        <div className='col-auto pt-4  d-flex align-items-center'>
+                    <div className='row justify-content-between p-0 align-items-center pt-4  '>
+                        <div className='col-auto  d-flex align-items-center'>
                             {reverse == false ?
                                 <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                                 :
                                 <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                        <SearchByLocation />
-                            <SearchPosts/>
+                        <div className='row px-0 py-2 justify-content-between align-items-center m-0 col-lg-8 '>
+                            <div className=' p-0 col-3'>
+                                <select
+                                    className="form-select py-2"
+                                    aria-label="Default select example"
+                                    onChange={(e) => setSelected(e.target.value)}
+                                    value={select}
+                                >
+                                    <option disabled>Search by..</option>
+                                    <option value="place">Place</option>
+                                    <option value="user">User</option>
+                                    <option value="title">Title</option>
+                                </select>
+                            </div>
+                            {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
+                            {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
+                            {select == "title" && <div className='col-9'>
+
+                                <ReactSearchAutocomplete
+                                    autoFocus
+                                    placeholder="Search by Title.."
+                                    resultStringKeyName="name"
+                                    onSearch={handleOnSearch}
+                                    onClear={()=>nav("/posts")}
+                                                        // onClick={handleInputClick} // Add this line
+
+                                />
+                            </div>}
+
+
+                            {select == "titleeqw" && <div className='d-flex justify-content-end col-9 '>
+                                {/* <input onKeyDown={(e) => {
+                                    if (e.key == "Enter") {
+                                        nav("?s=" + inputRf.current.value);
+                                    }
+                                }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
+                                {/* <button onClick={() => {
+                                nav("?s=" + inputRf.current.value);
+                            }} className='searchBtn'><IoSearchOutline className='search_icon' /></button> */}
+
+                            </div>
+                            
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className=''>

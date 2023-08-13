@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { API_URL, doApiGet } from "../../services/apiService";
 
-export default function SearchPosts() {
+export default function SearchUserPosts() {
     const [usersAr, setUsersAr] = useState([]);
   const nav = useNavigate();
 
@@ -36,7 +36,7 @@ export default function SearchPosts() {
   };
 
   return (
-    <div style={{ width: 400 }}>
+    <div>
       <ReactSearchAutocomplete
         items={usersAr}
         autoFocus
@@ -45,6 +45,7 @@ export default function SearchPosts() {
         onSelect={handleOnSelect}
         fuseOptions={{ keys: ["nickname"] ,maxPatternLength: 3, distance: 1}}
         resultStringKeyName="nickname"
+        onClear={()=>nav("/posts")}
       />
     </div>
   );
