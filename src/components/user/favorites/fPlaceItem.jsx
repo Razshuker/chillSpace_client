@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../../../css/favorites.css'
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
+import { MyContext } from '../../../context/myContext';
 
 
 export default function FPlaceItem(props) {
     const place = props.item;
     const img_url = place.img_url || "/images/defualtImg.jpg";
     const nav = useNavigate();
+    const { getUserInfo, onDeleteOrAddToFavorite } = useContext(MyContext);
 
 
 
@@ -18,7 +20,9 @@ export default function FPlaceItem(props) {
                     nav("/places/" + place._id)
                 }}>{place.name}</p>
                 <button onClick={() => {
-                    props.onDeleteOrAddToFavorite(place._id);
+                    onDeleteOrAddToFavorite(place._id);
+                    debugger;
+                    getUserInfo();
                 }} className='love_btn'>
                     <BsFillBookmarkFill className='h2 m-0' />
                 </button>
