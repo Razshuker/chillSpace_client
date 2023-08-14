@@ -41,12 +41,13 @@ export default function SearchUserPosts() {
         items={usersAr}
         autoFocus
         formatResult={formatResult}
-        placeholder="Search User.."
+        placeholder="Search by user.."
         onSelect={handleOnSelect}
-        fuseOptions={{ keys: ["nickname"] ,maxPatternLength: 3, distance: 1}}
+        fuseOptions={{ keys: ["nickname"] }}
         resultStringKeyName="nickname"
         onClear={()=>nav("/posts")}
-      />
+        maxResults={5}
+        />
     </div>
   );
 };

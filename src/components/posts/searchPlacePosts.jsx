@@ -41,9 +41,10 @@ export default function SearchPlacePosts() {
           formatResult={formatResult}
           placeholder="Search by place.."
           onSelect={handleOnSelect}
-          fuseOptions={{ keys: ["name"] ,maxPatternLength: 3, distance: 1}}
+          fuseOptions={{ keys: ["name"]}}
           resultStringKeyName="name"
-          onClear={()=>nav("/posts")}          
+          onClear={()=>nav("/posts")}   
+          maxResults={5}
         />
       </div>
     );
