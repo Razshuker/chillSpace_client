@@ -7,8 +7,8 @@ import PlaceBoxItem from '../places/placeBoxItem'
 
 export default function WhereToTravel() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [isAnswer, setIsAnswer] = useState(false);
     const [myPlaces, setMyPlaces] = useState([]);
+    const [isAnswer, setIsAnswer] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const onSub = async (_data) => {
@@ -18,8 +18,8 @@ export default function WhereToTravel() {
             const data = await doApiGet(url);
             console.log(data);
             setMyPlaces(data);
-            setLoading(false);
             setIsAnswer(true);
+            setLoading(false);
         } catch (error) {
             console.log(error);
             setLoading(false);
@@ -68,7 +68,7 @@ export default function WhereToTravel() {
                         <button className='find_btn'>Find me a place</button>
                     </form>
                 </div>}
-            {isAnswer &&
+            {(!loading && isAnswer && myPlaces.length == 0) ? <h3>Sorry, we couldn't find the right place for you</h3> :
                 <div className="row mt-5 justify-content-center place_click g-4">
                     {myPlaces.map(item => {
                         return (
