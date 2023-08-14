@@ -33,7 +33,7 @@ export default function AboutUs() {
                     At ChillSpace, we understand that the pursuit of  is a universal endeavor, and what better way to experience it than by immersing oneself in the breathtaking beauty and rich culture of Israel? With our extensive research, insider knowledge, and genuine enthusiasm, we aim to be your trusted companions in unlocking the hidden gems that radiate happiness in every corner of this remarkable land.</p>
 
                 <h3>Our favorite places:</h3>
-                <div className="row justify-content-center pb-5 g-4">
+                <div className="row justify-content-center pb-5 g-4 place_click">
                     {arPlaces.length > 0 && arPlaces.map(item => {
                         return (
                             <PlaceBoxItem item={item} key={item._id} />

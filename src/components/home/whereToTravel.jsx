@@ -69,7 +69,7 @@ export default function WhereToTravel() {
                     </form>
                 </div>}
             {isAnswer &&
-                <div className="row mt-5 justify-content-center">
+                <div className="row mt-5 justify-content-center place_click g-4">
                     {myPlaces.map(item => {
                         return (
                             <PlaceBoxItem key={item._id} item={item} />
