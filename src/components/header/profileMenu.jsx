@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import "../../App.css";
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
@@ -13,6 +14,11 @@ import { MyContext } from '../../context/myContext';
 export default function ProfileMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { userInfo } = useContext(MyContext);
+    const [userLogged, setUserLogged] = useState(false);
+
+    useEffect(() => {
+        checkCookieByName();
+    }, [])
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -20,6 +26,17 @@ export default function ProfileMenu() {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const checkCookieByName = () => {
+        const cookieName = "token";
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(cookieName + '=')) {
+                setUserLogged(true)
+            }
+        }
     };
 
     const open = Boolean(anchorEl);
@@ -42,7 +59,7 @@ export default function ProfileMenu() {
             >
                 <div>
                     <div className='profile'>
-                        {!localStorage[TOKEN_KEY] ?
+                        {!userLogged ?
                             <Login handleClose={handleClose} />
                             :
                             <UserInfo handleClose={handleClose} />

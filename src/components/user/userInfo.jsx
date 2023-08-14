@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import '../../App.css'
-import { TOKEN_KEY } from '../../services/apiService'
+import { API_URL, TOKEN_KEY, doApiMethod } from '../../services/apiService'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext';
 import Loading from '../loading';
@@ -13,6 +13,26 @@ export default function UserInfo({ handleClose }) {
     // if (!Object.keys(userInfo).length) {
     //     return <Loading />
     // }
+
+    const onLogout = async () => {
+        try {
+            const url = API_URL + "/users/logoutCookie";
+            await doApiMethod(url, "POST");
+            const cookieName = "token";
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(cookieName + '=')) {
+                    setUserInfo({});
+                    handleClose();
+                    toast.success("you logged out");
+                    nav("/");
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div style={{
@@ -29,10 +49,7 @@ export default function UserInfo({ handleClose }) {
             </div>
             <button onClick={() => {
                 localStorage.removeItem(TOKEN_KEY);
-                setUserInfo({});
-                handleClose();
-                toast.success("you logged out");
-                nav("/");
+                onLogout();
             }} className='btn'>Logout</button>
         </div>
     )
