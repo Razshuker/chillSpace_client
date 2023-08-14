@@ -11,18 +11,19 @@ export default function EditPlace() {
     const { register, setValue, getValues, handleSubmit, formState: { errors } } = useForm();
     const [tags, setTags] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [selectedCat, setSelectedCat] = useState([]);
     const AREAS = ["south", "north", "center", "jerusalem"];
     const [fitAreas, setAreas] = useState([]);
     const [types, setTypes] = useState([]);
-    const params = useParams();
     const [placeDetails, setPlaceDetails] = useState({});
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedCat, setSelectedCat] = useState([]);
     const nav = useNavigate();
+    const params = useParams();
 
 
     useEffect(() => {
         doApiGetPlace();
+
     }, [])
 
     const doApiGetPlace = async (res, req) => {
@@ -36,11 +37,12 @@ export default function EditPlace() {
             doApiTypes(data.type);
             doApiTags();
             doApiCategory();
+            setSelectedCat(data.categories_code || [])
+            setSelectedTags(data.tags_name || [])
         } catch (error) {
             console.log(error);
             toast.error("there is a problem, try again later")
         }
-
     }
 
     const doApiTypes = async (_type) => {
@@ -77,7 +79,7 @@ export default function EditPlace() {
         if (!isSelected) {
             setSelectedTags([...selectedTags, _tagName]);
         } else {
-            setSelectedTags(selectedTags.filter((name) => name !== _tagName));
+            setSelectedTags(selectedTags.filter((name) => name != _tagName));
         }
     };
     const onSelectCat = (_catCode) => {
@@ -85,7 +87,7 @@ export default function EditPlace() {
         if (!isSelected) {
             setSelectedCat([...selectedCat, _catCode]);
         } else {
-            setSelectedCat(selectedCat.filter((code) => code !== _catCode));
+            setSelectedCat(selectedCat.filter((code) => code != _catCode));
         }
     };
 
