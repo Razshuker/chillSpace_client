@@ -77,14 +77,19 @@ export default function PostItem(props) {
         try {
             if (userInfo._id) {
                 if (commentRef.current.value != "") {
-                    const user_id = userInfo._id;
-                    const text = commentRef.current.value;
-                    const post_id = item._id;
-                    const commentData = { user_id, text, post_id };
-                    const url = API_URL + "/comments";
-                    const data = await doApiMethod(url, "POST", commentData);
-                    if (data._id) {
-                        commentRef.current.value = "";
+                    try{
+                        const user_id = userInfo._id;
+                        const text = commentRef.current.value;
+                        const post_id = item._id;
+                        const commentData = { user_id, text, post_id };
+                        const url = API_URL + "/comments";
+                        const data = await doApiMethod(url, "POST", commentData);
+                        if (data._id) {
+                            commentRef.current.value = "";
+                        }
+                    }
+                    catch(error){
+                        console.log(error);
                     }
                 }
             } else {
