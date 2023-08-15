@@ -27,7 +27,7 @@ export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
 
     const initByQuery = () => {
         if(query.get("area")){
-            setSelectedTypes(query.get("area").split(','));
+            setArArea(query.get("area").split(','));
         }
         if(query.get("types")){
             setSelectedTypes(query.get("types").split(','));
