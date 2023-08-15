@@ -16,6 +16,7 @@ export default function PostItem(props) {
     const [isLiked, setIsLiked] = useState(true);
     const [userPostInfo, setUserPostInfo] = useState({});
     const [placeInfo, setPlaceInfo] = useState({});
+    const [comments, setComments] = useState([]);
     const commentRef = useRef();
     const { userInfo } = useContext(MyContext);
     const nav = useNavigate();
@@ -27,7 +28,18 @@ export default function PostItem(props) {
             setIsLiked(false)
         }
         getPlaceInfo();
+        doApiComments(item._id);
     }, [])
+
+     const doApiComments = async (_idPost) => {
+        try {
+            const url = API_URL + "/comments/" + _idPost;
+            const data = await doApiGet(url);
+            setComments(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const doApiUserInfo = async () => {
         const url = API_URL + "/users/userInfo/" + item.user_id;
@@ -86,6 +98,7 @@ export default function PostItem(props) {
                         const data = await doApiMethod(url, "POST", commentData);
                         if (data._id) {
                             commentRef.current.value = "";
+                            doApiComments(item._id)
                         }
                     }
                     catch(error){
@@ -164,7 +177,7 @@ export default function PostItem(props) {
 
             <div className='postCommets col-md-4 text-center d-flex ps-3' style={{ flexDirection: "column" }}>
                 <h5 className='text-center pb-2'>comments</h5>
-                <div className='pb-3'> <CommentsList postId={item._id} /></div>
+                <div className='pb-3'> <CommentsList comments={comments} /></div>
                 <div className='row align-items-end' style={{ flex: "1 1 0%" }}>
                     <div className='row col-12 align-items-center mt-auto ms-0' >
                         <div className='col-10 ' >
