@@ -7,14 +7,19 @@ export default function CommentsList(props) {
     const [comments, setComments] = useState([]);
     const postId = props.postId;
 
+    // find a way to do this without the loop
     useEffect(() => {
         doApiComments(postId);
     }, [comments])
 
     const doApiComments = async (_idPost) => {
-        const url = API_URL + "/comments/" + _idPost;
-        const data = await doApiGet(url);
-        setComments(data);
+        try {
+            const url = API_URL + "/comments/" + _idPost;
+            const data = await doApiGet(url);
+            setComments(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

@@ -5,6 +5,7 @@ import { BiSliderAlt, BiX } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai"
 import '../../css/places.css'
 import { useEffect } from 'react';
+import { API_URL } from '../../services/apiService';
 
 export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const inputRef = useRef();
@@ -31,6 +32,8 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     const onCleanSearch = () => {
         setPage(1);
         nav("/places");
+        // need to reload again to delete the default checked tags
+        window.location.reload(false);
     }
 
     const onClickSort = () => {

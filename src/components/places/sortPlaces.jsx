@@ -22,7 +22,23 @@ export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
         doApiTypes();
         doApiCategories();
         doApiTags();
+        initByQuery();
     }, [])
+
+    const initByQuery = () => {
+        if(query.get("area")){
+            setSelectedTypes(query.get("area").split(','));
+        }
+        if(query.get("types")){
+            setSelectedTypes(query.get("types").split(','));
+        }
+        if(query.get("tags")){
+            setSelectedTypes(query.get("tags").split(','));
+        }
+        if(query.get("cats")){
+            setSelectedTypes(query.get("cats").split(','));
+        }
+    }
 
     const doApiTypes = async () => {
         try {
@@ -112,20 +128,20 @@ export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
                 <h4 className='display-6 p-2'>Area</h4>
                 <div className='row pb-4 px-3'>
                     <div className='pt-3 col-auto form-check form-check-inline '>
-                        <input className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("north", "area") }} type="checkbox" name="scales"
+                        <input defaultChecked={isQueryExists("area", "north")} className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("north", "area") }} type="checkbox" name="scales"
                         />
                         <label className='form-check-label' htmlFor="north">North</label>
                     </div>
                     <div className='pt-3 col-auto form-check form-check-inline'>
-                        <input className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("south", "area") }} type="checkbox" />
+                        <input defaultChecked={isQueryExists("area","south" )} className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("south", "area") }} type="checkbox" />
                         <label className='form-check-label' htmlFor="south">South</label>
                     </div>
                     <div className='pt-3 col-auto form-check form-check-inline'>
-                        <input className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("center", "area") }} type="checkbox" />
+                        <input defaultChecked={isQueryExists("area", "center")} className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("center", "area") }} type="checkbox" />
                         <label className='form-check-label' htmlFor="center">Center</label>
                     </div>
                     <div className='pt-3 col-auto form-check form-check-inline'>
-                        <input className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("jerusalem", "area") }} type="checkbox" />
+                        <input defaultChecked={isQueryExists("area", "jerusalem")} className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected("jerusalem", "area") }} type="checkbox" />
                         <label className='form-check-label' htmlFor="jerusalem">Jerusalem</label>
                     </div>
                 </div>
@@ -147,7 +163,7 @@ export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
                     {categories.map(item => {
                         return (
                             <div className='pt-3 col-auto form-check form-check-inline' key={item._id}>
-                                <input className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected(item.category_code, "cats") }} type="checkbox" />
+                                <input  defaultChecked={isQueryExists("cats", item.category_code)} className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected(item.category_code, "cats") }} type="checkbox" />
                                 <label className='form-check-label' htmlFor={item.category_code}>{item.name}</label>
                             </div>
 
@@ -160,7 +176,7 @@ export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
                     {tags.map(item => {
                         return (
                             <div className='pt-3 col-auto form-check form-check-inline' key={item._id}>
-                                <input className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected(item.tag_name, "tags") }} type='checkbox' />
+                                <input  defaultChecked={isQueryExists("tags", item.tag_name)} className='form-check-input border-dark border-opacity-50' onClick={() => { onSelected(item.tag_name, "tags") }} type='checkbox' />
                                 <label className='form-check-label' htmlFor={item.tag_name}>{item.tag_name}</label>
                             </div>
                         )
