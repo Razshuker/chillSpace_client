@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 export default function PostItem(props) {
     const item = props.item;
     const [likes, setLikes] = useState(item.likes);
-    const [isLiked, setIsLiked] = useState(true);
+    const [isLiked, setIsLiked] = useState(false);
     const [userPostInfo, setUserPostInfo] = useState({});
     const [placeInfo, setPlaceInfo] = useState({});
     const [comments, setComments] = useState([]);
@@ -21,14 +21,11 @@ export default function PostItem(props) {
     const { userInfo } = useContext(MyContext);
     const nav = useNavigate();
 
-
     useEffect(() => {
         doApiUserInfo();
-        if (likes.includes(userInfo._id)) {
-            setIsLiked(false)
-        }
         getPlaceInfo();
         doApiComments(item._id);
+  
     }, [])
 
      const doApiComments = async (_idPost) => {
@@ -42,9 +39,16 @@ export default function PostItem(props) {
     }
 
     const doApiUserInfo = async () => {
-        const url = API_URL + "/users/userInfo/" + item.user_id;
-        const data = await doApiGet(url);
-        setUserPostInfo(data)
+        try {
+            const url = API_URL + "/users/userInfo/" + item.user_id;
+            const data = await doApiGet(url);
+            setUserPostInfo(data)
+            if (likes?.includes(data?._id)) {
+                setIsLiked(true)
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const getPlaceInfo = async () => {
@@ -63,9 +67,9 @@ export default function PostItem(props) {
         try {
             if (userInfo._id) {
                 const url = API_URL + "/posts/changeLike/" + _idPost;
-                const data = await doApiMethod(url, "PATCH");
+                await doApiMethod(url, "PATCH");
                 getLikes();
-                setIsLiked(!data.isAdded)
+                setIsLiked(!isLiked)
             }
             else {
                 toast.warning("Log in to like posts")
@@ -161,7 +165,7 @@ export default function PostItem(props) {
                             <div className=''>
                                 <button onClick={() => { changeLike(item._id) }} className='btnIcon'>
                                     <span>
-                                        {!isLiked ? <AiFillHeart className=' h2 m-0 text-danger' /> : <AiOutlineHeart className='h2 m-0 ' />}
+                                        {isLiked ? <AiFillHeart className=' h2 m-0 text-danger' /> : <AiOutlineHeart className='h2 m-0 ' />}
                                     </span>
                                 </button>
                             </div>
