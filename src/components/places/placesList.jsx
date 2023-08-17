@@ -42,7 +42,6 @@ export default function PlacesList({ page, setPage }) {
                 url += `&cats=` + query.get("cats")
             }
             const data = await doApiGet(url);
-            // setPage((page) => page + 1)
             setPlaces((places) => (page == 1 ? data : [...places, ...data]));
             setScrollEndFalse();
             setIsLoading(false);

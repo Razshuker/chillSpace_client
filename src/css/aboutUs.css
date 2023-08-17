@@ -25,7 +25,7 @@
     margin: 24px auto;
 }
 
-.aboutUs .place_box {
+.place_click .place_box {
     height: 200px;
     width: 200px;
     border-radius: 24px;
@@ -36,7 +36,7 @@
     margin: 0 8px 24px 8px;
 }
 
-.aboutUs .place-name {
+.place_click .place-name {
     z-index: 2;
     min-height: 200px;
     display: flex;
@@ -45,7 +45,7 @@
     text-align: center;
 }
 
-.aboutUs a {
+.place_click a {
     font-family: 'Raleway', sans-serif;
     text-shadow: black 1px 1px 0, 5px 2px 10px black;
     font-weight: 600;

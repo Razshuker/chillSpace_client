@@ -10,6 +10,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Scroll from './components/scroll';
 import OpenAi from './components/openAi';
+import axios from 'axios'
+import Cookies from 'js-cookie';
+axios.defaults.withCredentials = true;
+
 
 function App() {
 
@@ -18,6 +22,7 @@ function App() {
   const { uploadImage } = useCloudinary();
 
   useEffect(() => {
+    console.log(Cookies.get("hh"));
     if (localStorage[TOKEN_KEY]) {
       getUserInfo();
     }

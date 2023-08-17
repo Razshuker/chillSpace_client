@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import '../../App.css'
-import { TOKEN_KEY } from '../../services/apiService'
+import { API_URL, TOKEN_KEY, doApiMethod } from '../../services/apiService'
 import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/myContext';
 import Loading from '../loading';
@@ -13,6 +13,7 @@ export default function UserInfo({ handleClose }) {
     // if (!Object.keys(userInfo).length) {
     //     return <Loading />
     // }
+
 
     return (
         <div style={{
