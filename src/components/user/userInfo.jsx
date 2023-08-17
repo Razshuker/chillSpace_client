@@ -14,25 +14,6 @@ export default function UserInfo({ handleClose }) {
     //     return <Loading />
     // }
 
-    const onLogout = async () => {
-        try {
-            const url = API_URL + "/users/logoutCookie";
-            await doApiMethod(url, "POST");
-            const cookieName = "token";
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.startsWith(cookieName + '=')) {
-                    setUserInfo({});
-                    handleClose();
-                    toast.success("you logged out");
-                    nav("/");
-                }
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     return (
         <div style={{
@@ -49,7 +30,10 @@ export default function UserInfo({ handleClose }) {
             </div>
             <button onClick={() => {
                 localStorage.removeItem(TOKEN_KEY);
-                onLogout();
+                setUserInfo({});
+                handleClose();
+                toast.success("you logged out");
+                nav("/");
             }} className='btn'>Logout</button>
         </div>
     )

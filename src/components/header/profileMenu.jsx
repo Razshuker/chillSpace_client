@@ -14,11 +14,6 @@ import { MyContext } from '../../context/myContext';
 export default function ProfileMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { userInfo } = useContext(MyContext);
-    const [userLogged, setUserLogged] = useState(false);
-
-    useEffect(() => {
-        checkCookieByName();
-    }, [])
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -26,17 +21,6 @@ export default function ProfileMenu() {
 
     const handleClose = () => {
         setAnchorEl(null);
-    };
-
-    const checkCookieByName = () => {
-        const cookieName = "token";
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(cookieName + '=')) {
-                setUserLogged(true)
-            }
-        }
     };
 
     const open = Boolean(anchorEl);
@@ -59,7 +43,7 @@ export default function ProfileMenu() {
             >
                 <div>
                     <div className='profile'>
-                        {!userLogged ?
+                        {!localStorage[TOKEN_KEY] ?
                             <Login handleClose={handleClose} />
                             :
                             <UserInfo handleClose={handleClose} />
