@@ -10,15 +10,18 @@ import { toast } from 'react-toastify';
 export default function UpdateUserInfo() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const fileRef = useRef();
-    const { userInfo, uploadImage } = useContext(MyContext);
+    const { userInfo, uploadImage, getUserInfo } = useContext(MyContext);
 
 
     const onSub = async (_data) => {
         try {
-            _data.img_url = await uploadImage(fileRef);
+            if (fileRef.current.files[0] != undefined) {
+                _data.img_url = await uploadImage(fileRef);
+            }
             const url = API_URL + "/users/updateUser";
             const data = await doApiMethod(url, "PUT", _data);
             if (data.modifiedCount) {
+                getUserInfo();
                 toast.success("user updated");
             }
         } catch (error) {
