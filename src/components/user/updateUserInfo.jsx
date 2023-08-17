@@ -36,8 +36,8 @@ export default function UpdateUserInfo() {
             <div className="container">
                 {userInfo.full_name &&
                     <div className="row">
-                        <div className="col-md-4">
-                            {userInfo.img_url ? <img style={{ height: "30vh", width: "20vw", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />}
+                        <div className="col-md-4 pb-4 text-center">
+                            {userInfo.img_url ? <img style={{ height: "300px", width: "300px", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />}
                             <input ref={fileRef} type='file' className='input_upload mt-3' />
                         </div>
                         <form onSubmit={handleSubmit(onSub)} className='row col-md-8' >
