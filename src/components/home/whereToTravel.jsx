@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import '../../css/home.css'
 import { useForm } from "react-hook-form"
-import { API_URL, doApiGet } from '../../services/apiService'
+import { API_URL, TOKEN_KEY, doApiGet } from '../../services/apiService'
 import Loading from '../loading'
 import PlaceBoxItem from '../places/placeBoxItem'
+import { toast } from 'react-toastify'
 
 export default function WhereToTravel() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,17 +13,21 @@ export default function WhereToTravel() {
     const [loading, setLoading] = useState(false);
 
     const onSub = async (_data) => {
-        try {
-            setLoading(true);
-            const url = API_URL + `/places/whereToTravel?kind=${_data.kind}&members=${_data.members}&tags_ar=${_data.DescribeYourself},${_data.bestOption}`;
-            const data = await doApiGet(url);
-            console.log(data);
-            setMyPlaces(data);
-            setIsAnswer(true);
-            setLoading(false);
-        } catch (error) {
-            console.log(error);
-            setLoading(false);
+        if (!localStorage[TOKEN_KEY]) {
+            toast.error("You must login to get your results")
+        } else {
+            try {
+                setLoading(true);
+                const url = API_URL + `/places/whereToTravel?kind=${_data.kind}&members=${_data.members}&tags_ar=${_data.DescribeYourself},${_data.bestOption}`;
+                const data = await doApiGet(url);
+                console.log(data);
+                setMyPlaces(data);
+                setIsAnswer(true);
+                setLoading(false);
+            } catch (error) {
+                console.log(error);
+                setLoading(false);
+            }
         }
     }
 
