@@ -86,7 +86,7 @@ export default function UpdateUserInfo() {
 //     const fileRef = useRef();
 //     const { userInfo, uploadImage } = useContext(MyContext);
 //     const [citiesAr, setCitiesAr] = useState([]);
-//     const [selectedCity,setSelectedCity] = useState("")
+//     const [selectedCity, setSelectedCity] = useState("")
 
 //     useEffect(() => {
 //         doApiCities();
@@ -94,13 +94,15 @@ export default function UpdateUserInfo() {
 
 //     const onSub = async (_data) => {
 //         try {
-//             _data.img_url = await uploadImage(fileRef);
+//             if (fileRef.current.files[0] != undefined) {
+//                 _data.img_url = await uploadImage(fileRef);
+//             }
 //             _data.location = selectedCity;
 //             const url = API_URL + "/users/updateUser";
-//             if(selectedCity=""){
+//             if (selectedCity = "") {
 //                 alert("City is required")
 //             }
-//             else{
+//             else {
 //                 const data = await doApiMethod(url, "PUT", _data);
 //                 if (data.modifiedCount) {
 //                     toast.success("user updated");
@@ -127,7 +129,7 @@ export default function UpdateUserInfo() {
 //             const transformedData = data.results.map((item) => {
 //                 const { objectId, ...rest } = item;
 //                 return { id: objectId, ...rest };
-//               });
+//             });
 //             setCitiesAr(transformedData)
 //         } catch (error) {
 //             console.error('Error fetching data:', error);
@@ -173,7 +175,7 @@ export default function UpdateUserInfo() {
 //                                 {errors.nickname && <div className="text-danger">* Enter valid nickname</div>}
 //                             </div>
 //                             <label>Location</label>
-//                             <div>
+//                             <input>
 //                                 <ReactSearchAutocomplete
 //                                     items={citiesAr}
 //                                     autoFocus
@@ -182,10 +184,9 @@ export default function UpdateUserInfo() {
 //                                     onSelect={handleOnSelect}
 //                                     fuseOptions={{ keys: ["name"] }}
 //                                     resultStringKeyName="name"
-//                                     // onClear={() => nav("/posts")}
 //                                     maxResults={7}
 //                                 />
-//                             </div>
+//                             </input>
 //                             <button className='update_btn'>Update account</button>
 
 //                         </form>
