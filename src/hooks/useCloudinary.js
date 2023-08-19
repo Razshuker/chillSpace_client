@@ -7,7 +7,6 @@ export const useCloudinary = () => {
         return new Promise(async (resolve, reject) => {
             try {
                 const myFile = fileRef.current.files[0];
-                console.log(myFile);
                 const imageData = await imageToString(myFile);
                 const url = API_URL + "/upload/uploadCloud";
                 const data = await doApiMethod(url, "POST", { image: imageData });

@@ -14,7 +14,7 @@ header {
     padding: 48px 0;
     color: rgb(117, 100, 89);
     font-family: 'Raleway', sans-serif;
-    font-size: 5em;
+    font-size: 4em;
     text-align: center;
     text-shadow: 7px 7px 9px rgba(83, 74, 74, 0.651);
 }
@@ -54,4 +54,11 @@ header {
     color: white;
     font-family: 'Raleway', sans-serif;
     font-size: 1.5em;
+}
+
+
+@media(max-width:992px) {
+    .updateAccount form .update_btn {
+        padding: 8px 12px;
+    }
 }

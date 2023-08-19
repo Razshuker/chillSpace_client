@@ -10,15 +10,18 @@ import { toast } from 'react-toastify';
 export default function UpdateUserInfo() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const fileRef = useRef();
-    const { userInfo, uploadImage } = useContext(MyContext);
+    const { userInfo, uploadImage, getUserInfo } = useContext(MyContext);
 
 
     const onSub = async (_data) => {
         try {
-            _data.img_url = await uploadImage(fileRef);
+            if (fileRef.current.files[0] != undefined) {
+                _data.img_url = await uploadImage(fileRef);
+            }
             const url = API_URL + "/users/updateUser";
             const data = await doApiMethod(url, "PUT", _data);
             if (data.modifiedCount) {
+                getUserInfo();
                 toast.success("user updated");
             }
         } catch (error) {
@@ -33,8 +36,8 @@ export default function UpdateUserInfo() {
             <div className="container">
                 {userInfo.full_name &&
                     <div className="row">
-                        <div className="col-md-4">
-                            {userInfo.img_url ? <img style={{ height: "30vh", width: "20vw", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />}
+                        <div className="col-md-4 pb-4 text-center">
+                            {userInfo.img_url ? <img style={{ height: "300px", width: "300px", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />}
                             <input ref={fileRef} type='file' className='input_upload mt-3' />
                         </div>
                         <form onSubmit={handleSubmit(onSub)} className='row col-md-8' >
@@ -83,7 +86,7 @@ export default function UpdateUserInfo() {
 //     const fileRef = useRef();
 //     const { userInfo, uploadImage } = useContext(MyContext);
 //     const [citiesAr, setCitiesAr] = useState([]);
-//     const [selectedCity,setSelectedCity] = useState("")
+//     const [selectedCity, setSelectedCity] = useState("")
 
 //     useEffect(() => {
 //         doApiCities();
@@ -91,13 +94,15 @@ export default function UpdateUserInfo() {
 
 //     const onSub = async (_data) => {
 //         try {
-//             _data.img_url = await uploadImage(fileRef);
+//             if (fileRef.current.files[0] != undefined) {
+//                 _data.img_url = await uploadImage(fileRef);
+//             }
 //             _data.location = selectedCity;
 //             const url = API_URL + "/users/updateUser";
-//             if(selectedCity=""){
+//             if (selectedCity = "") {
 //                 alert("City is required")
 //             }
-//             else{
+//             else {
 //                 const data = await doApiMethod(url, "PUT", _data);
 //                 if (data.modifiedCount) {
 //                     toast.success("user updated");
@@ -124,7 +129,7 @@ export default function UpdateUserInfo() {
 //             const transformedData = data.results.map((item) => {
 //                 const { objectId, ...rest } = item;
 //                 return { id: objectId, ...rest };
-//               });
+//             });
 //             setCitiesAr(transformedData)
 //         } catch (error) {
 //             console.error('Error fetching data:', error);
@@ -170,7 +175,7 @@ export default function UpdateUserInfo() {
 //                                 {errors.nickname && <div className="text-danger">* Enter valid nickname</div>}
 //                             </div>
 //                             <label>Location</label>
-//                             <div>
+//                             <input>
 //                                 <ReactSearchAutocomplete
 //                                     items={citiesAr}
 //                                     autoFocus
@@ -179,10 +184,9 @@ export default function UpdateUserInfo() {
 //                                     onSelect={handleOnSelect}
 //                                     fuseOptions={{ keys: ["name"] }}
 //                                     resultStringKeyName="name"
-//                                     // onClear={() => nav("/posts")}
 //                                     maxResults={7}
 //                                 />
-//                             </div>
+//                             </input>
 //                             <button className='update_btn'>Update account</button>
 
 //                         </form>
