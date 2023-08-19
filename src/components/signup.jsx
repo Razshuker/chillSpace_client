@@ -34,7 +34,11 @@ export default function Signup() {
             }
         } catch (error) {
             console.log(error);
-            toast.error("there is a problem, try again later")
+            if (error.response.data.code == 11000) {
+                toast.error(error.response.data.msg);
+            } else {
+                toast.error("there is a problem, try again later")
+            }
         }
     }
 
