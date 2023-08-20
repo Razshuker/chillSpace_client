@@ -83,7 +83,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function PlacesList({ page, setPage }) {
     const [places, setPlaces] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [query] = useSearchParams();
     const [noMorePlaces, setNoMorePlaces] = useState(false);
 
@@ -125,13 +125,14 @@ export default function PlacesList({ page, setPage }) {
 
     return (
         <div className="placeList container">
+            {isLoading && <Loading />}
             <InfiniteScroll
                 dataLength={places.length}
                 next={getPlaces}
                 hasMore={!noMorePlaces && !isLoading}
                 loader={<Loading />}
             >
-                {places.length === 0 ? (
+                {places.length === 0 && !isLoading ? (
                     <h2 className='noPlaces'>
                         There aren't match places to the search : "{query.get("s")}"
                     </h2>
