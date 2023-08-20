@@ -41,7 +41,6 @@ export default function AddPost(props) {
             } else {
                 _data.img_url = "";
             } _data.user_id = userInfo._id;
-            console.log(_data);
             const url = API_URL + "/posts";
             const data = await doApiMethod(url, "POST", _data);
             if (data._id) {

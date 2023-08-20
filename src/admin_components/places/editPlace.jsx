@@ -30,7 +30,6 @@ export default function EditPlace() {
         try {
             const url = API_URL + "/places/single/" + params["id"];
             const data = await doApiGet(url);
-            console.log(data);
             setPlaceDetails(data);
             const filterArea = AREAS.filter(item => { return item != data.area });
             setAreas(filterArea);

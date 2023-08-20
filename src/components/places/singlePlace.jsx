@@ -33,7 +33,6 @@ export default function SinglePlace() {
         try {
             const url = API_URL + "/places/single/" + params["id"];
             const data = await doApiGet(url);
-            console.log(data);
             setPlace(data);
         } catch (error) {
             console.log(error);

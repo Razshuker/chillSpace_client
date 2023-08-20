@@ -16,7 +16,6 @@ export default function CategoriesList() {
         try {
             const url = API_URL + "/categories";
             const data = await doApiGet(url);
-            console.log(data);
             setCategories(data);
         } catch (error) {
             console.log(error);

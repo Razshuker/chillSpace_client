@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import '../App.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { API_URL, TOKEN_KEY, doApiGet } from '../services/apiService'
+import { CiMenuBurger } from "react-icons/ci";
+import { TfiClose } from "react-icons/tfi";
 import { MyContext } from '../context/myContext';
 
 export default function AdminHeader() {
     const nav = useNavigate();
     const [showNav, setShowNav] = useState(false);
+    const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const { setUserInfo } = useContext(MyContext);
 
     useEffect(() => {
@@ -27,27 +30,35 @@ export default function AdminHeader() {
         }
     }
 
+    const onToggleBurger = () => {
+        setIsBurgerOpen(!isBurgerOpen);
+    }
+
     return (
         <header className='container-fluid'>
             <div className="row justify-content-between align-items-center py-1">
-                <div className="col-5 logo"><img src='images/chillSpaceLogoPNG.png' alt='logo' /></div>
+                <div onClick={() => {
+                    nav("/")
+                }} className="col-auto logo"><img src='images/chillSpaceLogoPNG.png' alt='logo' /></div>
                 {showNav &&
-                    <div className="adminNav row col">
-                        <nav className="col  d-flex align-items-center">
-                            <ul className='list-inline d-flex m-0'>
+                    <div className="adminNav row col-auto">
+                        <nav className={isBurgerOpen ? "burgerShow col-auto justify-content-center pt-5" : "d-lg-flex align-items-center col-auto"}>
+                            <TfiClose onClick={onToggleBurger} className={isBurgerOpen ? "d-lg-flex closeIcon" : "d-none"} />
+                            <ul className='list-inline d-lg-flex m-0 col-12 col-lg-auto'>
                                 <li><Link className='text-dark' to="/admin/users">USERS</Link></li>
                                 <li><Link className='text-dark' to="/admin/places">PLACES</Link></li>
                                 <li><Link className='text-dark' to="/admin/categories">CATEGORIES</Link></li>
                                 <li><Link className='text-dark' to="/admin/types&tags">TAGS & TYPES</Link></li>
                                 <li><Link className='text-dark' to="/admin/reportedPosts">REPORTED POSTS</Link></li>
                             </ul>
+                            <button onClick={() => {
+                                localStorage.removeItem(TOKEN_KEY);
+                                setUserInfo({});
+                                setShowNav(false);
+                                nav("/admin");
+                            }} className='adminLogout_btn btn btn-danger col-auto me-4'>logout</button>
                         </nav>
-                        <button onClick={() => {
-                            localStorage.removeItem(TOKEN_KEY);
-                            setUserInfo({});
-                            setShowNav(false);
-                            nav("/admin");
-                        }} className='btn btn-danger col-2 me-4'>logout</button>
+                        <CiMenuBurger onClick={onToggleBurger} className={isBurgerOpen ? 'd-none' : 'd-lg-none burger p-0 me-4'} />
                     </div>
                 }
             </div>
