@@ -127,9 +127,7 @@ export default function PlacesList({ page, setPage }) {
         <div className="placeList container">
             <InfiniteScroll
                 dataLength={places.length}
-                next={() => {
-                    getPlaces();
-                }}
+                next={getPlaces}
                 hasMore={!noMorePlaces && !isLoading}
                 loader={<Loading />}
             >
