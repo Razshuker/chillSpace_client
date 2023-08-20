@@ -5,9 +5,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { useContext } from 'react';
 import { MyContext } from '../../context/myContext';
-import TimeDiff from './timeDiff';
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 export default function AddPost(props) {
     const { userInfo } = useContext(MyContext);
@@ -78,7 +78,7 @@ export default function AddPost(props) {
                                     <div className='justify-content-end d-flex h4 '>
                                         <button disabled className='btnIcon'> <AiOutlineExclamationCircle /> </button>
                                     </div>
-                                    <TimeDiff data={(Date.now())} className='col-auto' />
+                                    {moment(Date.now()).fromNow()}
                                     {/* {item.location && <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />location</div>} */}
                                     <div className='col-auto p-1'> <AiOutlinePushpin className='h5' />
                                         <select {...register("place_url", { required: false, minLength: 2 })} className="form-select" type="select" >

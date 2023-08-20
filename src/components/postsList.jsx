@@ -39,16 +39,16 @@ export default function PostsList() {
     const getPosts = async () => {
         try {
             setIsLoading(true);
-            let url = API_URL + "/posts";
+            let url = API_URL + "/posts?perPage=0";
             if (query.get("s")) {
-                url += "?s=" + query.get("s")
+                url += "&s=" + query.get("s")
             }
             else if (query.get("place")) {
                 const id = await getPlaceId(query.get("place"));
-                url += "?place=" + id;
+                url += "&place=" + id;
             }
             else if (query.get("user")) {
-                url += "?user=" + query.get("user")
+                url += "&user=" + query.get("user")
             }
             if (reverse) {
                 const mark = url.includes("?");
@@ -64,6 +64,35 @@ export default function PostsList() {
             setIsLoading(false)
         }
     }
+
+    // const getPosts = async () => {
+    //     try {
+    //         setIsLoading(true);
+    //         let url = API_URL + "/posts";
+    //         if (query.get("s")) {
+    //             url += "?s=" + query.get("s")
+    //         }
+    //         else if (query.get("place")) {
+    //             const id = await getPlaceId(query.get("place"));
+    //             url += "?place=" + id;
+    //         }
+    //         else if (query.get("user")) {
+    //             url += "?user=" + query.get("user")
+    //         }
+    //         if (reverse) {
+    //             const mark = url.includes("?");
+    //             mark ? url += `&` : url += `?`;
+    //             url += "reverse=yes"
+    //         }
+    //         const data = await doApiGet(url);
+    //         setPostsAr(data);
+    //         setIsLoading(false);
+    //     } catch (error) {
+    //         console.log(error);
+    //         toast.error("there is a problem, try again later")
+    //         setIsLoading(false)
+    //     }
+    // }
 
     const onSortClick = () => {
         setReverse(!reverse);

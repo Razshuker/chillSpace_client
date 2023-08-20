@@ -6,9 +6,9 @@ import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import CommentsList from './commentsList';
 import { useContext } from 'react';
 import { MyContext } from '../../context/myContext';
-import TimeDiff from './timeDiff';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import moment from "moment";
 
 export default function PostItem(props) {
     const item = props.item;
@@ -145,7 +145,7 @@ export default function PostItem(props) {
                         </div>
                     </div>
                     <div className='col-auto'>
-                        <TimeDiff data={(item.date_created)} className='col-auto' />
+                        {moment(item.date_created).fromNow()}
                     </div>
                     <div className='pt-2 p-0 pe-2 col-12 col-md-auto'>
                         {item.place_url && <button onClick={() => {
