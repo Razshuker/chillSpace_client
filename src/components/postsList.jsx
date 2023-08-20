@@ -33,7 +33,6 @@ export default function PostsList() {
         try {
             const url = API_URL + "/places/placeId/" + _name;
             const data = await doApiGet(url);
-            console.log(data);
             return data;
         } catch (error) {
         }

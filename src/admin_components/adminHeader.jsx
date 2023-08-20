@@ -37,7 +37,9 @@ export default function AdminHeader() {
     return (
         <header className='container-fluid'>
             <div className="row justify-content-between align-items-center py-1">
-                <div className="col-auto logo"><img src='images/chillSpaceLogoPNG.png' alt='logo' /></div>
+                <div onClick={() => {
+                    nav("/")
+                }} className="col-auto logo"><img src='images/chillSpaceLogoPNG.png' alt='logo' /></div>
                 {showNav &&
                     <div className="adminNav row col-auto">
                         <nav className={isBurgerOpen ? "burgerShow col-auto justify-content-center pt-5" : "d-lg-flex align-items-center col-auto"}>
