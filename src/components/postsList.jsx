@@ -74,6 +74,7 @@ export default function PostsList() {
     }
 
     const onSortClick = () => {
+        setPage(1);
         setReverse(!reverse);
     }
 
