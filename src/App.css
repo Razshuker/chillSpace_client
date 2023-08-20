@@ -51,6 +51,7 @@
 header {
     background-color: rgb(216, 191, 172);
     min-height: 8vh;
+    overflow-x: hidden;
 }
 
 header .logo img:hover {
@@ -233,6 +234,17 @@ footer {
         height: 100vh;
         position: fixed;
         width: 50%;
+    }
+
+    header .adminNav .burgerShow {
+        height: 100vh;
+        position: fixed;
+        width: 50%;
+        flex-wrap: wrap;
+    }
+
+    .adminLogout_btn {
+        height: 100px;
     }
 
     header nav {

@@ -86,7 +86,7 @@ export default function Header() {
                         <div className='col-2 d-none d-lg-block'><ProfileMenu /></div>
                     </div>
                     <div className="col-auto d-flex justify-content-end align-items-center d-lg-none">
-                        <CiMenuBurger onClick={onToggleBurger} className={isBurgerOpen ? 'd-none' : 'd-bloack burger p-0'} />
+                        <CiMenuBurger onClick={onToggleBurger} className={isBurgerOpen ? 'd-none' : 'burger p-0'} />
                     </div>
                 </div>
             </div>
