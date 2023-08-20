@@ -2,22 +2,39 @@ import React, { useEffect, useState } from 'react'
 import { API_URL, doApiGet, doApiMethod } from '../services/apiService';
 import '../css/tablesAdmin.css'
 import { toast } from 'react-toastify';
+import { PaginationButtons } from '../components/paginationButtons';
 
 export default function UsersList() {
     const [users_ar, setUsersAr] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pages, setPages] = useState(0);
 
     useEffect(() => {
         doApi();
+    }, [currentPage]);
+
+    useEffect(() => {
+        getUsersCount();
     }, []);
 
     const doApi = async () => {
         try {
-            const url = API_URL + "/users/usersList";
+            const url = API_URL + "/users/usersList?page=" + currentPage;
             const data = await doApiGet(url);
             setUsersAr(data);
         } catch (error) {
             console.log(error);
             toast.error("there is a problem, try again later")
+        }
+    }
+
+    const getUsersCount = async () => {
+        try {
+            const url = API_URL + "/users/count";
+            const data = await doApiGet(url);
+            setPages(Math.ceil(data / 5));
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -75,7 +92,7 @@ export default function UsersList() {
                                     {users_ar.map((item, i) => {
                                         return (
                                             <tr key={item._id}>
-                                                <td>{i + 1}</td>
+                                                <td>{(currentPage - 1) * 5 + i + 1}</td>
                                                 <td title={item._id}>{item._id.substring(0, 5)}</td>
                                                 <td>{item.full_name}</td>
                                                 <td>{item.nickname}</td>
@@ -114,6 +131,13 @@ export default function UsersList() {
                         </div>
                     </div>
                 }
+            </div>
+            <div className="d-flex justify-content-center my-3">
+                <PaginationButtons
+                    currentPage={currentPage}
+                    pages={pages}
+                    setCurrentPage={setCurrentPage}
+                />
             </div>
         </div>
     )
