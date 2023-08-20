@@ -22,7 +22,6 @@ function App() {
   const { uploadImage } = useCloudinary();
 
   useEffect(() => {
-    console.log(Cookies.get("hh"));
     if (localStorage[TOKEN_KEY]) {
       getUserInfo();
     }
