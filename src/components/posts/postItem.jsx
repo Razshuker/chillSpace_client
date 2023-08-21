@@ -42,11 +42,13 @@ export default function PostItem(props) {
 
     const doApiUserInfo = async () => {
         try {
-            const url = API_URL + "/users/userInfo/" + item.user_id;
-            const data = await doApiGet(url);
-            setUserPostInfo(data)
-            if (likes?.includes(data?._id)) {
-                setIsLiked(true)
+            if(item.user_id){
+                const url = API_URL + "/users/userInfo/" + item.user_id;
+                const data = await doApiGet(url);
+                setUserPostInfo(data)
+                if (likes?.includes(data?._id)) {
+                    setIsLiked(true)
+                }
             }
         } catch (error) {
             console.log(error);
