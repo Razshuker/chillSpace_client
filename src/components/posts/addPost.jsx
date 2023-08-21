@@ -19,7 +19,7 @@ export default function AddPost(props) {
 
 
     useEffect(() => {
-        console.log(fileRef);
+        // console.log(fileRef);
 
         getPlacesNames();
     }, [])

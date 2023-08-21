@@ -121,15 +121,15 @@ export default function PostsList() {
                             <p className='m-0 ps-2'>Add new post</p>
                         </div>
                     </Link>}
-                    <div className='row justify-content-between p-0 align-items-center pt-4  '>
-                        <div className='col-auto  d-flex align-items-center'>
+                    <div className='row justify-content-between p-0 align-items-center pt-4 '>
+                        <div className='col-auto p-0 d-flex align-items-center'>
                             {reverse == false ?
                                 <button className='postInputs' onClick={onSortClick}  >old <IoArrowForwardSharp />  new  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                                 :
                                 <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                        <div className='row px-0 py-2 justify-content-between align-items-center m-0 col-lg-8 '>
+                        <div className='row px-0 py-2 pt-3 pt-lg-0 justify-content-between align-items-center m-0 col-lg-8 '>
                             <div className=' p-0 col-3'>
                                 <select
                                     className="form-select py-2"
@@ -143,22 +143,19 @@ export default function PostsList() {
                                     <option value="title">Title</option>
                                 </select>
                             </div>
-                            {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
-                            {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
-                            {select == "title" && <div className='col-9'>
-
-                                <ReactSearchAutocomplete
-                                    autoFocus
-                                    placeholder="Search by Title.."
-                                    resultStringKeyName="name"
-                                    onSearch={handleOnSearch}
-                                    onClear={() => nav("/posts")}
-                                // onClick={handleInputClick} // Add this line
-
-                                />
-                            </div>}
-
-
+                                {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
+                                {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
+                                {select == "title" && <div className='col-9'>
+                                    <ReactSearchAutocomplete
+                                        autoFocus
+                                        placeholder="Search by Title.."
+                                        resultStringKeyName="name"
+                                        onSearch={handleOnSearch}
+                                        onClear={() => nav("/posts")}
+                                    // onClick={handleInputClick} // Add this line
+                                    />
+                                </div>}
+                                 
                             {select == "titleeqw" && <div className='d-flex justify-content-end col-9 '>
                                 {/* <input onKeyDown={(e) => {
                                     if (e.key == "Enter") {
