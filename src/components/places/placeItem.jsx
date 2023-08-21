@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { TOKEN_KEY } from '../../services/apiService';
 
 
-export default function PlaceItem({ item }) {
+export default function PlaceItem({ item, setPage }) {
     const nav = useNavigate();
     const [loggedUser, setLoggedUser] = useState(false);
     const [isLiked, setIsLiked] = useState(true);
@@ -75,7 +75,11 @@ export default function PlaceItem({ item }) {
                     <div className="row align-items-end col-11 ms-3">
                         {item.tags_name.map(tag => {
                             return (
-                                <button key={tag} onClick={() => nav("?tags=" + tag)} className='tags col'>{tag}</button>
+                                <button key={tag} onClick={() => {
+                                    setPage(1);
+                                    nav("?tags=" + tag);
+                                }
+                                } className='tags col'>{tag}</button>
                             )
                         })}
                     </div>

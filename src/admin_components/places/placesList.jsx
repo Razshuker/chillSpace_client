@@ -21,7 +21,6 @@ export default function PlacesList() {
         try {
             const url = API_URL + "/places?page=" + currentPage;
             const data = await doApiGet(url);
-            console.log(data)
             setPlaces(data);
         } catch (error) {
             console.log(error)
@@ -33,8 +32,8 @@ export default function PlacesList() {
             const url = API_URL + "/places/count";
             const count = await doApiGet(url);
             setPages(Math.ceil(count / 6))
-            console.log(pages);
         } catch (error) {
+            console.log(error);
         }
     }
 

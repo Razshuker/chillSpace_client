@@ -39,7 +39,6 @@ export default function EditPost(props) {
         try {
             const url = API_URL + "/posts/single/" + params["id"];
             const data = await doApiGet(url);
-            console.log(data);
             setPost(data);
         } catch (error) {
             console.log(error);
@@ -54,11 +53,9 @@ export default function EditPost(props) {
                 _data.img_url = post.img_url || "";
             }
             _data.user_id = userInfo._id;
-            console.log(_data);
             const url = API_URL + "/posts/" + params["id"];
             const data = await doApiMethod(url, "PUT", _data);
             if (data.modifiedCount) {
-                console.log(data);
                 nav("/user/posts");
             }
         } catch (error) {
