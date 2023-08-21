@@ -9,6 +9,7 @@ import { MyContext } from '../../context/myContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from "moment";
+import { fontSize } from '@mui/system';
 
 export default function PostItem(props) {
     const item = props.item;
@@ -134,8 +135,8 @@ export default function PostItem(props) {
     return (
         <div className='postItem p-3 p-lg-4 mt-4 row border border-dark border-opacity-10'>
             <div className='postInfo col-md-8 row m-0'>
-                <div className='row p-0 m-0 align-items-center justify-content-between pb-4'>
-                    <div className='border p-0 m-0 d-flex col-lg-auto col-12 me-auto'>
+                <div className={`border row p-0 m-0 justify-content-between pb-4 ${item.place_url? "align-items-center": "align-items-start"}`}>
+                    <div className={`p-0 m-0 d-flex col-lg-auto  me-auto ${item.place_url? "col-12": "col-6"}` }>
                         <div className='col-auto p-0 d-flex m-0 align-items-center'>
                             {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
                         </div>
@@ -145,13 +146,13 @@ export default function PostItem(props) {
                         </div>
                     </div>
 
-                    <div className='d-flex justify-content-lg-end  justify-content-between pt-2 pt-md-0 p-0 m-0 col-12 col-lg-5'>
+                    <div className={`border d-flex justify-content-lg-end  justify-content-between  pt-md-0 p-0 m-0 col-lg-5 ${item.place_url? "col-12": "col-6"}`}>
                         <div className=' px-lg-4 col-md-auto'>
                             {item.place_url && <button onClick={() => {
                                 nav(`/places/${placeInfo._id}`);
                             }} className=' col-auto locationBtn d-flex align-items-center p-2'> <AiOutlinePushpin className='h5 m-0' />{placeInfo.name}</button>}
                         </div>
-                        <div className=' col-md-auto row align-items-center opacity-75'>
+                        <div className='border col-md-auto row align-items-start  opacity-75 pe-4' style={{fontSize:"0.8em"}}>
                             {moment(item.date_created).fromNow()}
                         </div>
                     </div>
