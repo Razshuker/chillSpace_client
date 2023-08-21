@@ -14,7 +14,6 @@ export default function UsersList() {
         try {
             const url = API_URL + "/users/usersList";
             const data = await doApiGet(url);
-            console.log(data);
             setUsersAr(data);
         } catch (error) {
             console.log(error);

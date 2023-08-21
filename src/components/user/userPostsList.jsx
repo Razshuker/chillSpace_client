@@ -68,7 +68,7 @@ export default function UserPostsList() {
                     :
                     postsAr.map(item => {
                         return (
-                            <div onClick={() => {
+                            <div key={item._id} onClick={() => {
                                 nav("edit/" + item._id);
                             }}>
                                 <PostItem key={item._id} item={item} />
