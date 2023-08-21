@@ -9,7 +9,8 @@ import { MyContext } from '../../context/myContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from "moment";
-import { fontSize } from '@mui/system';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 export default function PostItem(props) {
     const item = props.item;
@@ -119,7 +120,6 @@ export default function PostItem(props) {
     }
 
     const onReportPost = async (_idPost) => {
-        if (window.confirm("Are you sure you want to report this post?")) {
             if (!item.report) {
                 try {
                     const url = API_URL + "/posts/reportPost/" + _idPost + "/false";
@@ -128,31 +128,30 @@ export default function PostItem(props) {
                 } catch (error) {
                     console.log(error);
                 }
-            }
         }
     }
 
     return (
-        <div className='postItem p-3 p-lg-4 mt-4 row border border-dark border-opacity-10'>
+        <div className='postItem m-0 p-3 p-lg-4 mt-4 row border border-dark border-opacity-10'>
             <div className='postInfo col-md-8 row m-0'>
-                <div className={`border row p-0 m-0 justify-content-between pb-4 ${item.place_url? "align-items-center": "align-items-start"}`}>
-                    <div className={`p-0 m-0 d-flex col-lg-auto  me-auto ${item.place_url? "col-12": "col-6"}` }>
+                <div className={`row p-0 m-0 justify-content-between pb-4 ${item.place_url ? "align-items-center" : "align-items-start"}`}>
+                    <div className={`p-0 m-0 d-flex col-lg-auto  me-auto ${item.place_url ? "col-12" : "col-6"}`}>
                         <div className='col-auto p-0 d-flex m-0 align-items-center'>
                             {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
                         </div>
                         <div className='col-auto ps-2'>
-                            <h5 className='small m-0'>{userPostInfo.nickname}</h5>
+                            <h5 className='small m-0 pt-1 '>{userPostInfo.nickname}</h5>
                             <h4 className='col-auto m-0'>{item.title}</h4>
                         </div>
                     </div>
 
-                    <div className={`border d-flex justify-content-lg-end  justify-content-between  pt-md-0 p-0 m-0 col-lg-5 ${item.place_url? "col-12": "col-6"}`}>
+                    <div className={`d-flex justify-content-lg-end  justify-content-between  pt-md-0 p-0 m-0 col-lg-5 ${item.place_url ? "col-12 pt-3 align-items-center" : "col-6"}`}>
                         <div className=' px-lg-4 col-md-auto'>
                             {item.place_url && <button onClick={() => {
                                 nav(`/places/${placeInfo._id}`);
                             }} className=' col-auto locationBtn d-flex align-items-center p-2'> <AiOutlinePushpin className='h5 m-0' />{placeInfo.name}</button>}
                         </div>
-                        <div className='border col-md-auto row align-items-start  opacity-75 pe-4' style={{fontSize:"0.8em"}}>
+                        <div className='col-md-auto row align-items-start  opacity-75 pe-3' style={{ fontSize: "0.8em" }}>
                             {moment(item.date_created).fromNow()}
                         </div>
                     </div>
@@ -175,9 +174,14 @@ export default function PostItem(props) {
                                 </div>
                                 <span className='px-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
-                            <div className='  p-0 m-0 '>
-                                <button onClick={() => onReportPost(item._id)} className='btnIcon'> <AiOutlineExclamationCircle className='h2 m-0' /> </button>
-                            </div>
+                            <Dropdown>
+                                <Dropdown.Toggle variant=""  className='btnIcon' id="dropdown-basic">
+                                <AiOutlineExclamationCircle className='h2 m-0' />                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={() => onReportPost(item._id)}>report this post</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </div>
                     </div>
                 </div>
