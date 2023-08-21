@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../css/login.css'
 import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiMethod } from '../services/apiService';
@@ -10,6 +10,16 @@ export default function Login(props) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate();
     const { getUserInfo } = useContext(MyContext);
+
+    const clearLocalStorage = () => {
+        localStorage.removeItem(TOKEN_KEY);
+        console.log("cleared");
+    }
+
+    useEffect(() => {
+        // delete the local storage every 10 hours (when the token is invalid)
+        setInterval(clearLocalStorage, 36000000);
+    }, [localStorage[TOKEN_KEY]]);
 
     const onSub = async (_data) => {
         try {

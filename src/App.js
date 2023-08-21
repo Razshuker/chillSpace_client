@@ -27,12 +27,6 @@ function App() {
     }
   }, [])
 
-  const clearLocalStorage = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    console.log("cleared");
-  }
-  // delete the local storage every 10 hours (when the token is invalid)
-  setInterval(clearLocalStorage, 36000000)
 
   return (
     <MyContext.Provider value={{

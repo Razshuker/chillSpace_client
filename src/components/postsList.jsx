@@ -38,54 +38,20 @@ export default function PostsList() {
         }
     }
 
-    const getPosts = async () => {
-        try {
-            setIsLoading(true);
-            let url = API_URL + "/posts?page=" + page;
-
-            if (query.get("s")) {
-                url += "&s=" + query.get("s")
-            }
-            else if (query.get("place")) {
-                const id = await getPlaceId(query.get("place"));
-                url += "&place=" + id;
-            }
-            else if (query.get("user")) {
-                url += "&user=" + query.get("user")
-            }
-            if (reverse) {
-                const mark = url.includes("?");
-                mark ? url += `&` : url += `?`;
-                url += "reverse=yes"
-            }
-            const data = await doApiGet(url);
-            if (data.length === 0) {
-                setNoMorePosts(true);
-            } else {
-                setPage(page => page + 1);
-                setPostsAr((postsAr) => page == 1 ? data : [...postsAr, ...data]);
-            }
-            setIsLoading(false);
-        } catch (error) {
-            console.log(error);
-            toast.error("there is a problem, try again later")
-            setIsLoading(false)
-        }
-    }
-
     // const getPosts = async () => {
     //     try {
     //         setIsLoading(true);
-    //         let url = API_URL + "/posts";
+    //         let url = API_URL + "/posts?page=" + page;
+
     //         if (query.get("s")) {
-    //             url += "?s=" + query.get("s")
+    //             url += "&s=" + query.get("s")
     //         }
     //         else if (query.get("place")) {
     //             const id = await getPlaceId(query.get("place"));
-    //             url += "?place=" + id;
+    //             url += "&place=" + id;
     //         }
     //         else if (query.get("user")) {
-    //             url += "?user=" + query.get("user")
+    //             url += "&user=" + query.get("user")
     //         }
     //         if (reverse) {
     //             const mark = url.includes("?");
@@ -93,7 +59,12 @@ export default function PostsList() {
     //             url += "reverse=yes"
     //         }
     //         const data = await doApiGet(url);
-    //         setPostsAr(data);
+    //         if (data.length === 0) {
+    //             setNoMorePosts(true);
+    //         } else {
+    //             setPage(page => page + 1);
+    //             setPostsAr((postsAr) => page == 1 ? data : [...postsAr, ...data]);
+    //         }
     //         setIsLoading(false);
     //     } catch (error) {
     //         console.log(error);
@@ -101,6 +72,35 @@ export default function PostsList() {
     //         setIsLoading(false)
     //     }
     // }
+
+    const getPosts = async () => {
+        try {
+            setIsLoading(true);
+            let url = API_URL + "/posts";
+            if (query.get("s")) {
+                url += "?s=" + query.get("s")
+            }
+            else if (query.get("place")) {
+                const id = await getPlaceId(query.get("place"));
+                url += "?place=" + id;
+            }
+            else if (query.get("user")) {
+                url += "?user=" + query.get("user")
+            }
+            if (reverse) {
+                const mark = url.includes("?");
+                mark ? url += `&` : url += `?`;
+                url += "reverse=yes"
+            }
+            const data = await doApiGet(url);
+            setPostsAr(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.log(error);
+            toast.error("there is a problem, try again later")
+            setIsLoading(false)
+        }
+    }
 
     const onSortClick = () => {
         setPage(1);
@@ -179,20 +179,23 @@ export default function PostsList() {
                             <PostsLoading />
                         </>
                     ) : (
-                        <InfiniteScroll
-                            dataLength={postsAr.length}
-                            next={getPosts}
-                            hasMore={!noMorePosts && !isLoading} // Prevent loading more while a request is in progress
-                            loader={<PostsLoading />} // You can replace this with your loading component
-                        >
+                        // <InfiniteScroll
+                        //     dataLength={postsAr.length}
+                        //     next={getPosts}
+                        //     hasMore={!noMorePosts && !isLoading} // Prevent loading more while a request is in progress
+                        //     loader={<PostsLoading />} // You can replace this with your loading component
+                        // >
+                        <div>
                             {postsAr.length === 0 ? (
                                 <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
                             ) : (
                                 postsAr.map(item => (
                                     <PostItem key={item._id} item={item} />
                                 ))
-                            )}
-                        </InfiniteScroll>
+                            )
+                            }
+                        </div>
+                        // </InfiniteScroll>
                     )}
                 </div>
 
