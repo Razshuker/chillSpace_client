@@ -3,6 +3,7 @@ import '../../css/posts.css'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { Dropdown } from 'react-bootstrap';
 
 export default function CommentItem(props) {
     const comment = props.comment;
@@ -20,7 +21,6 @@ export default function CommentItem(props) {
     }
 
     const  onReportComment = async(_idComment) => {
-        if(window.confirm("Are you sure you want to report this post?")){
                 if(!comment.report){
                     try {
                       const url = API_URL + "/comments/reportComment/"+_idComment+"/false";
@@ -30,7 +30,6 @@ export default function CommentItem(props) {
                         console.log(error);
                     }
                 }
-        }
     }
 
     return (
@@ -43,7 +42,15 @@ export default function CommentItem(props) {
                 <p className='col-auto mt-1 mb-0'>{comment.text}</p>
             </div>
             <div className='justify-content-end d-flex p-0 col-1 '>
-                <button  onClick={()=> onReportComment(comment._id)} className='btnIcon'> <AiOutlineExclamationCircle /> </button>
+                {/* <button  onClick={()=> onReportComment(comment._id)} className='btnIcon'> <AiOutlineExclamationCircle /> </button> */}
+                <Dropdown>
+                                <Dropdown.Toggle variant=""  className='btnIcon' id="dropdown-basic">
+                                <AiOutlineExclamationCircle />                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={()=> onReportComment(comment._id)}>report this comment</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
             </div>
         </div>)
 }

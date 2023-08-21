@@ -143,19 +143,19 @@ export default function PostsList() {
                                     <option value="title">Title</option>
                                 </select>
                             </div>
-                                {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
-                                {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
-                                {select == "title" && <div className='col-9'>
-                                    <ReactSearchAutocomplete
-                                        autoFocus
-                                        placeholder="Search by Title.."
-                                        resultStringKeyName="name"
-                                        onSearch={handleOnSearch}
-                                        onClear={() => nav("/posts")}
-                                    // onClick={handleInputClick} // Add this line
-                                    />
-                                </div>}
-                                 
+                            {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
+                            {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
+                            {select == "title" && <div className='col-9'>
+                                <ReactSearchAutocomplete
+                                    autoFocus
+                                    placeholder="Search by Title.."
+                                    resultStringKeyName="name"
+                                    onSearch={handleOnSearch}
+                                    onClear={() => nav("/posts")}
+                                // onClick={handleInputClick} // Add this line
+                                />
+                            </div>}
+
                             {select == "titleeqw" && <div className='d-flex justify-content-end col-9 '>
                                 {/* <input onKeyDown={(e) => {
                                     if (e.key == "Enter") {
@@ -189,6 +189,7 @@ export default function PostsList() {
                             {postsAr.length === 0 ? (
                                 <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
                             ) : (
+
                                 postsAr.map(item => (
                                     <PostItem key={item._id} item={item} />
                                 ))
