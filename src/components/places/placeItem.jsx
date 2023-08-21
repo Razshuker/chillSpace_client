@@ -10,16 +10,10 @@ import { TOKEN_KEY } from '../../services/apiService';
 
 export default function PlaceItem({ item, setPage }) {
     const nav = useNavigate();
-    const [loggedUser, setLoggedUser] = useState(false);
     const [isLiked, setIsLiked] = useState(true);
     const [isShowMore, setIsShowMore] = useState(false);
     const { userInfo, onDeleteOrAddToFavorite, getUserInfo } = useContext(MyContext);
 
-    useEffect(() => {
-        if (userInfo.full_name && localStorage[TOKEN_KEY]) {
-            setLoggedUser(true);
-        }
-    }, []);
 
     useEffect(() => {
         if (userInfo.favorites && userInfo.favorites.includes(item._id)) {
@@ -61,7 +55,7 @@ export default function PlaceItem({ item, setPage }) {
                 </div>
                 <div className="row flex-wrap">
                     <div onClick={() => {
-                        if (loggedUser) {
+                        if (localStorage[TOKEN_KEY]) {
                             setIsLiked((isLiked) => !isLiked);
                             onDeleteOrAddToFavorite(item._id);
                             getUserInfo();
