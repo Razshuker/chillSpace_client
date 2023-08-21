@@ -39,7 +39,7 @@ export default function EditCategory() {
     }
 
     return (
-        <div className='container-fluid'>
+        <div style={{ minHeight: "100vh" }} className='container-fluid'>
             <div className="container">
                 <h2 className='text-center display-3'>Edit category: {category.name}</h2>
                 {category.name && <form onSubmit={handleSubmit(onSub)} className='col-md-8' >

@@ -22,7 +22,7 @@ export default function AddCategory() {
     }
 
     return (
-        <div className='container-fluid'>
+        <div style={{ minHeight: "100vh" }} className='container-fluid'>
             <div className="container">
                 <h2 className='text-center display-3'>New category form:</h2>
                 <form onSubmit={handleSubmit(onSub)} className='col-md-8' >

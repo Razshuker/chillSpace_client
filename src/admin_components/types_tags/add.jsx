@@ -22,7 +22,7 @@ export default function Add() {
     }
 
     return (
-        <div className="container-fluid">
+        <div style={{ minHeight: "100vh" }} className="container-fluid">
             <h2 className='text-center my-5 display-4'>ADD TAG / TYPE</h2>
             <div className="container d-flex justify-content-center">
                 <form onSubmit={handleSubmit(onSub)} className="col-md-6" >
