@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../../css/favorites.css'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,6 +8,7 @@ import 'leaflet-defaulticon-compatibility';
 
 export default function Map() {
     const { getFavorites, favorites } = useContext(MyContext);
+    const [mapMarkers, setMapMarkers] = useState([]);
 
     const mapRef = useRef(null);
 
@@ -32,12 +33,16 @@ export default function Map() {
     }
 
     const makeMarkers = () => {
+        mapMarkers.forEach(marker => marker.remove());
+        setMapMarkers([]);
         if (favorites.length >= 1) {
-            favorites.map(item => {
+            const newMarkers = favorites.map(item => {
                 let location = [parseFloat(item.location.lat), parseFloat(item.location.lon)];
                 let marker = L.marker(location).addTo(mapRef.current);
                 marker.bindPopup(`<b>${item.name}</b>`).openPopup();
+                return marker;
             });
+            setMapMarkers(newMarkers);
         }
     };
 
