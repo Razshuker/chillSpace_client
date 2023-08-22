@@ -53,11 +53,11 @@ export default function ReportedPosts() {
 
 
     return (
-        <div className='container'>
+        <div className=''>
             <h2 className='p-4'>Reported Posts</h2>
             {reportedPosts.map(item => {
                 return (
-                    <div className='border border-dark p-5 mb-4' key={item._id} >
+                    <div className='border border-dark p-1 p-md-5 mb-4' key={item._id} >
                         <div>date created : {(item.date_created).substring(0, 10)}</div>
                         <PostItem key={item._id} item={item} />
                         <button onClick={() => { deletePost(item._id) }} className='btn btn-danger mx-1 mt-2'>Delete post</button>
