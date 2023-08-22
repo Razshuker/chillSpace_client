@@ -58,7 +58,7 @@ export default function PlaceItem({ item, setPage }) {
                         if (localStorage[TOKEN_KEY]) {
                             setIsLiked((isLiked) => !isLiked);
                             onDeleteOrAddToFavorite(item._id);
-                            getUserInfo();
+                            // getUserInfo();
                         } else {
                             toast.warning("you must login to add this place to you favorite");
                         }

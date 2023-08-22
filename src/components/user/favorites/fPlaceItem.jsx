@@ -21,7 +21,7 @@ export default function FPlaceItem(props) {
                 }}>{place.name}</p>
                 <button onClick={() => {
                     onDeleteOrAddToFavorite(place._id);
-                    getUserInfo();
+                    // getUserInfo();
                 }} className='love_btn'>
                     <BsFillBookmarkFill className='h2 m-0' />
                 </button>

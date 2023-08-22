@@ -84,7 +84,7 @@ export default function SinglePlace() {
                     if (loggedUser) {
                         setIsLiked((isLiked) => !isLiked);
                         onDeleteOrAddToFavorite(params["id"]);
-                        getUserInfo();
+                        // getUserInfo();
                     } else {
                         toast.warning("you must login to add this place to you favorite");
                     }

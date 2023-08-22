@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { API_URL, doApiGet, doApiMethod } from "../services/apiService";
 import { toast } from "react-toastify";
+import { useUser } from "./useUser";
 
 
 export const useFavorite = () => {
     const [favorites, setFavorites] = useState([]);
+    const { getUserInfo } = useUser();
 
 
     const getFavorites = async () => {
@@ -36,6 +38,7 @@ export const useFavorite = () => {
             const url = API_URL + "/users/editFavorite";
             const data = await doApiMethod(url, "PATCH", { place_id });
             if (data.modifiedCount) {
+                getUserInfo();
                 getFavorites();
             }
         } catch (error) {
