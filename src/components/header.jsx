@@ -42,13 +42,15 @@ export default function Header() {
                     <div className='row'>
                         <div className={isBurgerOpen ? "col-0" : "row col-auto align-items-center justify-content-end p-0"}>
                             <nav className={isBurgerOpen ? "burgerShow d-lg-flex nav " : "nav d-lg-flex justify-content-end"}>
-                                <TfiClose onClick={onToggleBurger} className={isBurgerOpen ? "d-lg-flex closeIcon" : "d-none"} />
+                                <TfiClose role='button' onClick={onToggleBurger} className={isBurgerOpen ? "d-lg-flex closeIcon" : "d-none"} />
                                 <ul className='list-inline m-0 d-lg-flex '>
                                     {isBurgerOpen ?
-                                        <div className='d-lg-none profile-li'>
+                                        <div  className='d-lg-none profile-li'>
+                                            <span role='button' >
                                             {localStorage[TOKEN_KEY] && userInfo.img_url ? <img onClick={onToggleProfile} src={userInfo.img_url} alt='profile' className='profile-img my-5' /> :
                                                 <AccountCircle onClick={onToggleProfile} className='profile_btn my-5' fontSize='large' />
                                             }
+                                            </span>
                                             {localStorage[TOKEN_KEY] &&
                                                 <div className={isProfileOpen ? 'responsive-profile d-flex align-items-center' : 'burger-profile'}>
                                                     <hr />
@@ -86,7 +88,7 @@ export default function Header() {
                         <div className='col-2 d-none d-lg-block'><ProfileMenu /></div>
                     </div>
                     <div className="col-auto d-flex justify-content-end align-items-center d-lg-none">
-                        <CiMenuBurger onClick={onToggleBurger} className={isBurgerOpen ? 'd-none' : 'burger p-0'} />
+                        <CiMenuBurger role='button' onClick={onToggleBurger} className={isBurgerOpen ? 'd-none' : 'burger p-0'} />
                     </div>
                 </div>
             </div>
