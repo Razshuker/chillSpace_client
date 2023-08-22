@@ -10,14 +10,14 @@ import { TOKEN_KEY } from '../../services/apiService';
 
 export default function PlaceItem({ item, setPage }) {
     const nav = useNavigate();
-    const [isLiked, setIsLiked] = useState(true);
+    const [isLiked, setIsLiked] = useState(false);
     const [isShowMore, setIsShowMore] = useState(false);
     const { userInfo, onDeleteOrAddToFavorite, getUserInfo } = useContext(MyContext);
 
 
     useEffect(() => {
         if (userInfo.favorites && userInfo.favorites.includes(item._id)) {
-            setIsLiked(false);
+            setIsLiked(true);
         }
     }, [userInfo.favorites]);
 
@@ -64,7 +64,7 @@ export default function PlaceItem({ item, setPage }) {
                         }
 
                     }} className="buttons d-flex justify-content-end col-1 w-100 pe-4">
-                        {!isLiked ? <BsFillBookmarkFill className='h1 saveIcon' /> : <BsBookmark className='h1 saveIcon' />}
+                        {isLiked ? <BsFillBookmarkFill className='h1 saveIcon' /> : <BsBookmark className='h1 saveIcon' />}
                     </div>
                     <div className="row align-items-end col-11 ms-3">
                         {item.tags_name.map(tag => {

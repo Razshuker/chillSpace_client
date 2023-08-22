@@ -54,7 +54,7 @@ export default function PlacesList({ page, setPage }) {
     return (
         <div className="placeList container">
             {isLoading ? <Loading /> :
-                <>
+                <div>
                     {places.length == 0 ? <h2 className='noPlaces'>There aren't match places to the search : "{query.get("s")}"</h2> :
 
                         places.map(item => {
@@ -64,7 +64,7 @@ export default function PlacesList({ page, setPage }) {
                         })
                     }
                     <UpButton />
-                </>
+                </div>
             }
         </div>
     )

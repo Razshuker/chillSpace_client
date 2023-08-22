@@ -27,7 +27,6 @@ export default function PostItem(props) {
         doApiUserInfo();
         getPlaceInfo();
         doApiComments(item._id);
-
     }, [])
 
     const doApiComments = async (_idPost) => {
@@ -42,7 +41,7 @@ export default function PostItem(props) {
 
     const doApiUserInfo = async () => {
         try {
-            if(item.user_id){
+            if (item.user_id) {
                 const url = API_URL + "/users/userInfo/" + item.user_id;
                 const data = await doApiGet(url);
                 setUserPostInfo(data)
@@ -122,14 +121,14 @@ export default function PostItem(props) {
     }
 
     const onReportPost = async (_idPost) => {
-            if (!item.report) {
-                try {
-                    const url = API_URL + "/posts/reportPost/" + _idPost + "/false";
-                    await doApiMethod(url, "PATCH");
+        if (!item.report) {
+            try {
+                const url = API_URL + "/posts/reportPost/" + _idPost + "/false";
+                await doApiMethod(url, "PATCH");
 
-                } catch (error) {
-                    console.log(error);
-                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -177,8 +176,8 @@ export default function PostItem(props) {
                                 <span className='px-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
                             <Dropdown>
-                                <Dropdown.Toggle variant=""  className='btnIcon' id="dropdown-basic">
-                                <AiOutlineExclamationCircle className='h2 m-0' />                                </Dropdown.Toggle>
+                                <Dropdown.Toggle variant="" className='btnIcon' id="dropdown-basic">
+                                    <AiOutlineExclamationCircle className='h2 m-0' />                                </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item onClick={() => onReportPost(item._id)}>report this post</Dropdown.Item>
