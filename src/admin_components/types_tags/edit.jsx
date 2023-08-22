@@ -41,7 +41,7 @@ export default function Edit() {
     }
 
     return (
-        <div className="container-fluid">
+        <div style={{ minHeight: "100vh" }} className="container-fluid">
             {item._id && <React.Fragment>
                 <h2 className='text-center my-5 display-4'>ADD TAG / TYPE</h2>
                 <div className="container d-flex justify-content-center">
