@@ -100,7 +100,7 @@ export default function UpdateUserInfo() {
                                 <input defaultValue={userInfo.nickname} {...register("nickname", { required: true, minLength: 2 })} className="form-control" type="text" />
                                 {errors.nickname && <div className="text-danger">* Enter valid nickname</div>}
                             </div>
-                            <div className='pb-5 mb-5'>
+                            <div style={{zIndex: 1}} className='pb-5 mb-5'>
                             <label>City</label>
                                 <ReactSearchAutocomplete
                                     items={citiesAr}
