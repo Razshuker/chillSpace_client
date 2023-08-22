@@ -67,8 +67,8 @@ export default function AddPost(props) {
                                         <div className='col-9 ms-3'>
                                             <h5>{userInfo.nickname}</h5>
                                             <div className='col-auto'>
-                                                <input placeholder="post's title" {...register("title", { required: true, minLength: 2 })} className="form-control" type="text" />
-                                                {errors.title && <div className="text-danger">* Enter valid title</div>}
+                                                <input placeholder="post's title" {...register("title", { required: true, minLength: 2, maxLength:15 })} className="form-control" type="text" />
+                                                {errors.title && <div className="text-danger">* Enter 2-15 characters</div>}
                                             </div>
                                         </div>
                                     </div>
@@ -97,8 +97,8 @@ export default function AddPost(props) {
                                     <input ref={fileRef} className="form-control" type="file" />
                                 </div>
                                 <div className='col-md-6'>
-                                    <textarea rows={6} placeholder='description' {...register("description", { required: true, minLength: 2 })} className="form-control" type="textarea" />
-                                    {errors.description && <div className="text-danger">* Enter valid description</div>}
+                                    <textarea rows={6} placeholder='description' {...register("description", { required: true, minLength: 2 , maxLength:1000})} className="form-control" type="textarea" />
+                                    {errors.description && <div className="text-danger">* Enter 2-1000 characters</div>}
                                 </div>
                             </div>
                             <div className='float-end'>

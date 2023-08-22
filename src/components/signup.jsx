@@ -123,7 +123,7 @@ export default function Signup() {
                             })} className="form-control input-signIn" type="password" />
                             {errors.confirm_password && <div className="text-danger">* Password aren't match</div>}
 
-                            <div className='pb-5 '>
+                            <div style={{zIndex: 1}} className='pb-5 '>
                                 <ReactSearchAutocomplete
                                     items={citiesAr}
                                     autoFocus
@@ -138,11 +138,6 @@ export default function Signup() {
                                         height: "75px",
                                         fontSize: "1.5em",
                                         searchIconMargin: '0 100px 0 20px'
-
-                                        //   color: "#eee",
-                                        //   lineColor: "rgb(205 20 20)",
-                                        //   border: "10px solid #fff",
-                                        //   outline: "none",
                                     }}
                                 />
                                 {selectedCity == "" && ifCity == false && <div className="text-danger">* Enter valid city</div>}
