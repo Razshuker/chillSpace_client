@@ -59,7 +59,7 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
 
                     </div>
                     <div className='d-flex align-items-center col-9'>
-                        <input onKeyDown={onEnterSearch} ref={inputRef} placeholder='search for place...' type="text" className='input_search me-2 col-10' />
+                        <input onKeyDown={onEnterSearch} ref={inputRef} placeholder='search for a place...' type="text" className='input_search me-2 col-10' />
                         <button onClick={onSearch} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>
                     </div>
                     {/* <button onClick={onCleanSearch} className='cleanBtn col-auto mt-4'>clean search</button> */}
