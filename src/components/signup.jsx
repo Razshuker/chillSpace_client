@@ -138,8 +138,7 @@ export default function Signup() {
                                     resultStringKeyName="name"
                                     maxResults={5}
                                     styling={{
-                                        backgroundColor: " rgba(255, 255, 255, 0.537) ",
-                                        height: "75px",
+                                        backgroundColor: " rgb(255,245,236) ",                                        height: "75px",
                                         fontSize: "1.5em",
                                         // searchIconMargin: '0 100px 0 20px'
                                     }}
