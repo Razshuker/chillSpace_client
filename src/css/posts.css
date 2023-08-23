@@ -60,6 +60,14 @@
     font-size: 1.5em;
 }
 
+.serchTitleInput {
+    box-shadow: 3px 0px 3px 2px   rgba(219, 216, 216, 0.471)
+    ;
+}
+ .serchTitleInput ::placeholder{
+    color:rgb(188, 187, 187)
+ }
+
 .searchTitleParent input{
     border-radius: 50px;
     padding: 10px;
@@ -72,7 +80,7 @@
     position: absolute;
     top: 23px;
     left: 15px;
-
+    color:rgb(149, 148, 148);
 }
 
 .btn-close{

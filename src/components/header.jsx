@@ -68,11 +68,11 @@ export default function Header() {
                                     <li><Link to="/places">PLACES</Link></li>
                                     <li><Link to="/posts">POSTS</Link></li>
                                 </ul>
-                                <div className="d-flex d-lg-none">
+                                <div className="d-flex d-lg-none pb-5">
                                     {!localStorage[TOKEN_KEY] ?
                                         <div className=' d-flex justify-content-end mb-3 flex-column'>
                                             <Link onClick={onToggleBurger} to='/login' className='btn btn-outline-dark d-block d-lg-none'>Login</Link>
-                                            <Link onClick={onToggleBurger} to='/sign-up' className='d-block d-lg-none text-dark'>Don't have an account?</Link>
+                                            <Link onClick={onToggleBurger} to='/sign-up' className='d-block d-lg-none text-dark pt-2'>Don't have an account?</Link>
                                         </div> : <div className=' d-flex align-items-end mb-3'>
                                             <button onClick={() => {
                                                 localStorage.removeItem(TOKEN_KEY);
