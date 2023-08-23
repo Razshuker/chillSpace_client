@@ -91,15 +91,19 @@ export default function Signup() {
     }
 
     return (
-        <div style={{ backgroundImage: 'url("images/sign-upBG.jpg")' }} className='sign-up container_fluid d-flex align-items-center'>
-            <h1 className='col-12'>SIGN UP</h1>
-            <div className="container">
+        <div style={{ backgroundImage: 'url("images/sign-upBG.jpg")' }} className='sign-up container_fluid d-flex align-items-start '>
+        <div className='container pb-3'>
+
+            <h1 className='col-12 pt-5 pb-4'>SIGN UP</h1>
+            <div className="px-4">
                 <div className="row">
-                    <div className="col-md-4 text-center">
-                        <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />
-                        <input ref={fileRef} type='file' className='input_upload' />
+                    <div className="input_upload col-md-4 col-8 m-auto rounded text-center bg-light bg-opacity-75 mt-2 mb-4">
+                        <CgProfile style={{ fontSize: "10em", color: "rgb(117, 100, 89)" }} />
+                        <div className=''>
+                        <input ref={fileRef} type='file' />
+                        </div>
                     </div>
-                    <form onSubmit={handleSubmit(onSub)} className='row col-md-8' >
+                    <form onSubmit={handleSubmit(onSub)} className='row col-lg-10 m-auto' >
                         <div className="col-md-6">
                             <input placeholder='First name' {...register("first_name", { required: true, minLength: 2 })} className="form-control input-signIn" type="text" />
                             {errors.first_name && <div className="text-danger">* Enter valid first_name</div>}
@@ -137,7 +141,7 @@ export default function Signup() {
                                         backgroundColor: " rgba(255, 255, 255, 0.537) ",
                                         height: "75px",
                                         fontSize: "1.5em",
-                                        searchIconMargin: '0 100px 0 20px'
+                                        // searchIconMargin: '0 100px 0 20px'
                                     }}
                                 />
                                 {selectedCity == "" && ifCity == false && <div className="text-danger">* Enter valid city</div>}
@@ -148,6 +152,8 @@ export default function Signup() {
                 </div>
             </div>
         </div>
+        </div>
+
 
     )
 }

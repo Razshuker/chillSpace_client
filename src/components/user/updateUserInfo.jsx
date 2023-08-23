@@ -75,7 +75,7 @@ export default function UpdateUserInfo() {
 
     return (
         <div style={{ backgroundImage: `url("/images/sign-upBG.jpg")` }} className='updateAccount container-fluid d-flex align-items-center'>
-            <h2 className='col-12'>UPDATE ACCOUNT DETAILS</h2>
+            <h3 className='col-12'>UPDATE ACCOUNT DETAILS</h3>
             <div className="container">
                 {userInfo.full_name &&
                     <div className="row">
