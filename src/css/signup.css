@@ -3,19 +3,21 @@ header {
 }
 
 .sign-up {
-    min-height: 90vh;
+    min-height: 100vh;
     flex-wrap: wrap;
 }
 
 .sign-up h1 {
     color: rgb(117, 100, 89);
     font-family: 'Raleway', sans-serif;
-    font-size: 7em;
+    font-size: 4em;
     text-align: center;
     text-shadow: 7px 7px 9px rgba(83, 74, 74, 0.651);
 }
 
-
+.sign-up .input_upload{
+    height: 200px;
+}
 
 .sign-up form .input-signIn {
     margin-bottom: 18px;
@@ -27,8 +29,8 @@ header {
 }
 
 .sign-up form .sign-up_btn {
-    width: 40%;
-    padding: 18px 48px;
+    width: 50%;
+    padding: 18px 24px;
     border-radius: 24px;
     border: none;
     margin: 12px auto;
@@ -36,4 +38,5 @@ header {
     color: white;
     font-family: 'Raleway', sans-serif;
     font-size: 1.5em;
+
 }

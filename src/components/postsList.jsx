@@ -12,6 +12,8 @@ import SearchPlacePosts from './posts/searchPlacePosts';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loading from './loading';
+import zIndex from '@mui/material/styles/zIndex';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 
 export default function PostsList() {
@@ -140,7 +142,7 @@ export default function PostsList() {
                                 <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             }
                         </div>
-                        <div className='row px-0 py-2 pt-3 pt-lg-0 justify-content-between align-items-center m-0 col-lg-8 '>
+                        <div style={{ zIndex: 1 }} className='row px-0 py-2 pt-3 pt-lg-0 justify-content-between align-items-center m-0 col-lg-8 '>
                             <div className=' p-0 col-3'>
                                 <select
                                     className="form-select py-2"
@@ -157,29 +159,28 @@ export default function PostsList() {
                             {select == "place" && <div className='col-9 '><SearchPlacePosts /></div>}
                             {select == "user" && <div className='col-9'><SearchUserPosts /></div>}
                             {select == "title" && <div className='col-9'>
-                                <ReactSearchAutocomplete
-                                    autoFocus
-                                    placeholder="Search by Title.."
-                                    resultStringKeyName="name"
-                                    onSearch={handleOnSearch}
-                                    onClear={() => nav("/posts")}
-                                // onClick={handleInputClick} // Add this line
-                                />
+                                <div className="searchTitleParent form-group">
+                                    <div className="searchTitleD ">
+                                        <AiOutlineSearch role='button' className="searchTitleI e m-0 h5 translate-middle-y pl-3" onClick={() => { nav("?s=" + inputRf.current.value) }} />
+                                        <input onKeyDown={(e) => {
+                                            if (e.key == "Enter") {
+                                                nav("?s=" + inputRf.current.value);
+
+
+                                            }
+                                        }} ref={inputRf}
+                                            className="serchTitleInput form-control px-5 pl-10 border rounded-md focus:ring focus:border-black"
+                                            placeholder='Search by title..'
+                                        />
+
+                                        <button onClick={() => {
+                                            nav("/posts")
+                                            inputRf.current.value = ""
+                                        }} className='btn btn-close'></button>
+                                    </div>
+                                </div>
                             </div>}
 
-                            {select == "titleeqw" && <div className='d-flex justify-content-end col-9 '>
-                                {/* <input onKeyDown={(e) => {
-                                    if (e.key == "Enter") {
-                                        nav("?s=" + inputRf.current.value);
-                                    }
-                                }} ref={inputRf} placeholder='Search by title...' className='postInputs input-group' />
-                                {/* <button onClick={() => {
-                                nav("?s=" + inputRf.current.value);
-                            }} className='searchBtn'><IoSearchOutline className='search_icon' /></button> */}
-
-                            </div>
-
-                            }
                         </div>
                     </div>
                 </div>

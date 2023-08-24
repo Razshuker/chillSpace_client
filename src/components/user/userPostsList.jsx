@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../css/posts.css'
 import PostItem from '../posts/postItem'
-import { API_URL, TOKEN_KEY, doApiGet } from '../../services/apiService';
+import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService';
 import { IoSearchOutline, IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
 import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from '../posts/postsLoading';
 import { toast } from 'react-toastify';
 import { MyContext } from '../../context/myContext';
+import { CiEdit } from 'react-icons/ci';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { Dropdown } from 'react-bootstrap';
 
 export default function UserPostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -19,7 +22,7 @@ export default function UserPostsList() {
 
     useEffect(() => {
         getPosts();
-    }, [reverse])
+    }, [reverse, postsAr])
 
     const getPosts = async () => {
         try {
@@ -39,10 +42,20 @@ export default function UserPostsList() {
         setReverse(!reverse);
     }
 
+    const deletePost = async (_idDel) => {
+        try {
+            const url = API_URL + "/posts/" + _idDel;
+            await doApiMethod(url, "DELETE");
+        } catch (error) {
+            console.log(error);
+            toast.error("There is a problem, please try again later");
+        }
+    }
+
     return (
         <div className='container-fluid pb-5'>
             <div className="px-5 mt-5">
-                <Link to={"add"} className='addBtn-posts'>
+                <Link to={"/posts/add"} className='addBtn-posts'>
                     <div className="d-flex align-items-center justify-content-center">
                         <BsPostcardHeart className='iconAdd' />
                         <p className='m-0 ps-2'>Add new post</p>
@@ -68,11 +81,27 @@ export default function UserPostsList() {
                     :
                     postsAr.map(item => {
                         return (
-                            <div key={item._id} onClick={() => {
-                                nav("edit/" + item._id);
-                            }}>
-                                <PostItem key={item._id} item={item} />
-                            </div>
+                            <>
+                                <div className='pb-3' key={item._id}>
+                                    <PostItem key={item._id} item={item} />
+                                </div>
+                                <div className=' d-flex align-items-center justify-content-end'>
+                                    <CiEdit role='button' onClick={() => {
+                                        nav("edit/" + item._id);
+                                    }} className='h3' />
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="" id="dropdown-basic">
+                                            <AiOutlineDelete role='button' className='h3 text-danger' />
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item onClick={() => { deletePost(item._id) }}>delete this post</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div>
+                                <hr />
+                                <br />
+                            </>
                         )
                     })
                 }

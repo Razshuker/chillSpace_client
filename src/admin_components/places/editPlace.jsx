@@ -202,7 +202,7 @@ export default function EditPlace() {
                             })}
                             <br />
                             <label className="pt-3 pb-1">open_hours - Sunday</label>
-                            <input defaultValue={placeDetails.open_hours['Sunday']} className="form-control" type="text" />
+                            <input defaultValue={placeDetails.open_hours['Sunday']} {...register('open_hours - Sunday')} className="form-control" type="text" />
                             <label className="pt-3 pb-1">open_hours - Monday</label>
                             <input defaultValue={placeDetails.open_hours['Monday']} {...register('open_hours - Monday')} className="form-control" type="text" />
                             <label className="pt-3 pb-1">open_hours - Tuesday</label>

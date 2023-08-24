@@ -28,20 +28,20 @@ export default function ChangePassword() {
 
     return (
         <div className="container-fluid">
-            <div className="container">
-                <h2>Change Password:</h2>
+            <div className="container pb-5">
+                <h2 className='p-3 text-center'>Change Password:</h2>
                 <div className="d-flex justify-content-center">
                     <form onSubmit={handleSubmit(onChangePassword)} className='col-md-6' >
-                        <input placeholder='old password' {...register("oldPassword", { required: true, minLength: 2 })} className="form-control" type="password" />
+                        <input placeholder='old password' {...register("oldPassword", { required: true, minLength: 2 })} className="form-control inputUpdate" type="password" />
                         {errors.oldPassword && <div className="text-danger">* Enter valid old password</div>}
-                        <input placeholder='new password' {...register("newPassword", { required: true, minLength: 2 })} className="form-control" type="password" />
+                        <input placeholder='new password' {...register("newPassword", { required: true, minLength: 2 })} className="form-control inputUpdate" type="password" />
                         {errors.newPassword && <div className="text-danger">* Enter valid new password</div>}
                         <input placeholder='confirm new password' {...register("confirm_password", {
                             required: true, validate: (value) => {
                                 const { newPassword } = getValues();
                                 return newPassword === value;
                             }
-                        })} className="form-control" type="password" />
+                        })} className="form-control inputUpdate" type="password" />
                         {errors.confirm_password && <div className="text-danger">* passwords aren't match</div>}
                         <button className='password_btn'>change password</button>
                     </form>

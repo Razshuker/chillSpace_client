@@ -75,33 +75,35 @@ export default function UpdateUserInfo() {
 
     return (
         <div style={{ backgroundImage: `url("/images/sign-upBG.jpg")` }} className='updateAccount container-fluid d-flex align-items-center'>
-            <h2 className='col-12'>UPDATE ACCOUNT DETAILS</h2>
+            <h1 className='col-12 pt-5 pb-3'>UPDATE ACCOUNT DETAILS</h1>
             <div className="container">
                 {userInfo.full_name &&
                     <div className="row">
-                        <div className="col-md-4 pb-4 text-center">
-                            {userInfo.img_url ? <img style={{ height: "300px", width: "300px", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "16em", color: "rgb(117, 100, 89)" }} />}
-                            <input ref={fileRef} type='file' className='input_upload mt-3' />
+                        <div className="input_upload row align-items-center col-auto m-auto rounded text-center bg-light bg-opacity-75 ">
+                            <div className='col-auto'>
+                            {userInfo.img_url ? <img style={{ height: "200px", width: "200px", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "7em", color: "rgb(117, 100, 89)" }} />}
+                            <input ref={fileRef} type='file' className='pt-3 col-10 text-center ps-5' />
+                            </div>
                         </div>
-                        <form onSubmit={handleSubmit(onSub)} className='row col-md-8' >
+                        <form onSubmit={handleSubmit(onSub)} className='row col-md-8 m-auto py-3' >
                             <div className="col-md-6">
-                                <label>Full name</label>
-                                <input defaultValue={userInfo.full_name} {...register("full_name", { required: true, minLength: 2 })} className="form-control" type="text" />
+                                <label className='pt-3 pb-2'>Full name</label>
+                                <input defaultValue={userInfo.full_name} {...register("full_name", { required: true, minLength: 2 })} className="form-control inputUpdate" type="text" />
                                 {errors.full_name && <div className="text-danger">* Enter valid name</div>}
-                                <label>Email</label>
-                                <input defaultValue={userInfo.email} {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className="form-control" type="email" />
+                                <label className='pt-3 pb-2'>Email</label>
+                                <input defaultValue={userInfo.email} {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })} className="form-control inputUpdate" type="email" />
                                 {errors.email && <div className="text-danger">* Enter valid email</div>}
                             </div>
                             <div className="col-md-6">
-                                <label>Phone</label>
-                                <input defaultValue={userInfo.phone} {...register("phone", { required: true, minLength: 2 })} className="form-control" type="tel" />
+                                <label className='pt-3 pb-2'>Phone</label>
+                                <input defaultValue={userInfo.phone} {...register("phone", { required: true, minLength: 2 })} className="form-control inputUpdate" type="tel" />
                                 {errors.phone && <div className="text-danger">* Enter valid phone</div>}
-                                <label>Nickname</label>
-                                <input defaultValue={userInfo.nickname} {...register("nickname", { required: true, minLength: 2 })} className="form-control" type="text" />
+                                <label className='pt-3 pb-2'>Nickname</label>
+                                <input defaultValue={userInfo.nickname} {...register("nickname", { required: true, minLength: 2 })} className="form-control inputUpdate" type="text" />
                                 {errors.nickname && <div className="text-danger">* Enter valid nickname</div>}
                             </div>
-                            <div className='pb-5 mb-5'>
-                            <label>City</label>
+                            <div style={{zIndex: 1}} className=' mb-5'>
+                            <label className='pt-3 pb-2'>City</label>
                                 <ReactSearchAutocomplete
                                     items={citiesAr}
                                     autoFocus
@@ -112,6 +114,12 @@ export default function UpdateUserInfo() {
                                     resultStringKeyName="name"
                                     maxResults={7}
                                     inputSearchString={userInfo.location}
+                                    styling={{
+                                        backgroundColor: " rgb(255,245,236) ",
+                                        height: "75px",
+                                        fontSize: "1.5em",
+                                        // searchIconMargin: '0 100px 0 20px'
+                                    }}
                                 />
                             </div>
                             <button className='update_btn'>Update account</button>

@@ -1,6 +1,6 @@
 import React from 'react'
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { AiFillLike, AiOutlinePushpin,AiFillMessage } from "react-icons/ai";
+import { AiFillLike, AiOutlinePushpin,AiFillMessage, AiOutlineHeart } from "react-icons/ai";
 
 
 export default function PostsLoading() {
@@ -41,7 +41,7 @@ export default function PostsLoading() {
             </p></div>
         </div>
         <div className='float-end'>
-            <button className='btnIcon'><AiFillLike className=' h3' /></button>
+            <button className='btnIcon'><AiOutlineHeart className='h2 m-0 ' /></button>
             <span className='p-1'><p className="placeholder-glow">
                 <span className="placeholder col-12"></span>
             </p></span>
