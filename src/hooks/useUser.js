@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { API_URL, TOKEN_KEY, doApiGet } from "../services/apiService";
 
 
@@ -12,7 +12,6 @@ export const useUser = () => {
                 const url = API_URL + "/users/userInfo";
                 const data = await doApiGet(url);
                 if (data._id) {
-                    console.log(data.favorites);
                     setUserInfo(data);
                 }
             }
