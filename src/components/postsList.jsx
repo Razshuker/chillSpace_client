@@ -14,6 +14,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Loading from './loading';
 import zIndex from '@mui/material/styles/zIndex';
 import { AiOutlineSearch } from 'react-icons/ai';
+import UpButton from './upButton';
 
 
 export default function PostsList() {
@@ -195,7 +196,7 @@ export default function PostsList() {
                             dataLength={displayedPosts.length}
                             next={fetchPosts}
                             hasMore={!noMorePosts && !isLoading}
-                            loader={<Loading />}
+                            loader={<PostsLoading />}
                         >
                             <div>
                                 {displayedPosts.length === 0 && !isLoading ? (
@@ -208,6 +209,7 @@ export default function PostsList() {
                                 )
                                 }
                             </div>
+                            <UpButton />
                         </InfiniteScroll>
                     )}
                 </div>

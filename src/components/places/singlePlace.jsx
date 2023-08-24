@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { API_URL, doApiGet } from '../../services/apiService';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import '../../css/places.css';
 import PlaceMap from './placeMap';
 import SamePlaceItem from './samePlaceItem';
-import { MyContext } from '../../context/myContext';
 import { toast } from 'react-toastify';
 
 
@@ -15,19 +14,66 @@ export default function SinglePlace() {
     const [place, setPlace] = useState({});
     const [samePlaces, setSamePlaces] = useState([1, 2, 3, 4])
     const params = useParams();
-    const [loggedUser, setLoggesUser] = useState(false);
     const nav = useNavigate();
-    const { userInfo, onDeleteOrAddToFavorite, getUserInfo } = useContext(MyContext);
+    const [userDetails, setUserDetails] = useState({});
 
     useEffect(() => {
-        if (userInfo.full_name) {
-            setLoggesUser(true);
-            if (userInfo.favorites.includes(params["id"])) {
-                setIsLiked(false);
+        getUserDetails();
+        getPlace();
+    }, []);
+
+    useEffect(() => {
+        if (place._id) {
+            getSamePlaces();
+        }
+    }, [place])
+
+    useEffect(() => {
+        if (userDetails._id && userDetails.favorites.includes(params["id"])) {
+            setIsLiked(false);
+        }
+    }, [userDetails]);
+
+    const getUserDetails = async () => {
+        try {
+            if (localStorage[TOKEN_KEY]) {
+                const url = API_URL + "/users/userInfo";
+                const data = await doApiGet(url);
+                if (data._id) {
+                    setUserDetails(data);
+                }
             }
         }
-        getPlace();
-    }, [])
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    const getSamePlaces = async () => {
+        try {
+            const url = API_URL + "/places?perPage=4&types=" + place.type + "&exclude=" + place._id;
+            const data = await doApiGet(url);
+            console.log(data);
+            setSamePlaces(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const onDeleteOrAddToFavorite = async (place_id) => {
+        try {
+            const url = API_URL + "/users/editFavorite";
+            const data = await doApiMethod(url, "PATCH", { place_id });
+            if (data.modifiedCount) {
+                getUserDetails();
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("there is a problem, try again later");
+        }
+    }
+
 
     const getPlace = async () => {
         try {
@@ -71,20 +117,19 @@ export default function SinglePlace() {
                     <hr />
                     <PlaceMap place={place} />
                     <hr />
-                    <h3 className='mt-3'>Same places:</h3>
+                    <h3 className='mt-3'>Similar places:</h3>
                     <div className="row mb-5 g-2">
                         {samePlaces.map((item, i) => {
                             return (
-                                <SamePlaceItem key={i} />
+                                <SamePlaceItem key={i} item={item} />
                             )
                         })}
                     </div>
                 </React.Fragment>}
                 <div onClick={() => {
-                    if (loggedUser) {
+                    if (localStorage[TOKEN_KEY]) {
                         setIsLiked((isLiked) => !isLiked);
                         onDeleteOrAddToFavorite(params["id"]);
-                        // getUserInfo();
                     } else {
                         toast.warning("you must login to add this place to you favorite");
                     }

@@ -2,12 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../../css/favorites.css'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { MyContext } from '../../../context/myContext';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'; // Import the CSS
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet-defaulticon-compatibility';
 
-export default function Map() {
-    const { getFavorites, favorites } = useContext(MyContext);
+export default function Map({ getFavorites, favorites }) {
     const [mapMarkers, setMapMarkers] = useState([]);
 
     const mapRef = useRef(null);

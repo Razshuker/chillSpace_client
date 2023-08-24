@@ -11,14 +11,42 @@ import { MyContext } from '../../context/myContext';
 import { CiEdit } from 'react-icons/ci';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Dropdown } from 'react-bootstrap';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function UserPostsList() {
     const [postsAr, setPostsAr] = useState([]);
     const [reverse, setReverse] = useState(false);
     const [query] = useSearchParams();
+    const [noMorePosts, setNoMorePosts] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { userInfo } = useContext(MyContext);
-    const inputRf = useRef();
     const nav = useNavigate();
+
+    const [displayLimit, setDisplayLimit] = useState(5); // Set the initial limit here
+    const [postsCount, setPostsCount] = useState();
+
+    useEffect(() => {
+        if (userInfo._id) {
+            count();
+        }
+    }, [query])
+
+    useEffect(() => {
+        if (displayLimit >= postsCount) {
+            setNoMorePosts(true);
+        }
+    }, [displayLimit])
+
+    const count = async () => {
+        try {
+            let url = API_URL + "/posts/count?user=" + userInfo._id;
+            const data = await doApiGet(url);
+            console.log(data);
+            setPostsCount(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
         getPosts();
@@ -26,14 +54,17 @@ export default function UserPostsList() {
 
     const getPosts = async () => {
         try {
+            setIsLoading(true);
             let url = API_URL + "/posts?userId=" + userInfo._id;
             if (reverse) {
                 url += `&reverse=yes`;
             }
             const data = await doApiGet(url);
+            setIsLoading(false);
             setPostsAr(data);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
             toast.error("there is a problem, try again later")
         }
     }
@@ -52,6 +83,16 @@ export default function UserPostsList() {
         }
     }
 
+    const fetchPosts = () => {
+        // Simulating a fake async API call that sends
+        // 20 more records in 1.5 seconds
+        setTimeout(() => {
+            setDisplayLimit(prevLimit => prevLimit + 5); // Adjust the increment as needed
+        }, 1500);
+    };
+
+    const displayedPosts = postsAr.slice(0, displayLimit); // Limit the displayed places
+
     return (
         <div className='container-fluid pb-5'>
             <div className="px-5 mt-5">
@@ -61,6 +102,7 @@ export default function UserPostsList() {
                         <p className='m-0 ps-2'>Add new post</p>
                     </div>
                 </Link>
+                <h2 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h2>
                 <div className='row justify-content-between  align-items-center'>
                     <div className='col-md-2'>
                         {reverse == false ?
@@ -72,38 +114,44 @@ export default function UserPostsList() {
                 </div>
             </div>
             <div className='container'>
-                <h2 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h2>
                 {postsAr.length == 0 ?
-                    <>
+                    <div>
                         <PostsLoading />
                         <PostsLoading />
-                    </>
+                    </div>
                     :
-                    postsAr.map(item => {
-                        return (
-                            <>
-                                <div className='pb-3' key={item._id}>
-                                    <PostItem key={item._id} item={item} />
-                                </div>
-                                <div className=' d-flex align-items-center justify-content-end'>
-                                    <CiEdit role='button' onClick={() => {
-                                        nav("edit/" + item._id);
-                                    }} className='h3' />
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="" id="dropdown-basic">
-                                            <AiOutlineDelete role='button' className='h3 text-danger' />
-                                        </Dropdown.Toggle>
+                    <InfiniteScroll
+                        dataLength={displayedPosts.length}
+                        next={fetchPosts}
+                        hasMore={!noMorePosts && !isLoading}
+                        loader={<PostsLoading />}
+                    >
+                        {postsAr.map(item => {
+                            return (
+                                <div key={item._id}>
+                                    <div className='pb-3' >
+                                        <PostItem key={item._id} item={item} />
+                                    </div>
+                                    <div className=' d-flex align-items-center justify-content-end'>
+                                        <CiEdit role='button' onClick={() => {
+                                            nav("edit/" + item._id);
+                                        }} className='h3' />
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant="" id="dropdown-basic">
+                                                <AiOutlineDelete role='button' className='h3 text-danger' />
+                                            </Dropdown.Toggle>
 
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item onClick={() => { deletePost(item._id) }}>delete this post</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item onClick={() => { deletePost(item._id) }}>delete this post</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
+                                    <hr />
+                                    <br />
                                 </div>
-                                <hr />
-                                <br />
-                            </>
-                        )
-                    })
+                            )
+                        })}
+                    </InfiniteScroll>
                 }
             </div>
         </div>
