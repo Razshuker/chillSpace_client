@@ -2,7 +2,6 @@ import React from 'react';
 import { BsSun } from "react-icons/bs";
 import '../../css/home.css';
 
-
 export default function Strip() {
     return (
         <div className='strip'>
@@ -12,10 +11,12 @@ export default function Strip() {
                 </video>
             </div>
             <div className='image d-lg-none d-block'></div>
-            <div className="text-overlay">
-                <BsSun className='sunIcon' />
-                <h2>YOUR PLACE</h2>
-                <h3>TO FIND YOUR CHILL</h3>
+            <div className="text-overlay bg-transparent ">
+                <div className='row pt-5 mt-2'>
+                <h1 style={{fontSize:"4em"}}>Your place</h1>
+                <h2 className='pt-2'> <span  style={{fontSize:"2.2em"}}>To find your chill</span>  <BsSun className='sunIcon mb-3' />
+</h2>
+                </div>
             </div>
         </div>
     );
