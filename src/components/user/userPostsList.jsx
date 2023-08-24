@@ -74,15 +74,15 @@ export default function UserPostsList() {
             <div className='container'>
                 <h2 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h2>
                 {postsAr.length == 0 ?
-                    <>
+                    <div>
                         <PostsLoading />
                         <PostsLoading />
-                    </>
+                    </div>
                     :
                     postsAr.map(item => {
                         return (
-                            <>
-                                <div className='pb-3' key={item._id}>
+                            <div key={item._id}>
+                                <div className='pb-3' >
                                     <PostItem key={item._id} item={item} />
                                 </div>
                                 <div className=' d-flex align-items-center justify-content-end'>
@@ -101,7 +101,7 @@ export default function UserPostsList() {
                                 </div>
                                 <hr />
                                 <br />
-                            </>
+                            </div>
                         )
                     })
                 }
