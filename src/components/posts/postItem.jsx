@@ -27,7 +27,6 @@ export default function PostItem(props) {
         doApiUserInfo();
         getPlaceInfo();
         doApiComments(item._id);
-
     }, [])
 
     const doApiComments = async (_idPost) => {
@@ -180,6 +179,7 @@ export default function PostItem(props) {
                             </div>
                             <Dropdown>
                                 <Dropdown.Toggle variant="" className='btnIcon' id="dropdown-basic">
+
                                     <AiOutlineExclamationCircle className='h2 m-0' />
                                 </Dropdown.Toggle>
 
