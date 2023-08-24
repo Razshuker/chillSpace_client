@@ -175,10 +175,31 @@ export default function PlacesList({ page, setPage }) {
     const [query] = useSearchParams();
     const [noMorePlaces, setNoMorePlaces] = useState(false);
     const [displayLimit, setDisplayLimit] = useState(6); // Set the initial limit here
+    const [placesCount, setPlacesCount] = useState();
+
+    useEffect(() => {
+        count();
+    }, [])
+
+    useEffect(() => {
+        if (displayLimit >= placesCount) {
+            setNoMorePlaces(true);
+        }
+    }, [displayLimit])
 
     useEffect(() => {
         getPlaces();
     }, [query]);
+
+    const count = async () => {
+        try {
+            const url = API_URL + "/places/count";
+            const data = await doApiGet(url);
+            setPlacesCount(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const getPlaces = async () => {
         try {
