@@ -15,14 +15,12 @@ import { Dropdown } from 'react-bootstrap';
 export default function UserPostsList() {
     const [postsAr, setPostsAr] = useState([]);
     const [reverse, setReverse] = useState(false);
-    const [query] = useSearchParams();
     const { userInfo } = useContext(MyContext);
-    const inputRf = useRef();
     const nav = useNavigate();
 
     useEffect(() => {
         getPosts();
-    }, [reverse, postsAr])
+    }, [reverse])
 
     const getPosts = async () => {
         try {
@@ -53,8 +51,9 @@ export default function UserPostsList() {
     }
 
     return (
-        <div className='container-fluid pb-5'>
-            <div className="px-5 mt-5">
+        <div className='container-fluid pt-5 pb-5'>
+            <h4 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h4>
+            <div className="px-2 mt-lg-5">
                 <Link to={"/posts/add"} className='addBtn-posts'>
                     <div className="d-flex align-items-center justify-content-center">
                         <BsPostcardHeart className='iconAdd' />
@@ -72,7 +71,6 @@ export default function UserPostsList() {
                 </div>
             </div>
             <div className='container'>
-                <h2 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h2>
                 {postsAr.length == 0 ?
                     <>
                         <PostsLoading />

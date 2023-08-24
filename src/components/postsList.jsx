@@ -91,9 +91,9 @@ export default function PostsList() {
                 url += "&user=" + query.get("user")
             }
             if (reverse) {
-                const mark = url.includes("?");
-                mark ? url += `&` : url += `?`;
-                url += "reverse=yes"
+                // const mark = url.includes("?");
+                // mark ? url += `&` : url += `?`;
+                url += "&reverse=yes"
             }
             const data = await doApiGet(url);
             setPostsAr(data);
