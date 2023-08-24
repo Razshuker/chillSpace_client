@@ -103,7 +103,6 @@ export default function UserPostsList() {
                         <p className='m-0 ps-2'>Add new post</p>
                     </div>
                 </Link>
-                <h2 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h2>
                 <div className='row justify-content-between  align-items-center'>
                     <div className='col-md-2'>
                         {reverse == false ?
