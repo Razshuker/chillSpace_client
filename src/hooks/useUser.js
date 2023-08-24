@@ -6,7 +6,6 @@ export const useUser = () => {
     const [userInfo, setUserInfo] = useState({});
 
     const getUserInfo = async () => {
-        console.log('get');
         try {
             if (localStorage[TOKEN_KEY]) {
                 const url = API_URL + "/users/userInfo";
