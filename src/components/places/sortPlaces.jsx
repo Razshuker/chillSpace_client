@@ -33,10 +33,10 @@ export default function SortPlaces({ setShowSort, isShowSort, setPage }) {
             setSelectedTypes(query.get("types").split(','));
         }
         if(query.get("tags")){
-            setSelectedTypes(query.get("tags").split(','));
+            setSelectedTags(query.get("tags").split(','));
         }
         if(query.get("cats")){
-            setSelectedTypes(query.get("cats").split(','));
+            setSelectedCats(query.get("cats").split(','));
         }
     }
 

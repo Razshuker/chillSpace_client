@@ -3,23 +3,38 @@ import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../css/tablesAdmin.css'
 import { toast } from 'react-toastify';
+import Loading from '../../components/loading';
+import { PaginationButtons } from '../../components/paginationButtons';
 
 export default function CategoriesList() {
     const [categories, setCategories] = useState([]);
+    const [pages, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const nav = useNavigate();
 
     useEffect(() => {
         doApi();
-    }, []);
+        doApiCount();
+    }, [currentPage]);
 
     const doApi = async () => {
         try {
-            const url = API_URL + "/categories";
+            const url = API_URL + "/categories?page="+currentPage;
             const data = await doApiGet(url);
             setCategories(data);
         } catch (error) {
             console.log(error);
             toast.error("there is a problem, try again later")
+        }
+    }
+
+    const doApiCount = async () => {
+        try {
+            const url = API_URL + "/categories/count";
+            const count = await doApiGet(url);
+            setPages(Math.ceil(count / 6))
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -43,6 +58,8 @@ export default function CategoriesList() {
             <div className="container">
                 <Link to={"add"} className='btn btn-outline-dark my-4'>Add new category</Link>
                 <div className="table-container">
+                    {categories.length != 0 ? (
+
                     <table className='table table-hover table-striped'>
                         <thead>
                             <tr>
@@ -59,7 +76,7 @@ export default function CategoriesList() {
                             {categories.map((item, i) => {
                                 return (
                                     <tr key={item._id}>
-                                        <td>{i + 1}</td>
+                                        <td>{(currentPage - 1) * 6 + i + 1}</td>
                                         <td>{item._id}</td>
                                         <td>{item.name}</td>
                                         <td>{item.category_code}</td>
@@ -75,7 +92,16 @@ export default function CategoriesList() {
                             })}
                         </tbody>
                     </table>
+                    ):
+                    <Loading/>}
                 </div>
+                <div className="d-flex justify-content-center my-3">
+                <PaginationButtons
+                    currentPage={currentPage}
+                    pages={pages}
+                    setCurrentPage={setCurrentPage}
+                />
+            </div>
             </div>
         </div>
     )
