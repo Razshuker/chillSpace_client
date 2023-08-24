@@ -63,6 +63,7 @@ export default function Signup() {
         try {
             if (selectedCity == "") setIfCity(false)
             else {
+                _data.matchPlacesUrl ="";
                 _data.location = selectedCity
                 _data.full_name = _data.first_name + " " + _data.last_name;
                 delete _data.first_name;
