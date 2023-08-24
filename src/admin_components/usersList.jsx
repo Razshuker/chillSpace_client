@@ -120,7 +120,7 @@ export default function UsersList() {
                                                 <td><button onClick={() => {
                                                     changeRole(item._id, item.role);
                                                 }} className='btn'>{item.role}</button></td>
-                                                <td><button onClick={() => {
+                                                <td><button style={{ position: "unset", fontSize: "1em" }} onClick={() => {
                                                     deleteUser(item._id, item.full_name);
                                                 }} className='btn btn-danger btn-close'></button></td>
                                             </tr>
