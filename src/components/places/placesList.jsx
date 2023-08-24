@@ -179,7 +179,7 @@ export default function PlacesList({ page, setPage }) {
 
     useEffect(() => {
         count();
-    }, [])
+    }, [query])
 
     useEffect(() => {
         if (displayLimit >= placesCount) {
@@ -193,7 +193,19 @@ export default function PlacesList({ page, setPage }) {
 
     const count = async () => {
         try {
-            const url = API_URL + "/places/count";
+            let url = API_URL + "/places/count";
+            if (query.get("area")) {
+                url += `?area=` + query.get("area");
+            }
+            if (query.get("tags")) {
+                url += `?tags=` + query.get("tags");
+            }
+            if (query.get("types")) {
+                url += `?types=` + query.get("types");
+            }
+            if (query.get("cats")) {
+                url += `?cats=` + query.get("cats");
+            }
             const data = await doApiGet(url);
             setPlacesCount(data);
         } catch (error) {
@@ -249,7 +261,6 @@ export default function PlacesList({ page, setPage }) {
                 next={fetchPlaces}
                 hasMore={!noMorePlaces && !isLoading}
                 loader={<Loading />}
-                children
             >
                 {displayedPlaces.length === 0 && !isLoading ? (
                     <h2 className="noPlaces">

@@ -11,6 +11,7 @@ import SearchUserPosts from './posts/searchUserPosts';
 import SearchPlacePosts from './posts/searchPlacePosts';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Loading from './loading';
 
 
 export default function PostsList() {
@@ -19,15 +20,49 @@ export default function PostsList() {
     const [isLoading, setIsLoading] = useState(false);
     const [select, setSelected] = useState("place");
     const [noMorePosts, setNoMorePosts] = useState(false);
-    const [page, setPage] = useState(1);
     const [query] = useSearchParams();
     const nav = useNavigate();
     const inputRf = useRef();
+    const [displayLimit, setDisplayLimit] = useState(5); // Set the initial limit here
+    const [postsCount, setPostsCount] = useState();
+
+    useEffect(() => {
+        count();
+    }, [query])
+
+    useEffect(() => {
+        if (displayLimit >= postsCount) {
+            setNoMorePosts(true);
+        }
+    }, [displayLimit])
+
 
     useEffect(() => {
         // const searchQ = query.get("s") || "";
         getPosts();
     }, [query, reverse])
+
+    const count = async () => {
+        try {
+            let url = API_URL + "/posts/count";
+            if (query.get("s")) {
+                url += "?s=" + query.get("s")
+            }
+            else if (query.get("place")) {
+                const id = await getPlaceId(query.get("place"));
+                url += "?place=" + id;
+            }
+            else if (query.get("user")) {
+                url += "?user=" + query.get("user")
+            }
+            const data = await doApiGet(url);
+            console.log(data);
+            setPostsCount(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // for finding posts by the places id
     const getPlaceId = async (_name) => {
         try {
@@ -38,54 +73,20 @@ export default function PostsList() {
         }
     }
 
-    // const getPosts = async () => {
-    //     try {
-    //         setIsLoading(true);
-    //         let url = API_URL + "/posts?page=" + page;
-
-    //         if (query.get("s")) {
-    //             url += "&s=" + query.get("s")
-    //         }
-    //         else if (query.get("place")) {
-    //             const id = await getPlaceId(query.get("place"));
-    //             url += "&place=" + id;
-    //         }
-    //         else if (query.get("user")) {
-    //             url += "&user=" + query.get("user")
-    //         }
-    //         if (reverse) {
-    //             const mark = url.includes("?");
-    //             mark ? url += `&` : url += `?`;
-    //             url += "reverse=yes"
-    //         }
-    //         const data = await doApiGet(url);
-    //         if (data.length === 0) {
-    //             setNoMorePosts(true);
-    //         } else {
-    //             setPage(page => page + 1);
-    //             setPostsAr((postsAr) => page == 1 ? data : [...postsAr, ...data]);
-    //         }
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         console.log(error);
-    //         toast.error("there is a problem, try again later")
-    //         setIsLoading(false)
-    //     }
-    // }
 
     const getPosts = async () => {
         try {
             setIsLoading(true);
-            let url = API_URL + "/posts";
+            let url = API_URL + "/posts?perPage=0";
             if (query.get("s")) {
-                url += "?s=" + query.get("s")
+                url += "&s=" + query.get("s")
             }
             else if (query.get("place")) {
                 const id = await getPlaceId(query.get("place"));
-                url += "?place=" + id;
+                url += "&place=" + id;
             }
             else if (query.get("user")) {
-                url += "?user=" + query.get("user")
+                url += "&user=" + query.get("user")
             }
             if (reverse) {
                 const mark = url.includes("?");
@@ -102,8 +103,18 @@ export default function PostsList() {
         }
     }
 
+    const fetchPosts = () => {
+        // Simulating a fake async API call that sends
+        // 20 more records in 1.5 seconds
+        setTimeout(() => {
+            setDisplayLimit(prevLimit => prevLimit + 5); // Adjust the increment as needed
+        }, 1500);
+    };
+
+    const displayedPosts = postsAr.slice(0, displayLimit); // Limit the displayed places
+
+
     const onSortClick = () => {
-        setPage(1);
         setReverse(!reverse);
     }
 
@@ -174,29 +185,29 @@ export default function PostsList() {
                 </div>
                 <div>
                     {isLoading ? (
-                        <>
-                            <PostsLoading />
-                            <PostsLoading />
-                        </>
-                    ) : (
-                        // <InfiniteScroll
-                        //     dataLength={postsAr.length}
-                        //     next={getPosts}
-                        //     hasMore={!noMorePosts && !isLoading} // Prevent loading more while a request is in progress
-                        //     loader={<PostsLoading />} // You can replace this with your loading component
-                        // >
                         <div>
-                            {postsAr.length === 0 ? (
-                                <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
-                            ) : (
-
-                                postsAr.map(item => (
-                                    <PostItem key={item._id} item={item} />
-                                ))
-                            )
-                            }
+                            <PostsLoading />
+                            <PostsLoading />
                         </div>
-                        // </InfiniteScroll>
+                    ) : (
+                        <InfiniteScroll
+                            dataLength={displayedPosts.length}
+                            next={fetchPosts}
+                            hasMore={!noMorePosts && !isLoading}
+                            loader={<Loading />}
+                        >
+                            <div>
+                                {displayedPosts.length === 0 && !isLoading ? (
+                                    <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
+                                ) : (
+
+                                    displayedPosts.map(item => (
+                                        <PostItem key={item._id} item={item} />
+                                    ))
+                                )
+                                }
+                            </div>
+                        </InfiniteScroll>
                     )}
                 </div>
 
