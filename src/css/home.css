@@ -189,6 +189,16 @@ header {
     border-radius: 24px;
 }
 
+@media(max-width:991px) {
+    .categories .back-icon {
+        left: 6px;
+    }
+
+    .categories .next-icon {
+        right: 6px;
+    }
+}
+
 @media(max-width:768px) {
     .categories h2 {
         font-size: 2em;

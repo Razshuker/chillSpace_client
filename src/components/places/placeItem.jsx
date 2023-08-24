@@ -3,23 +3,54 @@ import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import '../../css/places.css'
 import { useNavigate } from 'react-router-dom';
-import { MyContext } from '../../context/myContext'
 import { toast } from 'react-toastify';
-import { TOKEN_KEY } from '../../services/apiService';
+import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService';
 
 
 export default function PlaceItem({ item, setPage }) {
     const nav = useNavigate();
     const [isLiked, setIsLiked] = useState(false);
     const [isShowMore, setIsShowMore] = useState(false);
-    const { userInfo, onDeleteOrAddToFavorite, getUserInfo } = useContext(MyContext);
+    const [userDetails, setUserDetails] = useState({});
+
+    useEffect(() => {
+        getUserInfo();
+    }, [])
 
 
     useEffect(() => {
-        if (userInfo.favorites && userInfo.favorites.includes(item._id)) {
+        if (userDetails.favorites && userDetails.favorites.includes(item._id)) {
             setIsLiked(true);
         }
-    }, [userInfo.favorites]);
+    }, [userDetails.favorites]);
+
+    const getUserInfo = async () => {
+        try {
+            if (localStorage[TOKEN_KEY]) {
+                const url = API_URL + "/users/userInfo";
+                const data = await doApiGet(url);
+                if (data._id) {
+                    setUserDetails(data);
+                }
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    const onDeleteOrAddToFavorite = async (place_id) => {
+        try {
+            const url = API_URL + "/users/editFavorite";
+            const data = await doApiMethod(url, "PATCH", { place_id });
+            if (data.modifiedCount) {
+                getUserInfo();
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("there is a problem, try again later");
+        }
+    }
 
     const onReadMoreLess = () => {
         setIsShowMore(!isShowMore);
@@ -58,7 +89,6 @@ export default function PlaceItem({ item, setPage }) {
                         if (localStorage[TOKEN_KEY]) {
                             setIsLiked((isLiked) => !isLiked);
                             onDeleteOrAddToFavorite(item._id);
-                            // getUserInfo();
                         } else {
                             toast.warning("you must login to add this place to you favorite");
                         }
