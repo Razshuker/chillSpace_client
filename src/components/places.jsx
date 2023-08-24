@@ -10,23 +10,6 @@ export default function Places() {
     const [loading, setLoading] = useState(false);
 
     return (
-        // <div className='mb-3'>
-        //     {isShowSort ?
-        //         <div className='container-fluid row m-0 p-0'>
-        //             <div className='col-lg-4 m-0 p-0'>
-        //                 <SortPlaces setShowSort={setShowSort} isShowSort={isShowSort} setPage={setPage} />
-        //             </div>
-        //             <div className="col-lg-8 m-0 p-0">
-        //                 <PlacesList page={page} setPage={setPage} />
-        //             </div>
-        //         </div> :
-        //         <div className='container-fluid'>
-        //             <SearchForm setShowSort={setShowSort} isShowSort={isShowSort} setPage={setPage} />
-        //             <PlacesList page={page} setPage={setPage} />
-        //         </div>
-        //     }
-        // </div>
-
         <div className='mb-3'>
             <div className='container-fluid row m-0 p-0'>
                 <div className={isShowSort ? 'col-lg-4 m-0 p-0' : 'd-none'}>
