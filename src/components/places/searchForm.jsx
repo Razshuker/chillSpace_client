@@ -5,7 +5,6 @@ import { BiSliderAlt, BiX } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai"
 import '../../css/places.css'
 import { useEffect } from 'react';
-import { API_URL } from '../../services/apiService';
 import { Dropdown } from 'react-bootstrap';
 
 export default function SearchForm({ setShowSort, isShowSort }) {
@@ -62,17 +61,12 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                                     <Dropdown.Item onClick={onCleanSearch}>clear search</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
-                            // <div>
-                            //     <button onClick={onCleanSearch} className='cleanBtn col-auto '></button>
-                            // </div>
                         }
-
                     </div>
                     <div className='d-flex align-items-center col-9'>
-                        <input onKeyDown={onEnterSearch} ref={inputRef} placeholder='search for a place...' type="text" className='input_search me-2 col-10' />
+                        <input onKeyDown={onEnterSearch} ref={inputRef} placeholder='search for a place...' type="text" className='input_search me-2 col-11' />
                         <button onClick={onSearch} className='btn_search col-auto'><FaSistrix className='search_icon' /></button>
                     </div>
-                    {/* <button onClick={onCleanSearch} className='cleanBtn col-auto mt-4'>clean search</button> */}
                 </div>
             </div>
         </div>
