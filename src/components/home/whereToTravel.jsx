@@ -35,11 +35,12 @@ export default function WhereToTravel() {
     }
 
     const onSub = async (_data) => {
+        setLoading(true);
         if (!localStorage[TOKEN_KEY]) {
-            toast.error("You must login to get your results")
+            toast.error("You must login to get your results");
+            setLoading(false);
         } else {
             try {
-                setLoading(true);
                 const ansUrl = `kind=${_data.kind}&members=${_data.members}&tags_ar=${_data.DescribeYourself},${_data.bestOption}`;
                 const url = API_URL + `/places/whereToTravel?${ansUrl}`;
                 const data = await doApiGet(url);
@@ -47,7 +48,6 @@ export default function WhereToTravel() {
                 setIsAnswer(true);
                 setLoading(false);
                 changeUrlMatch(ansUrl);
-
             } catch (error) {
                 console.log(error);
                 setLoading(false);
@@ -106,7 +106,6 @@ export default function WhereToTravel() {
                     {errors.members && <div className="text-danger">* choose the best option for you</div>}
                     {myPlaces.length == 0 ?
                         <button className='find_btn'>Find me places</button> : <button className='find_btn'>Find me new places</button>
-
                     }
                 </form>
             </div>

@@ -120,7 +120,7 @@ export default function UserPostsList() {
                         <PostsLoading />
                     </div>
                     :
-                    <InfiniteScroll
+                    <InfiniteScroll style={{ overflowX: "hidden" }}
                         dataLength={displayedPosts.length}
                         next={fetchPosts}
                         hasMore={!noMorePosts && !isLoading}
