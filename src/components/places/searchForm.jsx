@@ -51,7 +51,7 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                             <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />
                         }
                         {query.get("s") &&
-                            <Dropdown>
+                            <Dropdown className='place_clear'>
                                 <Dropdown.Toggle variant="" className='cleanBtn col-auto' id="dropdown-basic">
 
                                     <AiOutlineDelete />

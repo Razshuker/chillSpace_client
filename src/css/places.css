@@ -28,7 +28,7 @@
     color: rgb(78, 67, 59);
 }
 
-button#dropdown-basic {
+.place_clear button#dropdown-basic {
     padding: 8px 12px;
     margin-left: 8px;
     background-color: #B7B7A4;
