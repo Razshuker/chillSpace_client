@@ -7,7 +7,7 @@ import '../../css/places.css'
 import { useEffect } from 'react';
 import { API_URL } from '../../services/apiService';
 
-export default function SearchForm({ setShowSort, isShowSort, setPage }) {
+export default function SearchForm({ setShowSort, isShowSort }) {
     const inputRef = useRef();
     const nav = useNavigate();
     const [query] = useSearchParams();
@@ -20,7 +20,6 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
         const searchParams = new URLSearchParams(query);
         searchParams.set("s", inputRef.current.value);
         nav("?" + searchParams.toString());
-        setPage(1);
     }
 
     const onEnterSearch = (e) => {
@@ -30,7 +29,6 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
     }
 
     const onCleanSearch = () => {
-        setPage(1);
         nav("/places");
         // need to reload again to delete the default checked tags
         window.location.reload(false);
@@ -38,7 +36,6 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
 
     const onClickSort = () => {
         setShowSort(!isShowSort);
-        setPage(1);
     }
 
     return (
@@ -53,9 +50,11 @@ export default function SearchForm({ setShowSort, isShowSort, setPage }) {
                             :
                             <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />
                         }
-                        <div>
-                            <button onClick={onCleanSearch} className='cleanBtn col-auto '><AiOutlineDelete /></button>
-                        </div>
+                        {query.get("s") &&
+                            <div>
+                                <button onClick={onCleanSearch} className='cleanBtn col-auto '><AiOutlineDelete /></button>
+                            </div>
+                        }
 
                     </div>
                     <div className='d-flex align-items-center col-9'>
