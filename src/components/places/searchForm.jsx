@@ -6,6 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai"
 import '../../css/places.css'
 import { useEffect } from 'react';
 import { API_URL } from '../../services/apiService';
+import { Dropdown } from 'react-bootstrap';
 
 export default function SearchForm({ setShowSort, isShowSort }) {
     const inputRef = useRef();
@@ -51,9 +52,19 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                             <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />
                         }
                         {query.get("s") &&
-                            <div>
-                                <button onClick={onCleanSearch} className='cleanBtn col-auto '><AiOutlineDelete /></button>
-                            </div>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="" className='cleanBtn col-auto' id="dropdown-basic">
+
+                                    <AiOutlineDelete />
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={onCleanSearch}>clear search</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            // <div>
+                            //     <button onClick={onCleanSearch} className='cleanBtn col-auto '></button>
+                            // </div>
                         }
 
                     </div>
