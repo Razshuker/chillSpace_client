@@ -7,7 +7,7 @@ import UpButton from '../upButton';
 import Loading from '../loading';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-export default function PlacesList({ page, setPage }) {
+export default function PlacesList() {
     const [places, setPlaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [query] = useSearchParams();
@@ -71,8 +71,7 @@ export default function PlacesList({ page, setPage }) {
             if (data.length === 0) {
                 setNoMorePlaces(true);
             } else {
-                setPage(page => page + 1);
-                setPlaces((places) => (page === 1 ? data : [...places, ...data]));
+                setPlaces(data);
             }
             setIsLoading(false);
         } catch (error) {
@@ -94,7 +93,7 @@ export default function PlacesList({ page, setPage }) {
     return (
         <div className="placeList container">
             {isLoading && <Loading />}
-            <InfiniteScroll
+            <InfiniteScroll style={{ overflowX: "hidden" }}
                 dataLength={displayedPlaces.length}
                 next={fetchPlaces}
                 hasMore={!noMorePlaces && !isLoading}
@@ -106,7 +105,7 @@ export default function PlacesList({ page, setPage }) {
                     </h2>
                 ) : (
                     displayedPlaces.map((item) => (
-                        <PlaceItem key={item._id} item={item} setPage={setPage} />
+                        <PlaceItem key={item._id} item={item} />
                     ))
                 )}
                 <UpButton />

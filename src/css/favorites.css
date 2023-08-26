@@ -35,10 +35,11 @@ h3 {
 }
 
 .place_item .love_btn {
-    border: none;
+    border: none !important;
     background-color: transparent;
     color: #B7B7A4;
-
+    padding-left: 16px;
+    padding-right: 0;
 }
 
 .place_item .place_name {

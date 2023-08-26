@@ -3,6 +3,7 @@ import '../css/loading.css'
 
 
 export default function Loading() {
+
   return (
     <div className='row align-items-center justify-content-center pt-5 mt-5'>
       <svg height="108px" width="108px" viewBox="0 0 128 128" className="loader">
@@ -21,15 +22,15 @@ export default function Loading() {
         </defs>
         <g strokeDasharray="175.93 351.86" strokeWidth="12" strokeLinecap="round">
           <g>
-            <rect clipPath="url(#loader-eyes)" height="64" width="128" fill="hsl(193,90%,50%)"></rect>
-            <g stroke="hsl(193,90%,50%)" fill="none">
+            <rect clipPath="url(#loader-eyes)" height="64" width="128" fill="hsl(22, 20%, 55%)"></rect>
+            <g stroke="hsl(22, 20%, 55%)" fill="none">
               <circle transform="rotate(180,64,64)" r="56" cy="64" cx="64" className="loader__mouth1"></circle>
               <circle transform="rotate(0,64,64)" r="56" cy="64" cx="64" className="loader__mouth2"></circle>
             </g>
           </g>
           <g mask="url(#loader-mask)">
-            <rect clipPath="url(#loader-eyes)" height="64" width="128" fill="hsl(223,90%,50%)"></rect>
-            <g stroke="hsl(223,90%,50%)" fill="none">
+            <rect clipPath="url(#loader-eyes)" height="64" width="128" fill="hsl(20.73, 24.36%, 26.86%)"></rect>
+            <g stroke="hsl(20.73, 24.36%, 26.86%)" fill="none">
               <circle transform="rotate(180,64,64)" r="56" cy="64" cx="64" className="loader__mouth1"></circle>
               <circle transform="rotate(0,64,64)" r="56" cy="64" cx="64" className="loader__mouth2"></circle>
             </g>

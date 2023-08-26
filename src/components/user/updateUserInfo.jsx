@@ -57,7 +57,7 @@ export default function UpdateUserInfo() {
 
     const onSub = async (_data) => {
         try {
-            _data.location = selectedCity == "" ? userInfo.location : selectedCity; 
+            _data.location = selectedCity == "" ? userInfo.location : selectedCity;
             if (fileRef.current.files[0] != undefined) {
                 _data.img_url = await uploadImage(fileRef);
             }
@@ -79,10 +79,10 @@ export default function UpdateUserInfo() {
             <div className="container">
                 {userInfo.full_name &&
                     <div className="row">
-                        <div className="input_upload row align-items-center col-auto m-auto rounded text-center bg-light bg-opacity-75 ">
+                        <div className="input_upload row align-items-center col-auto m-auto rounded text-center mb-5 bg-opacity-75 ">
                             <div className='col-auto'>
-                            {userInfo.img_url ? <img style={{ height: "200px", width: "200px", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "7em", color: "rgb(117, 100, 89)" }} />}
-                            <input ref={fileRef} type='file' className='pt-3 col-10 text-center ps-5' />
+                                {userInfo.img_url ? <img style={{ height: "200px", width: "200px", color: "rgb(117, 100, 89)" }} src={userInfo.img_url} alt='profile' className='profile-img' /> : <CgProfile style={{ fontSize: "7em", color: "rgb(117, 100, 89)" }} />}
+                                <input ref={fileRef} type='file' className='pt-3 col-10 text-center ps-5' />
                             </div>
                         </div>
                         <form onSubmit={handleSubmit(onSub)} className='row col-md-8 m-auto py-3' >
@@ -102,8 +102,8 @@ export default function UpdateUserInfo() {
                                 <input defaultValue={userInfo.nickname} {...register("nickname", { required: true, minLength: 2 })} className="form-control inputUpdate" type="text" />
                                 {errors.nickname && <div className="text-danger">* Enter valid nickname</div>}
                             </div>
-                            <div style={{zIndex: 1}} className=' mb-5'>
-                            <label className='pt-3 pb-2'>City</label>
+                            <div style={{ zIndex: 1 }} className=' mb-5'>
+                                <label className='pt-3 pb-2'>City</label>
                                 <ReactSearchAutocomplete
                                     items={citiesAr}
                                     autoFocus

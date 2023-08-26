@@ -5,6 +5,7 @@ header {
 .sign-up {
     min-height: 100vh;
     flex-wrap: wrap;
+    overflow-x: hidden;
 }
 
 .sign-up h1 {
@@ -15,7 +16,7 @@ header {
     text-shadow: 7px 7px 9px rgba(83, 74, 74, 0.651);
 }
 
-.sign-up .input_upload{
+.sign-up .input_upload {
     height: 200px;
 }
 

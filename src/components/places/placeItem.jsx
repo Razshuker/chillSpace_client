@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService';
 
 
-export default function PlaceItem({ item, setPage }) {
+export default function PlaceItem({ item }) {
     const nav = useNavigate();
     const [isLiked, setIsLiked] = useState(false);
     const [isShowMore, setIsShowMore] = useState(false);
@@ -100,7 +100,6 @@ export default function PlaceItem({ item, setPage }) {
                         {item.tags_name.map(tag => {
                             return (
                                 <button key={tag} onClick={() => {
-                                    setPage(1);
                                     nav("?tags=" + tag);
                                 }
                                 } className='tags col'>{tag}</button>

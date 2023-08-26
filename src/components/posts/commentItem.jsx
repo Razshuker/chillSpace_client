@@ -3,11 +3,20 @@ import '../../css/posts.css'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
 
 export default function CommentItem(props) {
     const comment = props.comment;
     const [userInfo, setUserInfo] = useState({});
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         doApiUserInfo(comment.user_id);
@@ -20,16 +29,16 @@ export default function CommentItem(props) {
         setUserInfo(data);
     }
 
-    const  onReportComment = async(_idComment) => {
-                if(!comment.report){
-                    try {
-                      const url = API_URL + "/comments/reportComment/"+_idComment+"/false";
-                      await doApiMethod(url,"PATCH");
+    const onReportComment = async (_idComment) => {
+        if (!comment.report) {
+            try {
+                const url = API_URL + "/comments/reportComment/" + _idComment + "/false";
+                await doApiMethod(url, "PATCH");
 
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 
     return (
@@ -42,15 +51,35 @@ export default function CommentItem(props) {
                 <p className='col-auto mt-1 mb-0'>{comment.text}</p>
             </div>
             <div className='justify-content-end d-flex p-0 col-1 '>
-                {/* <button  onClick={()=> onReportComment(comment._id)} className='btnIcon'> <AiOutlineExclamationCircle /> </button> */}
-                <Dropdown>
-                                <Dropdown.Toggle variant=""  className='btnIcon' id="dropdown-basic">
-                                <AiOutlineExclamationCircle />                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={()=> onReportComment(comment._id)}>report this comment</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                <div className='report'>
+                    <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>
+                        <AiOutlineExclamationCircle style={{ fontSize: "1.25em" }} className='h2 m-0' />
+                    </Button>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">
+                            {"Report comment"}
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                                Are you sure you want to report this comment?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose} className='text-dark'>Disagree</Button>
+                            <Button onClick={() => {
+                                handleClose();
+                                onReportComment(comment._id);
+                            }} autoFocus>
+                                Agree
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
             </div>
         </div>)
 }

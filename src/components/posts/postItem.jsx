@@ -9,7 +9,7 @@ import { MyContext } from '../../context/myContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from "moment";
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
 
 
 export default function PostItem(props) {
@@ -22,6 +22,16 @@ export default function PostItem(props) {
     const commentRef = useRef();
     const { userInfo } = useContext(MyContext);
     const nav = useNavigate();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     useEffect(() => {
         doApiUserInfo();
@@ -136,33 +146,33 @@ export default function PostItem(props) {
         <div className='postItem m-0 p-3 p-lg-4 mt-4 row border border-dark border-opacity-10'>
             <div className='postInfo p-0 col-md-8 row m-0'>
                 <div>
-                <div className={`row m-0 p-0 justify-content-between pb-4 align-items-start`}>
-                    <div className={` m-0 d-flex p-0 col-lg-auto  me-auto ${item.place_url ? "col-12" : "col-6"}`}>
-                        <div className='col-auto p-0 d-flex m-0 align-items-center'>
-                            {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
+                    <div className={`row m-0 p-0 justify-content-between pb-4 align-items-start`}>
+                        <div className={` m-0 d-flex p-0 col-lg-auto  me-auto ${item.place_url ? "col-12" : "col-6"}`}>
+                            <div className='col-auto p-0 d-flex m-0 align-items-center'>
+                                {userPostInfo.img_url ? <img src={userPostInfo.img_url} className='profile-pic' /> : <AccountCircle className='profile_icon' fontSize='large' />}
+                            </div>
+                            <div className='col-auto ps-2'>
+                                <h5 className={`small m-0 pt-lg-0 ${item.place_url ? "" : "pt-2"}`}>{userPostInfo.nickname}</h5>
+                                <h4 className='col-auto m-0'>{item.title}</h4>
+                            </div>
                         </div>
-                        <div className='col-auto ps-2'>
-                            <h5 className={`small m-0 pt-lg-0 ${item.place_url ? "" : "pt-2"}`}>{userPostInfo.nickname}</h5>
-                            <h4 className='col-auto m-0'>{item.title}</h4>
-                        </div>
-                    </div>
 
-                    <div className={`d-flex justify-content-lg-end  justify-content-between m-0 p-lg-0 py-2 px-0  col-lg-5 ${item.place_url ? "col-12 pt-2 align-items-center" : "col-6"}`}>
-                        <div className=' px-lg-4 col-md-auto'>
-                            {item.place_url && <button onClick={() => {
-                                nav(`/places/${placeInfo._id}`);
-                            }} className=' col-auto locationBtn d-flex align-items-center p-2'> <AiOutlinePushpin className='h5 m-0' />{placeInfo.name}</button>}
+                        <div className={`d-flex justify-content-lg-end  justify-content-between m-0 p-lg-0 py-2 px-0  col-lg-5 ${item.place_url ? "col-12 pt-2 align-items-center" : "col-6"}`}>
+                            <div className=' px-lg-4 col-md-auto'>
+                                {item.place_url && <button onClick={() => {
+                                    nav(`/places/${placeInfo._id}`);
+                                }} className=' col-auto locationBtn d-flex align-items-center p-2'> <AiOutlinePushpin className='h5 m-0' />{placeInfo.name}</button>}
+                            </div>
+                            <div className={`col-md-auto row align-items-start opacity-75 pe-3 ${item.place_url ? "" : ""}}`} style={{ fontSize: "0.8em" }}>
+                                {moment(item.date_created).fromNow()}
+                            </div>
                         </div>
-                        <div className={`col-md-auto row align-items-start opacity-75 pe-3 ${item.place_url ? "" : ""}}`} style={{ fontSize: "0.8em" }}>
-                            {moment(item.date_created).fromNow()}
-                        </div>
-                    </div>
 
-                </div>
-                <div className='row'>
-                    {item.img_url && <img src={item.img_url} alt="place pic" className='m-1 col-md-5 postPic' />}
-                    <div className='col-md-6 description'>{item.description}</div>
-                </div>
+                    </div>
+                    <div className='row'>
+                        {item.img_url && <img src={item.img_url} alt="place pic" className='m-1 col-md-5 postPic' />}
+                        <div className='col-md-6 description'>{item.description}</div>
+                    </div>
                 </div>
                 <div className='row align-items-end m-0 p-0'>
                     <div className='mt-auto m-0'>
@@ -177,20 +187,40 @@ export default function PostItem(props) {
                                 </div>
                                 <span className='px-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="" className='btnIcon' id="dropdown-basic">
-
+                            <div className='report'>
+                                <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>
                                     <AiOutlineExclamationCircle className='h2 m-0' />
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => onReportPost(item._id)}>report this post</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                                </Button>
+                                <Dialog
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">
+                                        {"Report post"}
+                                    </DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            Are you sure you want to report this post?
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose} className='text-dark'>Disagree</Button>
+                                        <Button onClick={() => {
+                                            handleClose();
+                                            onReportPost(item._id);
+                                        }} autoFocus>
+                                            Agree
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div className='postCommets col-md-4 text-center d-flex ps-3' style={{ flexDirection: "column" }}>
                 <h5 className='text-center pb-2'>comments</h5>

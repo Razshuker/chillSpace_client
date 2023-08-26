@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import '../../css/home.css'
 import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService'
@@ -13,6 +14,7 @@ export default function WhereToTravel() {
     const [isAnswer, setIsAnswer] = useState(false);
     const [loading, setLoading] = useState(false);
     const { userInfo } = useContext(MyContext);
+    const [message, setMessage] = useState(false);
 
     useEffect(() => {
         initMatches();
@@ -35,11 +37,12 @@ export default function WhereToTravel() {
     }
 
     const onSub = async (_data) => {
+        setLoading(true);
         if (!localStorage[TOKEN_KEY]) {
-            toast.error("You must login to get your results")
+            setLoading(false);
+            setMessage(true);
         } else {
             try {
-                setLoading(true);
                 const ansUrl = `kind=${_data.kind}&members=${_data.members}&tags_ar=${_data.DescribeYourself},${_data.bestOption}`;
                 const url = API_URL + `/places/whereToTravel?${ansUrl}`;
                 const data = await doApiGet(url);
@@ -47,7 +50,6 @@ export default function WhereToTravel() {
                 setIsAnswer(true);
                 setLoading(false);
                 changeUrlMatch(ansUrl);
-
             } catch (error) {
                 console.log(error);
                 setLoading(false);
@@ -106,12 +108,11 @@ export default function WhereToTravel() {
                     {errors.members && <div className="text-danger">* choose the best option for you</div>}
                     {myPlaces.length == 0 ?
                         <button className='find_btn'>Find me places</button> : <button className='find_btn'>Find me new places</button>
-
                     }
                 </form>
             </div>
             {loading ? <Loading /> :
-                <div className="row mt-5 justify-content-center place_click g-4">
+                localStorage[TOKEN_KEY] && <div className="row mt-5 justify-content-center place_click g-4">
                     {myPlaces.map(item => {
                         return (
                             <PlaceBoxItem key={item._id} item={item} />
@@ -120,7 +121,13 @@ export default function WhereToTravel() {
                 </div>
             }
             {myPlaces.length == 0 && isAnswer && <h3>Sorry, we couldn't find the right place for you</h3>}
-
+            {message && <div>
+                <h3>You must login to get your results</h3>
+                <Link to="/login" className='text-dark d-flex justify-content-center'>Login</Link>
+                <br />
+                <Link to="/sign-up" className='text-dark d-flex justify-content-center'>don't have an account? sign up</Link>
+            </div>
+            }
         </div>
     )
 }
