@@ -116,9 +116,9 @@ header nav ul li a:hover {
     font-size: 4em;
 }
 
-.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+/* .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
     color: transparent !important;
-}
+} */
 
 .css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
     background-color: transparent !important;
@@ -188,7 +188,7 @@ footer ul li a {
     padding: 2px;
     /* font-size: 1.25em; */
     /* font-family: 'Manrope', sans-serif; */
-    transition:80ms;
+    transition: 80ms;
     display: block;
 
 }
@@ -280,7 +280,7 @@ footer ul li a:hover {
     header .burger-profile {
         height: 0;
         color: transparent;
-        
+
     }
 
     header .burger-profile li {

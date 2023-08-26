@@ -23,9 +23,10 @@
 }
 
 .btnIcon {
-    background-color: inherit;
-    border: none;
-    padding: 0;
+    background-color: inherit !important;
+    border: none !important;
+    padding: 0 !important;
+    color: black !important;
 
 }
 
@@ -120,7 +121,7 @@
 .nameTitle {
     font-family: 'Manrope', sans-serif;
     font-size: 2em;
-    padding: 12px 0 ;
+    padding: 12px 0;
 }
 
 /* posts comments */

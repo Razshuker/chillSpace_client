@@ -9,7 +9,7 @@ import { MyContext } from '../../context/myContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from "moment";
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
 
 
 export default function PostItem(props) {
@@ -22,6 +22,16 @@ export default function PostItem(props) {
     const commentRef = useRef();
     const { userInfo } = useContext(MyContext);
     const nav = useNavigate();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
 
     useEffect(() => {
         doApiUserInfo();
@@ -177,16 +187,35 @@ export default function PostItem(props) {
                                 </div>
                                 <span className='px-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="" className='btnIcon' id="dropdown-basic">
-
+                            <div className='report'>
+                                <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>
                                     <AiOutlineExclamationCircle className='h2 m-0' />
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => onReportPost(item._id)}>report this post</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                                </Button>
+                                <Dialog
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">
+                                        {"Report post"}
+                                    </DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText id="alert-dialog-description">
+                                            Are you sure you want to report this post?
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose}>Disagree</Button>
+                                        <Button onClick={() => {
+                                            handleClose();
+                                            onReportPost(item._id);
+                                        }} autoFocus>
+                                            Agree
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
+                            </div>
                         </div>
                     </div>
                 </div>
