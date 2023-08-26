@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react';
 import '../css/signup.css'
 import { useForm } from "react-hook-form"
 import { CgProfile } from "react-icons/cg";
@@ -19,11 +19,28 @@ export default function Signup() {
     const [citiesAr, setCitiesAr] = useState([]);
     const [selectedCity, setSelectedCity] = useState("");
     const [ifCity, setIfCity] = useState(true);
+    const [passwordError, setPasswordError] = useState(false);
+
 
 
     useEffect(() => {
         doApiCities();
     }, []);
+
+    const handlePasswordChange = (event) => {
+        const newPassword = event.target.value;
+        setPasswordError(!validatePassword(newPassword));
+    };
+
+    const validatePassword = (password) => {
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*]/.test(password);
+        const isLengthValid = password.length >= 8;
+
+        return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar && isLengthValid;
+    };
 
     const doApiCities = async () => {
         try {
@@ -61,6 +78,10 @@ export default function Signup() {
 
     const onSub = async (_data) => {
         try {
+            if (!validatePassword(_data.password)) {
+                setPasswordError(true);
+                return;
+            }
             if (selectedCity == "") setIfCity(false)
             else {
                 _data.matchPlacesUrl = "";
@@ -81,6 +102,7 @@ export default function Signup() {
                     nav("/login");
                 }
             }
+            setPasswordError(false);
         } catch (error) {
             console.log(error);
             if (error.response.data.code == 11000) {
@@ -118,8 +140,9 @@ export default function Signup() {
                             <div className="col-md-6">
                                 <input placeholder='Nickname' {...register("nickname", { required: true, minLength: 2 })} className="form-control input-signIn" type="text" />
                                 {errors.nickname && <div className="text-danger">* Enter valid nickname</div>}
-                                <input placeholder='Password' {...register("password", { required: true, minLength: 2 })} className="form-control input-signIn" type="password" />
+                                <input onInput={handlePasswordChange} placeholder='Password' {...register("password", { required: true, minLength: 2 })} className="form-control input-signIn" type="password" />
                                 {errors.password && <div className="text-danger">* Enter valid password</div>}
+                                {passwordError && <div className="text-danger">*The password must contain 7 characters including an uppercase letter, a lowercase letter, a number and a special character.</div>}
                                 <input placeholder='Confirm password' {...register("confirm_password", {
                                     required: true, validate: (value) => {
                                         const { password } = getValues();
@@ -153,7 +176,5 @@ export default function Signup() {
                 </div>
             </div>
         </div>
-
-
     )
 }
