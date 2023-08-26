@@ -54,9 +54,9 @@ export default function CategoriesList() {
 
     return (
         <div className='container-fluid'>
-            <h1 className='display-4 text-center my-5'>Categories List:</h1>
+            <h1 className='display-4 text-center my-4'>Categories List:</h1>
             <div className="container">
-                <Link to={"add"} className='btn btn-outline-dark my-4'>Add new category</Link>
+                <Link to={"add"} className='btn btn-outline-dark mb-4'>Add new category</Link>
                 <div className="table-container">
                     {categories.length != 0 ? (
 
@@ -84,7 +84,8 @@ export default function CategoriesList() {
                                         <td>{Date().toString(item.date_created).substring(3, 15)}</td>
                                         <td><button onClick={() => {
                                             nav("edit/" + item._id);
-                                        }} className='btn'>edit</button><button onClick={() => {
+                                        }} className='btn btn-outline-dark mx-1
+                                        '>edit</button><button onClick={() => {
                                             onDeleteCat(item._id, item.name);
                                         }} className='btn btn-danger'>X</button></td>
                                     </tr>

@@ -10,15 +10,18 @@ import { useUser } from '../../hooks/useUser'
 export default function Favorites() {
     const [favorites, setFavorites] = useState([]);
     const { getUserInfo } = useUser();
+    const [isLoading, setIsLoading] = useState(true);
 
 
     const getFavorites = async () => {
         try {
+            // setIsLoading(true);
             const url = API_URL + "/users/favorites";
             const data = await doApiGet(url);
             getPlaces(data);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     }
 
@@ -30,8 +33,10 @@ export default function Favorites() {
                 return _favorites.includes(item._id);
             })
             setFavorites(filterData);
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     }
 
@@ -54,7 +59,7 @@ export default function Favorites() {
             <div className="container">
                 <div className="row">
                     <div className="placeArea col-lg-7">
-                        <PlaceArea onDeleteOrAddToFavorite={onDeleteOrAddToFavorite} favorites={favorites} getFavorites={getFavorites} />
+                        <PlaceArea onDeleteOrAddToFavorite={onDeleteOrAddToFavorite} isLoading={isLoading} favorites={favorites} getFavorites={getFavorites} />
                     </div>
                     <div className="map col-lg-5">
                         <Map favorites={favorites} getFavorites={getFavorites} />

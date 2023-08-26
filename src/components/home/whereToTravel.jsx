@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form"
 import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService'
 import Loading from '../loading'
 import PlaceBoxItem from '../places/placeBoxItem'
-import { toast } from 'react-toastify'
 import { MyContext } from '../../context/myContext'
 
 export default function WhereToTravel() {
@@ -61,8 +60,6 @@ export default function WhereToTravel() {
         try {
             const updateMatchUrl = API_URL + "/users/changeUrlMatch/" + _newUrl;
             await doApiMethod(updateMatchUrl, "PATCH");
-            // if(dataMatch.modifiedCount){
-            // }
         } catch (error) {
             console.log(error);
         }

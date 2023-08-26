@@ -24,6 +24,12 @@ export default function PostItem(props) {
     const nav = useNavigate();
     const [open, setOpen] = React.useState(false);
 
+    useEffect(() => {
+        doApiUserInfo();
+        getPlaceInfo();
+        doApiComments(item._id);
+    }, [])
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -31,13 +37,6 @@ export default function PostItem(props) {
     const handleClose = () => {
         setOpen(false);
     };
-
-
-    useEffect(() => {
-        doApiUserInfo();
-        getPlaceInfo();
-        doApiComments(item._id);
-    }, [])
 
     const doApiComments = async (_idPost) => {
         try {
@@ -221,7 +220,6 @@ export default function PostItem(props) {
                 </div>
             </div>
 
-
             <div className='postCommets col-md-4 text-center d-flex ps-3' style={{ flexDirection: "column" }}>
                 <h5 className='text-center pb-2'>comments</h5>
                 <div className='pb-3'> <CommentsList comments={comments} /></div>
@@ -241,7 +239,5 @@ export default function PostItem(props) {
                 </div>
             </div>
         </div>
-
-
     )
 }

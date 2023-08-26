@@ -19,7 +19,6 @@ export default function Footer() {
                     <div className='col-lg-4 col-12 col-md-6 '>
                         <div className=' row justify-content-center text-center align-items-center m-0'>
                             <h4 className='p-0 m-0'>R&N</h4>
-                            {/* <p>Chill Space</p> */}
                             <div className="col-auto">
                         <img className='img-fluid' style={{height:45}} src='images/chillSpaceLogoPNG.png' alt='logo' />
                     </div>
@@ -29,16 +28,16 @@ export default function Footer() {
                         <div className='row justify-content-around'>
                             <div className='col-6'>
                                 <div className='pb-3'>Noy Nosrati</div>
-                                <Link to="https://www.linkedin.com/in/noy-nosrati" className='text-dark' target="_blank"><AiFillLinkedin className='h4 mx-1'/></Link>
+                                <Link to="https://www.linkedin.com/in/noy-nosrati" className='text-dark' target="_blank"><AiFillLinkedin className='iconFooter h4 mx-1'/></Link>
                                 <Link to="https://github.com/noyNosrati/" className='text-dark'  target="_blank">
-                                <AiFillGithub className='h4 mx-1'/>
+                                <AiFillGithub className='h4 mx-1 iconFooter'/>
                                 </Link>
                             </div>
                             <div className='col-6 '>
                                 <div className='pb-3'>Raz Shuker</div>
-                                <Link to="https://www.linkedin.com/in/raz-shuker/" className='text-dark' target="_blank"><AiFillLinkedin className='h4 mx-1'/></Link>
+                                <Link to="https://www.linkedin.com/in/raz-shuker/" className='text-dark' target="_blank"><AiFillLinkedin className='h4 mx-1 iconFooter'/></Link>
                                 <Link to="https://github.com/Razshuker/" className='text-dark'  target="_blank">
-                                <AiFillGithub className='h4 mx-1'/>
+                                <AiFillGithub className='h4 mx-1 iconFooter'/>
                                 </Link>
                             </div>
                         </div>

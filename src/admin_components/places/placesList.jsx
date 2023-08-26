@@ -53,6 +53,8 @@ export default function PlacesList() {
     }
 
     return (
+        <div className='container-fluid'  style={{minHeight:300}}>
+
         <div className='container'>
             <h2 className='display-2 text-center mt-4'>Places List</h2>
             <button className='btn btn-outline-dark' onClick={() => { nav("/admin/places/add") }}>Add new place</button>
@@ -122,6 +124,7 @@ export default function PlacesList() {
                     setCurrentPage={setCurrentPage}
                 />
             </div>
+        </div>
         </div>
     )
 }

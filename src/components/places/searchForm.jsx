@@ -4,17 +4,12 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { BiSliderAlt, BiX } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai"
 import '../../css/places.css'
-import { useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 export default function SearchForm({ setShowSort, isShowSort }) {
     const inputRef = useRef();
     const nav = useNavigate();
     const [query] = useSearchParams();
-
-    useEffect(() => {
-        // onCleanSearch();
-    }, [])
 
     const onSearch = () => {
         const searchParams = new URLSearchParams(query);
@@ -48,8 +43,7 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                                 <BiX onClick={onClickSort} />
                             </div>
                             :
-                            <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />
-                        }
+                            <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />}
                         {query.get("s") &&
                             <Dropdown className='place_clear'>
                                 <Dropdown.Toggle variant="" className='cleanBtn col-auto' id="dropdown-basic">

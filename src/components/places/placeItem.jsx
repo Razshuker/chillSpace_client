@@ -94,7 +94,7 @@ export default function PlaceItem({ item }) {
                         }
 
                     }} className="buttons d-flex justify-content-end col-1 w-100 pe-4">
-                        {isLiked ? <BsFillBookmarkFill className='h1 saveIcon' /> : <BsBookmark className='h1 saveIcon' />}
+                        {isLiked ? <BsFillBookmarkFill role='button' className='h1 saveIcon' /> : <BsBookmark  role='button' className='h1 saveIcon' />}
                     </div>
                     <div className="row align-items-end col-11 ms-3">
                         {item.tags_name.map(tag => {

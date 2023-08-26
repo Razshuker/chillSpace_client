@@ -76,7 +76,7 @@ export default function TagsTable() {
                                 <td>{Date().toString(item.date_created).substring(3, 15)}</td>
                                 <td><button onClick={() => {
                                     nav("tag/" + item._id);
-                                }} className='btn'>edit</button></td>
+                                }} className='btn btn-outline-dark'>edit</button></td>
                                 <td><button onClick={() => {
                                     deleteTag(item._id);
                                 }} className='btn btn-danger btn-close'></button></td>

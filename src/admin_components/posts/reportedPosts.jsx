@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 export default function ReportedPosts() {
     const [reportedPosts, setReportedPosts] = useState([]);
 
-
     useEffect(() => {
         doApiReportedPosts();
     }, [reportedPosts])
@@ -23,7 +22,6 @@ export default function ReportedPosts() {
             toast.error("There is a problem, please try again later");
         }
     }
-
 
     const confirmPost = async (_idConfirm) => {
         try {
@@ -51,9 +49,8 @@ export default function ReportedPosts() {
         }
     }
 
-
     return (
-        <div className=''>
+        <div className='container'>
             <h2 className='p-4'>Reported Posts</h2>
             {reportedPosts.map(item => {
                 return (
@@ -66,6 +63,5 @@ export default function ReportedPosts() {
                 )
             })}
         </div>
-
     )
 }
