@@ -28,7 +28,8 @@ export default function PostItem(props) {
         doApiUserInfo();
         getPlaceInfo();
         doApiComments(item._id);
-    }, [])
+        userInfo?._id && likes?.includes(userInfo?._id)&&setIsLiked(true)
+    }, [userInfo])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -54,9 +55,6 @@ export default function PostItem(props) {
                 const url = API_URL + "/users/userInfo/" + item.user_id;
                 const data = await doApiGet(url);
                 setUserPostInfo(data)
-                if (likes?.includes(data?._id)) {
-                    setIsLiked(true)
-                }
             }
         } catch (error) {
             console.log(error);
@@ -184,7 +182,7 @@ export default function PostItem(props) {
                                         </span>
                                     </button>
                                 </div>
-                                <span className='px-1 d-flex align-items-center'>{likes.length}</span>
+                                <span className='ps-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
                             <div className='report'>
                                 <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>

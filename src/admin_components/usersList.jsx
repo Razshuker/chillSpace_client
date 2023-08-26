@@ -67,7 +67,7 @@ export default function UsersList() {
 
     return (
         <div className='container-fluid'>
-            <div className="container" style={{minHeight:300}}>
+            <div className="container" style={{minHeight:600}}>
                 {users_ar.length > 0 &&
                     <div>
                         <h1 className='display-4 text-center my-5'>Users List:</h1>

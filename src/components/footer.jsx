@@ -6,7 +6,7 @@ import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai'
 export default function Footer() {
     return (
         <footer className='container-fluid m-0'>
-            <div className='container m-0'>
+            <div className='container m-auto'>
                 <div className='row justify-content-center text-center align-items-center pt-4 pb-3 m-0'>
                     <div className='col-lg-4 col-12 col-md-6  '>
                         <ul className='list-inline mx-auto col-9 row  '>
