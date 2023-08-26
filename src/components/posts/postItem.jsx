@@ -206,7 +206,7 @@ export default function PostItem(props) {
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={handleClose}>Disagree</Button>
+                                        <Button onClick={handleClose} className='text-dark'>Disagree</Button>
                                         <Button onClick={() => {
                                             handleClose();
                                             onReportPost(item._id);
