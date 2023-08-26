@@ -1,6 +1,6 @@
 import React from 'react'
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { AiFillLike, AiOutlinePushpin,AiFillMessage, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlinePushpin,AiFillMessage, AiOutlineHeart } from "react-icons/ai";
 
 
 export default function PostsLoading() {
@@ -34,7 +34,6 @@ export default function PostsLoading() {
                 </p></div>
             </div>
         </div>
-
         <div className='row'>
             <div className='col-md-6'><p className="placeholder-glow">
                 <span className="placeholder col-12"></span>
@@ -47,7 +46,6 @@ export default function PostsLoading() {
             </p></span>
         </div>
     </div>
-
     <div className='col-md-5 text-center'>
         <h5 className='text-center'><p className="placeholder-glow">
             <span className="placeholder col-12"></span>

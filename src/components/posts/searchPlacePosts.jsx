@@ -19,7 +19,6 @@ export default function SearchPlacePosts() {
             const url = API_URL + "/places/placesNames";
             const data = await doApiGet(url);
             setPlacesAr(data);
-            // console.log();
         } catch (error) {
             console.log(error);
         }

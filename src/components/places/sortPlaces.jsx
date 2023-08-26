@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { API_URL, doApiGet } from '../../services/apiService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../../css/places.css'
-import { Style } from '@mui/icons-material';
 
 export default function SortPlaces({ setShowSort, isShowSort }) {
     const [types, setTypes] = useState([]);

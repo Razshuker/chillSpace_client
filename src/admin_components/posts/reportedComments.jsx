@@ -42,7 +42,6 @@ export default function ReportedComments() {
         }
     }
 
-
     return (
         <div className='container'>
             <h2 className='p-4'>Reported Comments</h2>

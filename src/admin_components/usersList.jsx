@@ -67,7 +67,7 @@ export default function UsersList() {
 
     return (
         <div className='container-fluid'>
-            <div className="container">
+            <div className="container" style={{minHeight:300}}>
                 {users_ar.length > 0 &&
                     <div>
                         <h1 className='display-4 text-center my-5'>Users List:</h1>
@@ -119,7 +119,7 @@ export default function UsersList() {
                                                 </td>
                                                 <td><button onClick={() => {
                                                     changeRole(item._id, item.role);
-                                                }} className='btn'>{item.role}</button></td>
+                                                }} className='btn btn-outline-dark'>{item.role}</button></td>
                                                 <td><button style={{ position: "unset", fontSize: "1em" }} onClick={() => {
                                                     deleteUser(item._id, item.full_name);
                                                 }} className='btn btn-danger btn-close'></button></td>

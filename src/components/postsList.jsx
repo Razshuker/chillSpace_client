@@ -2,20 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../css/posts.css'
 import PostItem from './posts/postItem'
 import { API_URL, TOKEN_KEY, doApiGet } from '../services/apiService';
-import { IoSearchOutline, IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
+import { IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
 import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from './posts/postsLoading';
 import { toast } from 'react-toastify';
 import SearchUserPosts from './posts/searchUserPosts';
 import SearchPlacePosts from './posts/searchPlacePosts';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Loading from './loading';
-import zIndex from '@mui/material/styles/zIndex';
 import { AiOutlineSearch } from 'react-icons/ai';
 import UpButton from './upButton';
-
 
 export default function PostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -41,7 +37,6 @@ export default function PostsList() {
 
 
     useEffect(() => {
-        // const searchQ = query.get("s") || "";
         getPosts();
     }, [query, reverse])
 
@@ -76,7 +71,6 @@ export default function PostsList() {
         }
     }
 
-
     const getPosts = async () => {
         try {
             setIsLoading(true);
@@ -92,8 +86,6 @@ export default function PostsList() {
                 url += "&user=" + query.get("user")
             }
             if (reverse) {
-                // const mark = url.includes("?");
-                // mark ? url += `&` : url += `?`;
                 url += "&reverse=yes"
             }
             const data = await doApiGet(url);
@@ -119,10 +111,6 @@ export default function PostsList() {
 
     const onSortClick = () => {
         setReverse(!reverse);
-    }
-
-    const handleOnSearch = (item) => {
-        nav("?s=" + item)
     }
 
     return (
@@ -166,8 +154,6 @@ export default function PostsList() {
                                         <input onKeyDown={(e) => {
                                             if (e.key == "Enter") {
                                                 nav("?s=" + inputRf.current.value);
-
-
                                             }
                                         }} ref={inputRf}
                                             className="serchTitleInput form-control px-5 pl-10 border rounded-md focus:ring focus:border-black"

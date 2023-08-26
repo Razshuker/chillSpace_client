@@ -1,14 +1,11 @@
 import React from 'react';
 
 export const PaginationButtons = ({ currentPage, pages, setCurrentPage }) => {
-
-
     return (
         <div>
             {[...Array(pages)].map((item, i) => {
                 const pageNumber = i + 1;
                 const isActive = pageNumber === currentPage;
-
                 return (
                     <button
                         key={i}

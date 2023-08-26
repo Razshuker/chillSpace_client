@@ -12,12 +12,10 @@ import { TOKEN_KEY } from '../services/apiService';
 import UserInfo from './user/userInfo';
 import { toast } from 'react-toastify';
 
-
 export default function Header() {
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const { userInfo, setUserInfo } = useContext(MyContext);
-
     const nav = useNavigate();
 
     const onToggleBurger = () => {

@@ -21,7 +21,6 @@ export default function UserPostsList() {
     const [isLoading, setIsLoading] = useState(false);
     const { userInfo } = useContext(MyContext);
     const nav = useNavigate();
-
     const [displayLimit, setDisplayLimit] = useState(5); // Set the initial limit here
     const [postsCount, setPostsCount] = useState();
 

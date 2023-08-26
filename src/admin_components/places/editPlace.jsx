@@ -20,7 +20,6 @@ export default function EditPlace() {
     const nav = useNavigate();
     const params = useParams();
 
-
     useEffect(() => {
         doApiGetPlace();
 

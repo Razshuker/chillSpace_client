@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import '../css/places.css'
 import SortPlaces from './places/sortPlaces';
 import PlacesList from './places/placesList';

@@ -22,7 +22,6 @@ export default function CommentItem(props) {
         doApiUserInfo(comment.user_id);
     }, [])
 
-
     const doApiUserInfo = async (_idUser) => {
         const url = API_URL + "/users/userInfo/" + _idUser;
         const data = await doApiGet(url);
@@ -42,13 +41,13 @@ export default function CommentItem(props) {
     }
 
     return (
-        <div className='comment row m-0' key={comment._id}>
+        <div className='comment row align-items-start m-0 pb-2' key={comment._id}>
             <div className='col-1 d-flex p-0'>
                 {userInfo.img_url ? <img src={userInfo.img_url} className='profile-pic-comment' /> : <AccountCircle fontSize='large' />}
             </div>
             <div className='col-9 text-start ps-4 '>
-                <p className='small m-0'><strong>{userInfo.nickname}</strong></p>
-                <p className='col-auto mt-1 mb-0'>{comment.text}</p>
+                <div className='small m-0'><strong>{userInfo.nickname}</strong></div>
+                <p className='col-auto p-0 m-0 text-truncate text-wrap small'>{comment.text}</p>
             </div>
             <div className='justify-content-end d-flex p-0 col-1 '>
                 <div className='report'>
