@@ -28,8 +28,13 @@ export default function PostItem(props) {
         doApiUserInfo();
         getPlaceInfo();
         doApiComments(item._id);
-        userInfo?._id && likes?.includes(userInfo?._id)&&setIsLiked(true)
-    }, [userInfo])
+        for (const like of likes) {
+            if (like._id === userInfo?._id) {
+                setIsLiked(true)
+                break;
+            }
+        }
+    }, [userInfo._id])
 
     const handleClickOpen = () => {
         setOpen(true);
