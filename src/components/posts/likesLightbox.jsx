@@ -1,6 +1,7 @@
 import React from 'react';
 import "../../css/posts.css"
 import { AccountCircle } from '@mui/icons-material';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export default function LikesLightbox({ setShowLikes, likes }) {
     const handleOverlayClick = (event) => {
@@ -12,13 +13,13 @@ export default function LikesLightbox({ setShowLikes, likes }) {
     return (
         <div className="likes-lightbox-overlay bg-dark" onClick={handleOverlayClick}>
             <div className="likes-lightbox-content">
-                <div className="d-flex justify-content-between p-3 border-bottom">
-                    <h2 className="mx-auto my-0 h3 font-weight-bold">Likes</h2>
+                <div className="d-flex justify-content-between p-3  border-bottom">
+                    <h2 className="mx-auto my-0 h5 font-weight-bold">Likes</h2>
                     <div
                         onClick={() => { setShowLikes(false) }}
                         className="cursor-pointer text-black-50 hover-text-gray-500 transition duration-200"
                     >
-                        <span role='button' className='h5'>X</span>
+                        <span role='button' className=''><AiOutlineClose/></span>
                     </div>
                 </div>
                 {likes.length === 0 ? (
@@ -26,12 +27,12 @@ export default function LikesLightbox({ setShowLikes, likes }) {
                         This post has no likes yet.
                     </p>
                 ) : (
-                    <ul className="list-unstyled overflow-auto" style={{ maxHeight: '300px', width:"250px" }}>
+                    <ul className="list-unstyled overflow-auto mt-2 ms-1" style={{ maxHeight: '300px', width:"250px" }}>
 
                         {likes.map((item, index) => (
                             <li
                                 key={index}
-                                className={`p-3 ${index === likes.length - 1 ? "rounded-bottom" : ""} hover:bg-gray-200 transition duration-200`}
+                                className={`p-2 ${index === likes.length - 1 ? "rounded-bottom" : ""} hover:bg-gray-200 transition duration-200`}
                             >
                                 {item.img_url ? 
                                 <img

@@ -185,6 +185,7 @@
 
 .likes-lightbox-content {
     background-color: white;
+    opacity: 100%;
     max-width: 320px;
     border-radius: 8px;
     overflow: hidden;
