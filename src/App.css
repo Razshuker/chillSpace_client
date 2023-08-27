@@ -198,8 +198,8 @@ footer ul li a:hover {
     color: white;
 }
 
-footer .iconFooter:hover{
-color: white;
+footer .iconFooter:hover {
+    color: white;
 }
 
 * {
@@ -252,7 +252,7 @@ color: white;
     header .burgerShow {
         height: 100vh;
         position: fixed;
-        width: 50%;
+        width: 40%;
     }
 
     header .adminNav .burgerShow {
@@ -326,6 +326,19 @@ color: white;
     }
 
 
+    header nav ul li::after {
+        content: " ";
+        display: block;
+        height: 1px;
+        width: 75%;
+        margin: 4px auto;
+        background-color: rgb(61, 60, 60);
+    }
+
+    header nav ul li:last-of-type::after {
+        width: 0%;
+    }
+
     header nav ul li a {
         display: flex;
         justify-content: center;
@@ -342,6 +355,12 @@ color: white;
 
     header nav a {
         display: block;
+    }
+
+    .login-div {
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 50vh;
     }
 
 }

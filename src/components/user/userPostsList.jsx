@@ -49,18 +49,21 @@ export default function UserPostsList() {
 
     useEffect(() => {
         getPosts();
-    }, [reverse])
+    }, [reverse, userInfo._id])
 
     const getPosts = async () => {
         try {
             setIsLoading(true);
-            let url = API_URL + "/posts?userId=" + userInfo._id;
-            if (reverse) {
-                url += `&reverse=yes`;
+            if (userInfo._id) {
+                let url = API_URL + "/posts?perPage=0&user=" + userInfo._id;
+                if (reverse) {
+                    url += `&reverse=yes`;
+                }
+                const data = await doApiGet(url);
+                setIsLoading(false);
+                postsAr.splice(0, Infinity);
+                setPostsAr(data);
             }
-            const data = await doApiGet(url);
-            setIsLoading(false);
-            setPostsAr(data);
         } catch (error) {
             console.log(error);
             setIsLoading(false);
@@ -125,7 +128,8 @@ export default function UserPostsList() {
                         hasMore={!noMorePosts && !isLoading}
                         loader={<PostsLoading />}
                     >
-                        {postsAr.map(item => {
+                        {console.log(postsAr)}
+                        {displayedPosts.map(item => {
                             return (
                                 <div key={item._id}>
                                     <div className='pb-3' >

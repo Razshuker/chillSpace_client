@@ -53,7 +53,6 @@ export default function SinglePlace() {
         try {
             const url = API_URL + "/places?perPage=4&types=" + place.type + "&exclude=" + place._id;
             const data = await doApiGet(url);
-            console.log(data);
             setSamePlaces(data);
         } catch (error) {
             console.log(error);

@@ -37,14 +37,14 @@ export default function SearchForm({ setShowSort, isShowSort }) {
         <div className='container-fluid'>
             <div className="container mt-5">
                 <div className="row align-items-center justify-content-between w-100">
-                    <div className='d-flex align-items-center col-3 p-0'>
+                    <div className='d-flex align-items-center col-3 ps-lg-5'>
                         {isShowSort ?
                             <div className='h1 ps-2-1 col-2 sort_icon me-4'>
                                 <BiX onClick={onClickSort} />
                             </div>
                             :
-                            <BiSliderAlt onClick={onClickSort} className='h2 col-2 sort_icon m-0' />}
-                        {query.get("s") &&
+                            <BiSliderAlt onClick={onClickSort} className='h2 col-auto sort_icon m-0' />}
+                        {(query.get("s") || query.get("area") || query.get("types") || query.get("cats") || query.get("tags")) &&
                             <Dropdown className='place_clear'>
                                 <Dropdown.Toggle variant="" className='cleanBtn col-auto' id="dropdown-basic">
 
