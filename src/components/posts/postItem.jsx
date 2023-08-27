@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import moment from "moment";
 import { Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions } from '@mui/material';
+import LikesLightbox from './likesLightbox';
 
 
 export default function PostItem(props) {
@@ -23,6 +24,7 @@ export default function PostItem(props) {
     const { userInfo } = useContext(MyContext);
     const nav = useNavigate();
     const [open, setOpen] = React.useState(false);
+    const [showLikes, setShowLikes] = useState(false);
 
     useEffect(() => {
         doApiUserInfo();
@@ -145,6 +147,8 @@ export default function PostItem(props) {
     }
 
     return (
+        <>
+            {showLikes && <LikesLightbox likes={likes} setShowLikes={setShowLikes}/>}
         <div className='postItem m-0 p-3 p-lg-4 mt-4 row border border-dark border-opacity-10'>
             <div className='postInfo p-0 col-md-8 row m-0'>
                 <div>
@@ -187,7 +191,7 @@ export default function PostItem(props) {
                                         </span>
                                     </button>
                                 </div>
-                                <span className='ps-1 d-flex align-items-center'>{likes.length}</span>
+                                <span onClick={()=>{setShowLikes(true)}} role='button' className='ps-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
                             <div className='report'>
                                 <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>
@@ -242,5 +246,6 @@ export default function PostItem(props) {
                 </div>
             </div>
         </div>
+        </>
     )
 }
