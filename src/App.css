@@ -180,6 +180,8 @@ footer {
     background-color: rgb(216, 191, 172);
     min-height: 15vh;
     font-family: 'Manrope', sans-serif;
+    z-index: 1 !important;
+    position: relative;
 }
 
 footer ul li a {
