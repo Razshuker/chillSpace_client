@@ -27,9 +27,10 @@ export default function Login(props) {
             const data = await doApiMethod(url, "POST", _data);
             if (data.token) {
                 localStorage.setItem(TOKEN_KEY, data.token);
+                setInterval(clearLocalStorage, 36000000);
                 toast.success("you logged in")
                 getUserInfo();
-                nav(-1);
+                nav("/");
                 if (props.handleClose) {
                     props.handleClose();
                 }
