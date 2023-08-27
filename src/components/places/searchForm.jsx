@@ -44,7 +44,7 @@ export default function SearchForm({ setShowSort, isShowSort }) {
                             </div>
                             :
                             <BiSliderAlt onClick={onClickSort} className='h2 col-auto sort_icon m-0' />}
-                        {query.get("s") &&
+                        {(query.get("s") || query.get("area") || query.get("types") || query.get("cats") || query.get("tags")) &&
                             <Dropdown className='place_clear'>
                                 <Dropdown.Toggle variant="" className='cleanBtn col-auto' id="dropdown-basic">
 

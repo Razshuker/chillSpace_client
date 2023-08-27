@@ -163,7 +163,7 @@ export default function PostsList() {
                                         <button onClick={() => {
                                             nav("/posts")
                                             inputRf.current.value = ""
-                                        }} className='btn btn-close'></button>
+                                        }} className='btn btn-close btn-close_post'></button>
                                     </div>
                                 </div>
                             </div>}

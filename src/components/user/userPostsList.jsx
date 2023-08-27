@@ -55,7 +55,7 @@ export default function UserPostsList() {
         try {
             setIsLoading(true);
             if (userInfo._id) {
-                let url = API_URL + "/posts?user=" + userInfo._id;
+                let url = API_URL + "/posts?perPage=0&user=" + userInfo._id;
                 if (reverse) {
                     url += `&reverse=yes`;
                 }
@@ -129,7 +129,7 @@ export default function UserPostsList() {
                         loader={<PostsLoading />}
                     >
                         {console.log(postsAr)}
-                        {postsAr.map(item => {
+                        {displayedPosts.map(item => {
                             return (
                                 <div key={item._id}>
                                     <div className='pb-3' >
