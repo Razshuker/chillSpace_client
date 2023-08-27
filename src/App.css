@@ -196,8 +196,8 @@ footer ul li a:hover {
     color: white;
 }
 
-footer .iconFooter:hover{
-color: white;
+footer .iconFooter:hover {
+    color: white;
 }
 
 * {
@@ -250,7 +250,7 @@ color: white;
     header .burgerShow {
         height: 100vh;
         position: fixed;
-        width: 50%;
+        width: 40%;
     }
 
     header .adminNav .burgerShow {
