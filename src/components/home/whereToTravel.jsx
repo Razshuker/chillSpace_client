@@ -70,7 +70,7 @@ export default function WhereToTravel() {
             <h2 className='text-center'>WHERE TO TRAVEL</h2>
             <div className="d-flex justify-content-center">
                 <form onSubmit={handleSubmit(onSub)} className='col-md-9'>
-                    <label>Describe yourself in the most appropriate option</label>
+                    <label>Describe yourself in the most appropriate way</label>
                     <select {...register("DescribeYourself", { required: true, minLength: 2 })} className="form-select" type="select" >
                         <option value="" >Choose option</option>
                         <option value="Nature,Hiking,Dirty" >Traveling is all that is on my mind</option>
