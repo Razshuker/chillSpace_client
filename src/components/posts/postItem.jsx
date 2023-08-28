@@ -164,14 +164,16 @@ export default function PostItem(props) {
                             </div>
                         </div>
 
-                        <div className={`d-flex justify-content-lg-end  justify-content-between m-0 p-lg-0 py-2 px-0  col-lg-5 ${item.place_url ? "col-12 pt-2 align-items-center" : "col-6"}`}>
+                        <div className={`d-flex justify-content-lg-end  justify-content-between m-0p-lg-0 py-2 px-0  col-lg-7 ${item.place_url ? "col-12 pt-2 align-items-center" : "col-6"}`}>
+                            <div className='pe-1 me-3'>
                             <div className=' px-lg-4 col-md-auto'>
                                 {item.place_url && <button onClick={() => {
                                     nav(`/places/${placeInfo._id}`);
                                 }} className=' col-auto locationBtn d-flex align-items-center p-2'> <AiOutlinePushpin className='h5 m-0' />{placeInfo.name}</button>}
                             </div>
-                            <div className={`col-md-auto row align-items-start opacity-75 pe-3 ${item.place_url ? "" : ""}}`} style={{ fontSize: "0.8em" }}>
-                                {moment(item.date_created).fromNow()}
+                            </div>
+                            <div className={`col-md-auto row align-items-start opacity-75 pe-md-5 ${item.place_url ? "" : ""}}`} style={{ fontSize: "0.8em" }}>
+                                 {moment(item.date_created).fromNow()}
                             </div>
                         </div>
 
