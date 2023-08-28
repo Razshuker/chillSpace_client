@@ -37,6 +37,7 @@ export default function PostsList() {
 
 
     useEffect(() => {
+        setPostsAr([]);
         getPosts();
     }, [query, reverse])
 
@@ -185,7 +186,7 @@ export default function PostsList() {
                             loader={<PostsLoading />}
                         >
                             <div>
-                                {displayedPosts.length === 0 && !isLoading ? (
+                                {postsAr.length === 0 && !isLoading ? (
                                     <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
                                 ) : (
 

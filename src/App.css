@@ -357,10 +357,15 @@ footer .iconFooter:hover {
         display: block;
     }
 
+    .login_resposive {
+        width: 50%;
+        margin: 0 auto;
+    }
+
     .login-div {
         justify-content: center;
         align-items: flex-end;
-        margin-top: 40vh;
+        margin-top: 30vh;
     }
 
 }
