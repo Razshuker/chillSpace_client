@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../css/posts.css'
 import PostItem from '../posts/postItem'
-import { API_URL, TOKEN_KEY, doApiGet, doApiMethod } from '../../services/apiService';
-import { IoSearchOutline, IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
+import { API_URL, doApiGet, doApiMethod } from '../../services/apiService';
+import { IoArrowForwardSharp, IoSwapVerticalSharp } from "react-icons/io5"
 import { BsPostcardHeart } from "react-icons/bs"
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import PostsLoading from '../posts/postsLoading';
@@ -40,7 +40,6 @@ export default function UserPostsList() {
         try {
             let url = API_URL + "/posts/count?user=" + userInfo._id;
             const data = await doApiGet(url);
-            console.log(data);
             setPostsCount(data);
         } catch (error) {
             console.log(error);
@@ -61,6 +60,9 @@ export default function UserPostsList() {
                 }
                 const data = await doApiGet(url);
                 setIsLoading(false);
+                if (data.length == 0) {
+                    setNoMorePosts(true);
+                }
                 postsAr.splice(0, Infinity);
                 setPostsAr(data);
             }
@@ -96,7 +98,7 @@ export default function UserPostsList() {
     const displayedPosts = postsAr.slice(0, displayLimit); // Limit the displayed places
 
     return (
-        <div className='container-fluid pt-5 pb-5'>
+        <div className='myPosts container-fluid pt-5 pb-5'>
             <h4 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h4>
             <div className="px-2 mt-lg-5">
                 <Link to={"/posts/add"} className='addBtn-posts'>
@@ -116,7 +118,7 @@ export default function UserPostsList() {
                 </div>
             </div>
             <div className='container'>
-                {postsAr.length == 0 ?
+                {isLoading && postsAr.length == 0 ?
                     <div>
                         <PostsLoading />
                         <PostsLoading />
@@ -128,32 +130,35 @@ export default function UserPostsList() {
                         hasMore={!noMorePosts && !isLoading}
                         loader={<PostsLoading />}
                     >
-                        {console.log(postsAr)}
-                        {displayedPosts.map(item => {
-                            return (
-                                <div key={item._id}>
-                                    <div className='pb-3' >
-                                        <PostItem key={item._id} item={item} />
-                                    </div>
-                                    <div className=' d-flex align-items-center justify-content-end'>
-                                        <CiEdit role='button' onClick={() => {
-                                            nav("edit/" + item._id);
-                                        }} className='h3' />
-                                        <Dropdown>
-                                            <Dropdown.Toggle variant="" id="dropdown-basic">
-                                                <AiOutlineDelete role='button' className='h3 text-danger' />
-                                            </Dropdown.Toggle>
+                        {postsAr.length === 0 && !isLoading ? (
+                            <h2 className='row justify-content-center align-items-center display-5' style={{ height: 300 }}>No results found.</h2>
+                        ) : (
+                            displayedPosts.map(item => {
+                                return (
+                                    <div key={item._id}>
+                                        <div className='pb-3' >
+                                            <PostItem key={item._id} item={item} />
+                                        </div>
+                                        <div className=' d-flex align-items-center justify-content-end'>
+                                            <CiEdit role='button' onClick={() => {
+                                                nav("edit/" + item._id);
+                                            }} className='h3' />
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="" id="dropdown-basic">
+                                                    <AiOutlineDelete role='button' className='h3 text-danger' />
+                                                </Dropdown.Toggle>
 
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={() => { deletePost(item._id) }}>delete this post</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item onClick={() => { deletePost(item._id) }}>delete this post</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </div>
+                                        <hr />
+                                        <br />
                                     </div>
-                                    <hr />
-                                    <br />
-                                </div>
-                            )
-                        })}
+                                )
+                            })
+                        )}
                     </InfiniteScroll>
                 }
             </div>

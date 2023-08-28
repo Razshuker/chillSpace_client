@@ -26,6 +26,7 @@ export default function PlacesList() {
     }, [displayLimit])
 
     useEffect(() => {
+        setPlaces([]);
         getPlaces();
     }, [query]);
 
@@ -99,7 +100,7 @@ export default function PlacesList() {
                 hasMore={!noMorePlaces && !isLoading}
                 loader={<Loading />}
             >
-                {displayedPlaces.length === 0 && !isLoading ? (
+                {places.length === 0 && !isLoading ? (
                     <h2 className="noPlaces">
                         There aren't match places to the search : "{query.get("s")}"
                     </h2>
