@@ -101,6 +101,7 @@ export default function PostItem(props) {
             const url = API_URL + "/posts/single/" + item._id;
             const data = await doApiGet(url);
             setLikes(data.likes);
+            console.log(data.likes);
         } catch (error) {
             console.log(error);
         }
@@ -148,7 +149,7 @@ export default function PostItem(props) {
 
     return (
         <>
-            {showLikes && <LikesLightbox likes={likes} setShowLikes={setShowLikes}/>}
+            {/* {showLikes && <LikesLightbox likes={likes} getLikes={getLikes} setShowLikes={setShowLikes}/>} */}
         <div className='postItem m-0 p-3 p-lg-4 mt-4 row border border-dark border-opacity-10'>
             <div className='postInfo p-0 col-md-8 row m-0'>
                 <div>
@@ -191,7 +192,8 @@ export default function PostItem(props) {
                                         </span>
                                     </button>
                                 </div>
-                                <span onClick={()=>{setShowLikes(true)}} role='button' className='ps-1 d-flex align-items-center'>{likes.length}</span>
+                                {/* <span onClick={()=>{setShowLikes(true)}} role='button' className='ps-1 d-flex align-items-center'>{likes.length}</span> */}
+                                <span className='ps-1 d-flex align-items-center'>{likes.length}</span>
                             </div>
                             <div className='report'>
                                 <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>

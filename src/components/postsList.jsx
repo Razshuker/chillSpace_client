@@ -114,7 +114,7 @@ export default function PostsList() {
     }
 
     return (
-        <div className='container-fluid pb-5'>
+        <div style={{minHeight:500}} className='container-fluid pb-5'>
             <div className='container'>
                 <div className="px-3">
                     {localStorage[TOKEN_KEY] && <Link to={"add"} className='addBtn-posts'>
