@@ -12,6 +12,7 @@ import { CiEdit } from 'react-icons/ci';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Dropdown } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
 export default function UserPostsList() {
     const [postsAr, setPostsAr] = useState([]);
@@ -23,6 +24,8 @@ export default function UserPostsList() {
     const nav = useNavigate();
     const [displayLimit, setDisplayLimit] = useState(5); // Set the initial limit here
     const [postsCount, setPostsCount] = useState();
+    const [open, setOpen] = useState(false);
+
 
     useEffect(() => {
         if (userInfo._id) {
@@ -38,8 +41,15 @@ export default function UserPostsList() {
 
     useEffect(() => {
         getPosts();
-    }, [reverse, userInfo._id,postsAr])
+    }, [reverse, userInfo._id, postsAr.length])
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const count = async () => {
         try {
@@ -80,8 +90,13 @@ export default function UserPostsList() {
 
     const deletePost = async (_idDel) => {
         try {
+            setIsLoading(true);
             const url = API_URL + "/posts/" + _idDel;
-            await doApiMethod(url, "DELETE");
+            const data = await doApiMethod(url, "DELETE");
+            if (data.deletedCount) {
+                getPosts();
+            }
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
             toast.error("There is a problem, please try again later");
@@ -146,15 +161,41 @@ export default function UserPostsList() {
                                             <CiEdit role='button' onClick={() => {
                                                 nav("edit/" + item._id);
                                             }} className='h3' />
-                                            <Dropdown>
+                                            {/* <Dropdown>
                                                 <Dropdown.Toggle variant="" id="dropdown-basic">
                                                     <AiOutlineDelete role='button' className='h3 text-danger' />
-                                                </Dropdown.Toggle>
-
-                                                <Dropdown.Menu>
+                                                </Dropdown.Toggle> */}
+                                            <Button variant="outlined" onClick={handleClickOpen} className='btnIcon'>
+                                                <AiOutlineDelete role='button' className='h3 text-danger' />
+                                            </Button>
+                                            <Dialog
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="alert-dialog-title"
+                                                aria-describedby="alert-dialog-description"
+                                            >
+                                                <DialogTitle id="alert-dialog-title">
+                                                    {"Delete post"}
+                                                </DialogTitle>
+                                                <DialogContent>
+                                                    <DialogContentText id="alert-dialog-description">
+                                                        Are you sure you want to delete this post?
+                                                    </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                    <Button onClick={handleClose} className='text-dark'>Disagree</Button>
+                                                    <Button onClick={() => {
+                                                        handleClose();
+                                                        deletePost(item._id);
+                                                    }} autoFocus>
+                                                        Agree
+                                                    </Button>
+                                                </DialogActions>
+                                            </Dialog>
+                                            {/* <Dropdown.Menu>
                                                     <Dropdown.Item onClick={() => { deletePost(item._id) }}>delete this post</Dropdown.Item>
                                                 </Dropdown.Menu>
-                                            </Dropdown>
+                                            </Dropdown> */}
                                         </div>
                                         <hr />
                                         <br />
