@@ -2,13 +2,20 @@ import React from 'react';
 import "../../css/posts.css"
 import { AccountCircle } from '@mui/icons-material';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useEffect } from 'react';
 
-export default function LikesLightbox({ setShowLikes, likes }) {
+export default function LikesLightbox({ setShowLikes, likes, getLikes }) {
     const handleOverlayClick = (event) => {
         if (event.target.classList.contains("bg-dark")) {
             setShowLikes(false);
         }
     };
+
+    useEffect(()=> {
+        // debugger;
+        console.log(likes);
+        // getLikes()
+    },[])
 
     return (
         <div className="likes-lightbox-overlay bg-dark" onClick={handleOverlayClick}>
