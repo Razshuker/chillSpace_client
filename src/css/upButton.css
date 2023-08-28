@@ -11,11 +11,11 @@
 }
 
 .scroll-to-top-btn button {
-    background-color: rgb(121, 99, 88);
+    background-color: rgb(146, 120, 107);
     border: 2px solid rgb(255, 232, 215);
     color: #fff;
     border: none;
-    padding: 10px 15px;
+    padding: 8px 12px;
     cursor: pointer;
     border-radius: 5px;
 }

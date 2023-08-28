@@ -36,6 +36,11 @@ export default function UserPostsList() {
         }
     }, [displayLimit])
 
+    useEffect(() => {
+        getPosts();
+    }, [reverse, userInfo._id,postsAr])
+
+
     const count = async () => {
         try {
             let url = API_URL + "/posts/count?user=" + userInfo._id;
@@ -45,10 +50,6 @@ export default function UserPostsList() {
             console.log(error);
         }
     }
-
-    useEffect(() => {
-        getPosts();
-    }, [reverse, userInfo._id])
 
     const getPosts = async () => {
         try {
@@ -98,9 +99,11 @@ export default function UserPostsList() {
     const displayedPosts = postsAr.slice(0, displayLimit); // Limit the displayed places
 
     return (
+
         <div className='myPosts container-fluid pt-5 pb-5'>
+
             <h4 className='text-center nameTitle'>{userInfo.full_name}'s posts:</h4>
-            <div className="px-2 mt-lg-5">
+            <div className="px-5 mt-lg-3">
                 <Link to={"/posts/add"} className='addBtn-posts'>
                     <div className="d-flex align-items-center justify-content-center">
                         <BsPostcardHeart className='iconAdd' />
@@ -108,7 +111,7 @@ export default function UserPostsList() {
                     </div>
                 </Link>
                 <div className='row justify-content-between  align-items-center'>
-                    <div className='col-md-2'>
+                    <div className='col-auto'>
                         {reverse == false ?
                             <button className='postInputs' onClick={onSortClick}  >new <IoArrowForwardSharp />  old  <IoSwapVerticalSharp className='h4 mx-2 my-0' /></button>
                             :
